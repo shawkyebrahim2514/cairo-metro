@@ -12,6 +12,7 @@ const station = (id: string, lat: number, lines: Station['lines'] = []): Station
   interchange: new Set(lines.map((l) => l.line)).size > 1,
   transferSec: null,
   status: 'open',
+  verified: false,
   wikidata: null,
   osmNodeIds: [],
   notes: [],

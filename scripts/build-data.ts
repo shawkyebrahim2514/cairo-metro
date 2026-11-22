@@ -1,6 +1,6 @@
 // Builds data/metro.json (stations + lines) and data/crosscheck.json from raw snapshots.
 // Usage: npm run data:build
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { haversineMeters } from '../packages/core/src/geo';
 import type {
   Branch,
@@ -55,6 +55,13 @@ const wiki = JSON.parse(readFileSync('data/raw/wikipedia-wikidata-stations.json'
   entities: Record<string, WikiEntity>;
 };
 const curated = JSON.parse(readFileSync('data/curated/curated.json', 'utf8')) as CuratedFile;
+interface VerificationFile {
+  stations: Record<string, { verified?: boolean; name?: Partial<LocalizedName> }>;
+}
+const verificationPath = 'data/curated/verification.json';
+const verification: VerificationFile = existsSync(verificationPath)
+  ? JSON.parse(readFileSync(verificationPath, 'utf8'))
+  : { stations: {} };
 
 const nodes = new Map<number, OsmNode>(
   (osm.elements as (OsmNode | OsmRelation)[])
@@ -228,21 +235,25 @@ for (const [qid, group] of byQid) {
   const lat = allNodes.reduce((s, n) => s + n.lat, 0) / allNodes.length;
   const lng = allNodes.reduce((s, n) => s + n.lon, 0) / allNodes.length;
   const w = wiki.entities[qid]!;
-  const override = curated.stationOverrides[qid];
+  const review = verification.stations[qid];
+  const override = {
+    ...curated.stationOverrides[qid],
+    name: { ...curated.stationOverrides[qid]?.name, ...review?.name },
+  };
 
   const osmEn = allNodes
     .map((n) => n.tags['name:en'])
     .filter((s): s is string => !!s && !hasArabic(s))
     .map(cleanEn);
   const wikiEn = w.en ? cleanEn(w.en) : '';
-  const en = override?.name?.en ?? osmEn[0] ?? wikiEn;
+  const en = override.name.en ?? osmEn[0] ?? wikiEn;
 
   const osmAr = allNodes
     .flatMap((n) => [n.tags['name:ar'], hasArabic(n.tags.name ?? '') ? n.tags.name : undefined])
     .filter((s): s is string => !!s)
     .map(cleanAr);
   const wikiAr = cleanAr(arabicFromWiki.get(qid) ?? '');
-  const ar = override?.name?.ar ?? (wikiAr || osmAr[0] || cleanAr(w.ar ?? ''));
+  const ar = override.name.ar ?? (wikiAr || osmAr[0] || cleanAr(w.ar ?? ''));
 
   const aliasPool = [
     ...osmEn,
@@ -257,7 +268,7 @@ for (const [qid, group] of byQid) {
     ]),
     ...osmAr,
     cleanAr(w.ar ?? ''),
-    ...(override?.aliases ?? []),
+    ...(override.aliases ?? []),
   ]
     .filter((s): s is string => !!s)
     .flatMap((s) => s.split(';'))
@@ -282,7 +293,7 @@ for (const [qid, group] of byQid) {
   const lineSet = new Set(linesEntries.map((l) => l.line));
   const interchange = lineSet.size > 1;
 
-  const notes = [...(override?.notes ?? [])];
+  const notes = [...(override.notes ?? [])];
   if (allNodes.some((n) => n.tags.construction)) {
     notes.push('OSM still tags this stop with construction=*; verify it is open.');
   }
@@ -298,8 +309,9 @@ for (const [qid, group] of byQid) {
     lng: +lng.toFixed(6),
     lines: linesEntries,
     interchange,
-    transferSec: interchange ? (override?.transferSec ?? curated.defaultTransferSec) : null,
+    transferSec: interchange ? (override.transferSec ?? curated.defaultTransferSec) : null,
     status: 'open',
+    verified: review?.verified === true,
     wikidata: qid,
     osmNodeIds: allNodes.map((n) => n.id).sort((a, b) => a - b),
     notes,

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cairo Metro · Data Verification</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">M</span>
+        <div>
+          <h1>Cairo Metro Data</h1>
+          <p>Verification workspace</p>
+        </div>
+      </div>
+      <div class="progress" aria-live="polite">
+        <div class="progress-text">
+          <strong id="verifiedCount">0</strong> / <span id="totalCount">0</span> verified
+        </div>
+        <div class="progress-bar"><div id="progressFill"></div></div>
+      </div>
+      <div class="topbar-actions">
+        <span id="saveState" class="save-state">Saved</span>
+        <button id="btnExport" class="btn ghost" title="Download verification.json">Export</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="tabs" id="lineTabs" role="tablist"></div>
+        <div class="filters">
+          <input id="search" type="search" placeholder="Search name (English / Arabic)…" />
+          <div class="chips" id="statusFilter">
+            <button class="chip active" data-filter="all">All</button>
+            <button class="chip" data-filter="unverified">Unverified</button>
+            <button class="chip" data-filter="flagged">Flagged</button>
+            <button class="chip" data-filter="verified">Verified</button>
+          </div>
+        </div>
+        <div id="lineSummary" class="line-summary"></div>
+        <ol id="stationList" class="station-list"></ol>
+      </aside>
+
+      <section class="map-wrap"><div id="map"></div></section>
+
+      <aside class="detail" id="detail">
+        <div class="empty">
+          <h2>Select a station</h2>
+          <p>Click a marker on the map or a station in the list to inspect and verify it.</p>
+          <ul>
+            <li>Compare OSM, Wikipedia and Wikidata values</li>
+            <li>Fix English / Arabic names</li>
+            <li>Mark stations as verified</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <script src="/vendor/leaflet/leaflet.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

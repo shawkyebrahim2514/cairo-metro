@@ -24,6 +24,8 @@ export interface Station {
   /** Seconds to walk between platforms; only meaningful for interchanges. */
   transferSec: number | null;
   status: 'open' | 'planned';
+  /** True once a human confirmed this station in the data viewer. */
+  verified: boolean;
   wikidata: string | null;
   osmNodeIds: number[];
   notes: string[];

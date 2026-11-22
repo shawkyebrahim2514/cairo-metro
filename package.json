@@ -15,7 +15,8 @@
     "build": "npm run build --workspaces --if-present",
     "data:fetch": "tsx scripts/fetch-osm.ts && tsx scripts/fetch-crosscheck.ts",
     "data:build": "tsx scripts/build-data.ts",
-    "data:validate": "tsx scripts/validate-data.ts"
+    "data:validate": "tsx scripts/validate-data.ts",
+    "data:view": "tsx tools/data-viewer/server.ts"
   },
   "engines": {
     "node": ">=20"
@@ -25,6 +26,7 @@
     "@types/node": "^26.6.6",
     "eslint": "^10.15.0",
     "globals": "^17.14.0",
+    "leaflet": "^1.9.4",
     "prettier": "^3.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
