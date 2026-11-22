@@ -94,4 +94,4 @@ OSM gaps; no official timetable/real-time data (times are estimates); Maps link 
 
 ## Progress
 
-- [ ] Stage 0
+- [x] Stage 0 (monorepo, tooling, core haversine, web shell, CI, data notes)
