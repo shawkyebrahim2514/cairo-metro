@@ -25,3 +25,14 @@ npm run lint
 npm test
 npm run build
 ```
+
+## Data workflow
+
+```
+npm run data:fetch      # refresh raw OSM + Wikipedia/Wikidata snapshots (data/raw)
+npm run data:build      # build data/metro.json + data/crosscheck.json (applies curated + verification files)
+npm run data:validate   # sanity checks (counts, connectivity, names, coordinates)
+npm run data:view       # open the verification workspace at http://127.0.0.1:5174
+```
+
+Verification progress and name corrections are saved to `data/curated/verification.json` (keyed by Wikidata id).

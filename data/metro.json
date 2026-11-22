@@ -24,6 +24,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q18161422",
       "osmNodeIds": [1235803733, 4979483242],
       "notes": []
@@ -47,6 +48,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q18349827",
       "osmNodeIds": [1235803732, 4979483239],
       "notes": []
@@ -70,6 +72,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678973",
       "osmNodeIds": [7559190648, 9076255925],
       "notes": []
@@ -93,6 +96,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275553",
       "osmNodeIds": [316637584, 5344953910],
       "notes": []
@@ -116,6 +120,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275554",
       "osmNodeIds": [1642286403, 4979331217],
       "notes": []
@@ -139,6 +144,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678983",
       "osmNodeIds": [2400937187, 4979511781],
       "notes": []
@@ -167,6 +173,7 @@
       "interchange": true,
       "transferSec": 240,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275997",
       "osmNodeIds": [5194295698, 5194295699, 5194295700, 5194295701],
       "notes": []
@@ -190,6 +197,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678995",
       "osmNodeIds": [11926766472, 11926766473],
       "notes": []
@@ -213,6 +221,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678980",
       "osmNodeIds": [7153641095, 7302135247],
       "notes": []
@@ -241,6 +250,7 @@
       "interchange": true,
       "transferSec": 240,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275582",
       "osmNodeIds": [317755256, 4979414356, 5194348150, 5194348151],
       "notes": []
@@ -264,6 +274,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q20311888",
       "osmNodeIds": [1235803722, 4979483234],
       "notes": []
@@ -287,6 +298,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275604",
       "osmNodeIds": [5355866946, 5355866947],
       "notes": []
@@ -310,6 +322,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678998",
       "osmNodeIds": [11923472302, 11923472312],
       "notes": []
@@ -333,6 +346,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678985",
       "osmNodeIds": [1654760266, 4979511765],
       "notes": []
@@ -361,6 +375,7 @@
       "interchange": true,
       "transferSec": 240,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276203",
       "osmNodeIds": [316632489, 9076904702, 11926706152, 11926706153],
       "notes": []
@@ -384,6 +399,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275685",
       "osmNodeIds": [316388053, 5194246948],
       "notes": ["OSM fixme: Probably part of the metro line"]
@@ -407,6 +423,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275690",
       "osmNodeIds": [9076904709, 9076904710],
       "notes": []
@@ -430,6 +447,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678991",
       "osmNodeIds": [9077189570, 11495591843],
       "notes": []
@@ -453,6 +471,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275722",
       "osmNodeIds": [1642383282, 4979331190],
       "notes": []
@@ -476,6 +495,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q20717306",
       "osmNodeIds": [1235803723, 4979483237],
       "notes": []
@@ -499,6 +519,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678974",
       "osmNodeIds": [7559190660, 9076234501],
       "notes": []
@@ -522,6 +543,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275721",
       "osmNodeIds": [316638531, 5348846069],
       "notes": []
@@ -545,6 +567,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275724",
       "osmNodeIds": [2460595904, 5349031091],
       "notes": []
@@ -568,6 +591,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q5350666",
       "osmNodeIds": [316643120, 4979331528],
       "notes": []
@@ -591,6 +615,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275726",
       "osmNodeIds": [316643099, 4979331216],
       "notes": []
@@ -614,6 +639,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275728",
       "osmNodeIds": [1131555201, 5355860835],
       "notes": []
@@ -637,6 +663,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678978",
       "osmNodeIds": [7559205785, 7926259279],
       "notes": []
@@ -660,6 +687,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678992",
       "osmNodeIds": [9077391794, 11495591840],
       "notes": []
@@ -683,6 +711,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678979",
       "osmNodeIds": [7302135245, 7302135246],
       "notes": []
@@ -706,6 +735,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275725",
       "osmNodeIds": [493207780, 5194246949],
       "notes": ["OSM fixme: Probably part of the metro line"]
@@ -729,6 +759,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275752",
       "osmNodeIds": [316643111, 4979331220],
       "notes": []
@@ -752,6 +783,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q18379756",
       "osmNodeIds": [1654760303, 4979483255],
       "notes": []
@@ -775,6 +807,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275754",
       "osmNodeIds": [316631596, 9076904701],
       "notes": []
@@ -798,6 +831,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678997",
       "osmNodeIds": [11923472281, 11923472282],
       "notes": []
@@ -821,6 +855,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275826",
       "osmNodeIds": [316642043, 5349031079],
       "notes": []
@@ -844,6 +879,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275831",
       "osmNodeIds": [316631600, 3759917281],
       "notes": []
@@ -867,6 +903,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275845",
       "osmNodeIds": [5348846066, 5348846067],
       "notes": []
@@ -890,6 +927,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275847",
       "osmNodeIds": [316643077, 4979331206],
       "notes": []
@@ -913,6 +951,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275846",
       "osmNodeIds": [316638393, 5344953907],
       "notes": []
@@ -936,6 +975,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275849",
       "osmNodeIds": [316643069, 4979331199],
       "notes": []
@@ -959,6 +999,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678982",
       "osmNodeIds": [7308408910, 7308408911],
       "notes": []
@@ -982,6 +1023,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678981",
       "osmNodeIds": [7302135248, 7302135249],
       "notes": []
@@ -1005,6 +1047,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275852",
       "osmNodeIds": [5349031071, 5349031072],
       "notes": []
@@ -1028,6 +1071,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275853",
       "osmNodeIds": [3755981998, 5344953912],
       "notes": []
@@ -1051,6 +1095,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276202",
       "osmNodeIds": [316637586, 5349031094],
       "notes": []
@@ -1074,6 +1119,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678977",
       "osmNodeIds": [7559190677, 7926259258],
       "notes": []
@@ -1097,6 +1143,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275868",
       "osmNodeIds": [9077189581, 11495591856],
       "notes": []
@@ -1120,6 +1167,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275910",
       "osmNodeIds": [316634827, 4978060972],
       "notes": []
@@ -1153,6 +1201,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678989",
       "osmNodeIds": [9077189602, 10099279486],
       "notes": ["OSM still tags this stop with construction=*; verify it is open."]
@@ -1176,6 +1225,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275913",
       "osmNodeIds": [316643067, 4979331198],
       "notes": []
@@ -1199,6 +1249,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678984",
       "osmNodeIds": [1654764997, 4979511774],
       "notes": []
@@ -1222,6 +1273,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275916",
       "osmNodeIds": [1641694429, 4978060958],
       "notes": []
@@ -1245,6 +1297,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275915",
       "osmNodeIds": [5194246943, 5194246944],
       "notes": []
@@ -1268,6 +1321,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275942",
       "osmNodeIds": [2208367184, 5348846065],
       "notes": []
@@ -1291,6 +1345,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275952",
       "osmNodeIds": [316642888, 4979331196],
       "notes": []
@@ -1314,6 +1369,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275956",
       "osmNodeIds": [316388031, 5348846064],
       "notes": []
@@ -1337,6 +1393,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678986",
       "osmNodeIds": [9077161247, 10099279471],
       "notes": []
@@ -1360,6 +1417,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275969",
       "osmNodeIds": [4978060988, 9076939028],
       "notes": []
@@ -1383,6 +1441,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275983",
       "osmNodeIds": [6288254841, 9076939045],
       "notes": []
@@ -1406,6 +1465,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276001",
       "osmNodeIds": [9076939018, 9076939019],
       "notes": []
@@ -1434,6 +1494,7 @@
       "interchange": true,
       "transferSec": 240,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275821",
       "osmNodeIds": [316641712, 4978062181, 10099279467, 10099279469],
       "notes": []
@@ -1457,6 +1518,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276010",
       "osmNodeIds": [316643127, 4979331537],
       "notes": []
@@ -1480,6 +1542,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678975",
       "osmNodeIds": [7559190666, 9076234491],
       "notes": []
@@ -1503,6 +1566,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275830",
       "osmNodeIds": [4979416433, 9076904700],
       "notes": []
@@ -1526,6 +1590,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275827",
       "osmNodeIds": [4979414360, 9076904711],
       "notes": []
@@ -1549,6 +1614,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276204",
       "osmNodeIds": [5353485468, 5353485469],
       "notes": []
@@ -1572,6 +1638,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678976",
       "osmNodeIds": [7559190674, 9076234476],
       "notes": []
@@ -1595,6 +1662,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678993",
       "osmNodeIds": [9077274203, 11495591821],
       "notes": []
@@ -1618,6 +1686,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276098",
       "osmNodeIds": [4978060979, 9076939029],
       "notes": []
@@ -1645,6 +1714,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678994",
       "osmNodeIds": [9077372453, 11495591794],
       "notes": []
@@ -1668,6 +1738,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276115",
       "osmNodeIds": [5349031084, 5349031085],
       "notes": []
@@ -1696,6 +1767,7 @@
       "interchange": true,
       "transferSec": 240,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276116",
       "osmNodeIds": [5194295704, 5194295705, 5349031082, 5349031083],
       "notes": []
@@ -1719,6 +1791,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678987",
       "osmNodeIds": [9077189601, 10099279483],
       "notes": []
@@ -1742,6 +1815,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q18280662",
       "osmNodeIds": [4978060976, 9076939031],
       "notes": []
@@ -1765,6 +1839,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276120",
       "osmNodeIds": [9076904698, 9076904699],
       "notes": []
@@ -1788,6 +1863,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276140",
       "osmNodeIds": [316643073, 4979331202],
       "notes": []
@@ -1811,6 +1887,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10275555",
       "osmNodeIds": [316639686, 5349031089],
       "notes": []
@@ -1834,6 +1911,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276148",
       "osmNodeIds": [1641694433, 9076939068],
       "notes": []
@@ -1857,6 +1935,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678990",
       "osmNodeIds": [9077161277, 11495611080],
       "notes": []
@@ -1880,6 +1959,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276184",
       "osmNodeIds": [2208367177, 5348846063],
       "notes": []
@@ -1903,6 +1983,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276191",
       "osmNodeIds": [5344953917, 5344953918],
       "notes": ["OSM fixme: Probably part of the metro line"]
@@ -1926,6 +2007,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276190",
       "osmNodeIds": [316638638, 5349031095],
       "notes": []
@@ -1949,6 +2031,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q106678996",
       "osmNodeIds": [11923457958, 11923457959],
       "notes": []
@@ -1972,6 +2055,7 @@
       "interchange": false,
       "transferSec": null,
       "status": "open",
+      "verified": false,
       "wikidata": "Q10276230",
       "osmNodeIds": [316637588, 4978062099],
       "notes": []
