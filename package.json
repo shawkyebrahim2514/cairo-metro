@@ -10,15 +10,19 @@
   "scripts": {
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "typecheck": "tsc -p scripts/tsconfig.json && npm run typecheck --workspaces --if-present",
     "test": "vitest run",
-    "build": "npm run build --workspaces --if-present"
+    "build": "npm run build --workspaces --if-present",
+    "data:fetch": "tsx scripts/fetch-osm.ts && tsx scripts/fetch-crosscheck.ts",
+    "data:build": "tsx scripts/build-data.ts",
+    "data:validate": "tsx scripts/validate-data.ts"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.6",
     "eslint": "^10.15.0",
     "globals": "^17.14.0",
     "prettier": "^3.10.1",

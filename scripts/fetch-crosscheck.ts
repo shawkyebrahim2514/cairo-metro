@@ -10,10 +10,17 @@ interface WikiRow {
   arabic: string;
 }
 
-async function getJson(url: string): Promise<any> {
+interface WikidataEntity {
+  labels?: Record<string, { value: string }>;
+  claims?: {
+    P625?: { mainsnak?: { datavalue?: { value?: { latitude: number; longitude: number } } } }[];
+  };
+}
+
+async function getJson<T>(url: string): Promise<T> {
   const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'application/json' } });
   if (!res.ok) throw new Error(`${url} -> HTTP ${res.status}`);
-  return res.json();
+  return (await res.json()) as T;
 }
 
 function parseLines(wikitext: string): Record<string, WikiRow[]> {
@@ -38,19 +45,19 @@ function parseLines(wikitext: string): Record<string, WikiRow[]> {
   return lines;
 }
 
-const page = await getJson(
+const page = await getJson<{ parse: { wikitext: string } }>(
   `https://en.wikipedia.org/w/api.php?action=parse&page=${PAGE}&prop=wikitext&format=json&formatversion=2`,
 );
-const lines = parseLines(page.parse.wikitext as string);
+const lines = parseLines(page.parse.wikitext);
 const qids = [...new Set(Object.values(lines).flatMap((rows) => rows.map((r) => r.qid)))];
 
 const entities: Record<string, unknown> = {};
 for (let i = 0; i < qids.length; i += 40) {
   const chunk = qids.slice(i, i + 40);
-  const data = await getJson(
+  const data = await getJson<{ entities: Record<string, WikidataEntity> }>(
     `https://www.wikidata.org/w/api.php?action=wbgetentities&ids=${chunk.join('|')}&props=labels|claims&languages=en|ar&format=json`,
   );
-  for (const [id, e] of Object.entries<any>(data.entities)) {
+  for (const [id, e] of Object.entries(data.entities)) {
     const coord = e.claims?.P625?.[0]?.mainsnak?.datavalue?.value;
     entities[id] = {
       en: e.labels?.en?.value ?? null,

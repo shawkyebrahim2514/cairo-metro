@@ -97,5 +97,6 @@ OSM gaps; no official timetable/real-time data (times are estimates); Maps link 
 - [x] Stage 0 (monorepo, tooling, core haversine, web shell, CI, data notes)
 
 ### Stage 1 addendum: sources + verification visualizer
+
 Sources (in priority order): (1) OSM Overpass, (2) official cairometro.gov.eg (station lists, fares, hours, map PDF), (3) Wikipedia/Wikidata for cross-check of names and order, (4) GitHub/Transitland/Mobility DB search for existing open datasets (license-checked), (5) manual curation for ride/transfer times.
 Verification: a dev-only data visualizer (apps/web /admin/data or standalone page) showing the map, per-line station lists, diffs vs. cross-check sources, validation errors, and per-station verified flag. Data files carry a `verified` field + `sources` per record; nothing ships as verified until the user approves.

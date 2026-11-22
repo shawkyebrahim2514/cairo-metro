@@ -1,0 +1,577 @@
+{
+  "_comment": "Hand-curated inputs for scripts/build-data.ts. Edit here, then run `npm run data:build`. stationOverrides are keyed by Wikidata QID.",
+  "lines": {
+    "L1": {
+      "name": {
+        "en": "Line 1",
+        "ar": "الخط الأول"
+      },
+      "colour": "#1F4FBF",
+      "operator": "Egyptian Company for Metro Management & Operation",
+      "branches": [
+        {
+          "id": "L1-main",
+          "name": {
+            "en": "Helwan – New El-Marg",
+            "ar": "حلوان – المرج الجديدة"
+          }
+        }
+      ]
+    },
+    "L2": {
+      "name": {
+        "en": "Line 2",
+        "ar": "الخط الثاني"
+      },
+      "colour": "#E0312B",
+      "operator": "Egyptian Company for Metro Management & Operation",
+      "branches": [
+        {
+          "id": "L2-main",
+          "name": {
+            "en": "Shubra El-Kheima – El-Mounib",
+            "ar": "شبرا الخيمة – المنيب"
+          }
+        }
+      ]
+    },
+    "L3": {
+      "name": {
+        "en": "Line 3",
+        "ar": "الخط الثالث"
+      },
+      "colour": "#1E9E4A",
+      "operator": "RATP Dev",
+      "branches": [
+        {
+          "id": "L3-main",
+          "name": {
+            "en": "Adly Mansour – Kit-Kat",
+            "ar": "عدلي منصور – الكيت كات"
+          }
+        },
+        {
+          "id": "L3-imbaba",
+          "name": {
+            "en": "Kit-Kat – Rod El-Farag Axis",
+            "ar": "الكيت كات – محور روض الفرج"
+          }
+        },
+        {
+          "id": "L3-cairo-univ",
+          "name": {
+            "en": "Kit-Kat – Cairo University",
+            "ar": "الكيت كات – جامعة القاهرة"
+          }
+        }
+      ]
+    }
+  },
+  "defaultTransferSec": 240,
+  "stationOverrides": {
+    "Q18161422": {
+      "name": {
+        "en": "Abbassia"
+      },
+      "_station": "abbassia"
+    },
+    "Q18349827": {
+      "name": {
+        "en": "Abdou Pasha"
+      },
+      "_station": "abdou-pasha"
+    },
+    "Q10275553": {
+      "name": {
+        "en": "Ain Helwan"
+      },
+      "_station": "ain-helwan"
+    },
+    "Q10275554": {
+      "name": {
+        "en": "Ain Shams"
+      },
+      "_station": "ain-shams"
+    },
+    "Q106678983": {
+      "name": {
+        "en": "Al-Ahram"
+      },
+      "_station": "al-ahram"
+    },
+    "Q10275722": {
+      "name": {
+        "en": "El-Demerdash"
+      },
+      "_station": "al-demerdash"
+    },
+    "Q10275910": {
+      "name": {
+        "en": "Khalafawy"
+      },
+      "_station": "al-khalafawy"
+    },
+    "Q10275721": {
+      "name": {
+        "en": "El-Maasara"
+      },
+      "_station": "al-maasara"
+    },
+    "Q10275724": {
+      "name": {
+        "en": "El-Malek El-Saleh"
+      },
+      "_station": "al-malek-al-saleh"
+    },
+    "Q5350666": {
+      "name": {
+        "en": "El-Marg"
+      },
+      "_station": "al-marj"
+    },
+    "Q10275983": {
+      "name": {
+        "en": "Mezallat"
+      },
+      "_station": "al-mezallat"
+    },
+    "Q10275728": {
+      "name": {
+        "en": "El-Mounib"
+      },
+      "_station": "al-mounib"
+    },
+    "Q106678995": {
+      "name": {
+        "en": "Al-Tawfikia"
+      },
+      "_station": "al-tawfikia"
+    },
+    "Q10275725": {
+      "name": {
+        "en": "El-Zahraa"
+      },
+      "_station": "al-zahraa"
+    },
+    "Q106678980": {
+      "name": {
+        "en": "Alf Maskan"
+      },
+      "_station": "alf-maskan"
+    },
+    "Q10275582": {
+      "name": {
+        "en": "Attaba"
+      },
+      "_station": "attaba"
+    },
+    "Q20311888": {
+      "name": {
+        "en": "Bab El-Shaaria"
+      },
+      "_station": "bab-el-shaaria"
+    },
+    "Q10275604": {
+      "name": {
+        "en": "Bohooth"
+      },
+      "_station": "behooth"
+    },
+    "Q106678998": {
+      "name": {
+        "en": "Bulaq El-Dakrour"
+      },
+      "_station": "bulaq-al-dakrour"
+    },
+    "Q18379756": {
+      "name": {
+        "en": "Fair Zone"
+      },
+      "_station": "cairo-fairground"
+    },
+    "Q10276203": {
+      "name": {
+        "en": "Cairo University"
+      },
+      "_station": "cairo-university"
+    },
+    "Q10275685": {
+      "name": {
+        "en": "Dar El-Salam"
+      },
+      "_station": "dar-al-salam"
+    },
+    "Q10275690": {
+      "name": {
+        "en": "Dokki"
+      },
+      "_station": "dokki"
+    },
+    "Q106678991": {
+      "name": {
+        "en": "El-Bohy"
+      },
+      "_station": "el-bohy"
+    },
+    "Q106678994": {
+      "name": {
+        "en": "Rod El-Farag Axis"
+      },
+      "_station": "el-dabaa-axis"
+    },
+    "Q20717306": {
+      "name": {
+        "en": "El-Geish"
+      },
+      "_station": "el-geish"
+    },
+    "Q10275726": {
+      "name": {
+        "en": "El-Matareyya"
+      },
+      "_station": "el-matareyya"
+    },
+    "Q106678992": {
+      "name": {
+        "en": "El-Qawmia"
+      },
+      "_station": "el-qawmia"
+    },
+    "Q106678979": {
+      "name": {
+        "en": "El-Shams Club"
+      },
+      "_station": "el-shams-club"
+    },
+    "Q10275752": {
+      "name": {
+        "en": "Ezbet El-Nakhl"
+      },
+      "_station": "ezbet-en-nakhl"
+    },
+    "Q10275754": {
+      "name": {
+        "en": "Faisal"
+      },
+      "_station": "faisal"
+    },
+    "Q106678997": {
+      "name": {
+        "en": "Gamet El-Dowel"
+      },
+      "_station": "gamet-el-dowel"
+    },
+    "Q10275826": {
+      "name": {
+        "en": "Ghamra"
+      },
+      "_station": "ghamra"
+    },
+    "Q10275831": {
+      "name": {
+        "en": "Giza"
+      },
+      "_station": "giza"
+    },
+    "Q10275845": {
+      "name": {
+        "en": "Hadayek El-Maadi"
+      },
+      "_station": "hadayek-el-maadi"
+    },
+    "Q10275847": {
+      "name": {
+        "en": "Hadayeq El-Zaitoun"
+      },
+      "_station": "hadayeq-al-zaitoun"
+    },
+    "Q10275846": {
+      "name": {
+        "en": "Hadayeq Helwan"
+      },
+      "_station": "hadayeq-helwan"
+    },
+    "Q10275849": {
+      "name": {
+        "en": "Hammamat El-Qobba"
+      },
+      "_station": "hammamat-al-qobba"
+    },
+    "Q106678982": {
+      "name": {
+        "en": "Haroun"
+      },
+      "_station": "haroun"
+    },
+    "Q106678981": {
+      "name": {
+        "en": "Heliopolis"
+      },
+      "_station": "heliopolis"
+    },
+    "Q10275852": {
+      "name": {
+        "en": "Helmeyet El-Zaitoun"
+      },
+      "_station": "helmeyet-al-zaitoun"
+    },
+    "Q10275853": {
+      "name": {
+        "en": "Helwan"
+      },
+      "_station": "helwan"
+    },
+    "Q10276202": {
+      "name": {
+        "en": "Helwan University"
+      },
+      "_station": "helwan-university"
+    },
+    "Q10275913": {
+      "name": {
+        "en": "Kobri El-Qobba"
+      },
+      "_station": "kobri-al-qobba"
+    },
+    "Q106678984": {
+      "name": {
+        "en": "Koleyet El-Banat"
+      },
+      "_station": "koleyet-el-banat"
+    },
+    "Q10275916": {
+      "name": {
+        "en": "Koliet El-Zeraa"
+      },
+      "_station": "koliet-el-zeraa"
+    },
+    "Q10275915": {
+      "name": {
+        "en": "Kozzika"
+      },
+      "_station": "kozzika"
+    },
+    "Q10275942": {
+      "name": {
+        "en": "Maadi"
+      },
+      "_station": "maadi"
+    },
+    "Q10275952": {
+      "name": {
+        "en": "Manshiet El-Sadr"
+      },
+      "_station": "manshiet-al-sadr"
+    },
+    "Q10275956": {
+      "name": {
+        "en": "Mar Girgis"
+      },
+      "_station": "mar-girgis"
+    },
+    "Q10275969": {
+      "name": {
+        "en": "Massara"
+      },
+      "_station": "massara"
+    },
+    "Q10276001": {
+      "name": {
+        "en": "Mohamed Naguib"
+      },
+      "_station": "mohamed-naguib"
+    },
+    "Q10275821": {
+      "name": {
+        "en": "Nasser"
+      },
+      "_station": "nasser"
+    },
+    "Q10276010": {
+      "name": {
+        "en": "New El-Marg"
+      },
+      "_station": "new-el-marg"
+    },
+    "Q106678975": {
+      "name": {
+        "en": "Omar Ibn El-Khattab"
+      },
+      "_station": "omar-ebn-elkhatab"
+    },
+    "Q10275830": {
+      "name": {
+        "en": "Omm El-Misryeen"
+      },
+      "_station": "omm-el-misryeen"
+    },
+    "Q10275827": {
+      "name": {
+        "en": "Opera"
+      },
+      "_station": "opera"
+    },
+    "Q10276204": {
+      "name": {
+        "en": "Orabi"
+      },
+      "_station": "orabi"
+    },
+    "Q106678976": {
+      "name": {
+        "en": "Qobaa"
+      },
+      "_station": "qubaa"
+    },
+    "Q10276098": {
+      "name": {
+        "en": "Rod El-Farag"
+      },
+      "_station": "rawd-el-farag"
+    },
+    "Q106678993": {
+      "name": {
+        "en": "Ring Road"
+      },
+      "_station": "ring-road"
+    },
+    "Q10276115": {
+      "name": {
+        "en": "Saad Zaghloul"
+      },
+      "_station": "saad-zaghloul"
+    },
+    "Q10276116": {
+      "name": {
+        "en": "Sadat"
+      },
+      "_station": "sadat"
+    },
+    "Q18280662": {
+      "name": {
+        "en": "Sainte Teresa"
+      },
+      "_station": "sainte-teresa"
+    },
+    "Q10276120": {
+      "name": {
+        "en": "Sakiat Mekki"
+      },
+      "_station": "sakiat-mekki"
+    },
+    "Q10276140": {
+      "name": {
+        "en": "Saray El-Qobba"
+      },
+      "_station": "saray-al-qobba"
+    },
+    "Q10275555": {
+      "name": {
+        "en": "Sayyeda Zeinab"
+      },
+      "_station": "sayyeda-zeinab"
+    },
+    "Q10276148": {
+      "name": {
+        "en": "Shubra El-Kheima"
+      },
+      "_station": "shobra-al-kheima"
+    },
+    "Q10275997": {
+      "name": {
+        "en": "Al-Shohadaa"
+      },
+      "_station": "shuhada"
+    },
+    "Q106678985": {
+      "name": {
+        "en": "Cairo Stadium"
+      },
+      "_station": "stadium"
+    },
+    "Q10276184": {
+      "name": {
+        "en": "Thakanat El-Maadi"
+      },
+      "_station": "thakanat-el-maadi"
+    },
+    "Q10276191": {
+      "name": {
+        "en": "Tora El-Asmant"
+      },
+      "_station": "tora-el-asmant"
+    },
+    "Q10276190": {
+      "name": {
+        "en": "Tora El-Balad"
+      },
+      "_station": "tora-el-balad"
+    },
+    "Q10276230": {
+      "name": {
+        "en": "Wadi Hof"
+      },
+      "_station": "wadi-hof"
+    },
+    "Q106678973": {
+      "name": {
+        "en": "Adly Mansour"
+      },
+      "_station": "adly-mansour"
+    },
+    "Q106678974": {
+      "name": {
+        "en": "El-Haykestep"
+      },
+      "_station": "el-haykestep"
+    },
+    "Q106678978": {
+      "name": {
+        "en": "El-Nozha"
+      },
+      "_station": "el-nozha"
+    },
+    "Q106678977": {
+      "name": {
+        "en": "Hesham Barakat"
+      },
+      "_station": "hesham-barakat"
+    },
+    "Q10275868": {
+      "name": {
+        "en": "Imbaba"
+      },
+      "_station": "imbaba"
+    },
+    "Q106678989": {
+      "name": {
+        "en": "Kit-Kat"
+      },
+      "_station": "kit-kat"
+    },
+    "Q106678986": {
+      "name": {
+        "en": "Maspero"
+      },
+      "_station": "masbero"
+    },
+    "Q106678987": {
+      "name": {
+        "en": "Safaa Hegazy"
+      },
+      "_station": "safaa-hegazy"
+    },
+    "Q106678990": {
+      "name": {
+        "en": "Sudan"
+      },
+      "_station": "sudan"
+    },
+    "Q106678996": {
+      "name": {
+        "en": "Wadi El-Nile"
+      },
+      "_station": "wadi-el-nile"
+    }
+  }
+}

@@ -1,0 +1,1293 @@
+{
+  "sources": ["OpenStreetMap", "Wikipedia", "Wikidata"],
+  "warnings": [],
+  "matchDistances": [
+    {
+      "line": "L1",
+      "qid": "Q10275853",
+      "distanceM": 113
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275553",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276202",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276230",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275846",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275721",
+      "distanceM": 2
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276191",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275915",
+      "distanceM": 3
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276190",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276184",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275942",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275845",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275685",
+      "distanceM": 2
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275725",
+      "distanceM": 27
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275956",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275724",
+      "distanceM": 92
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275555",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276115",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276116",
+      "distanceM": 2
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275821",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276204",
+      "distanceM": 10
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275997",
+      "distanceM": 51
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275826",
+      "distanceM": 5
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275722",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275952",
+      "distanceM": 0
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275913",
+      "distanceM": 4
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275849",
+      "distanceM": 7
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276140",
+      "distanceM": 4
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275847",
+      "distanceM": 4
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275852",
+      "distanceM": 1
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275726",
+      "distanceM": 3
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275554",
+      "distanceM": 5
+    },
+    {
+      "line": "L1",
+      "qid": "Q10275752",
+      "distanceM": 5
+    },
+    {
+      "line": "L1",
+      "qid": "Q5350666",
+      "distanceM": 16
+    },
+    {
+      "line": "L1",
+      "qid": "Q10276010",
+      "distanceM": 9
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276148",
+      "distanceM": 216
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275916",
+      "distanceM": 2
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275983",
+      "distanceM": 117
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275910",
+      "distanceM": 22
+    },
+    {
+      "line": "L2",
+      "qid": "Q18280662",
+      "distanceM": 5
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276098",
+      "distanceM": 9
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275969",
+      "distanceM": 2
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275997",
+      "distanceM": 1
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275582",
+      "distanceM": 4
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276001",
+      "distanceM": 7
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276116",
+      "distanceM": 109
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275827",
+      "distanceM": 4
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275690",
+      "distanceM": 3
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275604",
+      "distanceM": 9
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276203",
+      "distanceM": 2
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275754",
+      "distanceM": 2
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275831",
+      "distanceM": 6
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275830",
+      "distanceM": 8
+    },
+    {
+      "line": "L2",
+      "qid": "Q10276120",
+      "distanceM": 2
+    },
+    {
+      "line": "L2",
+      "qid": "Q10275728",
+      "distanceM": 24
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678973",
+      "distanceM": 19
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678974",
+      "distanceM": 19
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678975",
+      "distanceM": 34
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678976",
+      "distanceM": 20
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678977",
+      "distanceM": 24
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678978",
+      "distanceM": 47
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678979",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678980",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678981",
+      "distanceM": 2
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678982",
+      "distanceM": 0
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678983",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678984",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678985",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q18379756",
+      "distanceM": 2
+    },
+    {
+      "line": "L3",
+      "qid": "Q18161422",
+      "distanceM": 460
+    },
+    {
+      "line": "L3",
+      "qid": "Q18349827",
+      "distanceM": 176
+    },
+    {
+      "line": "L3",
+      "qid": "Q20717306",
+      "distanceM": 115
+    },
+    {
+      "line": "L3",
+      "qid": "Q20311888",
+      "distanceM": 34
+    },
+    {
+      "line": "L3",
+      "qid": "Q10275582",
+      "distanceM": 233
+    },
+    {
+      "line": "L3",
+      "qid": "Q10275821",
+      "distanceM": 12
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678986",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678987",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678989",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678990",
+      "distanceM": 3
+    },
+    {
+      "line": "L3",
+      "qid": "Q10275868",
+      "distanceM": 15
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678991",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678992",
+      "distanceM": 2
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678993",
+      "distanceM": 1
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678994",
+      "distanceM": 2
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678995",
+      "distanceM": 34
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678996",
+      "distanceM": 2
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678997",
+      "distanceM": 8
+    },
+    {
+      "line": "L3",
+      "qid": "Q106678998",
+      "distanceM": 174
+    },
+    {
+      "line": "L3",
+      "qid": "Q10276203",
+      "distanceM": 121
+    }
+  ],
+  "stations": [
+    {
+      "stationId": "helwan",
+      "qid": "Q10275853",
+      "wikidataEn": "Helwan",
+      "wikipediaAr": "حلوان",
+      "osmAr": ["حلوان"],
+      "osmEn": ["Helwan"],
+      "coordDistanceM": 113,
+      "flags": []
+    },
+    {
+      "stationId": "ain-helwan",
+      "qid": "Q10275553",
+      "wikidataEn": "Ain Helwan",
+      "wikipediaAr": "عين حلوان",
+      "osmAr": ["عين حلوان"],
+      "osmEn": ["Ain Helwan"],
+      "coordDistanceM": 0,
+      "flags": []
+    },
+    {
+      "stationId": "helwan-university",
+      "qid": "Q10276202",
+      "wikidataEn": "Capital University metro station",
+      "wikipediaAr": "جامعة العاصمة",
+      "osmAr": ["جامعة حلوان"],
+      "osmEn": ["Helwan University"],
+      "coordDistanceM": 0,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "wadi-hof",
+      "qid": "Q10276230",
+      "wikidataEn": "Wadi Hof",
+      "wikipediaAr": "وادي حوف",
+      "osmAr": ["وادي حوف"],
+      "osmEn": ["Wadi Hof"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "hadayeq-helwan",
+      "qid": "Q10275846",
+      "wikidataEn": "Hadayek Helwan",
+      "wikipediaAr": "حدائق حلوان",
+      "osmAr": ["حدائق حلوان"],
+      "osmEn": ["Hadayeq Helwan"],
+      "coordDistanceM": 0,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "el-maasara",
+      "qid": "Q10275721",
+      "wikidataEn": "El-Maasara",
+      "wikipediaAr": "المعصرة",
+      "osmAr": ["المعصرة"],
+      "osmEn": ["Al-Maasara"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "tora-el-asmant",
+      "qid": "Q10276191",
+      "wikidataEn": "Tora El-Asmant",
+      "wikipediaAr": "طرة الأسمنت",
+      "osmAr": ["طرا الأسمنت"],
+      "osmEn": ["Tora El-Asmant"],
+      "coordDistanceM": 1,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "kozzika",
+      "qid": "Q10275915",
+      "wikidataEn": "Kozzika",
+      "wikipediaAr": "كوتسيكا",
+      "osmAr": ["كوتسكا"],
+      "osmEn": ["Kozzika"],
+      "coordDistanceM": 3,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "tora-el-balad",
+      "qid": "Q10276190",
+      "wikidataEn": "Tora El-Balad",
+      "wikipediaAr": "طرة البلد",
+      "osmAr": ["طرة البلد"],
+      "osmEn": ["Tora El-Balad"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "thakanat-el-maadi",
+      "qid": "Q10276184",
+      "wikidataEn": "Sakanat El-Maadi",
+      "wikipediaAr": "ثكنات المعادي",
+      "osmAr": ["ثكنات المعادي"],
+      "osmEn": ["Thakanat El-Maadi"],
+      "coordDistanceM": 0,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "maadi",
+      "qid": "Q10275942",
+      "wikidataEn": "Maadi",
+      "wikipediaAr": "المعادي",
+      "osmAr": ["المعادى"],
+      "osmEn": ["Maadi"],
+      "coordDistanceM": 1,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "hadayek-el-maadi",
+      "qid": "Q10275845",
+      "wikidataEn": "Hadayek El-Maadi",
+      "wikipediaAr": "حدائق المعادي",
+      "osmAr": ["مترو حدائق المعادى", "حدائق المعادى"],
+      "osmEn": ["Hadayek El Maadi"],
+      "coordDistanceM": 1,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "dar-el-salam",
+      "qid": "Q10275685",
+      "wikidataEn": "Dar El-Salam",
+      "wikipediaAr": "دار السلام",
+      "osmAr": ["دار السلام"],
+      "osmEn": ["Dar Al-Salam"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "el-zahraa",
+      "qid": "Q10275725",
+      "wikidataEn": "El-Zahraa'",
+      "wikipediaAr": "الزهراء",
+      "osmAr": ["الزهراء"],
+      "osmEn": ["Al-Zahraa"],
+      "coordDistanceM": 27,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "mar-girgis",
+      "qid": "Q10275956",
+      "wikidataEn": "Mar Girgis",
+      "wikipediaAr": "مار جرجس",
+      "osmAr": ["مار جرجس"],
+      "osmEn": ["Mar Girgis"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "el-malek-el-saleh",
+      "qid": "Q10275724",
+      "wikidataEn": "El-Malek El-Saleh",
+      "wikipediaAr": "الملك الصالح",
+      "osmAr": ["الملك الصالح"],
+      "osmEn": ["Al-Malek Al-Saleh"],
+      "coordDistanceM": 92,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "sayyeda-zeinab",
+      "qid": "Q10275555",
+      "wikidataEn": "Al-Sayeda Zeinab",
+      "wikipediaAr": "السيدة زينب",
+      "osmAr": ["السيدة زينب"],
+      "osmEn": ["Sayyeda Zeinab"],
+      "coordDistanceM": 1,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "saad-zaghloul",
+      "qid": "Q10276115",
+      "wikidataEn": "Saad Zaghloul",
+      "wikipediaAr": "سعد زغلول",
+      "osmAr": ["سعد زغلول"],
+      "osmEn": ["Saad Zaghloul"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "sadat",
+      "qid": "Q10276116",
+      "wikidataEn": "Sadat",
+      "wikipediaAr": "السادات",
+      "osmAr": ["السادات"],
+      "osmEn": ["Sadat"],
+      "coordDistanceM": 54,
+      "flags": []
+    },
+    {
+      "stationId": "nasser",
+      "qid": "Q10275821",
+      "wikidataEn": "Nasser",
+      "wikipediaAr": "جمال عبدالناصر",
+      "osmAr": ["ناصر"],
+      "osmEn": ["Nasser"],
+      "coordDistanceM": 6,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "orabi",
+      "qid": "Q10276204",
+      "wikidataEn": "Orabi",
+      "wikipediaAr": "عرابي",
+      "osmAr": ["عرابي"],
+      "osmEn": ["Orabi"],
+      "coordDistanceM": 10,
+      "flags": []
+    },
+    {
+      "stationId": "al-shohadaa",
+      "qid": "Q10275997",
+      "wikidataEn": "Al-Shohadaa",
+      "wikipediaAr": "الشهداء",
+      "osmAr": ["الشهداء"],
+      "osmEn": ["Shuhada"],
+      "coordDistanceM": 25,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "ghamra",
+      "qid": "Q10275826",
+      "wikidataEn": "Ghamra",
+      "wikipediaAr": "غمرة",
+      "osmAr": ["الغمرة"],
+      "osmEn": ["Ghamra"],
+      "coordDistanceM": 5,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "el-demerdash",
+      "qid": "Q10275722",
+      "wikidataEn": "El-Demerdash",
+      "wikipediaAr": "الدمرداش",
+      "osmAr": ["الدمرداش"],
+      "osmEn": ["Al-Demerdash"],
+      "coordDistanceM": 1,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "manshiet-el-sadr",
+      "qid": "Q10275952",
+      "wikidataEn": "Manshiet El-Sadr",
+      "wikipediaAr": "منشية الصدر",
+      "osmAr": ["منشية الصدر"],
+      "osmEn": ["Manshiet Al-Sadr"],
+      "coordDistanceM": 0,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "kobri-el-qobba",
+      "qid": "Q10275913",
+      "wikidataEn": "Kobri El-Qobba",
+      "wikipediaAr": "كوبري القبة",
+      "osmAr": ["كوبري القبة"],
+      "osmEn": ["Kobri Al-Qobba"],
+      "coordDistanceM": 4,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "hammamat-el-qobba",
+      "qid": "Q10275849",
+      "wikidataEn": "Hammamat El-Qobba",
+      "wikipediaAr": "حمامات القبة",
+      "osmAr": ["حمامات القبة"],
+      "osmEn": ["Hammamat Al-Qobba"],
+      "coordDistanceM": 7,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "saray-el-qobba",
+      "qid": "Q10276140",
+      "wikidataEn": "Saray El-Qobba",
+      "wikipediaAr": "ساراي القبة",
+      "osmAr": ["سراي القبة"],
+      "osmEn": ["Saray Al-Qobba"],
+      "coordDistanceM": 4,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "hadayeq-el-zaitoun",
+      "qid": "Q10275847",
+      "wikidataEn": "Hadayeq El-Zaitoun",
+      "wikipediaAr": "حدائق الزيتون",
+      "osmAr": ["حدائق الزيتون"],
+      "osmEn": ["Hadayeq Al-Zaitoun"],
+      "coordDistanceM": 4,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "helmeyet-el-zaitoun",
+      "qid": "Q10275852",
+      "wikidataEn": "Helmeyet El-Zaitoun",
+      "wikipediaAr": "حلمية الزيتون",
+      "osmAr": ["حلمية الزيتون"],
+      "osmEn": ["Helmeyet Al-Zaitoun"],
+      "coordDistanceM": 1,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "el-matareyya",
+      "qid": "Q10275726",
+      "wikidataEn": "El-Matareyya",
+      "wikipediaAr": "المطرية",
+      "osmAr": ["المطرية"],
+      "osmEn": ["El-Matareyya"],
+      "coordDistanceM": 3,
+      "flags": []
+    },
+    {
+      "stationId": "ain-shams",
+      "qid": "Q10275554",
+      "wikidataEn": "Ain Shams",
+      "wikipediaAr": "عين شمس",
+      "osmAr": ["عين شمس"],
+      "osmEn": ["Ain Shams"],
+      "coordDistanceM": 5,
+      "flags": []
+    },
+    {
+      "stationId": "ezbet-el-nakhl",
+      "qid": "Q10275752",
+      "wikidataEn": "Ezbet El-Nakhl",
+      "wikipediaAr": "عزبة النخل",
+      "osmAr": ["محطة عزبة النخل"],
+      "osmEn": ["Ezbet en Nakhl"],
+      "coordDistanceM": 5,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "el-marg",
+      "qid": "Q5350666",
+      "wikidataEn": "El-Marg",
+      "wikipediaAr": "المرج",
+      "osmAr": ["المرج"],
+      "osmEn": ["Al Marj"],
+      "coordDistanceM": 16,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "new-el-marg",
+      "qid": "Q10276010",
+      "wikidataEn": "New El-Marg",
+      "wikipediaAr": "المرج الجديدة",
+      "osmAr": ["المرج الجديدة"],
+      "osmEn": ["New El-Marg"],
+      "coordDistanceM": 9,
+      "flags": []
+    },
+    {
+      "stationId": "shubra-el-kheima",
+      "qid": "Q10276148",
+      "wikidataEn": "Shubra El-Kheima",
+      "wikipediaAr": "شبرا الخيمة",
+      "osmAr": ["شبرا الخيمة"],
+      "osmEn": ["Shobra Al-Kheima"],
+      "coordDistanceM": 216,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "koliet-el-zeraa",
+      "qid": "Q10275916",
+      "wikidataEn": "Kolleyyet El-Zeraa",
+      "wikipediaAr": "كلية الزراعة",
+      "osmAr": ["كلية الزراعة"],
+      "osmEn": ["Koliet El-Zeraa"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "mezallat",
+      "qid": "Q10275983",
+      "wikidataEn": "Mezallat",
+      "wikipediaAr": "المظلات",
+      "osmAr": ["المظلات"],
+      "osmEn": ["Al-Mezallat"],
+      "coordDistanceM": 117,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "khalafawy",
+      "qid": "Q10275910",
+      "wikidataEn": "Khalafawy",
+      "wikipediaAr": "الخلفاوي",
+      "osmAr": ["الخلفاوي"],
+      "osmEn": ["Al-Khalafawy"],
+      "coordDistanceM": 22,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "sainte-teresa",
+      "qid": "Q18280662",
+      "wikidataEn": "St. Teresa",
+      "wikipediaAr": "سانتا تريزا",
+      "osmAr": ["سانت تيريزا"],
+      "osmEn": ["Sainte Teresa"],
+      "coordDistanceM": 5,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "rod-el-farag",
+      "qid": "Q10276098",
+      "wikidataEn": "Road El-Farag",
+      "wikipediaAr": "روض الفرج",
+      "osmAr": ["روض الفرج"],
+      "osmEn": ["Rawd El-Farag"],
+      "coordDistanceM": 9,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "massara",
+      "qid": "Q10275969",
+      "wikidataEn": "Masarra",
+      "wikipediaAr": "مسرة",
+      "osmAr": ["مسره"],
+      "osmEn": ["Massara"],
+      "coordDistanceM": 2,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "attaba",
+      "qid": "Q10275582",
+      "wikidataEn": "Attaba",
+      "wikipediaAr": "العتبة",
+      "osmAr": ["العتبة", "محطة مترو العتبة"],
+      "osmEn": ["Attaba"],
+      "coordDistanceM": 114,
+      "flags": []
+    },
+    {
+      "stationId": "mohamed-naguib",
+      "qid": "Q10276001",
+      "wikidataEn": "Mohamed Naguib",
+      "wikipediaAr": "محمد نجيب",
+      "osmAr": ["محمد نجيب", "نجيب"],
+      "osmEn": ["Mohamed Naguib"],
+      "coordDistanceM": 7,
+      "flags": []
+    },
+    {
+      "stationId": "opera",
+      "qid": "Q10275827",
+      "wikidataEn": "Opera",
+      "wikipediaAr": "الأوبرا",
+      "osmAr": ["الأوبرا"],
+      "osmEn": ["Opera"],
+      "coordDistanceM": 4,
+      "flags": []
+    },
+    {
+      "stationId": "dokki",
+      "qid": "Q10275690",
+      "wikidataEn": "Dokki",
+      "wikipediaAr": "الدقي",
+      "osmAr": ["الدقى"],
+      "osmEn": ["Dokki"],
+      "coordDistanceM": 3,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "bohooth",
+      "qid": "Q10275604",
+      "wikidataEn": "El Bohoth",
+      "wikipediaAr": "البحوث",
+      "osmAr": ["البحوث"],
+      "osmEn": ["Behooth"],
+      "coordDistanceM": 9,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "cairo-university",
+      "qid": "Q10276203",
+      "wikidataEn": "Cairo University",
+      "wikipediaAr": "جامعة القاهرة",
+      "osmAr": ["جامعة القاهرة"],
+      "osmEn": ["Cairo University"],
+      "coordDistanceM": 60,
+      "flags": []
+    },
+    {
+      "stationId": "faisal",
+      "qid": "Q10275754",
+      "wikidataEn": "Faisal",
+      "wikipediaAr": "فيصل",
+      "osmAr": ["فيصل"],
+      "osmEn": ["Faisal"],
+      "coordDistanceM": 2,
+      "flags": []
+    },
+    {
+      "stationId": "giza",
+      "qid": "Q10275831",
+      "wikidataEn": "Giza station",
+      "wikipediaAr": "الجيزة",
+      "osmAr": ["جيزة"],
+      "osmEn": ["Giza"],
+      "coordDistanceM": 6,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "omm-el-misryeen",
+      "qid": "Q10275830",
+      "wikidataEn": "Omm El-Masryeen",
+      "wikipediaAr": "أم المصريين",
+      "osmAr": ["أم المصريين"],
+      "osmEn": ["Omm El Misryeen"],
+      "coordDistanceM": 8,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "sakiat-mekki",
+      "qid": "Q10276120",
+      "wikidataEn": "Sakiat Mekky",
+      "wikipediaAr": "ساقية مكي",
+      "osmAr": ["ساقية مكي"],
+      "osmEn": ["Sakiat Mekki"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "el-mounib",
+      "qid": "Q10275728",
+      "wikidataEn": "El-Mounib",
+      "wikipediaAr": "المنيب",
+      "osmAr": ["المنيب"],
+      "osmEn": ["Al-Mounib"],
+      "coordDistanceM": 24,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "adly-mansour",
+      "qid": "Q106678973",
+      "wikidataEn": "Adly Mansour",
+      "wikipediaAr": "عدلي منصور",
+      "osmAr": ["عدلى منصور"],
+      "osmEn": ["Adly Mansour"],
+      "coordDistanceM": 19,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "el-haykestep",
+      "qid": "Q106678974",
+      "wikidataEn": "El Haykestep",
+      "wikipediaAr": "الهايكستب",
+      "osmAr": ["محطة مترو الهايكستب", "مترو الهايكستب", "الهايكستب"],
+      "osmEn": ["El Haykestep"],
+      "coordDistanceM": 19,
+      "flags": []
+    },
+    {
+      "stationId": "omar-ibn-el-khattab",
+      "qid": "Q106678975",
+      "wikidataEn": "Omar Ibn El-Khattab",
+      "wikipediaAr": "عمر بن الخطاب",
+      "osmAr": ["عمر بن الخطاب", "مترو عمر بن الخطاب"],
+      "osmEn": ["Omar Ebn Elkhatab"],
+      "coordDistanceM": 34,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "qobaa",
+      "qid": "Q106678976",
+      "wikidataEn": "Qobaa",
+      "wikipediaAr": "قباء",
+      "osmAr": ["مترو قباء"],
+      "osmEn": ["Qubaa"],
+      "coordDistanceM": 20,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "hesham-barakat",
+      "qid": "Q106678977",
+      "wikidataEn": "Hesham Barakat",
+      "wikipediaAr": "هشام بركات",
+      "osmAr": ["هشام بركات"],
+      "osmEn": ["Hesham Barakat"],
+      "coordDistanceM": 24,
+      "flags": []
+    },
+    {
+      "stationId": "el-nozha",
+      "qid": "Q106678978",
+      "wikidataEn": "El-Nozha",
+      "wikipediaAr": "النزهة",
+      "osmAr": ["مترو النزهة", "النزهة"],
+      "osmEn": ["El Nozha"],
+      "coordDistanceM": 47,
+      "flags": []
+    },
+    {
+      "stationId": "el-shams-club",
+      "qid": "Q106678979",
+      "wikidataEn": "Nadi El-Shams",
+      "wikipediaAr": "نادي الشمس",
+      "osmAr": ["نادي الشمس"],
+      "osmEn": ["El Shams Club"],
+      "coordDistanceM": 1,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "alf-maskan",
+      "qid": "Q106678980",
+      "wikidataEn": "Alf Maskan",
+      "wikipediaAr": "ألف مسكن",
+      "osmAr": ["محطة مترو ألف مسكن"],
+      "osmEn": ["Alf Maskan"],
+      "coordDistanceM": 1,
+      "flags": ["arabic-name-differs"]
+    },
+    {
+      "stationId": "heliopolis",
+      "qid": "Q106678981",
+      "wikidataEn": "Heliopolis Square",
+      "wikipediaAr": "ميدان هليوبوليس",
+      "osmAr": ["محطة مترو هليوبوليس", "ميدان هليوبوليس"],
+      "osmEn": ["Heliopolis"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "haroun",
+      "qid": "Q106678982",
+      "wikidataEn": "Haroun",
+      "wikipediaAr": "هارون",
+      "osmAr": ["هارون"],
+      "osmEn": ["Haroun"],
+      "coordDistanceM": 0,
+      "flags": []
+    },
+    {
+      "stationId": "al-ahram",
+      "qid": "Q106678983",
+      "wikidataEn": "Al-Ahram",
+      "wikipediaAr": "الأهرام",
+      "osmAr": ["الاهرام"],
+      "osmEn": ["Al Ahram"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "koleyet-el-banat",
+      "qid": "Q106678984",
+      "wikidataEn": "Koleyet El-Banat",
+      "wikipediaAr": "كلية البنات",
+      "osmAr": ["كلية البنات"],
+      "osmEn": ["Koleyet El Banat"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "cairo-stadium",
+      "qid": "Q106678985",
+      "wikidataEn": "Stadium",
+      "wikipediaAr": "الإستاد",
+      "osmAr": ["الإستاد"],
+      "osmEn": ["Stadium"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "fair-zone",
+      "qid": "Q18379756",
+      "wikidataEn": "Fair Zone",
+      "wikipediaAr": "أرض المعارض",
+      "osmAr": ["أرض المعارض"],
+      "osmEn": ["Cairo Fairground"],
+      "coordDistanceM": 2,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "abbassia",
+      "qid": "Q18161422",
+      "wikidataEn": "Abbassia",
+      "wikipediaAr": "العباسية",
+      "osmAr": ["العباسية"],
+      "osmEn": ["Abbassia"],
+      "coordDistanceM": 460,
+      "flags": ["coords-differ"]
+    },
+    {
+      "stationId": "abdou-pasha",
+      "qid": "Q18349827",
+      "wikidataEn": "Abdou Pasha",
+      "wikipediaAr": "عبده باشا",
+      "osmAr": ["عبده باشا"],
+      "osmEn": ["Abdou Pasha"],
+      "coordDistanceM": 176,
+      "flags": []
+    },
+    {
+      "stationId": "el-geish",
+      "qid": "Q20717306",
+      "wikidataEn": "El Geish",
+      "wikipediaAr": "الجيش",
+      "osmAr": ["الجيش"],
+      "osmEn": ["El Geish"],
+      "coordDistanceM": 115,
+      "flags": []
+    },
+    {
+      "stationId": "bab-el-shaaria",
+      "qid": "Q20311888",
+      "wikidataEn": "Bab El Shaaria",
+      "wikipediaAr": "باب الشعرية",
+      "osmAr": ["باب الشعرية"],
+      "osmEn": ["Bab el Shaaria"],
+      "coordDistanceM": 34,
+      "flags": []
+    },
+    {
+      "stationId": "maspero",
+      "qid": "Q106678986",
+      "wikidataEn": "Maspero",
+      "wikipediaAr": "ماسبيرو",
+      "osmAr": ["ماسبيرو"],
+      "osmEn": ["Masbero"],
+      "coordDistanceM": 1,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "safaa-hegazy",
+      "qid": "Q106678987",
+      "wikidataEn": "Safaa Hegazy",
+      "wikipediaAr": "صفاء حجازي",
+      "osmAr": ["صفاء حجازي"],
+      "osmEn": ["Safaa Hegazy"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "kit-kat",
+      "qid": "Q106678989",
+      "wikidataEn": "Kit Kat",
+      "wikipediaAr": "الكيت كات",
+      "osmAr": ["الكيت كات"],
+      "osmEn": ["Kit-kat"],
+      "coordDistanceM": 1,
+      "flags": []
+    },
+    {
+      "stationId": "sudan",
+      "qid": "Q106678990",
+      "wikidataEn": "Sudan",
+      "wikipediaAr": "السودان",
+      "osmAr": [],
+      "osmEn": ["Sudan"],
+      "coordDistanceM": 3,
+      "flags": []
+    },
+    {
+      "stationId": "imbaba",
+      "qid": "Q10275868",
+      "wikidataEn": "Imbaba",
+      "wikipediaAr": "إمبابة",
+      "osmAr": [],
+      "osmEn": ["Imbaba"],
+      "coordDistanceM": 15,
+      "flags": []
+    },
+    {
+      "stationId": "el-bohy",
+      "qid": "Q106678991",
+      "wikidataEn": "El-Bohy",
+      "wikipediaAr": "البوهي",
+      "osmAr": [],
+      "osmEn": [],
+      "coordDistanceM": 1,
+      "flags": ["osm-english-missing"]
+    },
+    {
+      "stationId": "el-qawmia",
+      "qid": "Q106678992",
+      "wikidataEn": "El-Qawmia",
+      "wikipediaAr": "القومية",
+      "osmAr": [],
+      "osmEn": [],
+      "coordDistanceM": 2,
+      "flags": ["osm-english-missing"]
+    },
+    {
+      "stationId": "ring-road",
+      "qid": "Q106678993",
+      "wikidataEn": "Ring Road",
+      "wikipediaAr": "الطريق الدائري",
+      "osmAr": [],
+      "osmEn": [],
+      "coordDistanceM": 1,
+      "flags": ["osm-english-missing"]
+    },
+    {
+      "stationId": "rod-el-farag-axis",
+      "qid": "Q106678994",
+      "wikidataEn": "Rod al-Farag Corridor",
+      "wikipediaAr": "محور روض الفرج",
+      "osmAr": ["محطه مترو محور الضبعة (محور روض الفرج)"],
+      "osmEn": ["El-Dabaa Axis"],
+      "coordDistanceM": 2,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "al-tawfikia",
+      "qid": "Q106678995",
+      "wikidataEn": "Tawfikia",
+      "wikipediaAr": "التوفيقية",
+      "osmAr": ["التوفيقية"],
+      "osmEn": ["Al-Tawfikia"],
+      "coordDistanceM": 34,
+      "flags": ["english-name-differs"]
+    },
+    {
+      "stationId": "wadi-el-nile",
+      "qid": "Q106678996",
+      "wikidataEn": "Wadi El Nile",
+      "wikipediaAr": "وادي النيل",
+      "osmAr": ["وادي النيل"],
+      "osmEn": ["Wadi El Nile"],
+      "coordDistanceM": 2,
+      "flags": []
+    },
+    {
+      "stationId": "gamet-el-dowel",
+      "qid": "Q106678997",
+      "wikidataEn": "Gamat El Dowal",
+      "wikipediaAr": "جامعة الدول العربية",
+      "osmAr": ["جامعة الدول"],
+      "osmEn": ["Gamet El Dowel"],
+      "coordDistanceM": 8,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    },
+    {
+      "stationId": "bulaq-el-dakrour",
+      "qid": "Q106678998",
+      "wikidataEn": "Boulak El Dakrour",
+      "wikipediaAr": "بولاق الدكرور",
+      "osmAr": ["محطة مترو بولاق الدكرور"],
+      "osmEn": ["Bulaq Al-Dakrour"],
+      "coordDistanceM": 174,
+      "flags": ["arabic-name-differs", "english-name-differs"]
+    }
+  ]
+}

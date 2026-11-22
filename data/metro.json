@@ -1,0 +1,2763 @@
+{
+  "generatedAt": "2026-11-22T22:16:24.944Z",
+  "attribution": [
+    "© OpenStreetMap contributors (ODbL)",
+    "Wikipedia (CC BY-SA 4.0) / Wikidata (CC0) for cross-checking"
+  ],
+  "stations": [
+    {
+      "id": "abbassia",
+      "name": {
+        "en": "Abbassia",
+        "ar": "العباسية"
+      },
+      "aliases": ["Abbassiya"],
+      "lat": 30.07278,
+      "lng": 31.284093,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 14
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q18161422",
+      "osmNodeIds": [1235803733, 4979483242],
+      "notes": []
+    },
+    {
+      "id": "abdou-pasha",
+      "name": {
+        "en": "Abdou Pasha",
+        "ar": "عبده باشا"
+      },
+      "aliases": [],
+      "lat": 30.065371,
+      "lng": 31.276502,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 15
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q18349827",
+      "osmNodeIds": [1235803732, 4979483239],
+      "notes": []
+    },
+    {
+      "id": "adly-mansour",
+      "name": {
+        "en": "Adly Mansour",
+        "ar": "عدلي منصور"
+      },
+      "aliases": ["عدلى منصور"],
+      "lat": 30.146953,
+      "lng": 31.421598,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 0
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678973",
+      "osmNodeIds": [7559190648, 9076255925],
+      "notes": []
+    },
+    {
+      "id": "ain-helwan",
+      "name": {
+        "en": "Ain Helwan",
+        "ar": "عين حلوان"
+      },
+      "aliases": ["محطة عين حلوان", "محطة مترو عين حلوان"],
+      "lat": 29.862658,
+      "lng": 31.325009,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 1
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275553",
+      "osmNodeIds": [316637584, 5344953910],
+      "notes": []
+    },
+    {
+      "id": "ain-shams",
+      "name": {
+        "en": "Ain Shams",
+        "ar": "عين شمس"
+      },
+      "aliases": [],
+      "lat": 30.131031,
+      "lng": 31.31907,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 31
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275554",
+      "osmNodeIds": [1642286403, 4979331217],
+      "notes": []
+    },
+    {
+      "id": "al-ahram",
+      "name": {
+        "en": "Al-Ahram",
+        "ar": "الأهرام"
+      },
+      "aliases": [],
+      "lat": 30.091313,
+      "lng": 31.326497,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 10
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678983",
+      "osmNodeIds": [2400937187, 4979511781],
+      "notes": []
+    },
+    {
+      "id": "al-shohadaa",
+      "name": {
+        "en": "Al-Shohadaa",
+        "ar": "الشهداء"
+      },
+      "aliases": ["Shuhada", "رمسيس", "Ramses", "مبارك", "Mubarak"],
+      "lat": 30.061806,
+      "lng": 31.246289,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 21
+        },
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 7
+        }
+      ],
+      "interchange": true,
+      "transferSec": 240,
+      "status": "open",
+      "wikidata": "Q10275997",
+      "osmNodeIds": [5194295698, 5194295699, 5194295700, 5194295701],
+      "notes": []
+    },
+    {
+      "id": "al-tawfikia",
+      "name": {
+        "en": "Al-Tawfikia",
+        "ar": "التوفيقية"
+      },
+      "aliases": ["Tawfikia"],
+      "lat": 30.065071,
+      "lng": 31.202158,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 1
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678995",
+      "osmNodeIds": [11926766472, 11926766473],
+      "notes": []
+    },
+    {
+      "id": "alf-maskan",
+      "name": {
+        "en": "Alf Maskan",
+        "ar": "ألف مسكن"
+      },
+      "aliases": ["محطة مترو ألف مسكن"],
+      "lat": 30.118065,
+      "lng": 31.339826,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 7
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678980",
+      "osmNodeIds": [7153641095, 7302135247],
+      "notes": []
+    },
+    {
+      "id": "attaba",
+      "name": {
+        "en": "Attaba",
+        "ar": "العتبة"
+      },
+      "aliases": ["Ataba", "محطة مترو العتبة"],
+      "lat": 30.052583,
+      "lng": 31.248074,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 8
+        },
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 18
+        }
+      ],
+      "interchange": true,
+      "transferSec": 240,
+      "status": "open",
+      "wikidata": "Q10275582",
+      "osmNodeIds": [317755256, 4979414356, 5194348150, 5194348151],
+      "notes": []
+    },
+    {
+      "id": "bab-el-shaaria",
+      "name": {
+        "en": "Bab El-Shaaria",
+        "ar": "باب الشعرية"
+      },
+      "aliases": [],
+      "lat": 30.053711,
+      "lng": 31.255876,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 17
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q20311888",
+      "osmNodeIds": [1235803722, 4979483234],
+      "notes": []
+    },
+    {
+      "id": "bohooth",
+      "name": {
+        "en": "Bohooth",
+        "ar": "البحوث"
+      },
+      "aliases": ["Behooth", "El Bohoth"],
+      "lat": 30.035764,
+      "lng": 31.200316,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 13
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275604",
+      "osmNodeIds": [5355866946, 5355866947],
+      "notes": []
+    },
+    {
+      "id": "bulaq-el-dakrour",
+      "name": {
+        "en": "Bulaq El-Dakrour",
+        "ar": "بولاق الدكرور"
+      },
+      "aliases": ["Bulaq Al-Dakrour", "Boulak El Dakrour", "محطة مترو بولاق الدكرور"],
+      "lat": 30.037542,
+      "lng": 31.195506,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 4
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678998",
+      "osmNodeIds": [11923472302, 11923472312],
+      "notes": []
+    },
+    {
+      "id": "cairo-stadium",
+      "name": {
+        "en": "Cairo Stadium",
+        "ar": "الإستاد"
+      },
+      "aliases": ["Stadium"],
+      "lat": 30.072949,
+      "lng": 31.317395,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 12
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678985",
+      "osmNodeIds": [1654760266, 4979511765],
+      "notes": []
+    },
+    {
+      "id": "cairo-university",
+      "name": {
+        "en": "Cairo University",
+        "ar": "جامعة القاهرة"
+      },
+      "aliases": [],
+      "lat": 30.025447,
+      "lng": 31.201282,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 14
+        },
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 5
+        }
+      ],
+      "interchange": true,
+      "transferSec": 240,
+      "status": "open",
+      "wikidata": "Q10276203",
+      "osmNodeIds": [316632489, 9076904702, 11926706152, 11926706153],
+      "notes": []
+    },
+    {
+      "id": "dar-el-salam",
+      "name": {
+        "en": "Dar El-Salam",
+        "ar": "دار السلام"
+      },
+      "aliases": ["Dar Al-Salam", "محطة دار السلام"],
+      "lat": 29.982005,
+      "lng": 31.24222,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 12
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275685",
+      "osmNodeIds": [316388053, 5194246948],
+      "notes": ["OSM fixme: Probably part of the metro line"]
+    },
+    {
+      "id": "dokki",
+      "name": {
+        "en": "Dokki",
+        "ar": "الدقي"
+      },
+      "aliases": ["الدقى"],
+      "lat": 30.038214,
+      "lng": 31.212014,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 12
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275690",
+      "osmNodeIds": [9076904709, 9076904710],
+      "notes": []
+    },
+    {
+      "id": "el-bohy",
+      "name": {
+        "en": "El-Bohy",
+        "ar": "البوهي"
+      },
+      "aliases": ["Al-Bohy"],
+      "lat": 30.082116,
+      "lng": 31.210484,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 3
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678991",
+      "osmNodeIds": [9077189570, 11495591843],
+      "notes": []
+    },
+    {
+      "id": "el-demerdash",
+      "name": {
+        "en": "El-Demerdash",
+        "ar": "الدمرداش"
+      },
+      "aliases": ["Al-Demerdash"],
+      "lat": 30.077257,
+      "lng": 31.277814,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 23
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275722",
+      "osmNodeIds": [1642383282, 4979331190],
+      "notes": []
+    },
+    {
+      "id": "el-geish",
+      "name": {
+        "en": "El-Geish",
+        "ar": "الجيش"
+      },
+      "aliases": ["محطة الجيش"],
+      "lat": 30.062267,
+      "lng": 31.26797,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 16
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q20717306",
+      "osmNodeIds": [1235803723, 4979483237],
+      "notes": []
+    },
+    {
+      "id": "el-haykestep",
+      "name": {
+        "en": "El-Haykestep",
+        "ar": "الهايكستب"
+      },
+      "aliases": ["محطة مترو الهايكستب", "مترو الهايكستب"],
+      "lat": 30.143881,
+      "lng": 31.40485,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 1
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678974",
+      "osmNodeIds": [7559190660, 9076234501],
+      "notes": []
+    },
+    {
+      "id": "el-maasara",
+      "name": {
+        "en": "El-Maasara",
+        "ar": "المعصرة"
+      },
+      "aliases": ["Al-Maasara", "مترو المعصرة"],
+      "lat": 29.906101,
+      "lng": 31.299735,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 5
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275721",
+      "osmNodeIds": [316638531, 5348846069],
+      "notes": []
+    },
+    {
+      "id": "el-malek-el-saleh",
+      "name": {
+        "en": "El-Malek El-Saleh",
+        "ar": "الملك الصالح"
+      },
+      "aliases": ["Al-Malek Al-Saleh"],
+      "lat": 30.017678,
+      "lng": 31.231195,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 15
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275724",
+      "osmNodeIds": [2460595904, 5349031091],
+      "notes": []
+    },
+    {
+      "id": "el-marg",
+      "name": {
+        "en": "El-Marg",
+        "ar": "المرج"
+      },
+      "aliases": ["Al Marj"],
+      "lat": 30.152081,
+      "lng": 31.335762,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 33
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q5350666",
+      "osmNodeIds": [316643120, 4979331528],
+      "notes": []
+    },
+    {
+      "id": "el-matareyya",
+      "name": {
+        "en": "El-Matareyya",
+        "ar": "المطرية"
+      },
+      "aliases": [],
+      "lat": 30.121384,
+      "lng": 31.313952,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 30
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275726",
+      "osmNodeIds": [316643099, 4979331216],
+      "notes": []
+    },
+    {
+      "id": "el-mounib",
+      "name": {
+        "en": "El-Mounib",
+        "ar": "المنيب"
+      },
+      "aliases": ["Al-Mounib"],
+      "lat": 29.981136,
+      "lng": 31.211966,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 19
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275728",
+      "osmNodeIds": [1131555201, 5355860835],
+      "notes": []
+    },
+    {
+      "id": "el-nozha",
+      "name": {
+        "en": "El-Nozha",
+        "ar": "النزهة"
+      },
+      "aliases": ["مترو النزهة"],
+      "lat": 30.128117,
+      "lng": 31.36052,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 5
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678978",
+      "osmNodeIds": [7559205785, 7926259279],
+      "notes": []
+    },
+    {
+      "id": "el-qawmia",
+      "name": {
+        "en": "El-Qawmia",
+        "ar": "القومية"
+      },
+      "aliases": ["Al-Kawmeiah"],
+      "lat": 30.093199,
+      "lng": 31.208882,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 4
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678992",
+      "osmNodeIds": [9077391794, 11495591840],
+      "notes": []
+    },
+    {
+      "id": "el-shams-club",
+      "name": {
+        "en": "El-Shams Club",
+        "ar": "نادي الشمس"
+      },
+      "aliases": ["Nadi El-Shams"],
+      "lat": 30.122304,
+      "lng": 31.343971,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 6
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678979",
+      "osmNodeIds": [7302135245, 7302135246],
+      "notes": []
+    },
+    {
+      "id": "el-zahraa",
+      "name": {
+        "en": "El-Zahraa",
+        "ar": "الزهراء"
+      },
+      "aliases": ["Al-Zahraa"],
+      "lat": 29.99544,
+      "lng": 31.231359,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 13
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275725",
+      "osmNodeIds": [493207780, 5194246949],
+      "notes": ["OSM fixme: Probably part of the metro line"]
+    },
+    {
+      "id": "ezbet-el-nakhl",
+      "name": {
+        "en": "Ezbet El-Nakhl",
+        "ar": "عزبة النخل"
+      },
+      "aliases": ["Ezbet en Nakhl", "محطة عزبة النخل"],
+      "lat": 30.139272,
+      "lng": 31.324503,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 32
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275752",
+      "osmNodeIds": [316643111, 4979331220],
+      "notes": []
+    },
+    {
+      "id": "fair-zone",
+      "name": {
+        "en": "Fair Zone",
+        "ar": "أرض المعارض"
+      },
+      "aliases": ["Cairo Fairground", "Cairo Fair", "محطة المعرض"],
+      "lat": 30.073329,
+      "lng": 31.301149,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 13
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q18379756",
+      "osmNodeIds": [1654760303, 4979483255],
+      "notes": []
+    },
+    {
+      "id": "faisal",
+      "name": {
+        "en": "Faisal",
+        "ar": "فيصل"
+      },
+      "aliases": [],
+      "lat": 30.017294,
+      "lng": 31.204031,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 15
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275754",
+      "osmNodeIds": [316631596, 9076904701],
+      "notes": []
+    },
+    {
+      "id": "gamet-el-dowel",
+      "name": {
+        "en": "Gamet El-Dowel",
+        "ar": "جامعة الدول العربية"
+      },
+      "aliases": ["Gamat El Dowal", "جامعة الدول"],
+      "lat": 30.050954,
+      "lng": 31.199687,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 3
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678997",
+      "osmNodeIds": [11923472281, 11923472282],
+      "notes": []
+    },
+    {
+      "id": "ghamra",
+      "name": {
+        "en": "Ghamra",
+        "ar": "غمرة"
+      },
+      "aliases": ["الغمرة"],
+      "lat": 30.068963,
+      "lng": 31.264675,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 22
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275826",
+      "osmNodeIds": [316642043, 5349031079],
+      "notes": []
+    },
+    {
+      "id": "giza",
+      "name": {
+        "en": "Giza",
+        "ar": "الجيزة"
+      },
+      "aliases": ["جيزة"],
+      "lat": 30.010571,
+      "lng": 31.207126,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 16
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275831",
+      "osmNodeIds": [316631600, 3759917281],
+      "notes": []
+    },
+    {
+      "id": "hadayek-el-maadi",
+      "name": {
+        "en": "Hadayek El-Maadi",
+        "ar": "حدائق المعادي"
+      },
+      "aliases": ["Hadayeq El-Maadi", "مترو حدائق المعادى", "حدائق المعادى"],
+      "lat": 29.970096,
+      "lng": 31.250667,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 11
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275845",
+      "osmNodeIds": [5348846066, 5348846067],
+      "notes": []
+    },
+    {
+      "id": "hadayeq-el-zaitoun",
+      "name": {
+        "en": "Hadayeq El-Zaitoun",
+        "ar": "حدائق الزيتون"
+      },
+      "aliases": ["Hadayeq Al-Zaitoun"],
+      "lat": 30.105204,
+      "lng": 31.309936,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 28
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275847",
+      "osmNodeIds": [316643077, 4979331206],
+      "notes": []
+    },
+    {
+      "id": "hadayeq-helwan",
+      "name": {
+        "en": "Hadayeq Helwan",
+        "ar": "حدائق حلوان"
+      },
+      "aliases": ["Hadayek Helwan"],
+      "lat": 29.897186,
+      "lng": 31.304069,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 4
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275846",
+      "osmNodeIds": [316638393, 5344953907],
+      "notes": []
+    },
+    {
+      "id": "hammamat-el-qobba",
+      "name": {
+        "en": "Hammamat El-Qobba",
+        "ar": "حمامات القبة"
+      },
+      "aliases": ["Hammamat Al-Qobba"],
+      "lat": 30.090337,
+      "lng": 31.298109,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 26
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275849",
+      "osmNodeIds": [316643069, 4979331199],
+      "notes": []
+    },
+    {
+      "id": "haroun",
+      "name": {
+        "en": "Haroun",
+        "ar": "هارون"
+      },
+      "aliases": [],
+      "lat": 30.101107,
+      "lng": 31.33276,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 9
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678982",
+      "osmNodeIds": [7308408910, 7308408911],
+      "notes": []
+    },
+    {
+      "id": "heliopolis",
+      "name": {
+        "en": "Heliopolis",
+        "ar": "ميدان هليوبوليس"
+      },
+      "aliases": ["Heliopolis Square", "محطة مترو هليوبوليس", "محطة هليوبوليس"],
+      "lat": 30.10796,
+      "lng": 31.338164,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 8
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678981",
+      "osmNodeIds": [7302135248, 7302135249],
+      "notes": []
+    },
+    {
+      "id": "helmeyet-el-zaitoun",
+      "name": {
+        "en": "Helmeyet El-Zaitoun",
+        "ar": "حلمية الزيتون"
+      },
+      "aliases": ["Helmeyet Al-Zaitoun"],
+      "lat": 30.114345,
+      "lng": 31.313896,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 29
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275852",
+      "osmNodeIds": [5349031071, 5349031072],
+      "notes": []
+    },
+    {
+      "id": "helwan",
+      "name": {
+        "en": "Helwan",
+        "ar": "حلوان"
+      },
+      "aliases": ["محطة حلوان"],
+      "lat": 29.849889,
+      "lng": 31.334232,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 0
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275853",
+      "osmNodeIds": [3755981998, 5344953912],
+      "notes": []
+    },
+    {
+      "id": "helwan-university",
+      "name": {
+        "en": "Helwan University",
+        "ar": "جامعة العاصمة"
+      },
+      "aliases": ["Capital University", "جامعة حلوان"],
+      "lat": 29.869019,
+      "lng": 31.320366,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 2
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276202",
+      "osmNodeIds": [316637586, 5349031094],
+      "notes": []
+    },
+    {
+      "id": "hesham-barakat",
+      "name": {
+        "en": "Hesham Barakat",
+        "ar": "هشام بركات"
+      },
+      "aliases": [],
+      "lat": 30.130965,
+      "lng": 31.373092,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 4
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678977",
+      "osmNodeIds": [7559190677, 7926259258],
+      "notes": []
+    },
+    {
+      "id": "imbaba",
+      "name": {
+        "en": "Imbaba",
+        "ar": "إمبابة"
+      },
+      "aliases": [],
+      "lat": 30.07595,
+      "lng": 31.207562,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 2
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275868",
+      "osmNodeIds": [9077189581, 11495591856],
+      "notes": []
+    },
+    {
+      "id": "khalafawy",
+      "name": {
+        "en": "Khalafawy",
+        "ar": "الخلفاوي"
+      },
+      "aliases": ["Al-Khalafawy"],
+      "lat": 30.097786,
+      "lng": 31.245442,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 3
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275910",
+      "osmNodeIds": [316634827, 4978060972],
+      "notes": []
+    },
+    {
+      "id": "kit-kat",
+      "name": {
+        "en": "Kit-Kat",
+        "ar": "الكيت كات"
+      },
+      "aliases": [],
+      "lat": 30.066796,
+      "lng": 31.212983,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 22
+        },
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 0
+        },
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 0
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678989",
+      "osmNodeIds": [9077189602, 10099279486],
+      "notes": ["OSM still tags this stop with construction=*; verify it is open."]
+    },
+    {
+      "id": "kobri-el-qobba",
+      "name": {
+        "en": "Kobri El-Qobba",
+        "ar": "كوبري القبة"
+      },
+      "aliases": ["Kobri Al-Qobba"],
+      "lat": 30.086969,
+      "lng": 31.293819,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 25
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275913",
+      "osmNodeIds": [316643067, 4979331198],
+      "notes": []
+    },
+    {
+      "id": "koleyet-el-banat",
+      "name": {
+        "en": "Koleyet El-Banat",
+        "ar": "كلية البنات"
+      },
+      "aliases": [],
+      "lat": 30.08367,
+      "lng": 31.328815,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 11
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678984",
+      "osmNodeIds": [1654764997, 4979511774],
+      "notes": []
+    },
+    {
+      "id": "koliet-el-zeraa",
+      "name": {
+        "en": "Koliet El-Zeraa",
+        "ar": "كلية الزراعة"
+      },
+      "aliases": ["Kolleyyet El-Zeraa"],
+      "lat": 30.113775,
+      "lng": 31.248692,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 1
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275916",
+      "osmNodeIds": [1641694429, 4978060958],
+      "notes": []
+    },
+    {
+      "id": "kozzika",
+      "name": {
+        "en": "Kozzika",
+        "ar": "كوتسيكا"
+      },
+      "aliases": ["كوتسكا"],
+      "lat": 29.93615,
+      "lng": 31.281706,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 7
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275915",
+      "osmNodeIds": [5194246943, 5194246944],
+      "notes": []
+    },
+    {
+      "id": "maadi",
+      "name": {
+        "en": "Maadi",
+        "ar": "المعادي"
+      },
+      "aliases": ["المعادى"],
+      "lat": 29.959844,
+      "lng": 31.258078,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 10
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275942",
+      "osmNodeIds": [2208367184, 5348846065],
+      "notes": []
+    },
+    {
+      "id": "manshiet-el-sadr",
+      "name": {
+        "en": "Manshiet El-Sadr",
+        "ar": "منشية الصدر"
+      },
+      "aliases": ["Manshiet Al-Sadr"],
+      "lat": 30.08221,
+      "lng": 31.287838,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 24
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275952",
+      "osmNodeIds": [316642888, 4979331196],
+      "notes": []
+    },
+    {
+      "id": "mar-girgis",
+      "name": {
+        "en": "Mar Girgis",
+        "ar": "مار جرجس"
+      },
+      "aliases": [],
+      "lat": 30.00585,
+      "lng": 31.229524,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 14
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275956",
+      "osmNodeIds": [316388031, 5348846064],
+      "notes": []
+    },
+    {
+      "id": "maspero",
+      "name": {
+        "en": "Maspero",
+        "ar": "ماسبيرو"
+      },
+      "aliases": ["Masbero", "Gamal AbdAlNasser"],
+      "lat": 30.055508,
+      "lng": 31.232223,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 20
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678986",
+      "osmNodeIds": [9077161247, 10099279471],
+      "notes": []
+    },
+    {
+      "id": "massara",
+      "name": {
+        "en": "Massara",
+        "ar": "مسرة"
+      },
+      "aliases": ["Masarra", "مسره"],
+      "lat": 30.071041,
+      "lng": 31.245017,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 6
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275969",
+      "osmNodeIds": [4978060988, 9076939028],
+      "notes": []
+    },
+    {
+      "id": "mezallat",
+      "name": {
+        "en": "Mezallat",
+        "ar": "المظلات"
+      },
+      "aliases": ["Al-Mezallat"],
+      "lat": 30.104097,
+      "lng": 31.246144,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 2
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275983",
+      "osmNodeIds": [6288254841, 9076939045],
+      "notes": []
+    },
+    {
+      "id": "mohamed-naguib",
+      "name": {
+        "en": "Mohamed Naguib",
+        "ar": "محمد نجيب"
+      },
+      "aliases": ["نجيب"],
+      "lat": 30.045424,
+      "lng": 31.244316,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 9
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276001",
+      "osmNodeIds": [9076939018, 9076939019],
+      "notes": []
+    },
+    {
+      "id": "nasser",
+      "name": {
+        "en": "Nasser",
+        "ar": "جمال عبدالناصر"
+      },
+      "aliases": ["الإسعاف", "El Esaaf", "Gamal AbdAlNasser", "ناصر"],
+      "lat": 30.053506,
+      "lng": 31.238798,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 19
+        },
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 19
+        }
+      ],
+      "interchange": true,
+      "transferSec": 240,
+      "status": "open",
+      "wikidata": "Q10275821",
+      "osmNodeIds": [316641712, 4978062181, 10099279467, 10099279469],
+      "notes": []
+    },
+    {
+      "id": "new-el-marg",
+      "name": {
+        "en": "New El-Marg",
+        "ar": "المرج الجديدة"
+      },
+      "aliases": [],
+      "lat": 30.163538,
+      "lng": 31.3383,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 34
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276010",
+      "osmNodeIds": [316643127, 4979331537],
+      "notes": []
+    },
+    {
+      "id": "omar-ibn-el-khattab",
+      "name": {
+        "en": "Omar Ibn El-Khattab",
+        "ar": "عمر بن الخطاب"
+      },
+      "aliases": ["Omar Ebn Elkhatab", "مترو عمر بن الخطاب"],
+      "lat": 30.140407,
+      "lng": 31.394481,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 2
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678975",
+      "osmNodeIds": [7559190666, 9076234491],
+      "notes": []
+    },
+    {
+      "id": "omm-el-misryeen",
+      "name": {
+        "en": "Omm El-Misryeen",
+        "ar": "أم المصريين"
+      },
+      "aliases": ["Omm El-Masryeen"],
+      "lat": 30.005138,
+      "lng": 31.207961,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 17
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275830",
+      "osmNodeIds": [4979416433, 9076904700],
+      "notes": []
+    },
+    {
+      "id": "opera",
+      "name": {
+        "en": "Opera",
+        "ar": "الأوبرا"
+      },
+      "aliases": ["Gezira"],
+      "lat": 30.042024,
+      "lng": 31.225185,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 11
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275827",
+      "osmNodeIds": [4979414360, 9076904711],
+      "notes": []
+    },
+    {
+      "id": "orabi",
+      "name": {
+        "en": "Orabi",
+        "ar": "عرابي"
+      },
+      "aliases": [],
+      "lat": 30.057365,
+      "lng": 31.242703,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 20
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276204",
+      "osmNodeIds": [5353485468, 5353485469],
+      "notes": []
+    },
+    {
+      "id": "qobaa",
+      "name": {
+        "en": "Qobaa",
+        "ar": "قباء"
+      },
+      "aliases": ["Qubaa", "مترو قباء"],
+      "lat": 30.134761,
+      "lng": 31.384063,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 3
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678976",
+      "osmNodeIds": [7559190674, 9076234476],
+      "notes": []
+    },
+    {
+      "id": "ring-road",
+      "name": {
+        "en": "Ring Road",
+        "ar": "الطريق الدائري"
+      },
+      "aliases": [],
+      "lat": 30.096414,
+      "lng": 31.199582,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 5
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678993",
+      "osmNodeIds": [9077274203, 11495591821],
+      "notes": []
+    },
+    {
+      "id": "rod-el-farag",
+      "name": {
+        "en": "Rod El-Farag",
+        "ar": "روض الفرج"
+      },
+      "aliases": ["Rawd El-Farag", "Road El-Farag"],
+      "lat": 30.08057,
+      "lng": 31.245353,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 5
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276098",
+      "osmNodeIds": [4978060979, 9076939029],
+      "notes": []
+    },
+    {
+      "id": "rod-el-farag-axis",
+      "name": {
+        "en": "Rod El-Farag Axis",
+        "ar": "محور روض الفرج"
+      },
+      "aliases": [
+        "El-Dabaa Axis",
+        "Rod al-Farag Corridor",
+        "محطه مترو محور الضبعة (محور روض الفرج)"
+      ],
+      "lat": 30.101882,
+      "lng": 31.184166,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 6
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678994",
+      "osmNodeIds": [9077372453, 11495591794],
+      "notes": []
+    },
+    {
+      "id": "saad-zaghloul",
+      "name": {
+        "en": "Saad Zaghloul",
+        "ar": "سعد زغلول"
+      },
+      "aliases": ["مترو سعد زغلول"],
+      "lat": 30.036567,
+      "lng": 31.23808,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 17
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276115",
+      "osmNodeIds": [5349031084, 5349031085],
+      "notes": []
+    },
+    {
+      "id": "sadat",
+      "name": {
+        "en": "Sadat",
+        "ar": "السادات"
+      },
+      "aliases": [],
+      "lat": 30.0441,
+      "lng": 31.235116,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 18
+        },
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 10
+        }
+      ],
+      "interchange": true,
+      "transferSec": 240,
+      "status": "open",
+      "wikidata": "Q10276116",
+      "osmNodeIds": [5194295704, 5194295705, 5349031082, 5349031083],
+      "notes": []
+    },
+    {
+      "id": "safaa-hegazy",
+      "name": {
+        "en": "Safaa Hegazy",
+        "ar": "صفاء حجازي"
+      },
+      "aliases": [],
+      "lat": 30.062405,
+      "lng": 31.222516,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-main",
+          "order": 21
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678987",
+      "osmNodeIds": [9077189601, 10099279483],
+      "notes": []
+    },
+    {
+      "id": "sainte-teresa",
+      "name": {
+        "en": "Sainte Teresa",
+        "ar": "سانتا تريزا"
+      },
+      "aliases": ["St. Teresa", "سانت تيريزا"],
+      "lat": 30.088348,
+      "lng": 31.24539,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 4
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q18280662",
+      "osmNodeIds": [4978060976, 9076939031],
+      "notes": []
+    },
+    {
+      "id": "sakiat-mekki",
+      "name": {
+        "en": "Sakiat Mekki",
+        "ar": "ساقية مكي"
+      },
+      "aliases": ["Sakiat Mekky"],
+      "lat": 29.995486,
+      "lng": 31.208614,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 18
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276120",
+      "osmNodeIds": [9076904698, 9076904699],
+      "notes": []
+    },
+    {
+      "id": "saray-el-qobba",
+      "name": {
+        "en": "Saray El-Qobba",
+        "ar": "ساراي القبة"
+      },
+      "aliases": ["Saray Al-Qobba", "سراي القبة"],
+      "lat": 30.098065,
+      "lng": 31.304757,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 27
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276140",
+      "osmNodeIds": [316643073, 4979331202],
+      "notes": []
+    },
+    {
+      "id": "sayyeda-zeinab",
+      "name": {
+        "en": "Sayyeda Zeinab",
+        "ar": "السيدة زينب"
+      },
+      "aliases": ["Al-Sayeda Zeinab", "AlSayyeda Zeinab"],
+      "lat": 30.029245,
+      "lng": 31.235388,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 16
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10275555",
+      "osmNodeIds": [316639686, 5349031089],
+      "notes": []
+    },
+    {
+      "id": "shubra-el-kheima",
+      "name": {
+        "en": "Shubra El-Kheima",
+        "ar": "شبرا الخيمة"
+      },
+      "aliases": ["Shobra Al-Kheima", "Shobra El Kheima", "محطة شبرا الخيمة"],
+      "lat": 30.124091,
+      "lng": 31.243494,
+      "lines": [
+        {
+          "line": "L2",
+          "branch": "L2-main",
+          "order": 0
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276148",
+      "osmNodeIds": [1641694433, 9076939068],
+      "notes": []
+    },
+    {
+      "id": "sudan",
+      "name": {
+        "en": "Sudan",
+        "ar": "السودان"
+      },
+      "aliases": [],
+      "lat": 30.06978,
+      "lng": 31.205337,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-imbaba",
+          "order": 1
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678990",
+      "osmNodeIds": [9077161277, 11495611080],
+      "notes": []
+    },
+    {
+      "id": "thakanat-el-maadi",
+      "name": {
+        "en": "Thakanat El-Maadi",
+        "ar": "ثكنات المعادي"
+      },
+      "aliases": ["Sakanat El-Maadi"],
+      "lat": 29.95284,
+      "lng": 31.263463,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 9
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276184",
+      "osmNodeIds": [2208367177, 5348846063],
+      "notes": []
+    },
+    {
+      "id": "tora-el-asmant",
+      "name": {
+        "en": "Tora El-Asmant",
+        "ar": "طرة الأسمنت"
+      },
+      "aliases": ["طرا الأسمنت"],
+      "lat": 29.925849,
+      "lng": 31.287695,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 6
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276191",
+      "osmNodeIds": [5344953917, 5344953918],
+      "notes": ["OSM fixme: Probably part of the metro line"]
+    },
+    {
+      "id": "tora-el-balad",
+      "name": {
+        "en": "Tora El-Balad",
+        "ar": "طرة البلد"
+      },
+      "aliases": ["طرا البلد"],
+      "lat": 29.946321,
+      "lng": 31.273577,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 8
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276190",
+      "osmNodeIds": [316638638, 5349031095],
+      "notes": []
+    },
+    {
+      "id": "wadi-el-nile",
+      "name": {
+        "en": "Wadi El-Nile",
+        "ar": "وادي النيل"
+      },
+      "aliases": [],
+      "lat": 30.058461,
+      "lng": 31.201019,
+      "lines": [
+        {
+          "line": "L3",
+          "branch": "L3-cairo-univ",
+          "order": 2
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q106678996",
+      "osmNodeIds": [11923457958, 11923457959],
+      "notes": []
+    },
+    {
+      "id": "wadi-hof",
+      "name": {
+        "en": "Wadi Hof",
+        "ar": "وادي حوف"
+      },
+      "aliases": [],
+      "lat": 29.879438,
+      "lng": 31.313404,
+      "lines": [
+        {
+          "line": "L1",
+          "branch": "L1-main",
+          "order": 3
+        }
+      ],
+      "interchange": false,
+      "transferSec": null,
+      "status": "open",
+      "wikidata": "Q10276230",
+      "osmNodeIds": [316637588, 4978062099],
+      "notes": []
+    }
+  ],
+  "lines": [
+    {
+      "id": "L1",
+      "name": {
+        "en": "Line 1",
+        "ar": "الخط الأول"
+      },
+      "colour": "#1F4FBF",
+      "operator": "Egyptian Company for Metro Management & Operation",
+      "branches": [
+        {
+          "id": "L1-main",
+          "name": {
+            "en": "Helwan – New El-Marg",
+            "ar": "حلوان – المرج الجديدة"
+          },
+          "stations": [
+            "helwan",
+            "ain-helwan",
+            "helwan-university",
+            "wadi-hof",
+            "hadayeq-helwan",
+            "el-maasara",
+            "tora-el-asmant",
+            "kozzika",
+            "tora-el-balad",
+            "thakanat-el-maadi",
+            "maadi",
+            "hadayek-el-maadi",
+            "dar-el-salam",
+            "el-zahraa",
+            "mar-girgis",
+            "el-malek-el-saleh",
+            "sayyeda-zeinab",
+            "saad-zaghloul",
+            "sadat",
+            "nasser",
+            "orabi",
+            "al-shohadaa",
+            "ghamra",
+            "el-demerdash",
+            "manshiet-el-sadr",
+            "kobri-el-qobba",
+            "hammamat-el-qobba",
+            "saray-el-qobba",
+            "hadayeq-el-zaitoun",
+            "helmeyet-el-zaitoun",
+            "el-matareyya",
+            "ain-shams",
+            "ezbet-el-nakhl",
+            "el-marg",
+            "new-el-marg"
+          ],
+          "segments": [
+            {
+              "from": "helwan",
+              "to": "ain-helwan",
+              "distanceM": 1675,
+              "rideSec": 184,
+              "estimated": true
+            },
+            {
+              "from": "ain-helwan",
+              "to": "helwan-university",
+              "distanceM": 837,
+              "rideSec": 107,
+              "estimated": true
+            },
+            {
+              "from": "helwan-university",
+              "to": "wadi-hof",
+              "distanceM": 1339,
+              "rideSec": 153,
+              "estimated": true
+            },
+            {
+              "from": "wadi-hof",
+              "to": "hadayeq-helwan",
+              "distanceM": 2169,
+              "rideSec": 229,
+              "estimated": true
+            },
+            {
+              "from": "hadayeq-helwan",
+              "to": "el-maasara",
+              "distanceM": 1076,
+              "rideSec": 129,
+              "estimated": true
+            },
+            {
+              "from": "el-maasara",
+              "to": "tora-el-asmant",
+              "distanceM": 2484,
+              "rideSec": 258,
+              "estimated": true
+            },
+            {
+              "from": "tora-el-asmant",
+              "to": "kozzika",
+              "distanceM": 1283,
+              "rideSec": 148,
+              "estimated": true
+            },
+            {
+              "from": "kozzika",
+              "to": "tora-el-balad",
+              "distanceM": 1376,
+              "rideSec": 156,
+              "estimated": true
+            },
+            {
+              "from": "tora-el-balad",
+              "to": "thakanat-el-maadi",
+              "distanceM": 1214,
+              "rideSec": 141,
+              "estimated": true
+            },
+            {
+              "from": "thakanat-el-maadi",
+              "to": "maadi",
+              "distanceM": 936,
+              "rideSec": 116,
+              "estimated": true
+            },
+            {
+              "from": "maadi",
+              "to": "hadayek-el-maadi",
+              "distanceM": 1345,
+              "rideSec": 153,
+              "estimated": true
+            },
+            {
+              "from": "hadayek-el-maadi",
+              "to": "dar-el-salam",
+              "distanceM": 1554,
+              "rideSec": 172,
+              "estimated": true
+            },
+            {
+              "from": "dar-el-salam",
+              "to": "el-zahraa",
+              "distanceM": 1824,
+              "rideSec": 197,
+              "estimated": true
+            },
+            {
+              "from": "el-zahraa",
+              "to": "mar-girgis",
+              "distanceM": 1171,
+              "rideSec": 137,
+              "estimated": true
+            },
+            {
+              "from": "mar-girgis",
+              "to": "el-malek-el-saleh",
+              "distanceM": 1325,
+              "rideSec": 151,
+              "estimated": true
+            },
+            {
+              "from": "el-malek-el-saleh",
+              "to": "sayyeda-zeinab",
+              "distanceM": 1348,
+              "rideSec": 154,
+              "estimated": true
+            },
+            {
+              "from": "sayyeda-zeinab",
+              "to": "saad-zaghloul",
+              "distanceM": 854,
+              "rideSec": 108,
+              "estimated": true
+            },
+            {
+              "from": "saad-zaghloul",
+              "to": "sadat",
+              "distanceM": 885,
+              "rideSec": 111,
+              "estimated": true
+            },
+            {
+              "from": "sadat",
+              "to": "nasser",
+              "distanceM": 1104,
+              "rideSec": 131,
+              "estimated": true
+            },
+            {
+              "from": "nasser",
+              "to": "orabi",
+              "distanceM": 570,
+              "rideSec": 82,
+              "estimated": true
+            },
+            {
+              "from": "orabi",
+              "to": "al-shohadaa",
+              "distanceM": 602,
+              "rideSec": 85,
+              "estimated": true
+            },
+            {
+              "from": "al-shohadaa",
+              "to": "ghamra",
+              "distanceM": 1940,
+              "rideSec": 208,
+              "estimated": true
+            },
+            {
+              "from": "ghamra",
+              "to": "el-demerdash",
+              "distanceM": 1565,
+              "rideSec": 173,
+              "estimated": true
+            },
+            {
+              "from": "el-demerdash",
+              "to": "manshiet-el-sadr",
+              "distanceM": 1111,
+              "rideSec": 132,
+              "estimated": true
+            },
+            {
+              "from": "manshiet-el-sadr",
+              "to": "kobri-el-qobba",
+              "distanceM": 782,
+              "rideSec": 102,
+              "estimated": true
+            },
+            {
+              "from": "kobri-el-qobba",
+              "to": "hammamat-el-qobba",
+              "distanceM": 557,
+              "rideSec": 81,
+              "estimated": true
+            },
+            {
+              "from": "hammamat-el-qobba",
+              "to": "saray-el-qobba",
+              "distanceM": 1071,
+              "rideSec": 128,
+              "estimated": true
+            },
+            {
+              "from": "saray-el-qobba",
+              "to": "hadayeq-el-zaitoun",
+              "distanceM": 937,
+              "rideSec": 116,
+              "estimated": true
+            },
+            {
+              "from": "hadayeq-el-zaitoun",
+              "to": "helmeyet-el-zaitoun",
+              "distanceM": 1085,
+              "rideSec": 129,
+              "estimated": true
+            },
+            {
+              "from": "helmeyet-el-zaitoun",
+              "to": "el-matareyya",
+              "distanceM": 783,
+              "rideSec": 102,
+              "estimated": true
+            },
+            {
+              "from": "el-matareyya",
+              "to": "ain-shams",
+              "distanceM": 1180,
+              "rideSec": 138,
+              "estimated": true
+            },
+            {
+              "from": "ain-shams",
+              "to": "ezbet-el-nakhl",
+              "distanceM": 1055,
+              "rideSec": 127,
+              "estimated": true
+            },
+            {
+              "from": "ezbet-el-nakhl",
+              "to": "el-marg",
+              "distanceM": 1789,
+              "rideSec": 194,
+              "estimated": true
+            },
+            {
+              "from": "el-marg",
+              "to": "new-el-marg",
+              "distanceM": 1297,
+              "rideSec": 149,
+              "estimated": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L2",
+      "name": {
+        "en": "Line 2",
+        "ar": "الخط الثاني"
+      },
+      "colour": "#E0312B",
+      "operator": "Egyptian Company for Metro Management & Operation",
+      "branches": [
+        {
+          "id": "L2-main",
+          "name": {
+            "en": "Shubra El-Kheima – El-Mounib",
+            "ar": "شبرا الخيمة – المنيب"
+          },
+          "stations": [
+            "shubra-el-kheima",
+            "koliet-el-zeraa",
+            "mezallat",
+            "khalafawy",
+            "sainte-teresa",
+            "rod-el-farag",
+            "massara",
+            "al-shohadaa",
+            "attaba",
+            "mohamed-naguib",
+            "sadat",
+            "opera",
+            "dokki",
+            "bohooth",
+            "cairo-university",
+            "faisal",
+            "giza",
+            "omm-el-misryeen",
+            "sakiat-mekki",
+            "el-mounib"
+          ],
+          "segments": [
+            {
+              "from": "shubra-el-kheima",
+              "to": "koliet-el-zeraa",
+              "distanceM": 1251,
+              "rideSec": 145,
+              "estimated": true
+            },
+            {
+              "from": "koliet-el-zeraa",
+              "to": "mezallat",
+              "distanceM": 1104,
+              "rideSec": 131,
+              "estimated": true
+            },
+            {
+              "from": "mezallat",
+              "to": "khalafawy",
+              "distanceM": 705,
+              "rideSec": 95,
+              "estimated": true
+            },
+            {
+              "from": "khalafawy",
+              "to": "sainte-teresa",
+              "distanceM": 1049,
+              "rideSec": 126,
+              "estimated": true
+            },
+            {
+              "from": "sainte-teresa",
+              "to": "rod-el-farag",
+              "distanceM": 865,
+              "rideSec": 109,
+              "estimated": true
+            },
+            {
+              "from": "rod-el-farag",
+              "to": "massara",
+              "distanceM": 1060,
+              "rideSec": 127,
+              "estimated": true
+            },
+            {
+              "from": "massara",
+              "to": "al-shohadaa",
+              "distanceM": 1034,
+              "rideSec": 125,
+              "estimated": true
+            },
+            {
+              "from": "al-shohadaa",
+              "to": "attaba",
+              "distanceM": 1040,
+              "rideSec": 125,
+              "estimated": true
+            },
+            {
+              "from": "attaba",
+              "to": "mohamed-naguib",
+              "distanceM": 874,
+              "rideSec": 110,
+              "estimated": true
+            },
+            {
+              "from": "mohamed-naguib",
+              "to": "sadat",
+              "distanceM": 898,
+              "rideSec": 112,
+              "estimated": true
+            },
+            {
+              "from": "sadat",
+              "to": "opera",
+              "distanceM": 983,
+              "rideSec": 120,
+              "estimated": true
+            },
+            {
+              "from": "opera",
+              "to": "dokki",
+              "distanceM": 1337,
+              "rideSec": 153,
+              "estimated": true
+            },
+            {
+              "from": "dokki",
+              "to": "bohooth",
+              "distanceM": 1159,
+              "rideSec": 136,
+              "estimated": true
+            },
+            {
+              "from": "bohooth",
+              "to": "cairo-university",
+              "distanceM": 1151,
+              "rideSec": 136,
+              "estimated": true
+            },
+            {
+              "from": "cairo-university",
+              "to": "faisal",
+              "distanceM": 944,
+              "rideSec": 117,
+              "estimated": true
+            },
+            {
+              "from": "faisal",
+              "to": "giza",
+              "distanceM": 805,
+              "rideSec": 104,
+              "estimated": true
+            },
+            {
+              "from": "giza",
+              "to": "omm-el-misryeen",
+              "distanceM": 609,
+              "rideSec": 86,
+              "estimated": true
+            },
+            {
+              "from": "omm-el-misryeen",
+              "to": "sakiat-mekki",
+              "distanceM": 1075,
+              "rideSec": 129,
+              "estimated": true
+            },
+            {
+              "from": "sakiat-mekki",
+              "to": "el-mounib",
+              "distanceM": 1628,
+              "rideSec": 179,
+              "estimated": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "L3",
+      "name": {
+        "en": "Line 3",
+        "ar": "الخط الثالث"
+      },
+      "colour": "#1E9E4A",
+      "operator": "RATP Dev",
+      "branches": [
+        {
+          "id": "L3-main",
+          "name": {
+            "en": "Adly Mansour – Kit-Kat",
+            "ar": "عدلي منصور – الكيت كات"
+          },
+          "stations": [
+            "adly-mansour",
+            "el-haykestep",
+            "omar-ibn-el-khattab",
+            "qobaa",
+            "hesham-barakat",
+            "el-nozha",
+            "el-shams-club",
+            "alf-maskan",
+            "heliopolis",
+            "haroun",
+            "al-ahram",
+            "koleyet-el-banat",
+            "cairo-stadium",
+            "fair-zone",
+            "abbassia",
+            "abdou-pasha",
+            "el-geish",
+            "bab-el-shaaria",
+            "attaba",
+            "nasser",
+            "maspero",
+            "safaa-hegazy",
+            "kit-kat"
+          ],
+          "segments": [
+            {
+              "from": "adly-mansour",
+              "to": "el-haykestep",
+              "distanceM": 1646,
+              "rideSec": 181,
+              "estimated": true
+            },
+            {
+              "from": "el-haykestep",
+              "to": "omar-ibn-el-khattab",
+              "distanceM": 1069,
+              "rideSec": 128,
+              "estimated": true
+            },
+            {
+              "from": "omar-ibn-el-khattab",
+              "to": "qobaa",
+              "distanceM": 1182,
+              "rideSec": 138,
+              "estimated": true
+            },
+            {
+              "from": "qobaa",
+              "to": "hesham-barakat",
+              "distanceM": 1136,
+              "rideSec": 134,
+              "estimated": true
+            },
+            {
+              "from": "hesham-barakat",
+              "to": "el-nozha",
+              "distanceM": 1250,
+              "rideSec": 145,
+              "estimated": true
+            },
+            {
+              "from": "el-nozha",
+              "to": "el-shams-club",
+              "distanceM": 1718,
+              "rideSec": 187,
+              "estimated": true
+            },
+            {
+              "from": "el-shams-club",
+              "to": "alf-maskan",
+              "distanceM": 617,
+              "rideSec": 87,
+              "estimated": true
+            },
+            {
+              "from": "alf-maskan",
+              "to": "heliopolis",
+              "distanceM": 1135,
+              "rideSec": 134,
+              "estimated": true
+            },
+            {
+              "from": "heliopolis",
+              "to": "haroun",
+              "distanceM": 922,
+              "rideSec": 115,
+              "estimated": true
+            },
+            {
+              "from": "haroun",
+              "to": "al-ahram",
+              "distanceM": 1245,
+              "rideSec": 144,
+              "estimated": true
+            },
+            {
+              "from": "al-ahram",
+              "to": "koleyet-el-banat",
+              "distanceM": 879,
+              "rideSec": 111,
+              "estimated": true
+            },
+            {
+              "from": "koleyet-el-banat",
+              "to": "cairo-stadium",
+              "distanceM": 1621,
+              "rideSec": 179,
+              "estimated": true
+            },
+            {
+              "from": "cairo-stadium",
+              "to": "fair-zone",
+              "distanceM": 1564,
+              "rideSec": 173,
+              "estimated": true
+            },
+            {
+              "from": "fair-zone",
+              "to": "abbassia",
+              "distanceM": 1642,
+              "rideSec": 181,
+              "estimated": true
+            },
+            {
+              "from": "abbassia",
+              "to": "abdou-pasha",
+              "distanceM": 1101,
+              "rideSec": 131,
+              "estimated": true
+            },
+            {
+              "from": "abdou-pasha",
+              "to": "el-geish",
+              "distanceM": 891,
+              "rideSec": 112,
+              "estimated": true
+            },
+            {
+              "from": "el-geish",
+              "to": "bab-el-shaaria",
+              "distanceM": 1503,
+              "rideSec": 168,
+              "estimated": true
+            },
+            {
+              "from": "bab-el-shaaria",
+              "to": "attaba",
+              "distanceM": 761,
+              "rideSec": 100,
+              "estimated": true
+            },
+            {
+              "from": "attaba",
+              "to": "nasser",
+              "distanceM": 899,
+              "rideSec": 112,
+              "estimated": true
+            },
+            {
+              "from": "nasser",
+              "to": "maspero",
+              "distanceM": 671,
+              "rideSec": 92,
+              "estimated": true
+            },
+            {
+              "from": "maspero",
+              "to": "safaa-hegazy",
+              "distanceM": 1209,
+              "rideSec": 141,
+              "estimated": true
+            },
+            {
+              "from": "safaa-hegazy",
+              "to": "kit-kat",
+              "distanceM": 1039,
+              "rideSec": 125,
+              "estimated": true
+            }
+          ]
+        },
+        {
+          "id": "L3-imbaba",
+          "name": {
+            "en": "Kit-Kat – Rod El-Farag Axis",
+            "ar": "الكيت كات – محور روض الفرج"
+          },
+          "stations": [
+            "kit-kat",
+            "sudan",
+            "imbaba",
+            "el-bohy",
+            "el-qawmia",
+            "ring-road",
+            "rod-el-farag-axis"
+          ],
+          "segments": [
+            {
+              "from": "kit-kat",
+              "to": "sudan",
+              "distanceM": 807,
+              "rideSec": 104,
+              "estimated": true
+            },
+            {
+              "from": "sudan",
+              "to": "imbaba",
+              "distanceM": 719,
+              "rideSec": 96,
+              "estimated": true
+            },
+            {
+              "from": "imbaba",
+              "to": "el-bohy",
+              "distanceM": 741,
+              "rideSec": 98,
+              "estimated": true
+            },
+            {
+              "from": "el-bohy",
+              "to": "el-qawmia",
+              "distanceM": 1242,
+              "rideSec": 144,
+              "estimated": true
+            },
+            {
+              "from": "el-qawmia",
+              "to": "ring-road",
+              "distanceM": 963,
+              "rideSec": 118,
+              "estimated": true
+            },
+            {
+              "from": "ring-road",
+              "to": "rod-el-farag-axis",
+              "distanceM": 1603,
+              "rideSec": 177,
+              "estimated": true
+            }
+          ]
+        },
+        {
+          "id": "L3-cairo-univ",
+          "name": {
+            "en": "Kit-Kat – Cairo University",
+            "ar": "الكيت كات – جامعة القاهرة"
+          },
+          "stations": [
+            "kit-kat",
+            "al-tawfikia",
+            "wadi-el-nile",
+            "gamet-el-dowel",
+            "bulaq-el-dakrour",
+            "cairo-university"
+          ],
+          "segments": [
+            {
+              "from": "kit-kat",
+              "to": "al-tawfikia",
+              "distanceM": 1059,
+              "rideSec": 127,
+              "estimated": true
+            },
+            {
+              "from": "al-tawfikia",
+              "to": "wadi-el-nile",
+              "distanceM": 743,
+              "rideSec": 98,
+              "estimated": true
+            },
+            {
+              "from": "wadi-el-nile",
+              "to": "gamet-el-dowel",
+              "distanceM": 845,
+              "rideSec": 107,
+              "estimated": true
+            },
+            {
+              "from": "gamet-el-dowel",
+              "to": "bulaq-el-dakrour",
+              "distanceM": 1545,
+              "rideSec": 172,
+              "estimated": true
+            },
+            {
+              "from": "bulaq-el-dakrour",
+              "to": "cairo-university",
+              "distanceM": 1455,
+              "rideSec": 163,
+              "estimated": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
