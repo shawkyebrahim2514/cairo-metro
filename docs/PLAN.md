@@ -2,7 +2,7 @@
 
 Repo: C:\Users\Asus\cairo-metro (local; publish to GitHub later). Commit each change separately.
 Scope: Cairo Metro Lines 1-3 (+ planned layers later). Web PWA, en/ar (RTL), offline-capable (bundled data).
-Stack: Vite + React + TS PWA, pure-TS core, static JSON data, MapLibre/Leaflet, Vitest, i18n, Cloudflare Worker for link expansion.
+Stack: Vite + React + TS PWA, pure-TS core, static JSON data, MapLibre/Leaflet, Vitest, i18n. No proxies or external workers (decision): all parsing runs in the client.
 Tooling note: pnpm not installed -> using npm workspaces.
 
 ## Core user stories
@@ -51,9 +51,9 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 
 ### Stage 3: Place resolution services
 
-1. workers/resolve-link: follow short-link redirect, parse.
-2. Geocoder adapter (Nominatim/Photon), cache, debounce.
-3. Walking-route adapter (OSRM/ORS) with haversine*factor fallback.
+1. (REVISED) No worker/proxy. Short-link handling is client-side only: Web Share Target text (name + address + link), guided "open link, copy long URL" flow, coordinates-from-Maps tip, plain-name search.
+2. (REVISED, pending user choice) Place text search without external services; see options in chat: bundled offline places index vs optional geocoder vs stations only.
+3. Walking distance: haversine*1.3 estimate (already in core); real routing only as an optional add-on if ever enabled.
    Done when: short Maps link -> coords; graceful offline degrade.
 
 ### Stage 4: Web MVP
@@ -103,4 +103,4 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] Stage 1 (metro data) done: OSM + Wikidata pipeline, validation, verification viewer (`npm run data:view`), manual station verification applied; 84 stations / 5 interchanges / L1 35, L2 20, L3 34. Fares (`data/curated/fares.json`) and operating hours (`data/curated/hours.json`) added. Open: station-to-zone data (official zone page is outdated), official L3 hours/headway, exits/facilities (optional, later).
 - [x] Stage 2 (core engine) done in `packages/core`: geo (haversine, bbox), `parsePlaceInput` link parser, `nearestStations` (pluggable walking distance), transliteration-tolerant `searchStations`, `buildGraph`/`planRoute`/`planRoutes` (Dijkstra, transfer penalty, fastest and fewest-transfers, L3 branch-change handling at Kit-Kat), `tripFare`/`ticketPrice`. 44 tests, no UI. Notes: times are estimates; fare counts the boarding station (interchange counts once), configurable via `ticket.counting` in `data/curated/fares.json` (confirmed by rider; re-check in Stage 6 benchmark).
-- [ ] Stage 3 next: place-resolution services (short-link expansion worker, geocoder adapter, walking-route adapter).
+- [ ] Stage 3 next: place-resolution services (client-side short-link handling, place search, no external workers).
