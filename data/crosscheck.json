@@ -470,7 +470,7 @@
       "flags": []
     },
     {
-      "stationId": "helwan-university",
+      "stationId": "capital-university-helwan-university",
       "qid": "Q10276202",
       "wikidataEn": "Capital University metro station",
       "wikipediaAr": "جامعة العاصمة",
@@ -490,7 +490,7 @@
       "flags": []
     },
     {
-      "stationId": "hadayeq-helwan",
+      "stationId": "hadayek-helwan",
       "qid": "Q10275846",
       "wikidataEn": "Hadayek Helwan",
       "wikipediaAr": "حدائق حلوان",
@@ -540,7 +540,7 @@
       "flags": []
     },
     {
-      "stationId": "thakanat-el-maadi",
+      "stationId": "sakanat-el-maadi",
       "qid": "Q10276184",
       "wikidataEn": "Sakanat El-Maadi",
       "wikipediaAr": "ثكنات المعادي",
@@ -610,7 +610,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "sayyeda-zeinab",
+      "stationId": "el-sayeda-zeinab",
       "qid": "Q10275555",
       "wikidataEn": "Al-Sayeda Zeinab",
       "wikipediaAr": "السيدة زينب",
@@ -660,7 +660,7 @@
       "flags": []
     },
     {
-      "stationId": "al-shohadaa",
+      "stationId": "el-shohadaa",
       "qid": "Q10275997",
       "wikidataEn": "Al-Shohadaa",
       "wikipediaAr": "الشهداء",
@@ -730,7 +730,7 @@
       "flags": ["arabic-name-differs", "english-name-differs"]
     },
     {
-      "stationId": "hadayeq-el-zaitoun",
+      "stationId": "hadayek-el-zaitoun",
       "qid": "Q10275847",
       "wikidataEn": "Hadayeq El-Zaitoun",
       "wikipediaAr": "حدائق الزيتون",
@@ -830,7 +830,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "khalafawy",
+      "stationId": "el-khalafawy",
       "qid": "Q10275910",
       "wikidataEn": "Khalafawy",
       "wikipediaAr": "الخلفاوي",
@@ -860,7 +860,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "massara",
+      "stationId": "masarra",
       "qid": "Q10275969",
       "wikidataEn": "Masarra",
       "wikipediaAr": "مسرة",
@@ -910,7 +910,7 @@
       "flags": ["arabic-name-differs"]
     },
     {
-      "stationId": "bohooth",
+      "stationId": "el-bohoth",
       "qid": "Q10275604",
       "wikidataEn": "El Bohoth",
       "wikipediaAr": "البحوث",
@@ -960,7 +960,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "sakiat-mekki",
+      "stationId": "sakiat-mekky",
       "qid": "Q10276120",
       "wikidataEn": "Sakiat Mekky",
       "wikipediaAr": "ساقية مكي",
@@ -970,7 +970,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "el-mounib",
+      "stationId": "el-monib",
       "qid": "Q10275728",
       "wikidataEn": "El-Mounib",
       "wikipediaAr": "المنيب",
@@ -1070,7 +1070,7 @@
       "flags": ["english-name-differs"]
     },
     {
-      "stationId": "haroun",
+      "stationId": "haron",
       "qid": "Q106678982",
       "wikidataEn": "Haroun",
       "wikipediaAr": "هارون",
@@ -1080,7 +1080,7 @@
       "flags": []
     },
     {
-      "stationId": "al-ahram",
+      "stationId": "el-ahram",
       "qid": "Q106678983",
       "wikidataEn": "Al-Ahram",
       "wikipediaAr": "الأهرام",
@@ -1100,7 +1100,7 @@
       "flags": []
     },
     {
-      "stationId": "cairo-stadium",
+      "stationId": "stadium",
       "qid": "Q106678985",
       "wikidataEn": "Stadium",
       "wikipediaAr": "الإستاد",
@@ -1110,7 +1110,7 @@
       "flags": []
     },
     {
-      "stationId": "fair-zone",
+      "stationId": "ard-el-mared",
       "qid": "Q18379756",
       "wikidataEn": "Fair Zone",
       "wikipediaAr": "أرض المعارض",
@@ -1130,7 +1130,7 @@
       "flags": ["coords-differ"]
     },
     {
-      "stationId": "abdou-pasha",
+      "stationId": "abdo-pasha",
       "qid": "Q18349827",
       "wikidataEn": "Abdou Pasha",
       "wikipediaAr": "عبده باشا",
@@ -1140,7 +1140,7 @@
       "flags": []
     },
     {
-      "stationId": "el-geish",
+      "stationId": "el-gish",
       "qid": "Q20717306",
       "wikidataEn": "El Geish",
       "wikipediaAr": "الجيش",
@@ -1150,7 +1150,7 @@
       "flags": []
     },
     {
-      "stationId": "bab-el-shaaria",
+      "stationId": "bab-el-sharia",
       "qid": "Q20311888",
       "wikidataEn": "Bab El Shaaria",
       "wikipediaAr": "باب الشعرية",
@@ -1250,7 +1250,7 @@
       "flags": ["arabic-name-differs", "english-name-differs"]
     },
     {
-      "stationId": "al-tawfikia",
+      "stationId": "el-tawfikia",
       "qid": "Q106678995",
       "wikidataEn": "Tawfikia",
       "wikipediaAr": "التوفيقية",
@@ -1280,7 +1280,7 @@
       "flags": ["arabic-name-differs", "english-name-differs"]
     },
     {
-      "stationId": "bulaq-el-dakrour",
+      "stationId": "bolaq-el-dakrour",
       "qid": "Q106678998",
       "wikidataEn": "Boulak El Dakrour",
       "wikipediaAr": "بولاق الدكرور",

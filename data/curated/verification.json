@@ -7,6 +7,426 @@
     "Q10275553": {
       "verified": true,
       "verifiedAt": "2026-11-22T22:32:15.274Z"
+    },
+    "Q10276202": {
+      "name": {
+        "en": "Capital University (Helwan University)",
+        "ar": "جامعة العاصمة (جامعة حلوان)"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:33:43.673Z"
+    },
+    "Q10276230": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:33:50.957Z"
+    },
+    "Q10275915": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:36:52.112Z"
+    },
+    "Q10276190": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:37:00.282Z"
+    },
+    "Q10276184": {
+      "name": {
+        "en": "Sakanat El-Maadi",
+        "ar": "ثكنات المعادي"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:39:22.330Z"
+    },
+    "Q10276191": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:39:53.615Z"
+    },
+    "Q10275721": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:40:14.853Z"
+    },
+    "Q10275846": {
+      "name": {
+        "en": "Hadayek Helwan",
+        "ar": "حدائق حلوان"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:40:42.383Z"
+    },
+    "Q10275942": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:40:56.534Z"
+    },
+    "Q10275845": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:41:18.117Z"
+    },
+    "Q10275685": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:41:34.050Z"
+    },
+    "Q10275725": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:41:43.352Z"
+    },
+    "Q10275956": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:41:50.636Z"
+    },
+    "Q10275724": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:42:32.787Z"
+    },
+    "Q10275555": {
+      "name": {
+        "en": "El-Sayeda Zeinab",
+        "ar": "السيدة زينب"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:44:15.107Z"
+    },
+    "Q10276115": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:44:29.022Z"
+    },
+    "Q10276116": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:47:43.195Z"
+    },
+    "Q10275821": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:48:20.029Z"
+    },
+    "Q10276204": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:48:27.360Z"
+    },
+    "Q10275997": {
+      "name": {
+        "en": "El-Shohadaa",
+        "ar": "الشهداء"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:48:49.546Z"
+    },
+    "Q10275826": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:49:06.546Z"
+    },
+    "Q10275722": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:49:16.513Z"
+    },
+    "Q10275952": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:49:38.580Z"
+    },
+    "Q10275913": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:49:45.345Z"
+    },
+    "Q10275849": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:50:01.130Z"
+    },
+    "Q10276140": {
+      "name": {
+        "en": "Saray El-Qobba",
+        "ar": "سراي القبة"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:51:08.334Z"
+    },
+    "Q10275847": {
+      "name": {
+        "en": "Hadayek El-Zaitoun",
+        "ar": "حدائق الزيتون"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:52:12.135Z"
+    },
+    "Q10275852": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:52:23.452Z"
+    },
+    "Q10275726": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:52:30.785Z"
+    },
+    "Q10275554": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:52:34.868Z"
+    },
+    "Q10275752": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:52:47.785Z"
+    },
+    "Q5350666": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:53:02.051Z"
+    },
+    "Q10276010": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:53:12.910Z"
+    },
+    "Q10276148": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:54:08.337Z"
+    },
+    "Q10275916": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:54:25.304Z"
+    },
+    "Q10275983": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:54:30.805Z"
+    },
+    "Q10275910": {
+      "name": {
+        "en": "El-khalafawy",
+        "ar": "الخلفاوي"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:56:00.190Z"
+    },
+    "Q18280662": {
+      "name": {
+        "en": "Sainte Teresa",
+        "ar": "سانت تريزا"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:57:04.023Z"
+    },
+    "Q10276098": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:57:23.408Z"
+    },
+    "Q10275969": {
+      "name": {
+        "en": "Masarra",
+        "ar": "مسرة"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:58:07.593Z"
+    },
+    "Q10275582": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:59:46.862Z"
+    },
+    "Q10276001": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:59:58.896Z"
+    },
+    "Q10275827": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:00:46.314Z"
+    },
+    "Q10275690": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:01:24.018Z"
+    },
+    "Q10275604": {
+      "name": {
+        "en": "El-Bohoth",
+        "ar": "البحوث"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:01:52.214Z"
+    },
+    "Q10276203": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:02:44.733Z"
+    },
+    "Q10275754": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:02:51.817Z"
+    },
+    "Q10275831": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:02:57.584Z"
+    },
+    "Q10275830": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:04:10.434Z"
+    },
+    "Q10276120": {
+      "name": {
+        "en": "Sakiat Mekky",
+        "ar": "ساقية مكي"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:05:03.487Z"
+    },
+    "Q10275728": {
+      "name": {
+        "en": "El-Monib",
+        "ar": "المنيب"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:05:36.353Z"
+    },
+    "Q106678973": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:05:57.185Z"
+    },
+    "Q106678974": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:06:12.971Z"
+    },
+    "Q106678975": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:07:14.156Z"
+    },
+    "Q106678976": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:07:35.591Z"
+    },
+    "Q106678977": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:08:05.839Z"
+    },
+    "Q106678978": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:08:09.576Z"
+    },
+    "Q106678979": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:08:18.458Z"
+    },
+    "Q106678980": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:08:30.375Z"
+    },
+    "Q106678981": {
+      "name": {
+        "en": "Heliopolis",
+        "ar": "هليوبوليس"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:09:01.093Z"
+    },
+    "Q106678982": {
+      "name": {
+        "en": "Haron",
+        "ar": "هارون"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:09:21.991Z"
+    },
+    "Q106678983": {
+      "name": {
+        "en": "El-Ahram",
+        "ar": "الأهرام"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:09:33.376Z"
+    },
+    "Q106678984": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:09:39.777Z"
+    },
+    "Q106678985": {
+      "name": {
+        "en": "Stadium",
+        "ar": "الإستاد"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:10:34.728Z"
+    },
+    "Q18379756": {
+      "name": {
+        "en": "Ard El-Mared",
+        "ar": "أرض المعارض"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:11:42.314Z"
+    },
+    "Q18161422": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:11:58.765Z"
+    },
+    "Q18349827": {
+      "name": {
+        "en": "Abdo Pasha",
+        "ar": "عبده باشا"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:13:00.197Z"
+    },
+    "Q20717306": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:13:07.164Z",
+      "name": {
+        "en": "El-Gish",
+        "ar": "الجيش"
+      }
+    },
+    "Q20311888": {
+      "name": {
+        "en": "Bab El-Sharia",
+        "ar": "باب الشعرية"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:14:04.683Z"
+    },
+    "Q106678986": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:14:23.884Z"
+    },
+    "Q106678987": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:14:57.934Z"
+    },
+    "Q106678989": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:02.752Z"
+    },
+    "Q106678990": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:12.569Z"
+    },
+    "Q10275868": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:19.969Z"
+    },
+    "Q106678991": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:24.901Z"
+    },
+    "Q106678992": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:33.529Z"
+    },
+    "Q106678993": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:15:43.618Z"
+    },
+    "Q106678994": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:16:32.070Z"
+    },
+    "Q106678995": {
+      "name": {
+        "en": "El-Tawfikia",
+        "ar": "التوفيقية"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:16:44.156Z"
+    },
+    "Q106678996": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:16:49.522Z"
+    },
+    "Q106678997": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:17:03.689Z"
+    },
+    "Q106678998": {
+      "name": {
+        "en": "Bolaq El-Dakrour",
+        "ar": "بولاق الدكرور"
+      },
+      "verified": true,
+      "verifiedAt": "2026-11-22T23:17:30.603Z"
     }
   }
 }
