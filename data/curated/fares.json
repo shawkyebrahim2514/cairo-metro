@@ -1,0 +1,61 @@
+{
+  "_comment": "Transcribed by hand from official images on https://www.cairometro.gov.eg/en/bookings/4 (copies in data/raw/official). Re-verify before release; prices change.",
+  "currency": "EGP",
+  "sources": [
+    "https://www.cairometro.gov.eg/en/bookings/4",
+    "https://www.cairometro.gov.eg/en/bookings/5"
+  ],
+  "ticket": {
+    "appliesTo": ["L1", "L2", "L3"],
+    "stationCountNote": "Official tables say 'N stations'. Whether this counts the origin station is not stated; confirm against real trips.",
+    "tiers": [
+      {
+        "maxStations": 9,
+        "standard": 10,
+        "senior60AndArmyPolice": 5,
+        "specialNeedsAndVeterans": 5
+      },
+      {
+        "maxStations": 16,
+        "standard": 12,
+        "senior60AndArmyPolice": 6,
+        "specialNeedsAndVeterans": 5
+      },
+      {
+        "maxStations": 23,
+        "standard": 15,
+        "senior60AndArmyPolice": 8,
+        "specialNeedsAndVeterans": 5
+      },
+      {
+        "maxStations": 39,
+        "standard": 20,
+        "senior60AndArmyPolice": 10,
+        "specialNeedsAndVeterans": 5
+      }
+    ]
+  },
+  "subscriptions": {
+    "zonesNote": "Prices are by number of zones crossed (1-4). The official zone-to-station map page still shows an older 10-zone layout, so station-to-zone data is not included yet.",
+    "monthly": {
+      "people": [390, 440, 510, 600],
+      "armyPolice": [300, 360, 450, 600],
+      "senior60": [275, 350, 415, 470]
+    },
+    "quarterly": {
+      "people": [1045, 1190, 1250, 1670],
+      "armyPolice": [900, 1080, 1350, 1800],
+      "senior60": [825, 1040, 1125, 1270],
+      "studentsAndSpecialNeeds": [150, 200, 250, 300],
+      "injuredAndFamilies": [525, 595, 715, 835],
+      "veterans": [265, 300, 380, 420]
+    },
+    "sixMonths": {
+      "armyPolice": [1800, 2160, 2700, 3600]
+    },
+    "annual": {
+      "twoLines": { "people": 5100, "armyPolice": 7300 },
+      "threeLines": { "people": 6400, "armyPolice": 7300 }
+    }
+  }
+}

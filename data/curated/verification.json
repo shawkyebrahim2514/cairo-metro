@@ -1,3 +1,12 @@
 {
-  "stations": {}
+  "stations": {
+    "Q10275853": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:31:45.555Z"
+    },
+    "Q10275553": {
+      "verified": true,
+      "verifiedAt": "2026-11-22T22:32:15.274Z"
+    }
+  }
 }

@@ -1,0 +1,51 @@
+{
+  "_comment": "Operating hours are seasonal (summer/winter time) and approximate. Last-train times are terminal departures. Re-verify before release.",
+  "sources": [
+    "https://www.cairometro.gov.eg/en/operations/1",
+    "https://www.cairometro.gov.eg/en/operations/2",
+    "https://english.ahram.org.eg/NewsContentP/1/581160/Egypt/Egypt-announces-metro,-LRT-and-monorail-schedules-.aspx"
+  ],
+  "lines": {
+    "L1": {
+      "firstTrain": "05:15",
+      "lastTrains": [
+        { "from": "Helwan", "to": "New El-Marg", "time": "23:40" },
+        { "from": "New El-Marg", "to": "Helwan", "time": "23:45" }
+      ],
+      "serviceEnds": "01:00",
+      "headwayMinutes": { "min": 4, "max": 4 },
+      "endToEndMinutes": 79,
+      "source": "official operations/1 page"
+    },
+    "L2": {
+      "firstTrain": "05:15",
+      "lastTrains": [
+        { "from": "Shubra El-Kheima", "to": "El-Mounib", "time": "23:35" },
+        { "from": "El-Mounib", "to": "Shubra El-Kheima", "time": "23:35" }
+      ],
+      "serviceEnds": "00:00",
+      "headwayMinutes": { "min": 2.75, "max": 3 },
+      "endToEndMinutes": 38,
+      "source": "official operations/2 page"
+    },
+    "L3": {
+      "firstTrain": "05:15",
+      "lastTrains": [
+        { "from": "Adly Mansour", "to": "Cairo University", "time": "23:33" },
+        { "from": "Adly Mansour", "to": "Rod El-Farag Axis", "time": "23:29" },
+        { "from": "Cairo University", "to": "Adly Mansour", "time": "23:52" },
+        { "from": "Rod El-Farag Axis", "to": "Adly Mansour", "time": "23:55" }
+      ],
+      "serviceEnds": null,
+      "headwayMinutes": null,
+      "endToEndMinutes": null,
+      "source": "Ahram Online (standard-time schedule article); no official L3 operations page found"
+    }
+  },
+  "transfers": {
+    "lastTrainConnections": [
+      "L1 and L2 last trains meet at Sadat around 00:00-00:15",
+      "L1 and L3 last trains meet at Nasser around 00:10"
+    ]
+  }
+}
