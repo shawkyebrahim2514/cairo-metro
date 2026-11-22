@@ -1,12 +1,12 @@
 # Data Sources & Licensing
 
-| Data | Source | License / notes |
-| --- | --- | --- |
-| Stations, line geometry, names (en/ar) | OpenStreetMap via Overpass API | ODbL. Attribution required: "© OpenStreetMap contributors". Derived datasets must remain ODbL. |
-| Fares, zones, subscriptions, hours | Official Cairo Metro site (https://www.cairometro.gov.eg/) | Facts re-entered manually and verified; cite the source and date in each data file. |
-| Geocoding | Nominatim / Photon | Respect usage policies (rate limit, cache, identify the app). |
-| Walking routes | OSRM / OpenRouteService | Public demo servers are rate-limited; fall back to straight-line distance. |
-| Map tiles | To be decided (OSM tiles are not for heavy use) | Attribution required. |
+| Data                                   | Source                                                     | License / notes                                                                                |
+| -------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Stations, line geometry, names (en/ar) | OpenStreetMap via Overpass API                             | ODbL. Attribution required: "© OpenStreetMap contributors". Derived datasets must remain ODbL. |
+| Fares, zones, subscriptions, hours     | Official Cairo Metro site (https://www.cairometro.gov.eg/) | Facts re-entered manually and verified; cite the source and date in each data file.            |
+| Geocoding                              | Nominatim / Photon                                         | Respect usage policies (rate limit, cache, identify the app).                                  |
+| Walking routes                         | OSRM / OpenRouteService                                    | Public demo servers are rate-limited; fall back to straight-line distance.                     |
+| Map tiles                              | To be decided (OSM tiles are not for heavy use)            | Attribution required.                                                                          |
 
 ## Benchmark app policy
 
