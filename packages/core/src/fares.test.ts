@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ticketPrice, type FaresData } from './fares';
+import { tripFare, ticketPrice, type FaresData } from './fares';
 
 const fares: FaresData = {
   currency: 'EGP',
@@ -20,5 +20,25 @@ describe('ticketPrice', () => {
 
   it('returns null beyond the largest tier', () => {
     expect(ticketPrice(fares, 17)).toBeNull();
+  });
+});
+
+describe('tripFare', () => {
+  it('counts the boarding station by default', () => {
+    expect(tripFare(fares, 8)).toBe(10);
+    expect(tripFare(fares, 9)).toBe(12);
+  });
+
+  it('follows the counting rule from the data', () => {
+    const noOrigin: FaresData = {
+      ...fares,
+      ticket: { ...fares.ticket, counting: { includesOrigin: false } },
+    };
+    expect(tripFare(noOrigin, 9)).toBe(10);
+    expect(tripFare(noOrigin, 10)).toBe(12);
+  });
+
+  it('has no fare for a zero-stop trip', () => {
+    expect(tripFare(fares, 0)).toBeNull();
   });
 });

@@ -7,7 +7,10 @@
   ],
   "ticket": {
     "appliesTo": ["L1", "L2", "L3"],
-    "stationCountNote": "Official tables say 'N stations'. Whether this counts the origin station is not stated; confirm against real trips.",
+    "counting": {
+      "includesOrigin": true,
+      "note": "Confirmed by the project owner (rider): the boarding station counts; an interchange station counts once with no extra cost."
+    },
     "tiers": [
       {
         "maxStations": 9,

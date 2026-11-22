@@ -1,4 +1,4 @@
-import { ticketPrice, type FaresData, type TicketCategory } from './fares';
+import { tripFare, type FaresData, type TicketCategory } from './fares';
 import type { Branch, LineId, MetroData } from './types';
 
 export type RouteMode = 'fastest' | 'fewest-transfers';
@@ -272,7 +272,7 @@ function toRoute(
     rideSec,
     transferSec,
     totalSec: rideSec + transferSec,
-    fare: fares && stops > 0 ? ticketPrice(fares, stops, category) : null,
+    fare: fares ? tripFare(fares, stops, category) : null,
     estimated: true,
   };
 }
