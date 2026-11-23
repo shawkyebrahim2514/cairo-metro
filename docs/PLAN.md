@@ -69,7 +69,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 
 1. [x] PWA manifest + icons + dependency-free service worker (app shell precached, other same-origin GETs stale-while-revalidate, so a new version appears on the second load) + offline data. Verified offline with a headless browser.
 2. [x] Web Share Target (GET, title/text/url; deduplicated, resolved offline via the places index; the query is removed from the URL after reading). Works only once the PWA is installed on Android/Chrome.
-3. Saved trips, recents, shareable route URLs.
+3. [x] Saved trips (star), recents (last 6), shareable route links (`#/plan?from=..&to=..`, Web Share API with clipboard fallback), all in localStorage. Verified in a headless browser.
 4. Fare + subscription calculator.
 5. Door-to-door totals (done in Stage 4).
 6. Accessibility + Lighthouse.

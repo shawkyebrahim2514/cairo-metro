@@ -55,6 +55,11 @@ const en = {
   clear: 'Clear',
   loadingPlaces: 'Loading places…',
   placesFailed: 'Could not load the places list. Station search still works; reload to retry.',
+  share: 'Share',
+  linkCopied: 'Link copied',
+  saveTrip: 'Save trip',
+  saved: 'Saved',
+  yourTrips: 'Saved and recent trips',
   closeBy: 'These two places are close together, so walking is probably faster than the metro.',
   mapHint: 'Tip: tap the map or a station to set a point (fills From, then To, then replaces To).',
 };
@@ -113,6 +118,11 @@ const ar: Record<Key, string> = {
   clear: 'مسح',
   loadingPlaces: 'جارٍ تحميل الأماكن…',
   placesFailed: 'تعذر تحميل قائمة الأماكن. البحث عن المحطات ما زال يعمل؛ أعد تحميل الصفحة.',
+  share: 'مشاركة',
+  linkCopied: 'تم نسخ الرابط',
+  saveTrip: 'حفظ الرحلة',
+  saved: 'محفوظة',
+  yourTrips: 'الرحلات المحفوظة والأخيرة',
   closeBy: 'المكانان قريبان من بعضهما، فالمشي غالباً أسرع من المترو.',
   mapHint: 'نصيحة: اضغط على الخريطة لتحديد موقع (يملأ «من» ثم «إلى» ثم يستبدل «إلى»).',
 };

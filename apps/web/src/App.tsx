@@ -5,6 +5,7 @@ import { NearestPage } from './pages/NearestPage';
 import { PlannerPage } from './pages/PlannerPage';
 import './styles.css';
 import { takeSharedText } from './share';
+import { readPlanHash } from './storage';
 
 type Tab = 'nearest' | 'plan';
 
@@ -21,7 +22,11 @@ export function App() {
     stored<Lang>('lang', ['en', 'ar'], navigator.language.startsWith('ar') ? 'ar' : 'en'),
   );
   const [tab, setTab] = useState<Tab>(() =>
-    sharedAtLoad ? 'nearest' : stored<Tab>('tab', ['nearest', 'plan'], 'nearest'),
+    sharedAtLoad
+      ? 'nearest'
+      : readPlanHash()
+        ? 'plan'
+        : stored<Tab>('tab', ['nearest', 'plan'], 'nearest'),
   );
   const [tiles, setTiles] = useState(() => localStorage.getItem('tiles') === '1');
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
