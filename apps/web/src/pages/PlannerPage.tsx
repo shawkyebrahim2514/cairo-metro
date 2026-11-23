@@ -201,6 +201,7 @@ export function PlannerPage({
         {tracking && trip && (
           <TrackPanel
             trip={trip}
+            to={to!}
             state={ts}
             wakeMe={wakeMe}
             follow={follow}
@@ -282,6 +283,8 @@ export function PlannerPage({
               <RouteCard
                 key={i}
                 trip={tr}
+                from={from!}
+                to={to!}
                 title={i === 0 ? t('fastest') : t('fewestTransfers')}
                 selected={i === selected}
                 onSelect={() => setSelected(i)}

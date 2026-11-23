@@ -175,6 +175,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] 12. Schematic map style: hand-laid line diagram (`apps/web/src/schematic.ts`, anchors at terminals and interchanges, stations spread evenly between), usable as a trip-image style.
 - [x] Idea 7: third tab **Metro map** with the same diagram (pan, pinch/wheel zoom, fit button, station search, tap a station for the details sheet and Start/Go here that opens the planner).
 
+- [x] Walking-route links: button opens Google Maps (Apple Maps on iOS) with a walking route for walk-in/out steps and the arrival note. Apple link untested on a real iPhone.
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.

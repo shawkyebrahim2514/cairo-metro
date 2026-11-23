@@ -3,10 +3,13 @@ import { stationsById } from '../data';
 import { Icon } from './Icon';
 import { formatDistance, formatMinutes, localDigits, stationName, useI18n } from '../i18n';
 import type { TrackSource, TrackState } from '../tracking';
+import { endpointPoint, type Endpoint } from '../endpoint';
 import type { Trip } from '../trip';
+import { WalkLink } from './WalkLink';
 
 interface Props {
   trip: Trip;
+  to: Endpoint;
   state: TrackState;
   wakeMe: boolean;
   follow: boolean;
@@ -27,6 +30,7 @@ const SOURCE_KEY = {
 
 export function TrackPanel({
   trip,
+  to,
   state,
   wakeMe,
   follow,
@@ -83,11 +87,14 @@ export function TrackPanel({
             {t('trackArrived')} {name(here)}
           </p>
           {trip.walkOut && (
-            <p className="note">
-              {t('walkFromStation')} {name(trip.walkOut.station.id)} ·{' '}
-              {formatDistance(trip.walkOut.walkMeters, t, lang)} ·{' '}
-              {formatMinutes(trip.walkOut.walkSec, t, lang)}
-            </p>
+            <>
+              <p className="note">
+                {t('walkFromStation')} {name(trip.walkOut.station.id)} ·{' '}
+                {formatDistance(trip.walkOut.walkMeters, t, lang)} ·{' '}
+                {formatMinutes(trip.walkOut.walkSec, t, lang)}
+              </p>
+              <WalkLink from={trip.walkOut.station} to={endpointPoint(to)} />
+            </>
           )}
         </>
       ) : (

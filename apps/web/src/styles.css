@@ -2124,3 +2124,12 @@ h2 svg {
   font-size: 1.4rem;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
 }
+
+.walk-link {
+  margin-top: 6px;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+.track .walk-link {
+  align-self: flex-start;
+}

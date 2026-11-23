@@ -9,10 +9,14 @@ import {
   useI18n,
 } from '../i18n';
 import { useSettings } from '../settings';
+import { endpointPoint, type Endpoint } from '../endpoint';
 import type { Trip } from '../trip';
+import { WalkLink } from './WalkLink';
 
 interface Props {
   trip: Trip;
+  from: Endpoint;
+  to: Endpoint;
   title: string;
   selected: boolean;
   onSelect: () => void;
@@ -20,7 +24,7 @@ interface Props {
 
 const lineNo = (line: string) => line.replace(/\D/g, '');
 
-export function RouteCard({ trip, title, selected, onSelect }: Props) {
+export function RouteCard({ trip, from, to, title, selected, onSelect }: Props) {
   const { t, lang } = useI18n();
   const { timeFormat } = useSettings();
   const { route } = trip;
@@ -126,6 +130,7 @@ export function RouteCard({ trip, title, selected, onSelect }: Props) {
                 {formatDistance(trip.walkIn.walkMeters, t, lang)} ·{' '}
                 {formatMinutes(trip.walkIn.walkSec, t, lang)}
               </div>
+              <WalkLink from={endpointPoint(from)} to={trip.walkIn.station} />
             </div>
           </li>
         )}
@@ -196,6 +201,7 @@ export function RouteCard({ trip, title, selected, onSelect }: Props) {
                 {formatDistance(trip.walkOut.walkMeters, t, lang)} ·{' '}
                 {formatMinutes(trip.walkOut.walkSec, t, lang)}
               </div>
+              <WalkLink from={trip.walkOut.station} to={endpointPoint(to)} />
             </div>
           </li>
         ) : null}

@@ -175,6 +175,10 @@ All choices are saved on the device.
 - Lighthouse (mobile): performance 0.99, accessibility 1, best practices 1, SEO 1 at the time of the last check.
 - An accessibility review is tracked in `docs/PLAN.md`.
 
+## 14b. Walking-route links
+
+The walk-in and walk-out steps (route card) and the arrival note (tracking) have a **Walking route in Maps** button. It opens the phone's maps app with a walking route: Apple Maps on iPhone/iPad, Google Maps elsewhere. Nothing is sent until the user taps it; no in-app street routing (offline).
+
 ## 15. Data and honesty about accuracy
 
 - **Network**: Lines 1, 2 and 3: 84 stations, 5 interchanges (Line 1: 35, Line 2: 20, Line 3: 34 stations).
