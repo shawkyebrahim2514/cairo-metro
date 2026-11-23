@@ -293,6 +293,13 @@ export function ImageDialog({
               ]}
               onChange={(v) => set('crop', v)}
             />
+            <Check
+              label={t('imgRotate')}
+              hint={t('imgHRotate')}
+              checked={ui.rotate}
+              disabled={ui.style === 'schematic' || (ui.style !== 'route' && ui.crop === 'network')}
+              onChange={(v) => set('rotate', v)}
+            />
             <Seg<ImageColour>
               label={t('imgColour')}
               hint={t('imgHColour')}
@@ -385,6 +392,12 @@ export function ImageDialog({
               hint={t('imgHSteps')}
               checked={ui.steps}
               onChange={(v) => set('steps', v)}
+            />
+            <Check
+              label={t('imgList')}
+              hint={t('imgHList')}
+              checked={ui.list}
+              onChange={(v) => set('list', v)}
             />
             <Check
               label={t('imgWomen')}

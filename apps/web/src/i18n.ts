@@ -141,6 +141,14 @@ const en = {
   imgStats: 'Summary tiles',
   imgFare: 'Fare',
   imgEta: 'Leave and arrive times',
+  imgList: 'Station list',
+  imgHList:
+    'Lists every station of a long trip under the map, in columns. Needs a tall format; left out if there is no room.',
+  imgRotate: 'Turn map to fit',
+  imgHRotate:
+    'Rotates the map so a diagonal trip fills the picture (a small N arrow shows north). Trip crop only.',
+  imgAllStations: 'All stations',
+  imgNorth: 'N',
   imgSteps: 'Step list',
   imgWomen: 'Women-only cars note',
   imgQr: 'QR code',
@@ -412,6 +420,13 @@ const ar: Record<Key, string> = {
   imgStats: 'بطاقات الملخص',
   imgFare: 'الأجرة',
   imgEta: 'وقت المغادرة والوصول',
+  imgList: 'قائمة المحطات',
+  imgHList:
+    'تعرض كل محطات الرحلة الطويلة أسفل الخريطة في أعمدة. تحتاج مقاسًا طويلًا وتُحذف إذا لم تتسع.',
+  imgRotate: 'تدوير الخريطة لتناسب',
+  imgHRotate: 'تدير الخريطة ليملأ المسار المائل الصورة (سهم صغير يوضح الشمال). مع قص الرحلة فقط.',
+  imgAllStations: 'كل المحطات',
+  imgNorth: 'ش',
   imgSteps: 'قائمة الخطوات',
   imgWomen: 'ملاحظة عربات السيدات',
   imgQr: 'رمز QR',

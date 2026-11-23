@@ -29,6 +29,10 @@ export interface ImageOptions {
   fare: boolean;
   eta: boolean;
   steps: boolean;
+  /** List every station under the map (long trips only). */
+  list: boolean;
+  /** Turn the map so a diagonal trip fills the picture (trip crop only). */
+  rotate: boolean;
   women: boolean;
   qr: boolean;
   branding: boolean;
@@ -49,6 +53,8 @@ export const DEFAULT_IMAGE_OPTIONS: ImageOptions = {
   fare: true,
   eta: true,
   steps: true,
+  list: true,
+  rotate: true,
   women: false,
   qr: false,
   branding: true,
@@ -112,27 +118,97 @@ const COS_CAIRO = Math.cos(30.05 * (Math.PI / 180));
 /** Smallest map span shown, so a very short trip is not zoomed in absurdly. */
 const MIN_SPAN = 0.012;
 
-/** Maps lat/lng points into a box (equirectangular, centred, uniform scale). */
-export function fitView(points: { lat: number; lng: number }[], box: Rect, pad: number) {
-  const xs = points.map((p) => p.lng * COS_CAIRO);
-  const ys = points.map((p) => -p.lat);
-  let minX = Math.min(...xs);
-  let maxX = Math.max(...xs);
-  let minY = Math.min(...ys);
-  let maxY = Math.max(...ys);
+/** From this many stations a trip counts as long: taller map, every-station list. */
+const LONG_TRIP = 14;
+const MIN_LONG_MAP_H = 620;
+
+type Pair = { x: number; y: number };
+
+/** Points in the flat map frame (x east, y south), turned by `theta`. */
+function frame(points: { lat: number; lng: number }[], theta: number) {
+  const c = Math.cos(theta);
+  const s = Math.sin(theta);
+  const pts = points.map((p) => {
+    const x = p.lng * COS_CAIRO;
+    const y = -p.lat;
+    return { x: x * c - y * s, y: x * s + y * c };
+  });
   const grow = (lo: number, hi: number) => {
     const extra = Math.max(0, MIN_SPAN - (hi - lo)) / 2;
     return [lo - extra, hi + extra] as const;
   };
-  [minX, maxX] = grow(minX, maxX);
-  [minY, maxY] = grow(minY, maxY);
-  const scale = Math.min((box.w - 2 * pad) / (maxX - minX), (box.h - 2 * pad) / (maxY - minY));
+  const [minX, maxX] = grow(Math.min(...pts.map((p) => p.x)), Math.max(...pts.map((p) => p.x)));
+  const [minY, maxY] = grow(Math.min(...pts.map((p) => p.y)), Math.max(...pts.map((p) => p.y)));
+  return { pts, minX, maxX, minY, maxY };
+}
+
+/** The turn that lays the trip's main direction along the vertical (or horizontal) axis, start first. */
+function bestTurn(points: { lat: number; lng: number }[], vertical: boolean): number {
+  const base: Pair[] = points.map((p) => ({ x: p.lng * COS_CAIRO, y: -p.lat }));
+  const mx = base.reduce((a, p) => a + p.x, 0) / base.length;
+  const my = base.reduce((a, p) => a + p.y, 0) / base.length;
+  let sxx = 0;
+  let syy = 0;
+  let sxy = 0;
+  for (const p of base) {
+    sxx += (p.x - mx) ** 2;
+    syy += (p.y - my) ** 2;
+    sxy += (p.x - mx) * (p.y - my);
+  }
+  const phi = 0.5 * Math.atan2(2 * sxy, sxx - syy);
+  let theta = (vertical ? Math.PI / 2 : 0) - phi;
+  const { pts } = frame(points, theta);
+  const a = pts[0]!;
+  const b = pts[pts.length - 1]!;
+  // start at the top (or the left)
+  if (vertical ? a.y > b.y : a.x > b.x) theta += Math.PI;
+  return theta;
+}
+
+/** Height over width of the trip once its main direction is laid along the vertical. */
+export function tripAspect(points: { lat: number; lng: number }[], rotate: boolean): number {
+  const f = frame(points, rotate && points.length > 2 ? bestTurn(points, true) : 0);
+  return (f.maxY - f.minY) / (f.maxX - f.minX);
+}
+
+/**
+ * Maps lat/lng points into a box (equirectangular, centred, uniform scale). With `rotate`, the map
+ * is turned so the trip fills the box better; the turn (radians) is exposed as `angle`.
+ */
+export function fitView(
+  points: { lat: number; lng: number }[],
+  box: Rect,
+  pad: number,
+  rotate = false,
+) {
+  const fitFor = (theta: number) => {
+    const f = frame(points, theta);
+    const scale = Math.min(
+      (box.w - 2 * pad) / (f.maxX - f.minX),
+      (box.h - 2 * pad) / (f.maxY - f.minY),
+    );
+    return { ...f, scale, theta };
+  };
+  let best = fitFor(0);
+  if (rotate && points.length > 2) {
+    const turned = fitFor(bestTurn(points, box.h > box.w));
+    // only turn the map when it clearly helps
+    if (turned.scale > best.scale * 1.15) best = turned;
+  }
+  const { minX, maxX, minY, maxY, scale, theta } = best;
   const offX = box.x + (box.w - (maxX - minX) * scale) / 2;
   const offY = box.y + (box.h - (maxY - minY) * scale) / 2;
-  return (lat: number, lng: number): Pt => ({
-    x: offX + (lng * COS_CAIRO - minX) * scale,
-    y: offY + (-lat - minY) * scale,
-  });
+  const c = Math.cos(theta);
+  const s = Math.sin(theta);
+  const project = (lat: number, lng: number): Pt => {
+    const x = lng * COS_CAIRO;
+    const y = -lat;
+    return {
+      x: offX + (x * c - y * s - minX) * scale,
+      y: offY + (x * s + y * c - minY) * scale,
+    };
+  };
+  return Object.assign(project, { angle: theta });
 }
 
 /** Draws a shareable PNG of the planned trip, shaped by the chosen options. */
@@ -148,28 +224,69 @@ export async function renderTripImage(input: Input): Promise<Blob> {
   const legColour = (line: LineId) =>
     o.colour === 'accent' ? input.accent : (lineColour.get(line) ?? '#2563eb');
 
-  // Vertical layout.
+  const ids = route.stations;
+  const pts = ids.map((id) => stationsById.get(id) as Station);
+  const schem = o.style === 'schematic';
+  const ends = schem ? [pts[0]!, pts[pts.length - 1]!] : [endpointPoint(from), endpointPoint(to)];
+  const network = o.style !== 'route';
+  const wholeNetwork = network && o.crop === 'network';
+  // The diagram is mapped onto pseudo coordinates so the same projection serves both styles.
+  const geo = (p: SPt) => ({ lat: -p.y / 10000, lng: p.x / (10000 * COS_CAIRO) });
+  const at = (s: { id: string; lat: number; lng: number }) =>
+    schem ? geo(schematic.positions.get(s.id)!) : s;
+  const focus = [...pts.map(at), ...(schem ? [] : ends)];
+  const everything = [...metro.stations.map(at), ...(schem ? [] : ends)];
+  const rotating = o.rotate && !schem && !wholeNetwork;
+  const long = ids.length >= LONG_TRIP;
+
+  // Vertical layout. A long trip gets a taller map and a list of every station.
   const rows = route.legs.length * 2 - 1 + (trip.walkIn ? 1 : 0) + (trip.walkOut ? 1 : 0);
   const top = HEADER_H + (o.stats ? 190 : 30);
   const tail = (o.women ? 70 : 0) + (o.qr ? 230 : o.branding ? 120 : 40);
+  const listOn = o.list && long;
+  const mapPad = wholeNetwork ? 40 : 90;
   let rowH = 78;
   let stepsH = 0;
+  let listH = 0;
+  let listCols = 2;
+  let listRowH = 40;
+  const listHeight = (cols: number, rh: number) => Math.ceil(ids.length / cols) * rh + 70;
   let mapH = 520;
+  if (long && !wholeNetwork) {
+    const ratio = tripAspect(focus, rotating);
+    mapH = Math.min(1400, Math.max(520, Math.round((W - 2 * M - 2 * mapPad) * ratio) + 2 * mapPad));
+  }
   let H = FORMAT_H[o.format];
   if (H === 0) {
     stepsH = o.steps ? rows * rowH + 40 : 0;
-    H = top + mapH + 30 + stepsH + tail;
+    if (listOn) listH = listHeight(listCols, listRowH);
+    H = top + mapH + 30 + stepsH + listH + tail;
   } else {
     const avail = H - top - 30 - tail;
-    if (o.steps) {
-      const room = avail - MIN_MAP_H;
+    const minMap = long ? MIN_LONG_MAP_H : MIN_MAP_H;
+    if (listOn) {
+      for (const [cols, rh] of [
+        [2, 40],
+        [3, 36],
+        [3, 30],
+      ] as const) {
+        if (avail - listHeight(cols, rh) >= minMap) {
+          listCols = cols;
+          listRowH = rh;
+          listH = listHeight(cols, rh);
+          break;
+        }
+      }
+    }
+    if (o.steps && !long) {
+      const room = avail - listH - minMap;
       if (rows * rowH + 40 <= room) stepsH = rows * rowH + 40;
       else {
         rowH = Math.floor((room - 40) / rows);
         stepsH = rowH >= 52 ? rows * rowH + 40 : 0;
       }
     }
-    mapH = avail - stepsH;
+    mapH = avail - stepsH - listH;
   }
 
   const canvas = document.createElement('canvas');
@@ -283,19 +400,8 @@ export async function renderTripImage(input: Input): Promise<Blob> {
   ctx.fillStyle = pal.mapBg;
   ctx.fillRect(box.x, box.y, box.w, box.h);
 
-  const ids = route.stations;
-  const pts = ids.map((id) => stationsById.get(id) as Station);
-  const schem = o.style === 'schematic';
-  const ends = schem ? [pts[0]!, pts[pts.length - 1]!] : [endpointPoint(from), endpointPoint(to)];
-  const network = o.style !== 'route';
-  const wholeNetwork = network && o.crop === 'network';
-  // The diagram is mapped onto pseudo coordinates so the same projection serves both styles.
-  const geo = (p: SPt) => ({ lat: -p.y / 10000, lng: p.x / (10000 * COS_CAIRO) });
-  const at = (s: { id: string; lat: number; lng: number }) =>
-    schem ? geo(schematic.positions.get(s.id)!) : s;
-  const focus = [...pts.map(at), ...(schem ? [] : ends)];
-  const everything = [...metro.stations.map(at), ...(schem ? [] : ends)];
-  const proj = fitView(wholeNetwork ? everything : focus, box, wholeNetwork ? 40 : 90);
+  const proj = fitView(wholeNetwork ? everything : focus, box, mapPad, rotating);
+  const turn = (proj as unknown as { angle: number }).angle;
   const P = (s: { id: string; lat: number; lng: number }) => {
     const g = at(s);
     return proj(g.lat, g.lng);
@@ -526,6 +632,34 @@ export async function renderTripImage(input: Input): Promise<Blob> {
       box.y + box.h - 14,
     );
   }
+  // A small north arrow when the map was turned.
+  if (Math.abs(Math.sin(turn / 2)) > 0.01) {
+    const cx = rtl ? box.x + 70 : box.x + box.w - 70;
+    const cy = box.y + 70;
+    const dx = Math.sin(turn);
+    const dy = -Math.cos(turn);
+    ctx.beginPath();
+    ctx.arc(cx, cy, 30, 0, Math.PI * 2);
+    ctx.fillStyle = pal.card;
+    ctx.globalAlpha = 0.9;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.beginPath();
+    ctx.moveTo(cx + dx * 22, cy + dy * 22);
+    ctx.lineTo(cx - dy * 9 - dx * 10, cy + dx * 9 - dy * 10);
+    ctx.lineTo(cx + dy * 9 - dx * 10, cy - dx * 9 - dy * 10);
+    ctx.closePath();
+    ctx.fillStyle = '#dc2626';
+    ctx.fill();
+    ctx.direction = 'ltr';
+    text(t('imgNorth'), cx + dx * 40, cy + dy * 40 + 8, {
+      size: 20,
+      weight: 800,
+      color: pal.muted,
+      align: 'center',
+    });
+    ctx.direction = rtl ? 'rtl' : 'ltr';
+  }
   ctx.restore();
 
   // Steps.
@@ -572,6 +706,46 @@ export async function renderTripImage(input: Input): Promise<Blob> {
     });
     if (trip.walkOut)
       stepLine(null, null, `${t('walkFromStation')} ${name(trip.walkOut.station.id)}`);
+  }
+
+  // Every station of a long trip, in columns.
+  if (listH > 0) {
+    const lineOf = new Map<string, LineId>();
+    for (const leg of route.legs)
+      for (const id of leg.stations) if (!lineOf.has(id)) lineOf.set(id, leg.line);
+    const changes = new Set(route.transfers.map((x) => x.stationId));
+    const ly = box.y + box.h + 60 + (stepsH > 0 ? stepsH : 0);
+    text(`${t('imgAllStations')} (${n(ids.length)})`, edgeStart, ly, {
+      size: 30,
+      weight: 800,
+      color: pal.text,
+    });
+    const per = Math.ceil(ids.length / listCols);
+    const colW = (W - 2 * M) / listCols;
+    const size = listRowH >= 36 ? 26 : 22;
+    ids.forEach((id, i) => {
+      const col = Math.floor(i / per);
+      const row = i % per;
+      const x = rtl ? W - M - col * colW : M + col * colW;
+      const yy = ly + 44 + row * listRowH + listRowH * 0.6;
+      const swap = changes.has(id);
+      const colour = swap ? '#f59e0b' : legColour(lineOf.get(id) ?? route.legs[0]!.line);
+      ctx.beginPath();
+      ctx.arc(rtl ? x - 10 : x + 10, yy - size * 0.32, 8, 0, Math.PI * 2);
+      ctx.fillStyle = colour;
+      ctx.fill();
+      const ends2 = i === 0 || i === ids.length - 1;
+      text(
+        fit(`${swap ? '⇄ ' : ''}${name(id)}`, colW - 48, size, ends2 || swap ? 800 : 500),
+        rtl ? x - 34 : x + 34,
+        yy,
+        {
+          size,
+          weight: ends2 || swap ? 800 : 500,
+          color: ends2 || swap ? pal.text : pal.body,
+        },
+      );
+    });
   }
 
   // Women-only cars tip, then the footer.

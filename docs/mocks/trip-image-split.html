@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mock: splitting a very long trip into panels</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #eef1f6;
+        margin: 24px;
+        color: #0f172a;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      p {
+        max-width: 760px;
+        color: #334155;
+      }
+      .row {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .card {
+        width: 300px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 12px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+      .hd {
+        background: linear-gradient(135deg, #0f766e, #1d4ed8);
+        color: #fff;
+        padding: 14px 16px;
+      }
+      .hd b {
+        display: block;
+        font-size: 18px;
+      }
+      .hd small {
+        opacity: 0.85;
+      }
+      .map {
+        margin: 10px;
+        background: #f8fafc;
+        border-radius: 12px;
+        height: 260px;
+        position: relative;
+      }
+      .badge {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #0f172a;
+        color: #fff;
+        font-size: 12px;
+        padding: 3px 9px;
+        border-radius: 12px;
+      }
+      .cut {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 0;
+        border-top: 2px dashed #f59e0b;
+      }
+      .foot {
+        padding: 6px 16px 14px;
+        font-size: 13px;
+        color: #475569;
+      }
+      .foot b {
+        color: #0f766e;
+      }
+      svg {
+        position: absolute;
+        inset: 0;
+      }
+      .opt {
+        margin-top: 28px;
+        background: #fff;
+        border-radius: 14px;
+        padding: 14px 18px;
+        max-width: 760px;
+      }
+      .opt h2 {
+        margin: 0 0 6px;
+        font-size: 16px;
+      }
+      .opt li {
+        margin: 4px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Mock: one very long trip, two panels in a single image</h1>
+    <p>
+      Idea: when a trip is long, the picture is cut at a transfer or the middle station into two
+      zoomed panels. Each panel shows only its part, so the route is big and every name has room.
+      The cut station is repeated at the bottom of panel 1 and the top of panel 2.
+    </p>
+
+    <div class="row">
+      <div class="card">
+        <div class="hd">
+          <b>Helwan to New El-Marg</b><small>81 min · 35 stations · Direct</small>
+        </div>
+        <div class="map">
+          <span class="badge">1 of 2 · Helwan to Sadat</span>
+          <svg viewBox="0 0 280 260">
+            <path
+              d="M60 235 L100 170 L120 120 L150 60 L170 25"
+              stroke="#1d4ed8"
+              stroke-width="9"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <circle cx="60" cy="235" r="9" fill="#fff" stroke="#1d4ed8" stroke-width="5" />
+            <circle cx="170" cy="25" r="9" fill="#fff" stroke="#f59e0b" stroke-width="5" />
+            <text x="75" y="240" font-size="12" font-weight="700">Helwan</text>
+            <text x="115" y="124" font-size="11">El-Malek El-Saleh</text>
+            <text x="182" y="30" font-size="12" font-weight="700">Sadat (cut)</text>
+          </svg>
+        </div>
+        <div class="foot"><b>Part 1</b> · stations 1-17 · continues on the next panel</div>
+      </div>
+      <div class="card">
+        <div class="hd">
+          <b>Helwan to New El-Marg</b><small>81 min · 35 stations · Direct</small>
+        </div>
+        <div class="map">
+          <span class="badge">2 of 2 · Sadat to New El-Marg</span>
+          <svg viewBox="0 0 280 260">
+            <path
+              d="M100 235 L140 190 L175 130 L195 70 L215 25"
+              stroke="#1d4ed8"
+              stroke-width="9"
+              fill="none"
+              stroke-linecap="round"
+            />
+            <circle cx="100" cy="235" r="9" fill="#fff" stroke="#f59e0b" stroke-width="5" />
+            <circle cx="215" cy="25" r="9" fill="#fff" stroke="#1d4ed8" stroke-width="5" />
+            <text x="115" y="240" font-size="12" font-weight="700">Sadat (cut)</text>
+            <text x="190" y="140" font-size="11">Ghamra</text>
+            <text x="92" y="30" font-size="12" font-weight="700">New El-Marg</text>
+          </svg>
+        </div>
+        <div class="foot"><b>Part 2</b> · stations 17-35 · arrive 19:45</div>
+      </div>
+    </div>
+
+    <div class="opt">
+      <h2>How it would work</h2>
+      <ul>
+        <li>
+          New image option <b>Split long trips</b> (off by default), shown only for trips of 20+
+          stations.
+        </li>
+        <li>
+          Cut at the transfer if there is one, otherwise at the middle station; two panels stacked
+          in the portrait or story format (or two separate images to share).
+        </li>
+        <li>
+          Each panel keeps its own north arrow if the map is turned, and its own station names.
+        </li>
+        <li>
+          Cost: medium. It needs a second projection and clipping in the renderer, plus a list
+          column per panel.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -180,6 +180,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Review round 2 fixes: Diagram style option restored in the image dialog; tracking only counts a station as reached within 300 m (
       eached in snapToRoute) and a jump over the warning still rings the wake alarm; fewest-transfers now minimises transfers first; two chosen stations under 700 m still plan a metro trip; first visit precaches JS/CSS/places chunks; enlarged image preview is inside the dialog focus trap (rest inert, focus restored); pins removable by tap or a Remove pin button. Left by design: the time-based estimate before boarding (it only runs when GPS is stale; each GPS fix re-anchors it).
 
+- [x] Long-trip images: taller map in portrait, Turn map to fit (rotation with north arrow), every-station list; split-into-panels idea mocked in docs/mocks/trip-image-split.html (not built, awaiting approval).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
