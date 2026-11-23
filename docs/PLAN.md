@@ -113,3 +113,5 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - **Monthly data refresh via GitHub Action:** scheduled workflow runs `npm run data:places` (and `data:fetch` + `data:build` + `data:validate`), and opens a PR with the diff for manual review. Never auto-merge; keep `verification.json` untouched. Measured OSM growth of our place categories: ~+3.5% per 6 months (8,672 -> 8,966 -> 9,277 between 2025-11 and 2026-11, net count).
 - **Optional resolver worker (Vercel/GitHub/etc.):** a small self-hosted function that expands short Maps links (and possibly caches geocoding). Strictly opt-in and configurable (endpoint in settings), never required; the app must keep working without it. Discuss design later.
+- **UI design theme refresh:** improve the visual theme/design after all functionality is finished.
+- **Search UX:** the place search returns every type (metro, parks, etc.) at once, which overwhelms. Design a better approach (type filters/tabs, grouped results, stations first). Later.
