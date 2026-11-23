@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import metroJson from '../../../data/metro.json';
+import { haversineMeters } from './geo';
 import { buildGraph, planRoute } from './routing';
 import { alertAt, snapToRoute, trackSteps, tripProgress } from './tracking';
 import type { MetroData } from './types';
@@ -29,6 +30,19 @@ describe('trip tracking', () => {
     expect(snapToRoute(coords, near)).toMatchObject({ index: 2, offRoute: false });
     const far = { lat: coords[2]!.lat + 0.05, lng: coords[2]!.lng };
     expect(snapToRoute(coords, far).offRoute).toBe(true);
+  });
+
+  it('only counts a station as reached when the rider is close to it', () => {
+    const i = coords.findIndex(
+      (c, k) => k + 1 < coords.length && haversineMeters(c, coords[k + 1]!) > 900,
+    );
+    expect(i).toBeGreaterThanOrEqual(0);
+    const [a, b] = [coords[i]!, coords[i + 1]!];
+    const mid = { lat: (a.lat + b.lat) / 2, lng: (a.lng + b.lng) / 2 };
+    const snap = snapToRoute(coords, mid);
+    expect(snap.reached).toBe(i);
+    const atNext = { lat: b.lat + 0.0003, lng: b.lng };
+    expect(snapToRoute(coords, atNext).reached).toBe(i + 1);
   });
 
   it('reports stops left, the exit and a shrinking ETA', () => {

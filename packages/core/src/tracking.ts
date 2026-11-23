@@ -28,10 +28,15 @@ export function trackSteps(route: Route): TrackStep[] {
 export interface RouteSnap {
   /** Index in `route.stations` of the station nearest to the fix. */
   index: number;
+  /** Last station reached: the nearest one when within STATION_REACH_M, otherwise the one just passed. */
+  reached: number;
   /** Distance from the fix to the route line, in metres. */
   distanceM: number;
   offRoute: boolean;
 }
+
+/** A fix this close to a station counts as having reached it. */
+export const STATION_REACH_M = 300;
 
 /** Metres from `p` to the segment a-b (local flat approximation, fine at city scale). */
 function distanceToSegmentM(p: LatLng, a: LatLng, b: LatLng): number {
@@ -60,10 +65,17 @@ export function snapToRoute(coords: LatLng[], fix: LatLng, maxOffRouteM = 400): 
     }
   });
   let line = best;
+  let segment = index;
   for (let i = 0; i + 1 < coords.length; i++) {
-    line = Math.min(line, distanceToSegmentM(fix, coords[i]!, coords[i + 1]!));
+    const d = distanceToSegmentM(fix, coords[i]!, coords[i + 1]!);
+    if (d < line) {
+      line = d;
+      segment = i;
+    }
   }
-  return { index, distanceM: line, offRoute: line > maxOffRouteM };
+  // Between stations the nearest one may be the next, so only count it once the rider is close.
+  const reached = best <= STATION_REACH_M ? index : Math.min(segment, index);
+  return { index, reached, distanceM: line, offRoute: line > maxOffRouteM };
 }
 
 export interface TripProgress {

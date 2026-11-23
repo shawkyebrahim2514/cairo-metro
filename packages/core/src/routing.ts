@@ -285,7 +285,7 @@ export function planRoute(
   options: RouteOptions & { fares?: FaresData; fareCategory?: TicketCategory } = {},
 ): Route | null {
   const mode = options.mode ?? 'fastest';
-  const penalty = options.transferPenaltySec ?? (mode === 'fewest-transfers' ? 1800 : 0);
+  const penalty = options.transferPenaltySec ?? (mode === 'fewest-transfers' ? 100_000 : 0);
   if (from === to) {
     return graph.nodesByStation.has(from)
       ? {

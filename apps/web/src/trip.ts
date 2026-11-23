@@ -39,7 +39,12 @@ export function planTrips(
   to: Endpoint,
   category: TicketCategory = 'standard',
 ): { trips: Trip[]; sameStation: boolean; closeBy: boolean } {
-  if (haversineMeters(endpointPoint(from), endpointPoint(to)) < WALK_INSTEAD_METERS) {
+  const stationPair =
+    from.kind === 'station' && to.kind === 'station' && from.station.id !== to.station.id;
+  if (
+    !stationPair &&
+    haversineMeters(endpointPoint(from), endpointPoint(to)) < WALK_INSTEAD_METERS
+  ) {
     return { trips: [], sameStation: false, closeBy: true };
   }
   const starts = access(from);

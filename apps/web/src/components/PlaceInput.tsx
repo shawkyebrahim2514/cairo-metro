@@ -72,6 +72,7 @@ export function PlaceInput({
   // Clearing caused by the user typing must not wipe what they typed.
   useEffect(() => {
     gpsToken.current++;
+    setBusy(false);
     if (typedRef.current) {
       typedRef.current = false;
     } else if (endpoint) {

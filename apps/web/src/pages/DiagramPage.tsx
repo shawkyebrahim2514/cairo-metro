@@ -87,6 +87,7 @@ export function DiagramPage({
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   const moved = useRef(false);
   const pinch = useRef(0);
+  const downAt = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const el = box.current;
@@ -160,6 +161,7 @@ export function DiagramPage({
 
   const onPointerDown = (e: React.PointerEvent) => {
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    downAt.current = { x: e.clientX, y: e.clientY };
     moved.current = false;
     pinch.current = 0;
   };
@@ -187,7 +189,8 @@ export function DiagramPage({
     }
     const dx = cur.x - prev.x;
     const dy = cur.y - prev.y;
-    if (!moved.current && Math.hypot(dx, dy) < 3) return;
+    if (!moved.current && Math.hypot(cur.x - downAt.current.x, cur.y - downAt.current.y) < 4)
+      return;
     moved.current = true;
     const k = view.w / size.w;
     setView((v) => ({ ...v, cx: v.cx - dx * k, cy: v.cy - dy * k }));

@@ -5,8 +5,39 @@ const VERSION = 'v1';
 const CACHE = `cairo-metro-${VERSION}`;
 const SHELL = ['./', 'manifest.webmanifest', 'icon.svg', 'icon-192.png', 'icon-512.png'];
 
+// The shell plus every script, style and data chunk it references, so the first visit
+// already works offline (not only after a second load).
+async function precache() {
+  const cache = await caches.open(CACHE);
+  await cache.addAll(SHELL);
+  const seen = new Set();
+  const queue = [];
+  const collect = (text, base, pattern) => {
+    for (const m of text.matchAll(pattern)) {
+      const url = new URL(m[1], base).href;
+      if (!seen.has(url)) {
+        seen.add(url);
+        queue.push(url);
+      }
+    }
+  };
+  const scope = self.registration.scope;
+  collect(
+    await (await cache.match('./')).text(),
+    scope,
+    /(?:src|href)="(\.\/assets\/[^"]+\.(?:js|css))"/g,
+  );
+  while (queue.length && seen.size < 60) {
+    const url = queue.shift();
+    const res = await fetch(url);
+    if (!res.ok) continue;
+    await cache.put(url, res.clone());
+    // lazy chunks are referenced as ./name.js relative to the importing file
+    if (url.endsWith('.js')) collect(await res.text(), url, /["'`](\.\/[\w.-]+\.(?:js|css))["'`]/g);
+  }
+}
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(SHELL)));
+  event.waitUntil(precache());
   self.skipWaiting();
 });
 

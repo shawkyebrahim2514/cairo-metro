@@ -152,6 +152,11 @@ export function ImageDialog({
   const [failed, setFailed] = useState(false);
   const [busy, setBusy] = useState(false);
   const [big, setBig] = useState(false);
+  const previewRef = useRef<HTMLButtonElement>(null);
+  const closeBig = () => {
+    setBig(false);
+    requestAnimationFrame(() => previewRef.current?.focus());
+  };
 
   const set = <K extends keyof UiOptions>(k: K, v: UiOptions[K]) => {
     setUi((cur) => {
@@ -248,11 +253,12 @@ export function ImageDialog({
       >
         <h2 id="img-title">{t('imgTitle')}</h2>
 
-        <div className="img-body">
+        <div className="img-body" inert={big}>
           <div className="img-pane">
             <button
               type="button"
               className="img-preview"
+              ref={previewRef}
               aria-label={t('imgEnlarge')}
               onClick={() => preview && setBig(true)}
             >
@@ -272,6 +278,7 @@ export function ImageDialog({
               options={[
                 ['network', t('imgStyleNetwork')],
                 ['route', t('imgStyleRoute')],
+                ['schematic', t('imgStyleSchematic')],
               ]}
               onChange={(v) => set('style', v)}
             />
@@ -400,7 +407,7 @@ export function ImageDialog({
           </div>
         </div>
 
-        <div className="tour-nav img-actions">
+        <div className="tour-nav img-actions" inert={big}>
           <button
             type="button"
             className="primary"
@@ -413,25 +420,26 @@ export function ImageDialog({
             {t('close')}
           </button>
         </div>
-      </div>
 
-      {big && preview && (
-        <button
-          type="button"
-          className="img-big"
-          aria-label={t('close')}
-          autoFocus
-          onClick={() => setBig(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') {
-              e.stopPropagation();
-              setBig(false);
-            }
-          }}
-        >
-          <img src={preview} alt={t('imgPreviewAlt')} />
-        </button>
-      )}
+        {big && preview && (
+          <button
+            type="button"
+            className="img-big"
+            aria-label={t('close')}
+            autoFocus
+            onClick={() => closeBig()}
+            onKeyDown={(e) => {
+              if (e.key === 'Tab') e.preventDefault();
+              if (e.key === 'Escape') {
+                e.stopPropagation();
+                closeBig();
+              }
+            }}
+          >
+            <img src={preview} alt={t('imgPreviewAlt')} />
+          </button>
+        )}
+      </div>
     </div>
   );
 }

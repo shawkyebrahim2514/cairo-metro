@@ -99,10 +99,10 @@ export function useTracking(
         setState((s) => ({ ...s, fix, offRoute: snap.offRoute, denied: false }));
         if (!snap.offRoute) {
           setState((s) => {
-            if (snap.index >= s.index || s.source === 'time') {
-              indexRef.current = snap.index;
-              anchor.current = { index: snap.index, at: Date.now() };
-              return { ...s, index: snap.index, source: 'gps' };
+            if (snap.reached >= s.index || s.source === 'time') {
+              indexRef.current = snap.reached;
+              anchor.current = { index: snap.reached, at: Date.now() };
+              return { ...s, index: snap.reached, source: 'gps' };
             }
             return s;
           });
@@ -161,8 +161,10 @@ export function useTracking(
       const rank = { station: 0, warn: 1, change: 2, arrive: 3 } as const;
       let kind: ReturnType<typeof alertAt> = null;
       let at = idx;
+      let wake = false;
       for (let i = prevIndex.current + 1; i <= idx; i++) {
         const k = alertAt(route, i, prefsRef.current.warnStops);
+        if (k === 'warn' || k === 'arrive') wake = true;
         if (k && (!kind || rank[k] >= rank[kind])) {
           kind = k;
           at = i;
@@ -184,7 +186,7 @@ export function useTracking(
                   } ${name(p.event.stationId)}`
                 : name(stationId);
         fireAlert(kind, prefsRef.current, text, lg);
-        if (wakeRef.current && (kind === 'warn' || kind === 'arrive')) {
+        if (wakeRef.current && wake) {
           setState((s) => ({ ...s, alarm: true }));
         }
       }
