@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import { DEFAULT_ALERTS, type AlertPrefs } from './alerts';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -18,6 +19,8 @@ export interface Settings {
   setHighlight: (h: HighlightId) => void;
   /** The colour value for the selected route highlight. */
   highlightColour: string;
+  alerts: AlertPrefs;
+  setAlerts: (a: AlertPrefs) => void;
 }
 
 export const SettingsContext = createContext<Settings>({
@@ -26,6 +29,8 @@ export const SettingsContext = createContext<Settings>({
   highlight: 'amber',
   setHighlight: () => {},
   highlightColour: HIGHLIGHTS[0].colour,
+  alerts: DEFAULT_ALERTS,
+  setAlerts: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { Footer } from '../components/Footer';
+import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
 import { PassCalculator } from '../components/PassCalculator';
 import type { TicketCategory } from '@cairo-metro/core';
@@ -19,6 +20,8 @@ import {
   recordTrip,
   toggleStar,
 } from '../storage';
+import { useSettings } from '../settings';
+import { useTracking } from '../tracking';
 import { planTrips, reachFrom } from '../trip';
 
 export function PlannerPage({
@@ -94,6 +97,37 @@ export function PlannerPage({
     setSelected(0);
   };
 
+  const [tracking, setTracking] = useState(false);
+  const [wakeMe, setWakeMe] = useState(false);
+  const [follow, setFollow] = useState(true);
+  const { alerts } = useSettings();
+  const {
+    state: ts,
+    setIndex,
+    dismissAlarm,
+  } = useTracking(trip?.route ?? null, tracking, alerts, wakeMe);
+
+  // A different trip ends tracking, so the old one never keeps ringing.
+  useEffect(() => {
+    setTracking(false);
+    setWakeMe(false);
+  }, [from, to, selected, category]);
+
+  const stationAt = trip ? stationsById.get(trip.route.stations[ts.index]!) : undefined;
+  const fixLat = ts.fixFresh ? ts.fix?.lat : undefined;
+  const fixLng = ts.fixFresh ? ts.fix?.lng : undefined;
+  const trackPoint = useMemo(() => {
+    if (!tracking) return null;
+    if (fixLat != null && fixLng != null) return { lat: fixLat, lng: fixLng };
+    return stationAt ? { lat: stationAt.lat, lng: stationAt.lng } : null;
+  }, [tracking, fixLat, fixLng, stationAt]);
+
+  const replan = () => {
+    if (!ts.fix) return;
+    setFrom(pinned(ts.fix, t));
+    setTracking(false);
+    setSelected(0);
+  };
   const starred = from && to ? isStarred(saved, from, to) : false;
 
   // Record each planned trip and keep the address bar shareable.
@@ -133,42 +167,63 @@ export function PlannerPage({
           legs={trip?.route.legs}
           tiles={tiles}
           bottomPad={Math.round(window.innerHeight * 0.45)}
+          track={trackPoint}
+          follow={tracking && follow}
+          onDrag={() => setFollow(false)}
           onPick={pick}
           onStation={(s) => pickEndpoint({ kind: 'station', station: s })}
         />
       </div>
       <Sheet snap={snap} onSnap={setSnap}>
-        <PlaceInput
-          tone="from"
-          label={t('from')}
-          endpoint={from}
-          onChange={(e) => {
-            setFrom(e);
-            setSelected(0);
-          }}
-          resolver={resolver}
-        />
-        <button
-          type="button"
-          className="swap"
-          onClick={swap}
-          aria-label={t('swap')}
-          title={t('swap')}
-        >
-          ⇅
-        </button>
-        <PlaceInput
-          tone="to"
-          label={t('to')}
-          endpoint={to}
-          onChange={(e) => {
-            setTo(e);
-            setSelected(0);
-          }}
-          resolver={resolver}
-          showGps={false}
-        />
-        <p className="note">{t('mapHint')}</p>
+        {tracking && trip && (
+          <TrackPanel
+            trip={trip}
+            state={ts}
+            wakeMe={wakeMe}
+            follow={follow}
+            onWakeMe={setWakeMe}
+            onFollow={() => setFollow((v) => !v)}
+            onSet={(i) => setIndex(i, 'manual')}
+            onReplan={replan}
+            onDismiss={dismissAlarm}
+            onStop={() => setTracking(false)}
+          />
+        )}
+        {!tracking && (
+          <>
+            <PlaceInput
+              tone="from"
+              label={t('from')}
+              endpoint={from}
+              onChange={(e) => {
+                setFrom(e);
+                setSelected(0);
+              }}
+              resolver={resolver}
+            />
+            <button
+              type="button"
+              className="swap"
+              onClick={swap}
+              aria-label={t('swap')}
+              title={t('swap')}
+            >
+              ⇅
+            </button>
+            <PlaceInput
+              tone="to"
+              label={t('to')}
+              endpoint={to}
+              onChange={(e) => {
+                setTo(e);
+                setSelected(0);
+              }}
+              resolver={resolver}
+              showGps={false}
+            />
+            <p className="note">{t('mapHint')}</p>
+          </>
+        )}
 
         {from && !to && <Reachable minutes={reachMin} onMinutes={setReachMin} result={reach} />}
 
@@ -194,6 +249,17 @@ export function PlannerPage({
             ))}
             {plan.trips.length > 0 && (
               <div className="actions">
+                <button
+                  type="button"
+                  className="pill"
+                  onClick={() => {
+                    setTracking(true);
+                    setFollow(true);
+                    setSnap('half');
+                  }}
+                >
+                  {t('trackStart')}
+                </button>
                 <button type="button" className="pill" onClick={share}>
                   {copied ? t('linkCopied') : t('share')}
                 </button>

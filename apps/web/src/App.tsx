@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
+import { loadAlerts, saveAlerts, type AlertPrefs } from './alerts';
 import { Footer } from './components/Footer';
 import { Icon } from './components/Icon';
 import { SettingsSheet } from './components/SettingsSheet';
@@ -62,6 +63,7 @@ export function App() {
   const [highlight, setHighlight] = useState<HighlightId>(() =>
     stored<HighlightId>('highlight', ['amber', 'violet', 'pink', 'cyan'], 'amber'),
   );
+  const [alerts, setAlerts] = useState<AlertPrefs>(loadAlerts);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
@@ -89,15 +91,19 @@ export function App() {
     return () => mq.removeEventListener('change', onChange);
   }, [theme, highlight]);
 
+  useEffect(() => saveAlerts(alerts), [alerts]);
+
   const settings = useMemo<Settings>(
     () => ({
       theme,
       setTheme,
       highlight,
+      alerts,
+      setAlerts,
       setHighlight,
       highlightColour: highlightColour(highlight),
     }),
-    [theme, highlight],
+    [theme, highlight, alerts],
   );
 
   useEffect(() => {

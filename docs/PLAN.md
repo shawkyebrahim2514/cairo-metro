@@ -131,13 +131,11 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] Settings sheet (gear): theme Light/Dark/Auto, route highlight colour, ticket type, map tiles; saved locally. [x] Map: station names beside dots by zoom, route glow/casing/per-line colour/animated dots, other lines fade. [x] SVG icons, line pills, glass bars, animation, shimmer, reduced motion. [x] Planner is a full-screen map with a bottom sheet (peek/half/full by tap or drag on the handle; opens to half when a route appears or a search box is focused; the route is fitted above the sheet). Checked in light/dark/Arabic at 390 px.
 
-### 7H Live trip tracking (decided, to build next)
+### 7H Live trip tracking (done)
 
-- Opt-in 'Track my trip' on the selected route: watchPosition snapped to the nearest route station (within ~300 m, else 'off route' with a re-plan button); position shown as a moving dot on the map; banner with next station, stops left, ETA, next change; follows the map with a recenter button.
-- GPS fallback: manual 'I am at station X' tap plus time-based auto-advance (~2 min per hop).
-- Alerts: vibration pattern per event (short per station, long for the exit, double for a change), optional beep/voice, '2 stops left' warning, banner colour change; Wake Lock keeps the screen on.
-- Extras chosen: re-plan when off route, 'you have arrived' (auto-switch to the walking steps), 'wake me' option.
-- Limits: alerts only while the page is open (no background); background alerts need a Capacitor native wrapper (Play once, Android Studio, background-location plugin; iOS needs a Mac and a $99/year account). Works offline as an installed PWA. Women-only car platform position: no data, skipped. Ideas for later: share ETA link, trip history.
+- [x] 'Track my trip' on a planned route: GPS snapped to the route (core `tracking.ts`: `trackSteps`, `snapToRoute`, `tripProgress`, `alertAt`, with tests), a moving dot on the map, a panel with the next station, stops left, ETA and the next change/exit, an 'I am at' manual correction, time-based estimate when GPS is lost (never auto-arrives; the exit needs a fix or a tap), off-route notice with 're-plan from here', arrival message with the walking steps, 'wake me' alarm that repeats until dismissed, 'follow me' map recentering.
+- [x] Trip alerts in Settings (vibration, pulse per station, 'n stops before' warning, beep, spoken announcements, keep screen on, test button); different vibration patterns per event.
+- Limits: alerts only while the page is open (no background); background alerts need a Capacitor native wrapper. Works offline as an installed PWA. Not verified on a real phone underground (headless Edge with emulated GPS only).
 
 ### Future ideas (not scheduled)
 

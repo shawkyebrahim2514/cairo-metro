@@ -992,3 +992,130 @@ footer {
 .map-bg .leaflet-top {
   top: 58px;
 }
+
+/* Live tracking */
+.track {
+  border: 1px solid var(--hl);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.track header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.track header strong {
+  flex: 1;
+}
+
+.track .pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2563eb;
+  animation: ping 1.6s ease-out infinite;
+}
+
+.track-label,
+.track-src {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.track-big {
+  margin: 2px 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.track-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.track-actions select {
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 8px;
+  max-width: 180px;
+}
+
+.pill.on {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.alarm {
+  width: 100%;
+  margin: 10px 0;
+  padding: 14px;
+  border: 0;
+  border-radius: 14px;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 800;
+  animation: ping-bg 1s infinite;
+}
+
+.track-dot span {
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2563eb;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 0 rgb(37 99 235 / 0.6);
+  animation: ping 1.6s ease-out infinite;
+}
+
+.settings {
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.settings h3 {
+  margin: 18px 0 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.pill.test {
+  margin-top: 12px;
+}
+
+@keyframes ping {
+  70% {
+    box-shadow: 0 0 0 12px rgb(37 99 235 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(37 99 235 / 0);
+  }
+}
+
+@keyframes ping-bg {
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.leaflet-tooltip {
+  background: var(--card);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.leaflet-tooltip-top::before {
+  border-top-color: var(--card);
+}

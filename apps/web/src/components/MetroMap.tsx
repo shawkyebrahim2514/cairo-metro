@@ -23,6 +23,11 @@ interface Props {
   tiles: boolean;
   /** Pixels at the bottom covered by the sheet, kept clear when fitting the route. */
   bottomPad?: number;
+  /** The rider's position during live tracking. */
+  track?: LatLng | null;
+  follow?: boolean;
+  /** Called when the user drags the map, so following can stop. */
+  onDrag?: () => void;
   onPick?: (p: LatLng) => void;
   /** Called when a station dot is tapped. */
   onStation?: (s: Station) => void;
@@ -36,6 +41,9 @@ export function MetroMap({
   legs,
   tiles,
   bottomPad = 0,
+  track = null,
+  follow = false,
+  onDrag,
   onPick,
   onStation,
 }: Props) {
@@ -54,6 +62,9 @@ export function MetroMap({
   pickRef.current = onPick;
   const [full, setFull] = useState(false);
   const meRef = useRef<L.CircleMarker | null>(null);
+  const dragRef = useRef(onDrag);
+  dragRef.current = onDrag;
+  const trackRef = useRef<L.Marker | null>(null);
   const stationRef = useRef(onStation);
   stationRef.current = onStation;
 
@@ -76,6 +87,7 @@ export function MetroMap({
       }
     }
     map.on('zoomend', () => setZoom(map.getZoom()));
+    map.on('dragstart', () => dragRef.current?.());
     map.on('click', (e: L.LeafletMouseEvent) =>
       pickRef.current?.({ lat: e.latlng.lat, lng: e.latlng.lng }),
     );
@@ -83,6 +95,7 @@ export function MetroMap({
       map.remove();
       baseRef.current = [];
       meRef.current = null;
+      trackRef.current = null;
       mapRef.current = null;
       tileRef.current = null;
       dynamicRef.current = null;
@@ -101,6 +114,33 @@ export function MetroMap({
       document.removeEventListener('keydown', onKey);
     };
   }, [full]);
+
+  // Live tracking: a pulsing dot that the map follows while following is on.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+    if (!track) {
+      trackRef.current?.remove();
+      trackRef.current = null;
+      return;
+    }
+    const ll: L.LatLngTuple = [track.lat, track.lng];
+    if (trackRef.current) trackRef.current.setLatLng(ll);
+    else {
+      trackRef.current = L.marker(ll, {
+        icon: L.divIcon({ className: 'track-dot', html: '<span></span>', iconSize: [22, 22] }),
+        interactive: false,
+        keyboard: false,
+        zIndexOffset: 1000,
+      }).addTo(map);
+    }
+    if (follow) {
+      // keep the dot in the part of the map the sheet does not cover
+      const z = Math.max(map.getZoom(), 15);
+      const target = map.project(ll, z).add([0, padRef.current / 2]);
+      map.setView(map.unproject(target, z), z, { animate: true });
+    }
+  }, [track, follow]);
 
   const locate = () => {
     navigator.geolocation.getCurrentPosition(
