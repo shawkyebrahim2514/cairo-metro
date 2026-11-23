@@ -58,6 +58,14 @@ const curated = JSON.parse(readFileSync('data/curated/curated.json', 'utf8')) as
 interface VerificationFile {
   stations: Record<string, { verified?: boolean; name?: Partial<LocalizedName> }>;
 }
+interface AltNamesFile {
+  stations: Record<string, { names: string[] }>;
+}
+const altNamesPath = 'data/curated/alt-names.json';
+const altNames: AltNamesFile = existsSync(altNamesPath)
+  ? JSON.parse(readFileSync(altNamesPath, 'utf8'))
+  : { stations: {} };
+
 const verificationPath = 'data/curated/verification.json';
 const verification: VerificationFile = existsSync(verificationPath)
   ? JSON.parse(readFileSync(verificationPath, 'utf8'))
@@ -286,6 +294,15 @@ for (const [qid, group] of byQid) {
   let id = slugify(en) || qid.toLowerCase();
   if (usedIds.has(id)) id = `${id}-${qid.toLowerCase()}`;
   usedIds.add(id);
+
+  // Alternative names people really use (curated separately so they can be reviewed in one place).
+  for (const a of altNames.stations[id]?.names ?? []) {
+    const clean = hasArabic(a) ? cleanAr(a) : cleanEn(a);
+    if (clean && !seen.has(norm(clean))) {
+      seen.add(norm(clean));
+      aliases.push(clean);
+    }
+  }
 
   const linesEntries: StationLineEntry[] = group.flatMap((g) =>
     g.memberships.map((m) => ({ line: g.line, branch: m.branch, order: m.order })),

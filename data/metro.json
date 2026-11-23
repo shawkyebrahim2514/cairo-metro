@@ -11,7 +11,7 @@
         "en": "Abbassia",
         "ar": "العباسية"
       },
-      "aliases": ["Abbassiya"],
+      "aliases": ["Abbassiya", "Abbasiya", "Abbasia", "Abbassiyya"],
       "lat": 30.07278,
       "lng": 31.284093,
       "lines": [
@@ -35,7 +35,7 @@
         "en": "Abdo Pasha",
         "ar": "عبده باشا"
       },
-      "aliases": ["Abdou Pasha"],
+      "aliases": ["Abdou Pasha", "Abdu Basha", "Abdou Basha", "Abdo Basha"],
       "lat": 30.065371,
       "lng": 31.276502,
       "lines": [
@@ -59,7 +59,7 @@
         "en": "Adly Mansour",
         "ar": "عدلي منصور"
       },
-      "aliases": ["عدلى منصور"],
+      "aliases": ["عدلى منصور", "Adli Mansour", "Adly Mansur", "Adli Mansur", "محطة عدلي منصور"],
       "lat": 30.146953,
       "lng": 31.421598,
       "lines": [
@@ -83,7 +83,7 @@
         "en": "Ain Helwan",
         "ar": "عين حلوان"
       },
-      "aliases": ["محطة عين حلوان", "محطة مترو عين حلوان"],
+      "aliases": ["محطة عين حلوان", "محطة مترو عين حلوان", "Ayn Helwan"],
       "lat": 29.862658,
       "lng": 31.325009,
       "lines": [
@@ -107,7 +107,7 @@
         "en": "Ain Shams",
         "ar": "عين شمس"
       },
-      "aliases": [],
+      "aliases": ["Ayn Shams"],
       "lat": 30.131031,
       "lng": 31.31907,
       "lines": [
@@ -131,7 +131,13 @@
         "en": "Alf Maskan",
         "ar": "ألف مسكن"
       },
-      "aliases": ["محطة مترو ألف مسكن"],
+      "aliases": [
+        "محطة مترو ألف مسكن",
+        "Alf Maskn",
+        "1000 Houses",
+        "Thousand Houses",
+        "Thousand Housing"
+      ],
       "lat": 30.118065,
       "lng": 31.339826,
       "lines": [
@@ -155,7 +161,17 @@
         "en": "Ard El-Mared",
         "ar": "أرض المعارض"
       },
-      "aliases": ["Cairo Fairground", "Fair Zone", "Cairo Fair", "محطة المعرض"],
+      "aliases": [
+        "Cairo Fairground",
+        "Fair Zone",
+        "Cairo Fair",
+        "محطة المعرض",
+        "International Fair",
+        "Cairo International Fair",
+        "Exhibition Grounds",
+        "Ard El Maared",
+        "المعارض"
+      ],
       "lat": 30.073329,
       "lng": 31.301149,
       "lines": [
@@ -179,7 +195,7 @@
         "en": "Attaba",
         "ar": "العتبة"
       },
-      "aliases": ["Ataba", "محطة مترو العتبة"],
+      "aliases": ["Ataba", "محطة مترو العتبة", "Ataba Square", "Attaba Square", "ميدان العتبة"],
       "lat": 30.052583,
       "lng": 31.248074,
       "lines": [
@@ -208,7 +224,7 @@
         "en": "Bab El-Sharia",
         "ar": "باب الشعرية"
       },
-      "aliases": ["Bab el Shaaria"],
+      "aliases": ["Bab el Shaaria", "Bab El Shariya", "Bab Sharia", "Bab Al Shaaria"],
       "lat": 30.053711,
       "lng": 31.255876,
       "lines": [
@@ -232,7 +248,16 @@
         "en": "Bolaq El-Dakrour",
         "ar": "بولاق الدكرور"
       },
-      "aliases": ["Bulaq Al-Dakrour", "Boulak El Dakrour", "محطة مترو بولاق الدكرور"],
+      "aliases": [
+        "Bulaq Al-Dakrour",
+        "Boulak El Dakrour",
+        "محطة مترو بولاق الدكرور",
+        "Bulaq",
+        "Dakrour",
+        "Boulaq El Dakrour",
+        "بولاق",
+        "الدكرور"
+      ],
       "lat": 30.037542,
       "lng": 31.195506,
       "lines": [
@@ -256,7 +281,7 @@
         "en": "Cairo University",
         "ar": "جامعة القاهرة"
       },
-      "aliases": [],
+      "aliases": ["Cairo Univ", "Cairo Uni", "Giza University Square"],
       "lat": 30.025447,
       "lng": 31.201282,
       "lines": [
@@ -285,7 +310,14 @@
         "en": "Capital University (Helwan University)",
         "ar": "جامعة العاصمة (جامعة حلوان)"
       },
-      "aliases": ["Helwan University", "Capital University", "جامعة حلوان"],
+      "aliases": [
+        "Helwan University",
+        "Capital University",
+        "جامعة حلوان",
+        "Helwan Univ",
+        "Capital Univ",
+        "Hilwan University"
+      ],
       "lat": 29.869019,
       "lng": 31.320366,
       "lines": [
@@ -309,7 +341,7 @@
         "en": "Dar El-Salam",
         "ar": "دار السلام"
       },
-      "aliases": ["Dar Al-Salam", "محطة دار السلام"],
+      "aliases": ["Dar Al-Salam", "محطة دار السلام", "Dar El Salaam"],
       "lat": 29.982005,
       "lng": 31.24222,
       "lines": [
@@ -333,7 +365,7 @@
         "en": "Dokki",
         "ar": "الدقي"
       },
-      "aliases": ["الدقى"],
+      "aliases": ["الدقى", "Doqqi", "Dukki", "Al Dokki"],
       "lat": 30.038214,
       "lng": 31.212014,
       "lines": [
@@ -357,7 +389,7 @@
         "en": "El-Ahram",
         "ar": "الأهرام"
       },
-      "aliases": ["Al Ahram"],
+      "aliases": ["Al Ahram", "Ahram", "Al Ahram Street"],
       "lat": 30.091313,
       "lng": 31.326497,
       "lines": [
@@ -381,7 +413,7 @@
         "en": "El-Bohoth",
         "ar": "البحوث"
       },
-      "aliases": ["Behooth", "Bohooth"],
+      "aliases": ["Behooth", "Bohooth", "Bohouth", "Research", "Al Buhuth", "Al Bohoth"],
       "lat": 30.035764,
       "lng": 31.200316,
       "lines": [
@@ -405,7 +437,7 @@
         "en": "El-Bohy",
         "ar": "البوهي"
       },
-      "aliases": ["Al-Bohy"],
+      "aliases": ["Al-Bohy", "Bohy", "Al Buhi", "El Bouhy"],
       "lat": 30.082116,
       "lng": 31.210484,
       "lines": [
@@ -429,7 +461,7 @@
         "en": "El-Demerdash",
         "ar": "الدمرداش"
       },
-      "aliases": ["Al-Demerdash"],
+      "aliases": ["Al-Demerdash", "Demerdash", "Demirdash"],
       "lat": 30.077257,
       "lng": 31.277814,
       "lines": [
@@ -453,7 +485,7 @@
         "en": "El-Gish",
         "ar": "الجيش"
       },
-      "aliases": ["El Geish", "محطة الجيش"],
+      "aliases": ["El Geish", "محطة الجيش", "Gesh", "El Geish Street", "Geish"],
       "lat": 30.062267,
       "lng": 31.26797,
       "lines": [
@@ -477,7 +509,15 @@
         "en": "El-Haykestep",
         "ar": "الهايكستب"
       },
-      "aliases": ["محطة مترو الهايكستب", "مترو الهايكستب"],
+      "aliases": [
+        "محطة مترو الهايكستب",
+        "مترو الهايكستب",
+        "Haikestep",
+        "Hikestep",
+        "Haykestep",
+        "Heikestep",
+        "Haykestab"
+      ],
       "lat": 30.143881,
       "lng": 31.40485,
       "lines": [
@@ -501,7 +541,7 @@
         "en": "El-khalafawy",
         "ar": "الخلفاوي"
       },
-      "aliases": ["Al-Khalafawy", "Khalafawy"],
+      "aliases": ["Al-Khalafawy", "Khalafawy", "Khalafawi", "El Khalafawi", "Al Khalafawi"],
       "lat": 30.097786,
       "lng": 31.245442,
       "lines": [
@@ -525,7 +565,7 @@
         "en": "El-Maasara",
         "ar": "المعصرة"
       },
-      "aliases": ["Al-Maasara", "مترو المعصرة"],
+      "aliases": ["Al-Maasara", "مترو المعصرة", "Maasara", "Maassara"],
       "lat": 29.906101,
       "lng": 31.299735,
       "lines": [
@@ -549,7 +589,7 @@
         "en": "El-Malek El-Saleh",
         "ar": "الملك الصالح"
       },
-      "aliases": ["Al-Malek Al-Saleh"],
+      "aliases": ["Al-Malek Al-Saleh", "Malek El Saleh", "Malek Saleh", "ملك الصالح"],
       "lat": 30.017678,
       "lng": 31.231195,
       "lines": [
@@ -573,7 +613,7 @@
         "en": "El-Marg",
         "ar": "المرج"
       },
-      "aliases": ["Al Marj"],
+      "aliases": ["Al Marj", "Marg", "Marj", "El Marj", "المرج القديمة"],
       "lat": 30.152081,
       "lng": 31.335762,
       "lines": [
@@ -597,7 +637,7 @@
         "en": "El-Matareyya",
         "ar": "المطرية"
       },
-      "aliases": [],
+      "aliases": ["Matareya", "Mataria", "El Mataria", "Matariya", "Matareyya"],
       "lat": 30.121384,
       "lng": 31.313952,
       "lines": [
@@ -621,7 +661,7 @@
         "en": "El-Monib",
         "ar": "المنيب"
       },
-      "aliases": ["Al-Mounib", "El-Mounib"],
+      "aliases": ["Al-Mounib", "El-Mounib", "Mounib", "El Moneeb", "Moneib"],
       "lat": 29.981136,
       "lng": 31.211966,
       "lines": [
@@ -645,7 +685,7 @@
         "en": "El-Nozha",
         "ar": "النزهة"
       },
-      "aliases": ["مترو النزهة"],
+      "aliases": ["مترو النزهة", "Nozha", "Al Nozha", "El Nouzha", "Nouzha"],
       "lat": 30.128117,
       "lng": 31.36052,
       "lines": [
@@ -669,7 +709,7 @@
         "en": "El-Qawmia",
         "ar": "القومية"
       },
-      "aliases": ["Al-Kawmeiah"],
+      "aliases": ["Al-Kawmeiah", "Qawmeya", "El Kawmeya", "Al Qawmiyya", "Qawmiyya"],
       "lat": 30.093199,
       "lng": 31.208882,
       "lines": [
@@ -693,7 +733,16 @@
         "en": "El-Sayeda Zeinab",
         "ar": "السيدة زينب"
       },
-      "aliases": ["Sayyeda Zeinab", "Al-Sayeda Zeinab", "AlSayyeda Zeinab"],
+      "aliases": [
+        "Sayyeda Zeinab",
+        "Al-Sayeda Zeinab",
+        "AlSayyeda Zeinab",
+        "Sayeda Zainab",
+        "Sayyida Zaynab",
+        "Sayeda Zeinab",
+        "Sayida Zeinab",
+        "السيدة"
+      ],
       "lat": 30.029245,
       "lng": 31.235388,
       "lines": [
@@ -717,7 +766,7 @@
         "en": "El-Shams Club",
         "ar": "نادي الشمس"
       },
-      "aliases": ["Nadi El-Shams"],
+      "aliases": ["Nadi El-Shams", "Shams Club", "Shams Sporting Club"],
       "lat": 30.122304,
       "lng": 31.343971,
       "lines": [
@@ -741,7 +790,22 @@
         "en": "El-Shohadaa",
         "ar": "الشهداء"
       },
-      "aliases": ["Shuhada", "Al-Shohadaa", "رمسيس", "Ramses", "مبارك", "Mubarak"],
+      "aliases": [
+        "Shuhada",
+        "Al-Shohadaa",
+        "رمسيس",
+        "Ramses",
+        "مبارك",
+        "Mubarak",
+        "Ramses Square",
+        "Martyrs",
+        "Shohada",
+        "Al Shuhadaa",
+        "ميدان رمسيس",
+        "مترو رمسيس",
+        "مترو مبارك",
+        "محطة الشهداء"
+      ],
       "lat": 30.061806,
       "lng": 31.246289,
       "lines": [
@@ -770,7 +834,7 @@
         "en": "El-Tawfikia",
         "ar": "التوفيقية"
       },
-      "aliases": ["Al-Tawfikia", "Tawfikia"],
+      "aliases": ["Al-Tawfikia", "Tawfikia", "Tawfiqiya", "Tawfiqia", "El Tawfiqiyya", "Tawfikeya"],
       "lat": 30.065071,
       "lng": 31.202158,
       "lines": [
@@ -794,7 +858,7 @@
         "en": "El-Zahraa",
         "ar": "الزهراء"
       },
-      "aliases": ["Al-Zahraa"],
+      "aliases": ["Al-Zahraa", "Zahraa", "Zahraa El Maadi", "Zahraa Maadi"],
       "lat": 29.99544,
       "lng": 31.231359,
       "lines": [
@@ -818,7 +882,13 @@
         "en": "Ezbet El-Nakhl",
         "ar": "عزبة النخل"
       },
-      "aliases": ["Ezbet en Nakhl", "محطة عزبة النخل"],
+      "aliases": [
+        "Ezbet en Nakhl",
+        "محطة عزبة النخل",
+        "Ezbet Nakhl",
+        "Izbat El Nakhl",
+        "Ezbet El Nakheel"
+      ],
       "lat": 30.139272,
       "lng": 31.324503,
       "lines": [
@@ -842,7 +912,7 @@
         "en": "Faisal",
         "ar": "فيصل"
       },
-      "aliases": [],
+      "aliases": ["Faysal", "Feisal", "شارع فيصل"],
       "lat": 30.017294,
       "lng": 31.204031,
       "lines": [
@@ -866,7 +936,17 @@
         "en": "Gamet El-Dowel",
         "ar": "جامعة الدول العربية"
       },
-      "aliases": ["Gamat El Dowal", "جامعة الدول"],
+      "aliases": [
+        "Gamat El Dowal",
+        "جامعة الدول",
+        "Arab League",
+        "Arab League University",
+        "Gamet El Dewal",
+        "Gameat El Dowal",
+        "Mohandessin",
+        "Mohandiseen",
+        "المهندسين"
+      ],
       "lat": 30.050954,
       "lng": 31.199687,
       "lines": [
@@ -890,7 +970,7 @@
         "en": "Ghamra",
         "ar": "غمرة"
       },
-      "aliases": ["الغمرة"],
+      "aliases": ["الغمرة", "Ghamrah"],
       "lat": 30.068963,
       "lng": 31.264675,
       "lines": [
@@ -914,7 +994,7 @@
         "en": "Giza",
         "ar": "الجيزة"
       },
-      "aliases": ["جيزة"],
+      "aliases": ["جيزة", "Gizah", "Giza Square", "ميدان الجيزة"],
       "lat": 30.010571,
       "lng": 31.207126,
       "lines": [
@@ -938,7 +1018,14 @@
         "en": "Hadayek El-Maadi",
         "ar": "حدائق المعادي"
       },
-      "aliases": ["Hadayeq El-Maadi", "مترو حدائق المعادى", "حدائق المعادى"],
+      "aliases": [
+        "Hadayeq El-Maadi",
+        "مترو حدائق المعادى",
+        "حدائق المعادى",
+        "Maadi Gardens",
+        "Hadayek Maadi",
+        "Hadayeq Maadi"
+      ],
       "lat": 29.970096,
       "lng": 31.250667,
       "lines": [
@@ -962,7 +1049,14 @@
         "en": "Hadayek El-Zaitoun",
         "ar": "حدائق الزيتون"
       },
-      "aliases": ["Hadayeq Al-Zaitoun", "Hadayeq El-Zaitoun"],
+      "aliases": [
+        "Hadayeq Al-Zaitoun",
+        "Hadayeq El-Zaitoun",
+        "Zaitoun Gardens",
+        "Zeitoun Gardens",
+        "Zeitoun",
+        "Zaytoun"
+      ],
       "lat": 30.105204,
       "lng": 31.309936,
       "lines": [
@@ -986,7 +1080,7 @@
         "en": "Hadayek Helwan",
         "ar": "حدائق حلوان"
       },
-      "aliases": ["Hadayeq Helwan"],
+      "aliases": ["Hadayeq Helwan", "Helwan Gardens"],
       "lat": 29.897186,
       "lng": 31.304069,
       "lines": [
@@ -1010,7 +1104,7 @@
         "en": "Hammamat El-Qobba",
         "ar": "حمامات القبة"
       },
-      "aliases": ["Hammamat Al-Qobba"],
+      "aliases": ["Hammamat Al-Qobba", "Hammamat El Kobba", "Hamamat El Qobba", "Hamamat El Kobba"],
       "lat": 30.090337,
       "lng": 31.298109,
       "lines": [
@@ -1058,7 +1152,14 @@
         "en": "Heliopolis",
         "ar": "هليوبوليس"
       },
-      "aliases": ["Heliopolis Square", "محطة مترو هليوبوليس", "ميدان هليوبوليس", "محطة هليوبوليس"],
+      "aliases": [
+        "Heliopolis Square",
+        "محطة مترو هليوبوليس",
+        "ميدان هليوبوليس",
+        "محطة هليوبوليس",
+        "Misr El Gedida",
+        "مصر الجديدة"
+      ],
       "lat": 30.10796,
       "lng": 31.338164,
       "lines": [
@@ -1082,7 +1183,14 @@
         "en": "Helmeyet El-Zaitoun",
         "ar": "حلمية الزيتون"
       },
-      "aliases": ["Helmeyet Al-Zaitoun"],
+      "aliases": [
+        "Helmeyet Al-Zaitoun",
+        "Helmeya",
+        "Helmiyet Zeitoun",
+        "Helmeyet Zeitoun",
+        "Zeitoun",
+        "حلمية"
+      ],
       "lat": 30.114345,
       "lng": 31.313896,
       "lines": [
@@ -1106,7 +1214,7 @@
         "en": "Helwan",
         "ar": "حلوان"
       },
-      "aliases": ["محطة حلوان"],
+      "aliases": ["محطة حلوان", "Hilwan", "Helwan Square"],
       "lat": 29.849889,
       "lng": 31.334232,
       "lines": [
@@ -1130,7 +1238,7 @@
         "en": "Hesham Barakat",
         "ar": "هشام بركات"
       },
-      "aliases": [],
+      "aliases": ["Hisham Barakat"],
       "lat": 30.130965,
       "lng": 31.373092,
       "lines": [
@@ -1154,7 +1262,7 @@
         "en": "Imbaba",
         "ar": "إمبابة"
       },
-      "aliases": [],
+      "aliases": ["Embaba", "Embabah"],
       "lat": 30.07595,
       "lng": 31.207562,
       "lines": [
@@ -1178,7 +1286,7 @@
         "en": "Kit-Kat",
         "ar": "الكيت كات"
       },
-      "aliases": [],
+      "aliases": ["Kit Kat Square", "كيت كات"],
       "lat": 30.066796,
       "lng": 31.212983,
       "lines": [
@@ -1212,7 +1320,7 @@
         "en": "Kobri El-Qobba",
         "ar": "كوبري القبة"
       },
-      "aliases": ["Kobri Al-Qobba"],
+      "aliases": ["Kobri Al-Qobba", "Kobry El Kobba", "Kobri El Kobba", "Koubri El Qubba"],
       "lat": 30.086969,
       "lng": 31.293819,
       "lines": [
@@ -1236,7 +1344,7 @@
         "en": "Koleyet El-Banat",
         "ar": "كلية البنات"
       },
-      "aliases": [],
+      "aliases": ["Girls College", "Koliet El Banat", "Kolyet El Banat", "Kulliyat al-Banat"],
       "lat": 30.08367,
       "lng": 31.328815,
       "lines": [
@@ -1260,7 +1368,13 @@
         "en": "Koliet El-Zeraa",
         "ar": "كلية الزراعة"
       },
-      "aliases": ["Kolleyyet El-Zeraa"],
+      "aliases": [
+        "Kolleyyet El-Zeraa",
+        "Faculty of Agriculture",
+        "Kolleyet El Zeraa",
+        "Kolyet El Zeraa",
+        "Agriculture College"
+      ],
       "lat": 30.113775,
       "lng": 31.248692,
       "lines": [
@@ -1284,7 +1398,7 @@
         "en": "Kozzika",
         "ar": "كوتسيكا"
       },
-      "aliases": ["كوتسكا"],
+      "aliases": ["كوتسكا", "Kozika", "Kozzica", "Kotsika", "Kutsika"],
       "lat": 29.93615,
       "lng": 31.281706,
       "lines": [
@@ -1308,7 +1422,7 @@
         "en": "Maadi",
         "ar": "المعادي"
       },
-      "aliases": ["المعادى"],
+      "aliases": ["المعادى", "Maadi Square", "Al Maadi"],
       "lat": 29.959844,
       "lng": 31.258078,
       "lines": [
@@ -1332,7 +1446,7 @@
         "en": "Manshiet El-Sadr",
         "ar": "منشية الصدر"
       },
-      "aliases": ["Manshiet Al-Sadr"],
+      "aliases": ["Manshiet Al-Sadr", "Manshiet Sadr", "Mansheyet El Sadr", "Manshiyat El Sadr"],
       "lat": 30.08221,
       "lng": 31.287838,
       "lines": [
@@ -1356,7 +1470,15 @@
         "en": "Mar Girgis",
         "ar": "مار جرجس"
       },
-      "aliases": [],
+      "aliases": [
+        "Mar Gerges",
+        "St George",
+        "Saint George",
+        "Coptic Cairo",
+        "Old Cairo",
+        "مصر القديمة",
+        "القاهرة القبطية"
+      ],
       "lat": 30.00585,
       "lng": 31.229524,
       "lines": [
@@ -1380,7 +1502,7 @@
         "en": "Masarra",
         "ar": "مسرة"
       },
-      "aliases": ["Massara", "مسره"],
+      "aliases": ["Massara", "مسره", "Massarah", "Masara"],
       "lat": 30.071041,
       "lng": 31.245017,
       "lines": [
@@ -1404,7 +1526,13 @@
         "en": "Maspero",
         "ar": "ماسبيرو"
       },
-      "aliases": ["Masbero", "Gamal AbdAlNasser"],
+      "aliases": [
+        "Masbero",
+        "Gamal AbdAlNasser",
+        "Maspero Television Building",
+        "Radio and Television Building",
+        "مبنى التليفزيون"
+      ],
       "lat": 30.055508,
       "lng": 31.232223,
       "lines": [
@@ -1428,7 +1556,7 @@
         "en": "Mezallat",
         "ar": "المظلات"
       },
-      "aliases": ["Al-Mezallat"],
+      "aliases": ["Al-Mezallat", "Mazallat", "Mizallat", "Mezalat", "Mezzalat"],
       "lat": 30.104097,
       "lng": 31.246144,
       "lines": [
@@ -1452,7 +1580,14 @@
         "en": "Mohamed Naguib",
         "ar": "محمد نجيب"
       },
-      "aliases": ["نجيب"],
+      "aliases": [
+        "نجيب",
+        "Naguib",
+        "Mohammed Naguib",
+        "Mohamed Neguib",
+        "Mohamed Naguib Square",
+        "ميدان محمد نجيب"
+      ],
       "lat": 30.045424,
       "lng": 31.244316,
       "lines": [
@@ -1476,7 +1611,16 @@
         "en": "Nasser",
         "ar": "جمال عبدالناصر"
       },
-      "aliases": ["الإسعاف", "El Esaaf", "Gamal AbdAlNasser", "ناصر"],
+      "aliases": [
+        "الإسعاف",
+        "El Esaaf",
+        "Gamal AbdAlNasser",
+        "ناصر",
+        "Abdel Nasser",
+        "Gamal Abdel Nasser",
+        "Esaaf",
+        "عبد الناصر"
+      ],
       "lat": 30.053506,
       "lng": 31.238798,
       "lines": [
@@ -1505,7 +1649,7 @@
         "en": "New El-Marg",
         "ar": "المرج الجديدة"
       },
-      "aliases": [],
+      "aliases": ["New Marg", "New Marj", "Marg El Gedida", "المرج الجديد"],
       "lat": 30.163538,
       "lng": 31.3383,
       "lines": [
@@ -1529,7 +1673,14 @@
         "en": "Omar Ibn El-Khattab",
         "ar": "عمر بن الخطاب"
       },
-      "aliases": ["Omar Ebn Elkhatab", "مترو عمر بن الخطاب"],
+      "aliases": [
+        "Omar Ebn Elkhatab",
+        "مترو عمر بن الخطاب",
+        "Omar Ibn Khattab",
+        "Omar Ebn El Khattab",
+        "Omar Bin Elkhattab",
+        "Omar Ibn El Khatab"
+      ],
       "lat": 30.140407,
       "lng": 31.394481,
       "lines": [
@@ -1553,7 +1704,7 @@
         "en": "Omm El-Misryeen",
         "ar": "أم المصريين"
       },
-      "aliases": ["Omm El-Masryeen"],
+      "aliases": ["Omm El-Masryeen", "Om El Masryeen", "Umm El Masreyeen"],
       "lat": 30.005138,
       "lng": 31.207961,
       "lines": [
@@ -1577,7 +1728,7 @@
         "en": "Opera",
         "ar": "الأوبرا"
       },
-      "aliases": ["Gezira"],
+      "aliases": ["Gezira", "Cairo Opera House", "Opera House", "دار الأوبرا", "الجزيرة"],
       "lat": 30.042024,
       "lng": 31.225185,
       "lines": [
@@ -1601,7 +1752,7 @@
         "en": "Orabi",
         "ar": "عرابي"
       },
-      "aliases": [],
+      "aliases": ["Urabi", "Arabi", "Ahmed Orabi"],
       "lat": 30.057365,
       "lng": 31.242703,
       "lines": [
@@ -1625,7 +1776,7 @@
         "en": "Qobaa",
         "ar": "قباء"
       },
-      "aliases": ["Qubaa", "مترو قباء"],
+      "aliases": ["Qubaa", "مترو قباء", "Koba", "Kobaa", "Quba", "Qoba"],
       "lat": 30.134761,
       "lng": 31.384063,
       "lines": [
@@ -1649,7 +1800,7 @@
         "en": "Ring Road",
         "ar": "الطريق الدائري"
       },
-      "aliases": [],
+      "aliases": ["Ring", "El Dayery", "Autostrad", "الدائري"],
       "lat": 30.096414,
       "lng": 31.199582,
       "lines": [
@@ -1673,7 +1824,7 @@
         "en": "Rod El-Farag",
         "ar": "روض الفرج"
       },
-      "aliases": ["Rawd El-Farag", "Road El-Farag"],
+      "aliases": ["Rawd El-Farag", "Road El-Farag", "Rod Al Farag", "Roud El Farag"],
       "lat": 30.08057,
       "lng": 31.245353,
       "lines": [
@@ -1700,7 +1851,9 @@
       "aliases": [
         "El-Dabaa Axis",
         "Rod al-Farag Corridor",
-        "محطه مترو محور الضبعة (محور روض الفرج)"
+        "محطه مترو محور الضبعة (محور روض الفرج)",
+        "Rod El Farag Corridor",
+        "Dabaa Axis"
       ],
       "lat": 30.101882,
       "lng": 31.184166,
@@ -1725,7 +1878,13 @@
         "en": "Saad Zaghloul",
         "ar": "سعد زغلول"
       },
-      "aliases": ["مترو سعد زغلول"],
+      "aliases": [
+        "مترو سعد زغلول",
+        "Saad Zaghlol",
+        "Saad Zaghlul",
+        "Saad Zaghloul Mausoleum",
+        "ضريح سعد زغلول"
+      ],
       "lat": 30.036567,
       "lng": 31.23808,
       "lines": [
@@ -1749,7 +1908,14 @@
         "en": "Sadat",
         "ar": "السادات"
       },
-      "aliases": [],
+      "aliases": [
+        "Tahrir",
+        "Tahrir Square",
+        "Anwar El Sadat",
+        "التحرير",
+        "ميدان التحرير",
+        "أنور السادات"
+      ],
       "lat": 30.0441,
       "lng": 31.235116,
       "lines": [
@@ -1778,7 +1944,7 @@
         "en": "Safaa Hegazy",
         "ar": "صفاء حجازي"
       },
-      "aliases": [],
+      "aliases": ["Safa Hegazy", "Safaa Higazy", "Safaa Hijazi", "صفا حجازي"],
       "lat": 30.062405,
       "lng": 31.222516,
       "lines": [
@@ -1802,7 +1968,7 @@
         "en": "Sainte Teresa",
         "ar": "سانت تريزا"
       },
-      "aliases": ["St. Teresa", "سانت تيريزا", "سانتا تريزا"],
+      "aliases": ["St. Teresa", "سانت تيريزا", "سانتا تريزا", "Saint Teresa", "Santa Teresa"],
       "lat": 30.088348,
       "lng": 31.24539,
       "lines": [
@@ -1826,7 +1992,7 @@
         "en": "Sakanat El-Maadi",
         "ar": "ثكنات المعادي"
       },
-      "aliases": ["Thakanat El-Maadi"],
+      "aliases": ["Thakanat El-Maadi", "Maadi Barracks", "Sakanat Maadi", "Thakanat Maadi"],
       "lat": 29.95284,
       "lng": 31.263463,
       "lines": [
@@ -1850,7 +2016,7 @@
         "en": "Sakiat Mekky",
         "ar": "ساقية مكي"
       },
-      "aliases": ["Sakiat Mekki"],
+      "aliases": ["Sakiat Mekki", "Sakiat Makki", "Sakiet Mekky", "Sakyet Mekki"],
       "lat": 29.995486,
       "lng": 31.208614,
       "lines": [
@@ -1874,7 +2040,7 @@
         "en": "Saray El-Qobba",
         "ar": "سراي القبة"
       },
-      "aliases": ["Saray Al-Qobba", "ساراي القبة"],
+      "aliases": ["Saray Al-Qobba", "ساراي القبة", "Saray El Kobba", "Sarai El Qobba"],
       "lat": 30.098065,
       "lng": 31.304757,
       "lines": [
@@ -1898,7 +2064,15 @@
         "en": "Shubra El-Kheima",
         "ar": "شبرا الخيمة"
       },
-      "aliases": ["Shobra Al-Kheima", "Shobra El Kheima", "محطة شبرا الخيمة"],
+      "aliases": [
+        "Shobra Al-Kheima",
+        "Shobra El Kheima",
+        "محطة شبرا الخيمة",
+        "Shobra",
+        "Shubra",
+        "Shubra Kheima",
+        "شبرا"
+      ],
       "lat": 30.124091,
       "lng": 31.243494,
       "lines": [
@@ -1922,7 +2096,12 @@
         "en": "Stadium",
         "ar": "الإستاد"
       },
-      "aliases": [],
+      "aliases": [
+        "Cairo Stadium",
+        "Cairo International Stadium",
+        "Nasr City Stadium",
+        "ستاد القاهرة"
+      ],
       "lat": 30.072949,
       "lng": 31.317395,
       "lines": [
@@ -1946,7 +2125,7 @@
         "en": "Sudan",
         "ar": "السودان"
       },
-      "aliases": [],
+      "aliases": ["Sudan Street", "شارع السودان"],
       "lat": 30.06978,
       "lng": 31.205337,
       "lines": [
@@ -1970,7 +2149,7 @@
         "en": "Tora El-Asmant",
         "ar": "طرة الأسمنت"
       },
-      "aliases": ["طرا الأسمنت"],
+      "aliases": ["طرا الأسمنت", "Tora Cement", "Tura El Asmant", "Tora Asmant"],
       "lat": 29.925849,
       "lng": 31.287695,
       "lines": [
@@ -1994,7 +2173,7 @@
         "en": "Tora El-Balad",
         "ar": "طرة البلد"
       },
-      "aliases": ["طرا البلد"],
+      "aliases": ["طرا البلد", "Tora Balad", "Tura El Balad"],
       "lat": 29.946321,
       "lng": 31.273577,
       "lines": [
@@ -2018,7 +2197,7 @@
         "en": "Wadi El-Nile",
         "ar": "وادي النيل"
       },
-      "aliases": [],
+      "aliases": ["Nile Valley", "Wadi El Nil"],
       "lat": 30.058461,
       "lng": 31.201019,
       "lines": [
@@ -2042,7 +2221,7 @@
         "en": "Wadi Hof",
         "ar": "وادي حوف"
       },
-      "aliases": [],
+      "aliases": ["Wadi Hoff"],
       "lat": 29.879438,
       "lng": 31.313404,
       "lines": [

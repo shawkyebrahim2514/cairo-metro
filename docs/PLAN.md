@@ -73,7 +73,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 4. [x] Ticket-type selector (standard / senior / special needs) feeding fares, plus a monthly-pass vs single-tickets calculator (`comparePass` in core, rides per month, break-even). Zones are estimated from the ticket tier because station-to-zone data is missing (open data gap). Quarterly/annual passes not compared yet.
 5. Door-to-door totals (done in Stage 4).
 6. [x] Accessibility pass (combobox semantics, Escape closes suggestions, focus rings, reduced motion, landmarks, dark-mode contrast, meta description, robots.txt). Lighthouse (mobile, run with npx, not a dependency): performance 0.99, accessibility 1, best practices 1, SEO 1.
-7. Alternative station names people actually use (e.g. "Tahrir" for Sadat, old names, abbreviations, Arabic colloquial spellings): collect them into `data/curated/curated.json` aliases, and verify in the data viewer. Scheduled, do after the PWA work.
+7. [x] Alternative station names (Tahrir=Sadat, area names, spelling variants, Arabic) in `data/curated/alt-names.json`, merged by build-data; review list in `docs/alt-names-review.md`. PROPOSED, awaiting user verification; also check suspicious old aliases (Maspero "Gamal AbdAlNasser", Opera "Gezira").
 
 ### Stage 6: Quality & benchmark
 
@@ -108,6 +108,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Stage 4 done: web MVP (i18n en/ar RTL, dark/light theme), own Leaflet map with optional OSM tiles and tappable stations, nearest page, trip planner (door-to-door over the 3 nearest stations per end, fastest + fewest transfers, fare, step list, walk-instead hint under 700 m). Review fixes: input editing, stale GPS, resolver cache/failure message. Verified by scripted browser check at 390 px in EN and AR (no overflow). Follow-ups: station aliases such as Tahrir for Sadat, web lifecycle tests, Stage 6 benchmark vs the Egypt Transport app (black-box).
 
 ### Future ideas (not scheduled)
+
+- **Feature discovery / onboarding:** a quick, convenient way for anyone to learn what each feature does (short tooltips, first-run tour, "what's this?" hints).
 
 - **Monthly data refresh via GitHub Action:** scheduled workflow runs `npm run data:places` (and `data:fetch` + `data:build` + `data:validate`), and opens a PR with the diff for manual review. Never auto-merge; keep `verification.json` untouched. Measured OSM growth of our place categories: ~+3.5% per 6 months (8,672 -> 8,966 -> 9,277 between 2025-11 and 2026-11, net count).
 - **Optional resolver worker (Vercel/GitHub/etc.):** a small self-hosted function that expands short Maps links (and possibly caches geocoding). Strictly opt-in and configurable (endpoint in settings), never required; the app must keep working without it. Discuss design later.
