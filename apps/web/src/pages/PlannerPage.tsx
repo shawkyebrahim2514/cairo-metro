@@ -17,7 +17,7 @@ import { SharedTripCard } from '../components/SharedTripCard';
 import { unlockAudio } from '../alerts';
 import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
-import { formatClock, stationName, useI18n } from '../i18n';
+import { stationName, useI18n } from '../i18n';
 import {
   clearHistory,
   isStarred,
@@ -27,10 +27,10 @@ import {
   recordTrip,
   toggleStar,
 } from '../storage';
-import { resolveTheme, useSettings } from '../settings';
+import { useSettings } from '../settings';
 import { useTracking } from '../tracking';
 import { planTrips, reachFrom } from '../trip';
-import { DEFAULT_IMAGE_OPTIONS, renderTripImage } from '../tripImage';
+import { ImageDialog } from '../components/ImageDialog';
 
 export function PlannerPage({
   resolver,
@@ -50,7 +50,7 @@ export function PlannerPage({
   const [copied, setCopied] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
   const [stationInfo, setStationInfo] = useState<Station | null>(null);
-  const [imaging, setImaging] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
   const [showShared, setShowShared] = useState(Boolean(linked));
@@ -112,7 +112,7 @@ export function PlannerPage({
   const [tracking, setTracking] = useState(false);
   const [wakeMe, setWakeMe] = useState(false);
   const [follow, setFollow] = useState(true);
-  const { alerts, theme, highlightColour, timeFormat } = useSettings();
+  const { alerts } = useSettings();
   const {
     state: ts,
     setIndex,
@@ -161,40 +161,6 @@ export function PlannerPage({
     setSaved((cur) => recordTrip(cur, from, to));
     history.replaceState(null, '', planUrl(from, to));
   }, [from, to, plan]);
-
-  const saveImage = async () => {
-    if (!from || !to || !trip || imaging) return;
-    setImaging(true);
-    try {
-      const blob = await renderTripImage({
-        trip,
-        from,
-        to,
-        options: { ...DEFAULT_IMAGE_OPTIONS, lang },
-        t,
-        appTheme: resolveTheme(theme),
-        accent: highlightColour,
-        clock: (d) => formatClock(d, lang, timeFormat),
-        url: planUrl(from, to),
-      });
-      const file = new File([blob], 'cairo-metro-trip.png', { type: 'image/png' });
-      if (navigator.canShare?.({ files: [file] })) {
-        try {
-          await navigator.share({ files: [file], title: t('appName') });
-          return;
-        } catch {
-          // dismissed or failed: fall back to a download
-        }
-      }
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = file.name;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
-    } finally {
-      setImaging(false);
-    }
-  };
 
   const share = async () => {
     if (!from || !to) return;
@@ -330,9 +296,9 @@ export function PlannerPage({
                 <button type="button" className="pill" onClick={() => setQrOpen(true)}>
                   <Icon name="qr" size={16} /> {t('qrButton')}
                 </button>
-                <button type="button" className="pill" disabled={imaging} onClick={saveImage}>
+                <button type="button" className="pill" onClick={() => setImageOpen(true)}>
                   <Icon name="image" size={16} />
-                  {imaging ? t('tripImageMaking') : t('tripImage')}
+                  {t('tripImage')}
                 </button>
                 <button
                   type="button"
@@ -364,6 +330,15 @@ export function PlannerPage({
       </Sheet>
       {qrOpen && from && to && (
         <QrDialog url={planUrl(from, to)} onClose={() => setQrOpen(false)} />
+      )}
+      {imageOpen && from && to && trip && (
+        <ImageDialog
+          trip={trip}
+          from={from}
+          to={to}
+          resolver={resolver}
+          onClose={() => setImageOpen(false)}
+        />
       )}
       {stationInfo && (
         <StationSheet
