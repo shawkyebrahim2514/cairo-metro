@@ -25,7 +25,7 @@ export function InstallCard() {
       </div>
       {canPrompt && (
         <button type="button" className="pill primary" onClick={() => void install()}>
-          {t('installButton')}
+          <Icon name="install" size={16} /> {t('installButton')}
         </button>
       )}
     </aside>

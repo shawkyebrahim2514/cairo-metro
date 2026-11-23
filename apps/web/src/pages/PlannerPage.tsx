@@ -5,6 +5,8 @@ import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
 import type { Station, TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
+import { Icon } from '../components/Icon';
+import { isIos } from '../pwa';
 import { QrDialog } from '../components/QrDialog';
 import { StationSheet } from '../components/StationSheet';
 import { QuickPlaces } from '../components/QuickPlaces';
@@ -268,7 +270,7 @@ export function PlannerPage({
               aria-label={t('swap')}
               title={t('swap')}
             >
-              ⇅
+              <Icon name="swap" size={18} />
             </button>
             <PlaceInput
               tone="to"
@@ -309,15 +311,17 @@ export function PlannerPage({
             {plan.trips.length > 0 && (
               <div className="actions">
                 <button type="button" className="pill primary" onClick={startTracking}>
-                  <span aria-hidden="true">▶</span> {t('trackStart')}
+                  <Icon name="play" size={16} /> {t('trackStart')}
                 </button>
                 <button type="button" className="pill" onClick={share}>
+                  <Icon name={isIos() ? 'shareIos' : 'share'} size={16} />
                   {copied ? t('linkCopied') : t('share')}
                 </button>
                 <button type="button" className="pill" onClick={() => setQrOpen(true)}>
-                  {t('qrButton')}
+                  <Icon name="qr" size={16} /> {t('qrButton')}
                 </button>
                 <button type="button" className="pill" disabled={imaging} onClick={saveImage}>
+                  <Icon name="image" size={16} />
                   {imaging ? t('tripImageMaking') : t('tripImage')}
                 </button>
                 <button
@@ -326,7 +330,7 @@ export function PlannerPage({
                   aria-pressed={starred}
                   onClick={() => setSaved(toggleStar(saved, from, to))}
                 >
-                  <span aria-hidden="true">{starred ? '★ ' : '☆ '}</span>
+                  <Icon name={starred ? 'star' : 'starOutline'} size={16} />
                   {starred ? t('saved') : t('saveTrip')}
                 </button>
               </div>

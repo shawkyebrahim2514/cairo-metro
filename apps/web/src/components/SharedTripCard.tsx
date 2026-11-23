@@ -58,9 +58,10 @@ export function SharedTripCard({
           {t('sharedView')}
         </button>
         <button type="button" className="pill" onClick={onTrack}>
-          {t('trackStart')}
+          <Icon name="play" size={16} /> {t('trackStart')}
         </button>
         <button type="button" className="pill" aria-pressed={starred} onClick={onSave}>
+          <Icon name={starred ? 'star' : 'starOutline'} size={16} />{' '}
           {starred ? t('saved') : t('saveTrip')}
         </button>
       </div>

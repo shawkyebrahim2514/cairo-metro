@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { endpointName } from '../endpoint';
 import { formatClock, useI18n, type Lang } from '../i18n';
 import { useSettings } from '../settings';
+import { Icon } from './Icon';
 import { openTrip, type SavedTrip } from '../storage';
 import type { Endpoint } from '../endpoint';
 
@@ -50,8 +51,8 @@ export function TripList({ trips, onOpen, onClear }: Props) {
           title={t('historyAgain')}
           onClick={() => onOpen(trip.from, trip.to)}
         >
-          {s.starred ? '★ ' : ''}
-          {endpointName(trip.from, lang)} → {endpointName(trip.to, lang)}
+          {s.starred && <Icon name="star" size={14} />} {endpointName(trip.from, lang)} →{' '}
+          {endpointName(trip.to, lang)}
         </button>
         {!s.starred && <span className="trip-when">{when(s.at, lang)}</span>}
       </li>
@@ -69,7 +70,9 @@ export function TripList({ trips, onOpen, onClear }: Props) {
       )}
       {history.length > 0 && (
         <>
-          <h2>{t('history')}</h2>
+          <h2>
+            <Icon name="history" size={18} /> {t('history')}
+          </h2>
           <ul className="cards">{shown.map(row)}</ul>
           <div className="trip-tools">
             {history.length > COLLAPSED && (
@@ -78,7 +81,7 @@ export function TripList({ trips, onOpen, onClear }: Props) {
               </button>
             )}
             <button type="button" className="pill" onClick={onClear}>
-              {t('historyClear')}
+              <Icon name="close" size={14} /> {t('historyClear')}
             </button>
           </div>
         </>

@@ -1,5 +1,6 @@
 import { tripProgress } from '@cairo-metro/core';
 import { stationsById } from '../data';
+import { Icon } from './Icon';
 import { formatDistance, formatMinutes, localDigits, stationName, useI18n } from '../i18n';
 import type { TrackSource, TrackState } from '../tracking';
 import type { Trip } from '../trip';
@@ -55,7 +56,7 @@ export function TrackPanel({
         <span className="pulse" aria-hidden="true" />
         <strong>{t('trackTitle')}</strong>
         <button type="button" className="pill" onClick={onStop}>
-          {t('trackStop')}
+          <Icon name="stop" size={14} /> {t('trackStop')}
         </button>
       </header>
 

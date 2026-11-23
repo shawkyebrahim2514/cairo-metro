@@ -41,7 +41,7 @@ export function QuickPlaces({ candidate, onPick }: Props) {
               title={candidate ? undefined : t('placeHint')}
               onClick={() => candidate && update(slot, candidate)}
             >
-              + {setLabel}
+              <Icon name={slot === 'home' ? 'home' : 'work'} size={16} /> + {setLabel}
             </button>
           );
         }
@@ -53,6 +53,7 @@ export function QuickPlaces({ candidate, onPick }: Props) {
               onClick={() => onPick(place)}
               title={endpointName(place, lang)}
             >
+              <Icon name={slot === 'home' ? 'home' : 'work'} size={16} />
               <b>{label}</b>
               <span>{endpointName(place, lang)}</span>
             </button>

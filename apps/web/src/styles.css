@@ -1762,3 +1762,31 @@ footer {
   flex-wrap: wrap;
   gap: 8px;
 }
+
+.pill,
+.quick-chip.empty,
+.quick-go,
+.swap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.swap {
+  display: flex;
+}
+.quick-go svg {
+  flex: none;
+}
+h2 svg {
+  vertical-align: -3px;
+}
+.trip-row .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[dir='rtl'] .icon-play {
+  transform: scaleX(-1);
+}

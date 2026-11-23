@@ -161,7 +161,7 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 ### Stage 8B: image options and icons (in order)
 
-- [ ] 1. Inline SVG icon set (icons.tsx), then apply to Track, Share (platform aware), QR, Image, Save, Swap, GPS, Settings, Help, Close, Home/Work, History, Copy link, station sheet rows, Install.
+- [x] 1. Inline SVG icon set (icons.tsx), then apply to Track, Share (platform aware), QR, Image, Save, Swap, GPS, Settings, Help, Close, Home/Work, History, Copy link, station sheet rows, Install.
 - [ ] 2. Image options dialog (tap Image): live preview, Style, Crop, Include toggles, Theme, Language, Format, route colour; choices remembered.
 - [ ] 3. Tooltip-style (i) hint beside every option (short, accessible, en+ar).
 - [ ] 4. Network map style: all lines faded, route highlighted, other station names off by default, route names on.

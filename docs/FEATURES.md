@@ -162,6 +162,8 @@ All choices are saved on the device.
 - **Station sheet**: tapping a station on the map opens its lines, first and last train, women-only cars note and places within 600 m of walking, with "Start here" and "Go here" buttons.
 - **Hosted on GitHub Pages**, deployed automatically on every push to the main branch.
 
+- **Icons** beside the main buttons (track, share, QR, image, save, swap, history, Home/Work, install, language, help); the share icon follows the platform (iOS box-arrow, Android nodes). Icons are decorative; the text label is always kept.
+
 ## 14. Accessibility
 
 - Search box is a full combobox: arrow keys move through a listbox of results, Enter picks, and the result count is announced.

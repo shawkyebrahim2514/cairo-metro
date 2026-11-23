@@ -163,14 +163,14 @@ export function App() {
                 aria-label={t('help')}
                 onClick={() => setTour(true)}
               >
-                ?
+                <Icon name="help" />
               </button>
               <button
                 type="button"
                 className="pill"
                 onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
               >
-                {t('language')}
+                <Icon name="lang" size={18} /> {t('language')}
               </button>
             </div>
           </header>
