@@ -17,7 +17,7 @@ import { SharedTripCard } from '../components/SharedTripCard';
 import { unlockAudio } from '../alerts';
 import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
-import { stationName, useI18n } from '../i18n';
+import { formatClock, stationName, useI18n } from '../i18n';
 import {
   clearHistory,
   isStarred,
@@ -27,10 +27,10 @@ import {
   recordTrip,
   toggleStar,
 } from '../storage';
-import { useSettings } from '../settings';
+import { resolveTheme, useSettings } from '../settings';
 import { useTracking } from '../tracking';
 import { planTrips, reachFrom } from '../trip';
-import { renderTripImage } from '../tripImage';
+import { DEFAULT_IMAGE_OPTIONS, renderTripImage } from '../tripImage';
 
 export function PlannerPage({
   resolver,
@@ -112,7 +112,7 @@ export function PlannerPage({
   const [tracking, setTracking] = useState(false);
   const [wakeMe, setWakeMe] = useState(false);
   const [follow, setFollow] = useState(true);
-  const { alerts } = useSettings();
+  const { alerts, theme, highlightColour, timeFormat } = useSettings();
   const {
     state: ts,
     setIndex,
@@ -166,7 +166,17 @@ export function PlannerPage({
     if (!from || !to || !trip || imaging) return;
     setImaging(true);
     try {
-      const blob = await renderTripImage({ trip, from, to, lang, t });
+      const blob = await renderTripImage({
+        trip,
+        from,
+        to,
+        options: { ...DEFAULT_IMAGE_OPTIONS, lang },
+        t,
+        appTheme: resolveTheme(theme),
+        accent: highlightColour,
+        clock: (d) => formatClock(d, lang, timeFormat),
+        url: planUrl(from, to),
+      });
       const file = new File([blob], 'cairo-metro-trip.png', { type: 'image/png' });
       if (navigator.canShare?.({ files: [file] })) {
         try {
