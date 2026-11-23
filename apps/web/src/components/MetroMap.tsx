@@ -26,7 +26,7 @@ interface Props {
 const CAIRO: L.LatLngTuple = [30.05, 31.25];
 
 export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Props) {
-  const { lang } = useI18n();
+  const { lang, t } = useI18n();
   const hostRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const tileRef = useRef<L.TileLayer | null>(null);
@@ -134,5 +134,5 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
       map.fitBounds(L.latLngBounds(bounds), { padding: [40, 40], maxZoom: 16 });
   }, [markers, route]);
 
-  return <div className="map" ref={hostRef} />;
+  return <div className="map" ref={hostRef} role="region" aria-label={t('mapLabel')} />;
 }

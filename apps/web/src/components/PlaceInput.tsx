@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { parsePlaceInput, searchStations, type ResolvedPlace } from '@cairo-metro/core';
 import { metro, type PlaceResolver } from '../data';
 import { endpointName, pinned, type Endpoint } from '../endpoint';
@@ -42,6 +42,7 @@ export function PlaceInput({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
+  const listId = useId();
 
   const typedRef = useRef(false);
   const prevEndpointRef = useRef<Endpoint | null>(null);
@@ -170,6 +171,11 @@ export function PlaceInput({
             onFocus={() => setOpen(true)}
             autoComplete="off"
             enterKeyHint="search"
+            role="combobox"
+            aria-expanded={open && suggestions.length > 0}
+            aria-controls={listId}
+            aria-autocomplete="list"
+            onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
           />
           {text && (
             <button
@@ -203,9 +209,9 @@ export function PlaceInput({
       {error && <p className="note error">{error}</p>}
       {hint && <p className="note">{hint}</p>}
       {open && suggestions.length > 0 && (
-        <ul className="suggestions" role="listbox">
+        <ul className="suggestions" id={listId}>
           {suggestions.map((s) => (
-            <li key={s.key} role="option" aria-selected={false}>
+            <li key={s.key}>
               <button type="button" onClick={() => choose(s)}>
                 <span>{s.label}</span>
                 <small>{s.sub}</small>
