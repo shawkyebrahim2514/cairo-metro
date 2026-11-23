@@ -1469,3 +1469,75 @@ footer {
   font-size: 0.66rem;
   font-weight: 800;
 }
+
+/* Shared trip card */
+.shared-card {
+  position: relative;
+  margin: 0 0 12px;
+  padding: 14px 16px 14px;
+  border-radius: 18px;
+  color: #fff;
+  background: linear-gradient(135deg, #0f766e, #1d4ed8);
+  box-shadow: 0 8px 22px rgba(15, 118, 110, 0.28);
+}
+.shared-card p {
+  margin: 0;
+}
+.shared-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.shared-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-top: 4px !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding-inline-end: 28px;
+}
+.shared-arrow {
+  opacity: 0.8;
+}
+.shared-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-top: 6px !important;
+  font-size: 0.9rem;
+}
+.shared-stats b {
+  font-size: 1.05rem;
+}
+.shared-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.shared-card .pill {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.shared-card .pill.primary {
+  background: #fff;
+  color: #0f4c75;
+  border-color: #fff;
+}
+.shared-x {
+  position: absolute;
+  inset-block-start: 8px;
+  inset-inline-end: 8px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  cursor: pointer;
+}

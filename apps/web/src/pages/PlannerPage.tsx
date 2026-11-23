@@ -7,6 +7,7 @@ import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
 import { Reachable } from '../components/Reachable';
 import { RouteCard } from '../components/RouteCard';
+import { SharedTripCard } from '../components/SharedTripCard';
 import { unlockAudio } from '../alerts';
 import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
@@ -42,6 +43,7 @@ export function PlannerPage({
   const [copied, setCopied] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
+  const [showShared, setShowShared] = useState(Boolean(linked));
 
   // Offer the 'where can I get to' view while only the origin is chosen.
   const reach = useMemo(
@@ -122,6 +124,14 @@ export function PlannerPage({
     return stationAt ? { lat: stationAt.lat, lng: stationAt.lng } : null;
   }, [tracking, fixLat, fixLng, stationAt]);
 
+  const startTracking = () => {
+    unlockAudio();
+    setTracking(true);
+    setFollow(true);
+    setSnap('half');
+    setShowShared(false);
+  };
+
   const replan = () => {
     if (!ts.fix) return;
     setFrom(pinned(ts.fix, t));
@@ -189,6 +199,24 @@ export function PlannerPage({
             onStop={() => setTracking(false)}
           />
         )}
+        {!tracking &&
+          showShared &&
+          from === linked?.from &&
+          to === linked?.to &&
+          from &&
+          to &&
+          trip && (
+            <SharedTripCard
+              from={from}
+              to={to}
+              trip={trip}
+              starred={starred}
+              onView={() => setShowShared(false)}
+              onTrack={startTracking}
+              onSave={() => setSaved(toggleStar(saved, from, to))}
+              onClose={() => setShowShared(false)}
+            />
+          )}
         {!tracking && (
           <>
             <PlaceInput
@@ -247,16 +275,7 @@ export function PlannerPage({
             ))}
             {plan.trips.length > 0 && (
               <div className="actions">
-                <button
-                  type="button"
-                  className="pill primary"
-                  onClick={() => {
-                    unlockAudio();
-                    setTracking(true);
-                    setFollow(true);
-                    setSnap('half');
-                  }}
-                >
+                <button type="button" className="pill primary" onClick={startTracking}>
                   <span aria-hidden="true">▶</span> {t('trackStart')}
                 </button>
                 <button type="button" className="pill" onClick={share}>
