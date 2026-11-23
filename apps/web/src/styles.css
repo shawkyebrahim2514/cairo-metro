@@ -461,3 +461,237 @@ footer {
 .reach-list small {
   color: var(--muted);
 }
+
+/* Mock-aligned layout (docs/mocks/index.html): app bar, bottom tabs, item rows, rail steps. */
+.app {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 0 0 84px;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 1500;
+  padding: 12px 14px 10px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.top h1 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.pill {
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  background: var(--chip);
+  color: var(--muted);
+}
+
+main,
+.app > .note,
+footer {
+  padding-inline: 14px;
+}
+
+main {
+  padding-top: 12px;
+}
+
+.tabs {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  z-index: 1600;
+  gap: 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0;
+}
+
+.tabs button {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  padding: 8px 0 10px;
+  border-radius: 0;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.tabs button .tab-ico {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.tabs button.active {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.field {
+  gap: 8px;
+  padding-inline-start: 12px;
+  border-radius: 14px;
+}
+
+.field input {
+  padding: 10px 4px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+
+.dot.to {
+  background: #dc2626;
+}
+
+.suggestions {
+  border-radius: 16px;
+}
+
+.suggestions li button {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 9px 11px;
+  margin-bottom: 6px;
+}
+
+.suggestions li button .t {
+  flex: 1;
+  min-width: 0;
+  display: block;
+}
+
+.suggestions li button .t b {
+  display: block;
+}
+
+.ico {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #fff;
+  flex: none;
+  background: var(--accent);
+}
+
+.ico.stations {
+  background: #1d4ed8;
+}
+
+.ico.places {
+  background: #64748b;
+}
+
+.lines {
+  display: flex;
+  gap: 3px;
+}
+
+.lines i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: block;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.route .total {
+  font-size: 1.35rem;
+}
+
+.steps > li {
+  border-inline-start-width: 6px;
+  border-radius: 3px;
+  padding: 3px 10px;
+}
+
+.map,
+.map-wrap.full .map {
+  border-radius: 16px;
+}
+
+.map-wrap.full .map {
+  border-radius: 0;
+}
+
+footer a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+footer select {
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+
+footer {
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.ico {
+  padding: 0;
+  line-height: 1;
+}
+
+.steps > li.walk {
+  border-inline-start-width: 3px;
+}
+
+.cards + .actions,
+.route ~ .actions {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.route ~ .actions .pill {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.route ~ .actions .pill[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+
+/* Keep the map tools on the right in both directions so they never overlap Leaflet's zoom control. */
+.map-tools {
+  inset-inline-end: auto;
+  right: 10px;
+}

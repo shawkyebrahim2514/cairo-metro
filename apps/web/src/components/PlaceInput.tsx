@@ -3,9 +3,10 @@ import {
   nearestStations,
   parsePlaceInput,
   searchStations,
+  type LineId,
   type ResolvedPlace,
 } from '@cairo-metro/core';
-import { metro, type PlaceResolver } from '../data';
+import { lineColour, metro, type PlaceResolver } from '../data';
 import { endpointName, pinned, type Endpoint } from '../endpoint';
 import { formatDistance, stationName, useI18n } from '../i18n';
 
@@ -18,6 +19,8 @@ interface Suggestion {
   sub: string;
   endpoint: Endpoint;
   group: Group;
+  /** Line ids for station suggestions, shown as coloured dots. */
+  lines?: LineId[];
 }
 
 interface Props {
@@ -26,6 +29,8 @@ interface Props {
   onChange: (e: Endpoint | null) => void;
   resolver: PlaceResolver | null;
   showGps?: boolean;
+  /** Colour of the dot in front of the field. */
+  tone?: 'from' | 'to';
   /** Text to prefill on mount (e.g. a shared link), shown with suggestions. */
   seedText?: string | null;
 }
@@ -44,6 +49,7 @@ export function PlaceInput({
   onChange,
   resolver,
   showGps = true,
+  tone,
   seedText,
 }: Props) {
   const { t, lang } = useI18n();
@@ -124,13 +130,14 @@ export function PlaceInput({
     }
 
     for (const m of searchStations(metro.stations, q, filter === 'stations' ? 8 : 4)) {
-      const lines = [...new Set(m.station.lines.map((l) => l.line))].join(' / ');
+      const lines = [...new Set(m.station.lines.map((l) => l.line))];
       out.push({
         key: `s-${m.station.id}`,
         label: stationName(m.station, lang),
         sub: `${t('stationLabel')} · ${lines}`,
         endpoint: { kind: 'station', station: m.station },
         group: 'stations',
+        lines,
       });
     }
     resolver?.searchPlaces(q, filter === 'places' ? 10 : 6).forEach((p, i) => {
@@ -188,6 +195,7 @@ export function PlaceInput({
       <label>
         <span className="label">{label}</span>
         <div className="field">
+          {tone && <i className={`dot ${tone}`} aria-hidden="true" />}
           <input
             value={text}
             placeholder={t('searchPlaceholder')}
@@ -268,8 +276,20 @@ export function PlaceInput({
                   {items.map((s) => (
                     <li key={s.key}>
                       <button type="button" onClick={() => choose(s)}>
-                        <span>{s.label}</span>
-                        <small>{s.sub}</small>
+                        <span className={`ico ${s.group}`} aria-hidden="true">
+                          {s.group === 'stations' ? 'M' : s.group === 'places' ? 'P' : '📍'}
+                        </span>
+                        <span className="t">
+                          <b>{s.label}</b>
+                          <small>{s.sub}</small>
+                        </span>
+                        {s.lines && (
+                          <span className="lines" aria-hidden="true">
+                            {s.lines.map((l) => (
+                              <i key={l} style={{ background: lineColour.get(l) }} />
+                            ))}
+                          </span>
+                        )}
                       </button>
                     </li>
                   ))}

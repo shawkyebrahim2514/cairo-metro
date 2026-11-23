@@ -118,6 +118,7 @@ export function PlannerPage({
   return (
     <>
       <PlaceInput
+        tone="from"
         label={t('from')}
         endpoint={from}
         onChange={(e) => {
@@ -136,6 +137,7 @@ export function PlannerPage({
         ⇅
       </button>
       <PlaceInput
+        tone="to"
         label={t('to')}
         endpoint={to}
         onChange={(e) => {

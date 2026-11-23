@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
@@ -109,6 +109,9 @@ export function App() {
                 localStorage.setItem('tab', id);
               }}
             >
+              <span className="tab-ico" aria-hidden="true">
+                {id === 'nearest' ? '📍' : '🚇'}
+              </span>
               {id === 'nearest' ? t('tabNearest') : t('tabPlan')}
             </button>
           ))}
