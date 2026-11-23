@@ -1,7 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { stationsById } from './data';
 import { decodeEndpoint, encodeEndpoint, type Endpoint } from './endpoint';
-import { isStarred, recordTrip, toggleStar, type SavedTrip } from './storage';
+import {
+  clearHistory,
+  isStarred,
+  loadPlace,
+  recordTrip,
+  savePlace,
+  toggleStar,
+  type SavedTrip,
+} from './storage';
 
 const memory = new Map<string, string>();
 beforeEach(() => {
@@ -11,6 +19,7 @@ beforeEach(() => {
     value: {
       getItem: (k: string) => memory.get(k) ?? null,
       setItem: (k: string, v: string) => void memory.set(k, v),
+      removeItem: (k: string) => void memory.delete(k),
     },
   });
 });
@@ -43,10 +52,32 @@ describe('saved trips', () => {
   it('keeps recents capped and starred trips forever', () => {
     let trips: SavedTrip[] = [];
     trips = toggleStar(trips, station(0), station(1));
-    for (let i = 2; i < 12; i++) trips = recordTrip(trips, station(0), station(i));
-    expect(trips.filter((t) => !t.starred)).toHaveLength(6);
+    for (let i = 2; i < 40; i++) trips = recordTrip(trips, station(0), station(i));
+    expect(trips.filter((t) => !t.starred)).toHaveLength(30);
     expect(isStarred(trips, station(0), station(1))).toBe(true);
     trips = toggleStar(trips, station(0), station(1));
     expect(isStarred(trips, station(0), station(1))).toBe(false);
+  });
+
+  it('stamps trips, and clearing history keeps the starred ones', () => {
+    let trips: SavedTrip[] = [];
+    trips = toggleStar(trips, station(0), station(1));
+    trips = recordTrip(trips, station(0), station(2));
+    expect(trips.every((t) => typeof t.at === 'number')).toBe(true);
+    trips = clearHistory(trips);
+    expect(trips).toHaveLength(1);
+    expect(trips[0]!.starred).toBe(true);
+  });
+});
+
+describe('home and work places', () => {
+  it('saves, loads and removes a slot', () => {
+    const s = station(4);
+    expect(loadPlace('home')).toBeNull();
+    savePlace('home', s);
+    expect(loadPlace('home')).toEqual(s);
+    expect(loadPlace('work')).toBeNull();
+    savePlace('home', null);
+    expect(loadPlace('home')).toBeNull();
   });
 });

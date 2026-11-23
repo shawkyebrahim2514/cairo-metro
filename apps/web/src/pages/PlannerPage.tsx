@@ -5,6 +5,8 @@ import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
 import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
+import { QuickPlaces } from '../components/QuickPlaces';
+import { TripList } from '../components/TripList';
 import { Reachable } from '../components/Reachable';
 import { RouteCard } from '../components/RouteCard';
 import { SharedTripCard } from '../components/SharedTripCard';
@@ -13,9 +15,9 @@ import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
 import { stationName, useI18n } from '../i18n';
 import {
+  clearHistory,
   isStarred,
   loadTrips,
-  openTrip,
   planUrl,
   readPlanHash,
   recordTrip,
@@ -249,6 +251,7 @@ export function PlannerPage({
               resolver={resolver}
               showGps={false}
             />
+            <QuickPlaces candidate={from ?? to} onPick={pickEndpoint} />
             <p className="note">{t('mapHint')}</p>
           </>
         )}
@@ -296,32 +299,16 @@ export function PlannerPage({
           </>
         )}
 
-        {!(from && to) && saved.length > 0 && (
-          <>
-            <h2>{t('yourTrips')}</h2>
-            <ul className="cards">
-              {saved.map((s) => {
-                const trip = openTrip(s);
-                if (!trip) return null;
-                return (
-                  <li key={s.from + '>' + s.to} className="card">
-                    <button
-                      type="button"
-                      className="link"
-                      onClick={() => {
-                        setFrom(trip.from);
-                        setTo(trip.to);
-                        setSelected(0);
-                      }}
-                    >
-                      {s.starred ? '★ ' : ''}
-                      {endpointName(trip.from, lang)} → {endpointName(trip.to, lang)}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </>
+        {!(from && to) && (
+          <TripList
+            trips={saved}
+            onOpen={(f, to2) => {
+              setFrom(f);
+              setTo(to2);
+              setSelected(0);
+            }}
+            onClear={() => setSaved(clearHistory(saved))}
+          />
         )}
         <Footer />
       </Sheet>

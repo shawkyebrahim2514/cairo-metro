@@ -1621,3 +1621,91 @@ footer {
   border: 0;
   font-weight: 700;
 }
+
+/* Quick places and trip history */
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 4px;
+}
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0 12px;
+  cursor: pointer;
+}
+.quick-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.quick-chip.set {
+  padding: 0;
+  border-style: solid;
+  color: var(--text);
+  cursor: default;
+}
+.quick-go {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 150px;
+  min-height: 44px;
+  justify-content: center;
+  padding: 0 4px 0 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+[dir='rtl'] .quick-go {
+  padding: 0 12px 0 4px;
+}
+.quick-go b {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+.quick-go span {
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.quick-x {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.trip-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.trip-when {
+  flex: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.trip-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0;
+}

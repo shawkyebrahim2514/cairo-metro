@@ -4,10 +4,12 @@ export interface SavedTrip {
   from: string;
   to: string;
   starred: boolean;
+  /** When the trip was last planned (ms since epoch); absent on trips saved by older versions. */
+  at?: number;
 }
 
 const KEY = 'trips';
-const MAX_RECENT = 6;
+const MAX_RECENT = 30;
 
 const same = (a: SavedTrip, from: string, to: string) => a.from === from && a.to === to;
 
@@ -37,8 +39,9 @@ export function recordTrip(trips: SavedTrip[], from: Endpoint, to: Endpoint): Sa
   const f = encodeEndpoint(from);
   const t = encodeEndpoint(to);
   const existing = trips.find((x) => same(x, f, t));
-  if (existing?.starred) return trips;
-  return persist([{ from: f, to: t, starred: false }, ...trips.filter((x) => x !== existing)]);
+  const at = Date.now();
+  if (existing?.starred) return persist(trips.map((x) => (x === existing ? { ...x, at } : x)));
+  return persist([{ from: f, to: t, starred: false, at }, ...trips.filter((x) => x !== existing)]);
 }
 
 export function toggleStar(trips: SavedTrip[], from: Endpoint, to: Endpoint): SavedTrip[] {
@@ -46,7 +49,10 @@ export function toggleStar(trips: SavedTrip[], from: Endpoint, to: Endpoint): Sa
   const t = encodeEndpoint(to);
   const existing = trips.find((x) => same(x, f, t));
   const rest = trips.filter((x) => x !== existing);
-  return persist([{ from: f, to: t, starred: !existing?.starred }, ...rest]);
+  return persist([
+    { from: f, to: t, starred: !existing?.starred, at: existing?.at ?? Date.now() },
+    ...rest,
+  ]);
 }
 
 export const isStarred = (trips: SavedTrip[], from: Endpoint, to: Endpoint) =>
@@ -71,4 +77,24 @@ export function readPlanHash(): { from: Endpoint; to: Endpoint } | null {
 export function planUrl(from: Endpoint, to: Endpoint): string {
   const p = new URLSearchParams({ from: encodeEndpoint(from), to: encodeEndpoint(to) });
   return `${window.location.origin}${window.location.pathname}#/plan?${p}`;
+}
+
+export const clearHistory = (trips: SavedTrip[]): SavedTrip[] =>
+  persist(trips.filter((t) => t.starred));
+
+export type PlaceSlot = 'home' | 'work';
+
+const placeKey = (slot: PlaceSlot) => 'place.' + slot;
+
+export function loadPlace(slot: PlaceSlot): Endpoint | null {
+  try {
+    return decodeEndpoint(localStorage.getItem(placeKey(slot)));
+  } catch {
+    return null;
+  }
+}
+
+export function savePlace(slot: PlaceSlot, e: Endpoint | null): void {
+  if (e) localStorage.setItem(placeKey(slot), encodeEndpoint(e));
+  else localStorage.removeItem(placeKey(slot));
 }
