@@ -67,6 +67,10 @@ describe('searchStations', () => {
     expect(searchStations(data.stations, 'المرج').length).toBeGreaterThan(0);
   });
 
+  it('matches words typed in a different order', () => {
+    expect(top('kheima shubra')[0]).toBe('Shubra El-Kheima');
+  });
+
   it('tolerates a small typo and returns nothing for gibberish', () => {
     expect(top('abbassiya').join()).toMatch(/Abb?assi/i);
     expect(searchStations(data.stations, 'zzzzqqqq')).toEqual([]);

@@ -51,10 +51,10 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 
 ### Stage 3: Place resolution services
 
-1. (REVISED) No worker/proxy. Short-link handling is client-side only: Web Share Target text (name + address + link), guided "open link, copy long URL" flow, coordinates-from-Maps tip, plain-name search.
-2. (REVISED, pending user choice) Place text search without external services; see options in chat: bundled offline places index vs optional geocoder vs stations only.
+1. No worker/proxy (decision). Short-link handling is fully client-side: Web Share Target text (name + address + link) via `parseSharedText`; a bare short link asks for the place name; Maps coordinates tip.
+2. Offline places index (decision: no geocoder service): `npm run data:places` builds `data/places.json` from OSM (ODbL); `createPlaceResolver` in core searches it with the same transliteration-tolerant matching.
 3. Walking distance: haversine*1.3 estimate (already in core); real routing only as an optional add-on if ever enabled.
-   Done when: short Maps link -> coords; graceful offline degrade.
+   Done when: pasted/shared input -> coords or a clear next step; fully offline.
 
 ### Stage 4: Web MVP
 
@@ -103,4 +103,10 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] Stage 1 (metro data) done: OSM + Wikidata pipeline, validation, verification viewer (`npm run data:view`), manual station verification applied; 84 stations / 5 interchanges / L1 35, L2 20, L3 34. Fares (`data/curated/fares.json`) and operating hours (`data/curated/hours.json`) added. Open: station-to-zone data (official zone page is outdated), official L3 hours/headway, exits/facilities (optional, later).
 - [x] Stage 2 (core engine) done in `packages/core`: geo (haversine, bbox), `parsePlaceInput` link parser, `nearestStations` (pluggable walking distance), transliteration-tolerant `searchStations`, `buildGraph`/`planRoute`/`planRoutes` (Dijkstra, transfer penalty, fastest and fewest-transfers, L3 branch-change handling at Kit-Kat), `tripFare`/`ticketPrice`. 44 tests, no UI. Notes: times are estimates; fare counts the boarding station (interchange counts once), configurable via `ticket.counting` in `data/curated/fares.json` (confirmed by rider; re-check in Stage 6 benchmark).
-- [ ] Stage 3 next: place-resolution services (client-side short-link handling, place search, no external workers).
+- [x] Stage 3 done (core): offline places index (9,126 places, ~1.1 MB raw / ~240 KB gzip), `createPlaceResolver`, `parseSharedText`, word-order-tolerant search. UI wiring (Share Target, map pin) comes in Stages 4-5.
+- [ ] Stage 4 next: web MVP (shell, i18n, own map with optional tiles, nearest page, trip planner).
+
+### Future ideas (not scheduled)
+
+- **Monthly data refresh via GitHub Action:** scheduled workflow runs `npm run data:places` (and `data:fetch` + `data:build` + `data:validate`), and opens a PR with the diff for manual review. Never auto-merge; keep `verification.json` untouched. Measured OSM growth of our place categories: ~+3.5% per 6 months (8,672 -> 8,966 -> 9,277 between 2025-11 and 2026-11, net count).
+- **Optional resolver worker (Vercel/GitHub/etc.):** a small self-hosted function that expands short Maps links (and possibly caches geocoding). Strictly opt-in and configurable (endpoint in settings), never required; the app must keep working without it. Discuss design later.

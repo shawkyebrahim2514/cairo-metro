@@ -1,0 +1,68 @@
+import { describe, expect, it } from 'vitest';
+import places from '../../../data/places.json';
+import { createPlaceResolver, parseSharedText } from './place-resolver';
+import type { Place } from './types';
+
+const resolver = createPlaceResolver(places.places as Place[]);
+
+describe('parseSharedText', () => {
+  it('splits name, address and link', () => {
+    expect(
+      parseSharedText('City Stars\nOmar Ibn El-Khattab, Nasr City\nhttps://maps.app.goo.gl/AbC123'),
+    ).toEqual({
+      url: 'https://maps.app.goo.gl/AbC123',
+      name: 'City Stars',
+      address: 'Omar Ibn El-Khattab, Nasr City',
+    });
+  });
+
+  it('handles a one-line "name - link" and a link only', () => {
+    expect(parseSharedText('Cairo Tower - https://maps.app.goo.gl/x')).toEqual({
+      url: 'https://maps.app.goo.gl/x',
+      name: 'Cairo Tower',
+    });
+    expect(parseSharedText('https://maps.app.goo.gl/x')).toEqual({
+      url: 'https://maps.app.goo.gl/x',
+    });
+  });
+});
+
+describe('place resolver (real index)', () => {
+  it('has a usable index', () => {
+    expect(places.places.length).toBeGreaterThan(5000);
+  });
+
+  it('resolves coordinates from a long link without touching the index', () => {
+    const r = resolver.resolve('https://www.google.com/maps/@30.01,31.2,15z');
+    expect(r).toMatchObject({ status: 'resolved', place: { source: 'coordinates' } });
+  });
+
+  it('finds a well-known place by English name, with spelling variants', () => {
+    for (const q of ['Cairo University', 'cairo univercity']) {
+      const r = resolver.searchPlaces(q, 5);
+      expect(r.length, q).toBeGreaterThan(0);
+    }
+  });
+
+  it('finds places by Arabic name', () => {
+    expect(resolver.searchPlaces('جامعة القاهرة', 5).length).toBeGreaterThan(0);
+  });
+
+  it('uses the name from shared text when the link is a short link', () => {
+    const name = (places.places as Place[]).find((p) => p.en && p.type === 'mall')!.en;
+    const r = resolver.resolve(`${name}\nSomewhere, Cairo\nhttps://maps.app.goo.gl/AbC123`);
+    expect(['resolved', 'ambiguous']).toContain(r.status);
+  });
+
+  it('asks for a name when only a short link is pasted', () => {
+    expect(resolver.resolve('https://maps.app.goo.gl/AbC123')).toEqual({
+      status: 'needs-name',
+      url: 'https://maps.app.goo.gl/AbC123',
+    });
+  });
+
+  it('reports empty and not-found input', () => {
+    expect(resolver.resolve('  ')).toEqual({ status: 'empty' });
+    expect(resolver.resolve('qqqzzzxxxwww').status).toBe('not-found');
+  });
+});

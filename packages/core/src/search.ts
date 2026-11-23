@@ -93,6 +93,12 @@ function scoreKey(query: string, candidate: string): number | null {
   if (candidate === query) return 0;
   if (candidate.startsWith(query)) return 1;
   if (candidate.split(' ').some((t) => t.startsWith(query))) return 2;
+  // Every typed word starts some word of the name, in any order ("hospital demerdash").
+  const qTokens = query.split(' ');
+  if (qTokens.length > 1) {
+    const cTokens = candidate.split(' ');
+    if (qTokens.every((q) => cTokens.some((c) => c.startsWith(q)))) return 2.5;
+  }
   if (candidate.includes(query)) return 3;
   // Also match without spaces (user typed "newmarg" or "kitkat").
   const qc = query.replace(/ /g, '');
@@ -117,20 +123,42 @@ export interface StationMatch {
   score: number;
 }
 
+export interface Match<T> {
+  item: T;
+  score: number;
+}
+
+/** Precomputes normalised names once so that searching thousands of items stays fast. */
+export function createSearchIndex<T>(items: T[], namesOf: (item: T) => string[]) {
+  const entries = items.map((item) => ({
+    item,
+    label: namesOf(item).find(Boolean) ?? '',
+    keys: [...new Set(namesOf(item).map(normalizeForSearch).filter(Boolean))],
+  }));
+  return {
+    search(query: string, limit = 8): Match<T>[] {
+      const q = normalizeForSearch(query);
+      if (!q) return [];
+      const matches: (Match<T> & { label: string })[] = [];
+      for (const e of entries) {
+        let best: number | null = null;
+        for (const key of e.keys) {
+          const s = scoreKey(q, key);
+          if (s !== null && (best === null || s < best)) best = s;
+        }
+        if (best !== null) matches.push({ item: e.item, score: best, label: e.label });
+      }
+      return matches
+        .sort((a, b) => a.score - b.score || a.label.localeCompare(b.label))
+        .slice(0, limit)
+        .map(({ item, score }) => ({ item, score }));
+    },
+  };
+}
+
 /** Search stations by English/Arabic name and aliases, tolerant to transliteration variants. */
 export function searchStations(stations: Station[], query: string, limit = 8): StationMatch[] {
-  const q = normalizeForSearch(query);
-  if (!q) return [];
-  const matches: StationMatch[] = [];
-  for (const station of stations) {
-    let best: number | null = null;
-    for (const name of [station.name.en, station.name.ar, ...station.aliases]) {
-      const s = scoreKey(q, normalizeForSearch(name));
-      if (s !== null && (best === null || s < best)) best = s;
-    }
-    if (best !== null) matches.push({ station, score: best });
-  }
-  return matches
-    .sort((a, b) => a.score - b.score || a.station.name.en.localeCompare(b.station.name.en))
-    .slice(0, limit);
+  return createSearchIndex(stations, (s) => [s.name.en, s.name.ar, ...s.aliases])
+    .search(query, limit)
+    .map((m) => ({ station: m.item, score: m.score }));
 }

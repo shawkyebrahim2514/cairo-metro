@@ -56,6 +56,24 @@ export interface Line {
   branches: Branch[];
 }
 
+/** A named place from the offline index (mall, university, landmark, district...). */
+export interface Place {
+  id: string;
+  /** Either name may be empty when OSM has only one language. */
+  en: string;
+  ar: string;
+  /** OSM tag value such as 'mall', 'university' or 'suburb'. */
+  type: string;
+  lat: number;
+  lng: number;
+}
+
+export interface PlacesData {
+  generatedAt: string;
+  license: string;
+  places: Place[];
+}
+
 export interface MetroData {
   generatedAt: string;
   attribution: string[];
