@@ -8,6 +8,7 @@ import { PlannerPage } from './pages/PlannerPage';
 import './styles.css';
 import { takeSharedText } from './share';
 import { readPlanHash } from './storage';
+import { reportUrl } from './report';
 
 type Tab = 'nearest' | 'plan';
 
@@ -156,6 +157,17 @@ export function App() {
             />{' '}
             {t('mapTiles')}
           </label>
+          <a
+            href={reportUrl(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => {
+              // refresh so the link carries the current route
+              e.currentTarget.href = reportUrl(lang);
+            }}
+          >
+            {t('reportProblem')}
+          </a>
           <small>{t('attribution')}</small>
         </footer>
       </div>

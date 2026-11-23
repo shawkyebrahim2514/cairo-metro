@@ -1,0 +1,36 @@
+name: Data refresh
+
+# Monthly OSM refresh. Opens a pull request for manual review; never merges itself.
+# data/curated/verification.json is never modified by these scripts.
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run data:fetch
+      - run: npm run data:build
+      - run: npm run data:validate
+      - run: npm run data:places
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: data/refresh
+          commit-message: 'Refresh OSM data'
+          title: 'Monthly data refresh'
+          body: |
+            Automated OSM refresh. Review the diff (stations, aliases, places) before merging.
+            Validation passed. `verification.json` is untouched.
+          labels: data
