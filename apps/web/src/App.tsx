@@ -10,7 +10,9 @@ import { servedFromCache, useOnline } from './pwa';
 import { SettingsSheet } from './components/SettingsSheet';
 import { Tour } from './components/Tour';
 import { NearestPage } from './pages/NearestPage';
+import { DiagramPage } from './pages/DiagramPage';
 import { PlannerPage } from './pages/PlannerPage';
+import type { Endpoint } from './endpoint';
 import './styles.css';
 import { takeSharedText } from './share';
 import { readPlanHash } from './storage';
@@ -24,7 +26,7 @@ import {
   type ThemeMode,
 } from './settings';
 
-type Tab = 'nearest' | 'plan';
+type Tab = 'nearest' | 'plan' | 'diagram';
 
 // Read once at load: the share target query is removed from the URL right away.
 const sharedAtLoad = takeSharedText();
@@ -43,7 +45,7 @@ export function App() {
       ? 'nearest'
       : readPlanHash()
         ? 'plan'
-        : stored<Tab>('tab', ['nearest', 'plan'], 'nearest'),
+        : stored<Tab>('tab', ['nearest', 'plan', 'diagram'], 'nearest'),
   );
   const [tiles, setTiles] = useState(() => localStorage.getItem('tiles') === '1');
   const [category, setCategory] = useState<TicketCategory>(() =>
@@ -74,6 +76,7 @@ export function App() {
     stored<StationLabels>('stationLabels', ['always', 'zoom', 'off'], 'always'),
   );
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [preset, setPreset] = useState<{ from?: Endpoint; to?: Endpoint } | null>(null);
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
   const online = useOnline();
 
@@ -176,21 +179,29 @@ export function App() {
           </header>
 
           <nav className="tabs" aria-label={t('appName')}>
-            {(['nearest', 'plan'] as const).map((id) => (
+            {(['nearest', 'plan', 'diagram'] as const).map((id) => (
               <button
                 key={id}
                 type="button"
                 aria-current={tab === id ? 'page' : undefined}
                 className={tab === id ? 'active' : ''}
                 onClick={() => {
+                  setPreset(null);
                   setTab(id);
                   localStorage.setItem('tab', id);
                 }}
               >
                 <span className="tab-ico" aria-hidden="true">
-                  <Icon name={id === 'nearest' ? 'pin' : 'metro'} size={22} />
+                  <Icon
+                    name={id === 'nearest' ? 'pin' : id === 'plan' ? 'metro' : 'map'}
+                    size={22}
+                  />
                 </span>
-                {id === 'nearest' ? t('tabNearest') : t('tabPlan')}
+                {id === 'nearest'
+                  ? t('tabNearest')
+                  : id === 'plan'
+                    ? t('tabPlan')
+                    : t('tabDiagram')}
               </button>
             ))}
           </nav>
@@ -204,8 +215,17 @@ export function App() {
           <main>
             {tab === 'nearest' ? (
               <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
+            ) : tab === 'plan' ? (
+              <PlannerPage resolver={resolver} tiles={tiles} category={category} preset={preset} />
             ) : (
-              <PlannerPage resolver={resolver} tiles={tiles} category={category} />
+              <DiagramPage
+                resolver={resolver}
+                onPlan={(p) => {
+                  setPreset(p);
+                  setTab('plan');
+                  localStorage.setItem('tab', 'plan');
+                }}
+              />
             )}
           </main>
 

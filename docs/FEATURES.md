@@ -157,7 +157,7 @@ All choices are saved on the device.
 - **Offline badge** in the header: "Ready offline" once the service worker has cached the app (from the second visit), "Offline" when the connection drops.
 - **Shared-trip card**: opening a trip link shows a gradient card with the route, time, stations and fare, plus View route, Track my trip and Save buttons. Link previews in WhatsApp/Facebook show a generic app card (static hosting cannot make per-trip previews).
 - **Trip QR code**: a QR of the trip link that another phone can scan (built in, no library).
-- **Trip image**: tap **Image** to open an options dialog with a live preview (choices are remembered). Each option has an (i) hint. Options: map style (network map with all lines faded behind the highlighted trip, or route only); zoom (crop to the trip or whole network); other station names; include ETA, fare, women-cars note, steps, stats, branding and a QR corner; walking legs drawn dashed with start/end pins; nearby places at the destination (adds the OpenStreetMap credit automatically); image theme (match app, light, dark); image language (match app, English, Arabic); format (portrait, square, story 9:16). Shared with Web Share on phones, downloaded elsewhere. No map tiles are used. A schematic style is planned.
+- **Trip image**: tap **Image** to open an options dialog with a live preview (choices are remembered). Each option has an (i) hint. Options: map style (network map with all lines faded behind the highlighted trip, a clean line diagram, or route only); zoom (crop to the trip or whole network); other station names; include ETA, fare, women-cars note, steps, stats, branding and a QR corner; walking legs drawn dashed with start/end pins; nearby places at the destination (adds the OpenStreetMap credit automatically); image theme (match app, light, dark); image language (match app, English, Arabic); format (portrait, square, story 9:16). Shared with Web Share on phones, downloaded elsewhere. No map tiles are used. The diagram style ignores walking legs and nearby places.
 - **Home and Work** quick places, and a **trip history** (last 30, with dates, "Show all", "Clear history") next to saved trips.
 - **Station sheet**: tapping a station on the map opens its lines, first and last train, women-only cars note and places within 600 m of walking, with "Start here" and "Go here" buttons.
 - **Hosted on GitHub Pages**, deployed automatically on every push to the main branch.
@@ -185,3 +185,12 @@ All choices are saved on the device.
 ## 16. Tech summary
 
 React 19 and Vite, a pure TypeScript core package (routing, fares, search, tracking, tests), Leaflet for the map, static JSON data, Vitest tests, GitHub Actions for CI, data refresh and Pages deployment.
+
+## 14. Metro map (line diagram)
+
+- Third tab **Metro map**: the whole network as a clean line diagram (Line 1 blue, Line 2 red, Line 3 green with its two western branches). Interchanges are ringed dots.
+- Pan by dragging, zoom by pinch, mouse wheel or the + / - buttons, and use the third button to fit the whole network. Station names appear once you zoom in.
+- **Find a station** search (English, Arabic and alternative names such as Tahrir). Choosing a result centres the map on it and opens its details.
+- Tapping a station opens the station sheet (lines, first/last train, nearby places) with **Start here** and **Go here**, which open the Trip planner with that station already filled in.
+- Stations are keyboard-focusable (Enter or Space opens the details).
+- The diagram is schematic: distances are not to scale, and a line crossing another without a ringed dot is not a transfer.

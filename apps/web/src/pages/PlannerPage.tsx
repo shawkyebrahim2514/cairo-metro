@@ -36,15 +36,18 @@ export function PlannerPage({
   resolver,
   tiles,
   category,
+  preset,
 }: {
   resolver: PlaceResolver | null;
   tiles: boolean;
   category: TicketCategory;
+  /** Endpoints chosen elsewhere (for example on the metro map). */
+  preset?: { from?: Endpoint; to?: Endpoint } | null;
 }) {
   const { t, lang } = useI18n();
   const [linked] = useState(readPlanHash);
-  const [from, setFrom] = useState<Endpoint | null>(linked?.from ?? null);
-  const [to, setTo] = useState<Endpoint | null>(linked?.to ?? null);
+  const [from, setFrom] = useState<Endpoint | null>(linked?.from ?? preset?.from ?? null);
+  const [to, setTo] = useState<Endpoint | null>(linked?.to ?? preset?.to ?? null);
   const [selected, setSelected] = useState(0);
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);

@@ -172,7 +172,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] 9. Formats: portrait, square, story 9:16.
 - [x] 10. Extra toggles: ETA/leave time, fare, women tip, steps, stats, branding; QR corner toggle (off by default).
 - [x] 11. Tests, headless render checks, docs, push.
-- [ ] 12. Later: schematic map style (also idea 7).
+- [x] 12. Schematic map style: hand-laid line diagram (`apps/web/src/schematic.ts`, anchors at terminals and interchanges, stations spread evenly between), usable as a trip-image style.
+- [x] Idea 7: third tab **Metro map** with the same diagram (pan, pinch/wheel zoom, fit button, station search, tap a station for the details sheet and Start/Go here that opens the planner).
 
 ### Future ideas (not scheduled)
 

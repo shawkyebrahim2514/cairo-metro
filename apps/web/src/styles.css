@@ -1999,3 +1999,128 @@ h2 svg {
   color: var(--accent);
   background: var(--card);
 }
+
+.diagram-page {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: calc(100dvh - 170px);
+  min-height: 380px;
+}
+.diagram-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--muted);
+}
+.diagram-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1rem;
+}
+.diagram-suggest {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(100% + 4px);
+  z-index: 1000;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.25);
+}
+.diagram-suggest li.muted {
+  padding: 10px;
+}
+.diagram-suggest button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: start;
+}
+.diagram-suggest .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.diagram-box {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+}
+.diagram-box svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+.dg-station {
+  cursor: pointer;
+  outline: none;
+}
+.dg-dot {
+  fill: var(--card);
+  stroke-width: 3.5;
+}
+.dg-dot.x {
+  stroke: var(--text);
+  stroke-width: 4;
+}
+.dg-station text {
+  fill: var(--text);
+  font-weight: 600;
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.dg-station:focus-visible .dg-dot,
+.dg-station.sel .dg-dot {
+  stroke: var(--accent);
+  stroke-width: 6;
+}
+.diagram-zoom {
+  position: absolute;
+  inset-block-end: 12px;
+  inset-inline-end: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.diagram-zoom button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  color: var(--text);
+  font-size: 1.4rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+}
