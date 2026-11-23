@@ -118,7 +118,7 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] 7B time features: core `schedule.ts` (`lineService`, `tripService`: open / closing-soon / closed from `hours.json`, average wait from headway) with tests; route cards show the average wait, a closing-soon warning with the last train, or a closed notice (device local time). Next-train times by timetable are not possible (no timetable data).
 - [x] 7C exploration (partly): with only a From station chosen, the planner lists stations reachable within 10/20/30/45/60 min (core `reachableStations`, tests, teal map markers). Last-mile suggestions not implemented.
 - **7D Station info:** exits, facilities, women-only cars, accessibility, per-station zones (needs data).
-- **7E More networks:** LRT, Monorail, Lines 4+ as optional layers.
+- **7E More networks:** BRT (Ring Road, "اتوبيس ترددي"; phase 2 opened Sep 2026, interchanges with L1 El-Zahraa/El-Marg and L3 Adly Mansour/Imbaba), East Nile Monorail (meets BRT at El-Mosheer Tantawy), LRT (Adly Mansour), Lines 4+. Each as an optional layer; needs station lists, fares, and times from official sources first (not yet collected).
 - [x] 7F community and data ops: footer "Report a problem" opens a prefilled GitHub issue (page URL carries the route, language, device); monthly `data-refresh.yml` Action opens a PR (never auto-merges, verification.json untouched; untested until first run); `CONTRIBUTING.md`. Optional resolver worker stays a future idea.
 - **7G Quality:** web lifecycle tests, quarterly/annual pass comparison, more benchmark trips.
 - Published: https://github.com/shawkyebrahim2514/cairo-metro (public, MIT; data ODbL attribution).
