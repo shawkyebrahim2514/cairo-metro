@@ -80,6 +80,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 - [x] Benchmark harness: `npm run benchmark` plans 30 trips from `data/benchmark/trips.json` and writes `docs/benchmark.md` with empty App columns. Next: user (or a normal-user walkthrough) fills the app results, then we compare and fix data/weights.
 - [x] Confirmed by the user (rider): fares count the boarding station and an interchange counts once; the 4-minute default transfer time is good. Still to do: compare ride times and stops on sample trips, and the issue-report flow (needs the GitHub repo URL, so after publishing).
 - [x] Benchmark vs the app (El-Monib to Cairo University 12 min/6, to Bolaq El-Dakrour 14 min/7, to El-Sayeda Zeinab 25 min/12): routes match; the app counts stations including the boarding one (our stops + 1), now shown that way in the route summary; app time is about 2 min per counted station with no visible transfer time. Decision: keep our realistic 4-min transfer time. More sample trips still welcome.
+- [x] Official timing check: L1 end-to-end 79 min official vs 81 ours, L2 38 vs 39 (within ~3%, no change needed). L3 headway 4-8 min added to hours.json (secondary source, unverified).
 
 1. Compare 20-30 trips vs Egypt Transport app + official map -> docs/benchmark.md.
 2. Fix data/weights.

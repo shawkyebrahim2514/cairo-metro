@@ -37,9 +37,9 @@
         { "from": "Rod El-Farag Axis", "to": "Adly Mansour", "time": "23:55" }
       ],
       "serviceEnds": null,
-      "headwayMinutes": null,
+      "headwayMinutes": { "min": 4, "max": 8 },
       "endToEndMinutes": null,
-      "source": "Ahram Online (standard-time schedule article); no official L3 operations page found"
+      "source": "Ahram Online (standard-time schedule article); no official L3 operations page found; headway 4-8 min per a secondary site citing the Ministry of Transport (2026), unverified"
     }
   },
   "transfers": {
