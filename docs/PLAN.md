@@ -159,6 +159,21 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] 8A feature batch from the backlog: trip image, QR share, Home/Work quick-picks, trip history, station detail sheet with nearby places, install card + offline badge, shared-trip card with Open Graph preview. Skipped: user-reported disruptions. Still backlog: leave-at/arrive-by, map station search + schematic view, walking directions, Capacitor wrapper, Monorail/BRT.
 
+### Stage 8B: image options and icons (in order)
+
+- [ ] 1. Inline SVG icon set (icons.tsx), then apply to Track, Share (platform aware), QR, Image, Save, Swap, GPS, Settings, Help, Close, Home/Work, History, Copy link, station sheet rows, Install.
+- [ ] 2. Image options dialog (tap Image): live preview, Style, Crop, Include toggles, Theme, Language, Format, route colour; choices remembered.
+- [ ] 3. Tooltip-style (i) hint beside every option (short, accessible, en+ar).
+- [ ] 4. Network map style: all lines faded, route highlighted, other station names off by default, route names on.
+- [ ] 5. Crop to trip option (whole network vs zoomed, other lines faded).
+- [ ] 6. Walking legs (dashed) and start/end pins with place names.
+- [ ] 7. Nearby places dots at destination (auto adds the OpenStreetMap credit line); no map tiles (skipped on purpose).
+- [ ] 8. Image theme (light/dark/match app) and image language (EN/AR).
+- [ ] 9. Formats: portrait, square, story 9:16.
+- [ ] 10. Extra toggles: ETA/leave time, fare, women tip, steps, stats, branding; QR corner toggle (off by default).
+- [ ] 11. Tests, headless render checks, docs, push.
+- [ ] 12. Later: schematic map style (also idea 7).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
