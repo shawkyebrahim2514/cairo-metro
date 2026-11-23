@@ -75,7 +75,9 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 6. [x] Accessibility pass (combobox semantics, Escape closes suggestions, focus rings, reduced motion, landmarks, dark-mode contrast, meta description, robots.txt). Lighthouse (mobile, run with npx, not a dependency): performance 0.99, accessibility 1, best practices 1, SEO 1.
 7. [x] Alternative station names (Tahrir=Sadat, area names, spelling variants, Arabic) in `data/curated/alt-names.json`, merged by build-data; review list in `docs/alt-names-review.md`. PROPOSED, awaiting user verification; also check suspicious old aliases (Maspero "Gamal AbdAlNasser", Opera "Gezira").
 
-### Stage 6: Quality & benchmark
+### Stage 6: Quality & benchmark (in progress)
+
+- [x] Benchmark harness: `npm run benchmark` plans 30 trips from `data/benchmark/trips.json` and writes `docs/benchmark.md` with empty App columns. Next: user (or a normal-user walkthrough) fills the app results, then we compare and fix data/weights.
 
 1. Compare 20-30 trips vs Egypt Transport app + official map -> docs/benchmark.md.
 2. Fix data/weights.
@@ -115,3 +117,4 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - **Optional resolver worker (Vercel/GitHub/etc.):** a small self-hosted function that expands short Maps links (and possibly caches geocoding). Strictly opt-in and configurable (endpoint in settings), never required; the app must keep working without it. Discuss design later.
 - **UI design theme refresh:** improve the visual theme/design after all functionality is finished.
 - **Search UX:** the place search returns every type (metro, parks, etc.) at once, which overwhelms. Design a better approach (type filters/tabs, grouped results, stations first). Later.
+- **Map design:** redesign the map: full-screen/expanded view to locate places well, better pins and controls. Later.

@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "cairo-metro",
   "private": true,
   "version": "0.0.0",
@@ -17,6 +17,7 @@
     "data:places": "tsx scripts/build-places.ts",
     "data:build": "tsx scripts/build-data.ts",
     "data:validate": "tsx scripts/validate-data.ts",
+    "benchmark": "tsx scripts/benchmark.ts",
     "data:view": "tsx tools/data-viewer/server.ts"
   },
   "engines": {
