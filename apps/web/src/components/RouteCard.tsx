@@ -28,7 +28,7 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
         <span className="total">{formatMinutes(trip.totalSec, t, lang)}</span>
       </header>
       <p className="meta">
-        {n(route.stops)} {route.stops === 1 ? t('stop') : t('stops')} ·{' '}
+        {n(route.stops + 1)} {route.stops === 0 ? t('stationCountOne') : t('stationCount')} ·{' '}
         {nt === 0 ? t('direct') : `${n(nt)} ${nt === 1 ? t('transfer') : t('transfers')}`}
         {route.fare != null && ` · ${n(route.fare)} ${t('fare')}`}
       </p>
