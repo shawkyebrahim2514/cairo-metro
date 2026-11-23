@@ -5,6 +5,7 @@ import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
 import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
+import { QrDialog } from '../components/QrDialog';
 import { QuickPlaces } from '../components/QuickPlaces';
 import { TripList } from '../components/TripList';
 import { Reachable } from '../components/Reachable';
@@ -26,6 +27,7 @@ import {
 import { useSettings } from '../settings';
 import { useTracking } from '../tracking';
 import { planTrips, reachFrom } from '../trip';
+import { renderTripImage } from '../tripImage';
 
 export function PlannerPage({
   resolver,
@@ -43,6 +45,8 @@ export function PlannerPage({
   const [selected, setSelected] = useState(0);
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);
+  const [qrOpen, setQrOpen] = useState(false);
+  const [imaging, setImaging] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
   const [showShared, setShowShared] = useState(Boolean(linked));
@@ -153,6 +157,30 @@ export function PlannerPage({
     setSaved((cur) => recordTrip(cur, from, to));
     history.replaceState(null, '', planUrl(from, to));
   }, [from, to, plan]);
+
+  const saveImage = async () => {
+    if (!from || !to || !trip || imaging) return;
+    setImaging(true);
+    try {
+      const blob = await renderTripImage({ trip, from, to, lang, t });
+      const file = new File([blob], 'cairo-metro-trip.png', { type: 'image/png' });
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], title: t('appName') });
+          return;
+        } catch {
+          // dismissed or failed: fall back to a download
+        }
+      }
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = file.name;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
+    } finally {
+      setImaging(false);
+    }
+  };
 
   const share = async () => {
     if (!from || !to) return;
@@ -284,6 +312,12 @@ export function PlannerPage({
                 <button type="button" className="pill" onClick={share}>
                   {copied ? t('linkCopied') : t('share')}
                 </button>
+                <button type="button" className="pill" onClick={() => setQrOpen(true)}>
+                  {t('qrButton')}
+                </button>
+                <button type="button" className="pill" disabled={imaging} onClick={saveImage}>
+                  {imaging ? t('tripImageMaking') : t('tripImage')}
+                </button>
                 <button
                   type="button"
                   className="pill"
@@ -312,6 +346,9 @@ export function PlannerPage({
         )}
         <Footer />
       </Sheet>
+      {qrOpen && from && to && (
+        <QrDialog url={planUrl(from, to)} onClose={() => setQrOpen(false)} />
+      )}
     </>
   );
 }

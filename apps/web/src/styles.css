@@ -1709,3 +1709,19 @@ footer {
   gap: 8px;
   margin: 8px 0;
 }
+
+/* QR dialog */
+.qr-dialog {
+  text-align: center;
+}
+.qr {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin: 8px auto;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+}
+.qr-dialog .tour-nav {
+  justify-content: center;
+}
