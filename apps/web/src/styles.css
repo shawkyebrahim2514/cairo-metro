@@ -1,0 +1,296 @@
+:root {
+  --bg: #f6f7f9;
+  --card: #fff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --accent: #2563eb;
+  --warn: #b45309;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115;
+    --card: #1a1d24;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --border: #2a2f3a;
+    --accent: #60a5fa;
+    --warn: #fbbf24;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    16px/1.4 system-ui,
+    -apple-system,
+    'Segoe UI',
+    Tahoma,
+    sans-serif;
+}
+
+.app {
+  max-width: 720px;
+  margin-inline: auto;
+  padding: 12px 14px 24px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  font-size: 1.3rem;
+  margin: 4px 0;
+}
+
+h2 {
+  font-size: 1.05rem;
+  margin: 16px 0 8px;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.pill {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 10px 0 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.tabs button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 8px;
+  border-radius: 9px;
+}
+
+.tabs button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.place-input {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.field:focus-within {
+  border-color: var(--accent);
+}
+
+.icon {
+  border: 0;
+  background: transparent;
+  font-size: 1.2rem;
+  padding: 6px 10px;
+  color: var(--muted);
+}
+
+.suggestions {
+  position: absolute;
+  inset-inline: 0;
+  z-index: 1000;
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+  max-height: 320px;
+  overflow: auto;
+}
+
+.suggestions button {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: start;
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.suggestions button:hover {
+  background: var(--bg);
+}
+
+.suggestions small,
+.meta,
+.note {
+  color: var(--muted);
+}
+
+.note {
+  font-size: 0.85rem;
+  margin: 6px 0;
+}
+
+.note.warn {
+  color: var(--warn);
+}
+
+.note.error {
+  color: #dc2626;
+}
+
+.swap {
+  display: block;
+  margin: -2px auto 2px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+}
+
+.map {
+  height: 300px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-top: 10px;
+  z-index: 0;
+}
+
+.cards {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+
+.cards .card {
+  margin-top: 0;
+}
+
+.card .meta {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+}
+
+.route.selected {
+  border-color: var(--accent);
+}
+
+.route header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.total {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.badge {
+  display: inline-block;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+
+.steps {
+  list-style: none;
+  margin: 8px 0;
+  padding: 0;
+}
+
+.steps > li {
+  border-inline-start: 4px solid var(--border);
+  padding: 4px 10px;
+  margin-bottom: 4px;
+}
+
+.steps > li.walk {
+  border-inline-start-style: dashed;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.stations {
+  margin: 4px 0 0;
+  padding-inline-start: 18px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.link {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+footer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--muted);
+}
