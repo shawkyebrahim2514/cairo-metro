@@ -127,13 +127,17 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] GitHub Pages: `.github/workflows/pages.yml` builds `apps/web` and deploys on every push to main. Live at https://shawkyebrahim2514.github.io/cairo-metro/ (relative base path, hash routes, so it works under the sub-path).
 
-### UI v2 (implemented, except bottom sheet)
+### UI v2 (implemented)
 
-- [x] Settings sheet (gear): theme Light/Dark/Auto, route highlight colour (amber/violet/pink/cyan), ticket type, map tiles; saved locally. [x] Map: station names beside dots by zoom (route stations always), route with glow, white casing, per-line colour, animated dots; other lines fade. [x] SVG icons, line pills in route steps, glass app bar/tabs, entry animation, loading shimmer, reduced-motion support. Checked in light/dark/Arabic at 390 px. Not done: bottom-sheet layout over a full-screen map (large layout change, to decide).
+- [x] Settings sheet (gear): theme Light/Dark/Auto, route highlight colour, ticket type, map tiles; saved locally. [x] Map: station names beside dots by zoom, route glow/casing/per-line colour/animated dots, other lines fade. [x] SVG icons, line pills, glass bars, animation, shimmer, reduced motion. [x] Planner is a full-screen map with a bottom sheet (peek/half/full by tap or drag on the handle; opens to half when a route appears or a search box is focused; the route is fitted above the sheet). Checked in light/dark/Arabic at 390 px.
 
-### 7H Live trip tracking (idea, awaiting user decision)
+### 7H Live trip tracking (decided, to build next)
 
-- Opt-in 'Track my trip' on a planned route: watchPosition, snap to the nearest route station, show next station, stops left, ETA, and a banner/vibration before the exit or interchange; Wake Lock to keep the screen on. GPS is weak underground, so add a manual 'I am at station X' tap and time-based auto-advance. No background alerts in a web app (needs the native wrapper). Location stays on the device.
+- Opt-in 'Track my trip' on the selected route: watchPosition snapped to the nearest route station (within ~300 m, else 'off route' with a re-plan button); position shown as a moving dot on the map; banner with next station, stops left, ETA, next change; follows the map with a recenter button.
+- GPS fallback: manual 'I am at station X' tap plus time-based auto-advance (~2 min per hop).
+- Alerts: vibration pattern per event (short per station, long for the exit, double for a change), optional beep/voice, '2 stops left' warning, banner colour change; Wake Lock keeps the screen on.
+- Extras chosen: re-plan when off route, 'you have arrived' (auto-switch to the walking steps), 'wake me' option.
+- Limits: alerts only while the page is open (no background); background alerts need a Capacitor native wrapper (Play once, Android Studio, background-location plugin; iOS needs a Mac and a $99/year account). Works offline as an installed PWA. Women-only car platform position: no data, skipped. Ideas for later: share ETA link, trip history.
 
 ### Future ideas (not scheduled)
 

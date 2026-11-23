@@ -21,6 +21,8 @@ interface Props {
   /** The route's legs, so each part is drawn in its line colour. */
   legs?: { line: LineId; stations: string[] }[];
   tiles: boolean;
+  /** Pixels at the bottom covered by the sheet, kept clear when fitting the route. */
+  bottomPad?: number;
   onPick?: (p: LatLng) => void;
   /** Called when a station dot is tapped. */
   onStation?: (s: Station) => void;
@@ -28,7 +30,17 @@ interface Props {
 
 const CAIRO: L.LatLngTuple = [30.05, 31.25];
 
-export function MetroMap({ markers = [], route, legs, tiles, onPick, onStation }: Props) {
+export function MetroMap({
+  markers = [],
+  route,
+  legs,
+  tiles,
+  bottomPad = 0,
+  onPick,
+  onStation,
+}: Props) {
+  const padRef = useRef(bottomPad);
+  padRef.current = bottomPad;
   const { lang, t } = useI18n();
   const { highlightColour } = useSettings();
   const baseRef = useRef<L.Polyline[]>([]);
@@ -217,7 +229,11 @@ export function MetroMap({ markers = [], route, legs, tiles, onPick, onStation }
       bounds.push([m.point.lat, m.point.lng]);
     }
     if (bounds.length > 0)
-      map.fitBounds(L.latLngBounds(bounds), { padding: [40, 40], maxZoom: 16 });
+      map.fitBounds(L.latLngBounds(bounds), {
+        paddingTopLeft: [40, padRef.current > 0 ? 72 : 40],
+        paddingBottomRight: [40, 40 + padRef.current],
+        maxZoom: 16,
+      });
   }, [markers, route, legs, highlightColour]);
 
   return (

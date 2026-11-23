@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
+import { Footer } from './components/Footer';
 import { Icon } from './components/Icon';
 import { SettingsSheet } from './components/SettingsSheet';
 import { Tour } from './components/Tour';
@@ -10,7 +11,6 @@ import { PlannerPage } from './pages/PlannerPage';
 import './styles.css';
 import { takeSharedText } from './share';
 import { readPlanHash } from './storage';
-import { reportUrl } from './report';
 import {
   applyTheme,
   highlightColour,
@@ -115,7 +115,7 @@ export function App() {
   return (
     <I18nContext.Provider value={i18n}>
       <SettingsContext.Provider value={settings}>
-        <div className="app">
+        <div className={tab === 'plan' ? 'app plan' : 'app'}>
           <header className="top">
             <h1>{t('appName')}</h1>
             <div className="actions">
@@ -196,20 +196,7 @@ export function App() {
             />
           )}
 
-          <footer>
-            <a
-              href={reportUrl(lang)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                // refresh so the link carries the current route
-                e.currentTarget.href = reportUrl(lang);
-              }}
-            >
-              {t('reportProblem')}
-            </a>
-            <small>{t('attribution')}</small>
-          </footer>
+          {tab === 'nearest' && <Footer />}
         </div>
       </SettingsContext.Provider>
     </I18nContext.Provider>
