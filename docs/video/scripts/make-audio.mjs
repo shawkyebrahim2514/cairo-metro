@@ -32,21 +32,30 @@ chords.forEach((c, i) => {
 const cwd = process.cwd().replace(/\\/g, '/');
 fs.writeFileSync('chords.txt', parts.map((p) => `file '${cwd}/${p}'`).join('\n'));
 run('-f', 'concat', '-safe', '0', '-i', 'chords.txt', '-c', 'copy', `${out}prog.wav`);
-// loop to 52 s
-run('-stream_loop', '6', '-i', `${out}prog.wav`, '-t', '52', `${out}prog52.wav`);
+// loop to LEN seconds (default 52; the full video uses 200)
+const LEN = Number(process.env.LEN ?? 52);
+run(
+  '-stream_loop',
+  String(Math.ceil(LEN / 9.6)),
+  '-i',
+  `${out}prog.wav`,
+  '-t',
+  String(LEN),
+  `${out}prog52.wav`,
+);
 // kick every 0.6 s (from beat 1), hat on off-beats
 run(
   '-f',
   'lavfi',
   '-i',
-  `aevalsrc='0.9*sin(2*PI*(48+90*exp(-30*mod(t,0.6)))*mod(t,0.6))*exp(-7*mod(t,0.6))':d=52:s=44100`,
+  `aevalsrc='0.9*sin(2*PI*(48+90*exp(-30*mod(t,0.6)))*mod(t,0.6))*exp(-7*mod(t,0.6))':d=${LEN}:s=44100`,
   `${out}kick.wav`,
 );
 run(
   '-f',
   'lavfi',
   '-i',
-  'anoisesrc=d=52:c=white:a=0.3:r=44100',
+  `anoisesrc=d=${LEN}:c=white:a=0.3:r=44100`,
   '-af',
   "highpass=f=7000,volume='pow(abs(sin(PI*t/0.3)),30)':eval=frame",
   `${out}hat.wav`,
@@ -95,6 +104,20 @@ run(
   '-i',
   `aevalsrc='0.35*(sin(2*PI*880*t)+0.7*sin(2*PI*1318.5*t)+0.5*sin(2*PI*1760*t))*exp(-2.5*t)':d=2.2:s=44100`,
   `${out}chime.wav`,
+);
+run(
+  '-f',
+  'lavfi',
+  '-i',
+  `aevalsrc='0.3*(sin(2*PI*523.25*t)*between(t,0,0.5)+sin(2*PI*659.25*t)*between(t,0.12,0.6)+sin(2*PI*783.99*t)*between(t,0.24,0.8)+sin(2*PI*1046.5*t)*between(t,0.36,1.2))*exp(-3*t)':d=1.4:s=44100`,
+  `${out}success.wav`,
+);
+run(
+  '-f',
+  'lavfi',
+  '-i',
+  `aevalsrc='0.5*sin(2*PI*(330+400*t*8)*t)*exp(-14*t)':d=0.3:s=44100`,
+  `${out}swipe.wav`,
 );
 for (const f of ['chord0', 'chord1', 'chord2', 'chord3', 'prog', 'prog52', 'kick', 'hat'])
   fs.rmSync(`${out}${f}.wav`, { force: true });

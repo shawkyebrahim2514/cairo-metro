@@ -25,7 +25,7 @@ npm run clip            # rec-clip/*.webm
 node -e "require('child_process').execFileSync(require('ffmpeg-static'),['-y','-i',require('fs').readdirSync('rec-clip').map(f=>'rec-clip/'+f)[0],'-c:v','libx264','-pix_fmt','yuv420p','-crf','20','-r','30','public/clip.mp4'])"
 npm run audio           # public/music.wav + whoosh/pop/click/chime
 npm run studio          # preview and scrub
-npm run render -- --browser-executable="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+LEN=200 npm run audio   # the full video needs 200 s of music\nnpx remotion render src/index.ts Full out/full.mp4 --browser-executable="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --concurrency=8\nnpx remotion render src/index.ts Teaser out/teaser.mp4 --browser-executable=...   # same flag
 ```
 
 Optional last step, to make it louder without re-encoding the video:
@@ -33,14 +33,18 @@ Optional last step, to make it louder without re-encoding the video:
 
 Timing in `Demo.tsx` is tied to the clip: the Image dialog scene starts the clip at frame 120 (4.0 s) and plays it at 2.1x. If you re-record, check the `mark(...)` timestamps that `capture-clip.mjs` prints and adjust `startFrom` and `playbackRate`.
 
-## Storyline
+## Storyline (v2: two videos)
 
-1. Hook as a question and answer: "Your trip, as a picture."
-2. Real recording of the Image dialog inside a phone frame, with option chips.
-3. Montage of image styles: network map, route only, diagram, dark, Arabic, story.
-4. Long trip: tall map, then the every-station list.
-5. Feature cards: QR, live tracking, walking links, offline, English and Arabic.
-6. Outro with the app link.
+Every chapter is **question, then answer, then benefit**: a big question with an Arabic line, then a real phone recording on the right with the answer headline and a "why you will like it" line on the left.
+
+- **Full (1920x1080, about 3 min):** intro, then 10 chapters: nearest station, trip planner, reachable in 30 min, hours and last train, live tracking, **image export (6 parts, the longest chapter)**, link and QR share, walking links, offline, Arabic; then a recap outro.
+- **Teaser (1080x1920, about 55 s):** the same chapters shortened and sped up (nearest, planner, tracking, image styles and themes, offline).
+
+Chapters are data in `src/chapters.ts`; `src/Chapter.tsx` renders them in wide or tall layout; `src/Full.tsx` and `src/Teaser.tsx` assemble the timeline and sound cues; `src/kit.tsx` has the shared pieces. The 10 phone clips and image variants were recorded in parallel by separate agents; see "Capturing clips" below.
+
+## Capturing clips
+
+Clips are 780x1688 mp4 in `public/clips/` and trip images in `public/img/`. Recipe for each clip: Playwright with a 390x844 viewport at 2x, `recordVideo` of 780x1688, then ffmpeg `crop=390:844:0:0,scale=780:1688` (Playwright draws the page in the top-left corner), plus injected tap ripples and human pacing. Tracking uses `setGeolocation` along the real route; the "closing soon" state fakes the time with `page.clock.install`; offline uses `context.setOffline(true)`. The agent scripts lived in a temp folder and are not kept; `scripts/capture-clip.mjs` shows the pattern.
 
 ## The sound generator
 
