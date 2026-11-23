@@ -1,0 +1,25 @@
+{
+  "name": "cairo-metro-video",
+  "private": true,
+  "description": "Promo video for Cairo Metro, built with Remotion. Dev-only, not part of the app.",
+  "type": "module",
+  "scripts": {
+    "images": "node scripts/capture-images.mjs",
+    "clip": "node scripts/capture-clip.mjs",
+    "audio": "node scripts/make-audio.mjs",
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts Demo out/demo.mp4 --concurrency=4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.546",
+    "ffmpeg-static": "^5.3.0",
+    "playwright-core": "^1.50.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "4.0.546"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.0"
+  }
+}

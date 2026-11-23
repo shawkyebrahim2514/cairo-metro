@@ -184,6 +184,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] Final cleanup: alternative names approved (alt-names.json supports a `remove` list; wrong Maspero alias removed), unused pass-comparison code deleted from core (comparePass, comparePassPlans), README refreshed. Station zones stay a known data gap; benchmark trips and real-device checks postponed by the user; unbuilt ideas dropped from scope.
 
+- [x] Promo video: Remotion project in `docs/video` (image-export-first, synthesized audio, failures and fixes documented in its README); dev-only, renders not committed.
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
