@@ -123,6 +123,10 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - 7G quality (partly): [x] quarterly pass comparison (`comparePassPlans`, shown in the pass calculator; annual passes are priced per lines, not zones, so not compared). [x] web lifecycle tests (`apps/web/src/lifecycle.test.tsx`, jsdom + Testing Library as dev-only dependencies: StrictMode map mount, stale GPS fix ignored). Remaining: more benchmark trips (need app results from the user).
 - Published: https://github.com/shawkyebrahim2514/cairo-metro (public, MIT; data ODbL attribution).
 
+### Hosting
+
+- [x] GitHub Pages: `.github/workflows/pages.yml` builds `apps/web` and deploys on every push to main. Live at https://shawkyebrahim2514.github.io/cairo-metro/ (relative base path, hash routes, so it works under the sub-path).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
