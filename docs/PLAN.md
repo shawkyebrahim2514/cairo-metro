@@ -127,9 +127,13 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] GitHub Pages: `.github/workflows/pages.yml` builds `apps/web` and deploys on every push to main. Live at https://shawkyebrahim2514.github.io/cairo-metro/ (relative base path, hash routes, so it works under the sub-path).
 
-### UI v2 (partly implemented)
+### UI v2 (implemented, except bottom sheet)
 
-- [x] Settings sheet (gear in app bar): theme Light/Dark/Auto, route highlight colour (amber/violet/pink/cyan), ticket type, map tiles; saved in localStorage. [x] Map: station names beside dots by zoom (route stations always), route drawn with glow, white casing, per-line colour and animated dots, other lines fade. Remaining: route timeline card, SVG icons, bottom-sheet layout, skeletons.
+- [x] Settings sheet (gear): theme Light/Dark/Auto, route highlight colour (amber/violet/pink/cyan), ticket type, map tiles; saved locally. [x] Map: station names beside dots by zoom (route stations always), route with glow, white casing, per-line colour, animated dots; other lines fade. [x] SVG icons, line pills in route steps, glass app bar/tabs, entry animation, loading shimmer, reduced-motion support. Checked in light/dark/Arabic at 390 px. Not done: bottom-sheet layout over a full-screen map (large layout change, to decide).
+
+### 7H Live trip tracking (idea, awaiting user decision)
+
+- Opt-in 'Track my trip' on a planned route: watchPosition, snap to the nearest route station, show next station, stops left, ETA, and a banner/vibration before the exit or interchange; Wake Lock to keep the screen on. GPS is weak underground, so add a manual 'I am at station X' tap and time-based auto-advance. No background alerts in a web app (needs the native wrapper). Location stays on the device.
 
 ### Future ideas (not scheduled)
 

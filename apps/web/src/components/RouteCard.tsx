@@ -69,8 +69,8 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
           const tr = route.transfers[i];
           return (
             <li key={i} style={{ borderColor: lineColour.get(leg.line) }}>
-              <span className="badge" style={{ background: lineColour.get(leg.line) }}>
-                {leg.line}
+              <span className="badge line-pill" style={{ background: lineColour.get(leg.line) }}>
+                {t('line')} {n(leg.line.replace(/\D/g, ''))}
               </span>{' '}
               {t('takeLine')} {name(leg.stations[0]!)} {t('towards')}{' '}
               {leg.towards.map(name).join(' / ')} · {n(leg.stops)}{' '}

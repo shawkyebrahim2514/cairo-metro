@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
+import { Icon } from './components/Icon';
 import { SettingsSheet } from './components/SettingsSheet';
 import { Tour } from './components/Tour';
 import { NearestPage } from './pages/NearestPage';
@@ -124,7 +125,7 @@ export function App() {
                 aria-label={t('settings')}
                 onClick={() => setSettingsOpen(true)}
               >
-                ⚙
+                <Icon name="gear" />
               </button>
               <button
                 type="button"
@@ -157,7 +158,7 @@ export function App() {
                 }}
               >
                 <span className="tab-ico" aria-hidden="true">
-                  {id === 'nearest' ? '📍' : '🚇'}
+                  <Icon name={id === 'nearest' ? 'pin' : 'metro'} size={22} />
                 </span>
                 {id === 'nearest' ? t('tabNearest') : t('tabPlan')}
               </button>
