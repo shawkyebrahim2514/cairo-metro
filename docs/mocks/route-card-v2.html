@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Route card v2 mock</title>
+    <style>
+      :root {
+        --bg: #f4f7f9;
+        --card: #fff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --chip: #eef2f6;
+        --accent: #0f766e;
+        --hl: #f59e0b;
+        --l1: #1d4ed8;
+        --l2: #dc2626;
+        --ok: #15803d;
+        --warn: #b45309;
+      }
+      body.dark {
+        --bg: #0b1220;
+        --card: #131c2e;
+        --text: #e8eefc;
+        --muted: #93a3bd;
+        --border: #25324a;
+        --chip: #1b2740;
+        --accent: #2dd4bf;
+        --ok: #4ade80;
+        --warn: #fbbf24;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          15px/1.4 system-ui,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        padding: 16px;
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .bar button {
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font: inherit;
+      }
+      .bar button.on {
+        background: var(--accent);
+        color: #fff;
+      }
+      .phone {
+        max-width: 390px;
+        margin: 0 auto;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border-color: var(--accent);
+      }
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      .tag {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent);
+      }
+      .time {
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .time small {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .arrive {
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-align: end;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        margin: 14px 0 10px;
+      }
+      .stat {
+        background: var(--chip);
+        border-radius: 14px;
+        padding: 8px 6px;
+        text-align: center;
+      }
+      .stat b {
+        display: block;
+        font-size: 1.15rem;
+      }
+      .stat span {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        padding: 8px 10px;
+        border-radius: 12px;
+        background: color-mix(in srgb, var(--ok) 14%, transparent);
+        color: var(--ok);
+        margin-bottom: 12px;
+      }
+      .status.warn {
+        background: color-mix(in srgb, var(--warn) 16%, transparent);
+        color: var(--warn);
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      .tl {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .tl > li {
+        position: relative;
+        display: grid;
+        grid-template-columns: 28px 1fr;
+        gap: 10px;
+        padding-bottom: 14px;
+      }
+      .tl > li:last-child {
+        padding-bottom: 0;
+      }
+      .tl > li::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 12px;
+        top: 20px;
+        bottom: -2px;
+        width: 4px;
+        border-radius: 2px;
+        background: var(--c, var(--border));
+      }
+      .tl > li.walk::before {
+        background: none;
+        border-inline-start: 3px dotted var(--muted);
+        width: 0;
+        inset-inline-start: 13px;
+      }
+      .tl > li:last-child::before {
+        display: none;
+      }
+      .node {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--card);
+        border: 4px solid var(--c, var(--muted));
+        z-index: 1;
+        font-size: 0.8rem;
+        color: #fff;
+      }
+      .node.end {
+        background: var(--c, var(--text));
+      }
+      .node.ico {
+        border: 0;
+        background: var(--chip);
+      }
+      .name {
+        font-weight: 700;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .pill {
+        display: inline-block;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 2px 9px;
+        border-radius: 999px;
+        background: var(--c);
+      }
+      .ride {
+        margin-top: 6px;
+        background: var(--chip);
+        border-radius: 12px;
+        padding: 8px 10px;
+      }
+      .ride summary {
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-weight: 600;
+      }
+      .ride summary::-webkit-details-marker {
+        display: none;
+      }
+      .ride ul {
+        margin: 8px 0 2px;
+        padding: 0;
+        list-style: none;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .ride li {
+        padding: 2px 0;
+        padding-inline-start: 14px;
+        position: relative;
+      }
+      .ride li::before {
+        content: '';
+        position: absolute;
+        inset-inline-start: 0;
+        top: 10px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c);
+      }
+      .change {
+        margin-top: 6px;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        background: color-mix(in srgb, var(--hl) 18%, transparent);
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .tips {
+        margin-top: 12px;
+      }
+      .tips details {
+        background: var(--chip);
+        border-radius: 12px;
+        padding: 8px 10px;
+        font-size: 0.85rem;
+      }
+      .tips summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .tips p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .actions button {
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 14px;
+        padding: 10px;
+        font: inherit;
+        font-weight: 600;
+      }
+      .actions .primary {
+        grid-column: 1 / -1;
+        background: var(--accent);
+        color: #fff;
+        border: 0;
+        font-size: 1rem;
+      }
+      .fine {
+        color: var(--muted);
+        font-size: 0.75rem;
+        text-align: center;
+        margin: 8px 0 0;
+      }
+      [hidden] {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      <button data-v="direct" class="on">Direct trip</button>
+      <button data-v="change">With a change</button>
+      <button id="theme">Dark</button>
+      <button id="dir">العربية</button>
+    </div>
+
+    <div class="phone">
+      <section class="card" data-view="direct">
+        <div class="top">
+          <div>
+            <div class="tag" data-i="fastest">Fastest</div>
+            <div class="time">10 <small data-i="min">min</small></div>
+          </div>
+          <div class="arrive"><span data-i="arrive">Arrive</span><br /><b>14:25</b></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>6</b><span data-i="stations">stations</span></div>
+          <div class="stat">
+            <b data-i="direct">Direct</b><span data-i="transfers0">no changes</span>
+          </div>
+          <div class="stat"><b>10</b><span data-i="egp">EGP</span></div>
+        </div>
+        <div class="status">
+          <span class="dot"></span><span data-i="running">Running · a train about every 2 min</span>
+        </div>
+
+        <ol class="tl">
+          <li class="walk">
+            <span class="node ico">🚶</span>
+            <div>
+              <div class="name" data-i="walkTo">Walk to El-Monib</div>
+              <div class="sub">400 m · 5 <span data-i="min">min</span></div>
+            </div>
+          </li>
+          <li style="--c: var(--l2)">
+            <span class="node"></span>
+            <div>
+              <div class="name">El-Monib</div>
+              <div class="sub">
+                <span class="pill" style="--c: var(--l2)"><span data-i="line">Line</span> 2</span>
+                <span data-i="towards">towards</span> Shubra El-Kheima
+              </div>
+              <details class="ride" style="--c: var(--l2)">
+                <summary>
+                  <span>5 <span data-i="stops">stops</span> · 10 <span data-i="min">min</span></span
+                  ><span>▾</span>
+                </summary>
+                <ul>
+                  <li>Sakiat Mekky</li>
+                  <li>Omm El-Misryeen</li>
+                  <li>Giza</li>
+                  <li>Faisal</li>
+                </ul>
+              </details>
+            </div>
+          </li>
+          <li style="--c: var(--l2)">
+            <span class="node end" style="--c: var(--l2)"></span>
+            <div>
+              <div class="name">Cairo University</div>
+              <div class="sub" data-i="getOff">Get off here</div>
+            </div>
+          </li>
+          <li class="walk">
+            <span class="node ico">📍</span>
+            <div>
+              <div class="name" data-i="dest">Destination</div>
+              <div class="sub">150 m · 2 <span data-i="min">min</span></div>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tips">
+          <details>
+            <summary>♀ <span data-i="women">Women-only cars</span></summary>
+            <p data-i="womenText">The 2 middle cars of every train. Men may use them after 9 pm.</p>
+          </details>
+        </div>
+        <div class="actions">
+          <button class="primary" data-i="track">▶ Track my trip</button>
+          <button data-i="share">Share</button>
+          <button data-i="save">☆ Save trip</button>
+        </div>
+        <p class="fine" data-i="estimates">Times are estimates.</p>
+      </section>
+
+      <section class="card" data-view="change" hidden>
+        <div class="top">
+          <div>
+            <div class="tag" data-i="fastest">Fastest</div>
+            <div class="time">31 <small data-i="min">min</small></div>
+          </div>
+          <div class="arrive"><span data-i="arrive">Arrive</span><br /><b>14:46</b></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>13</b><span data-i="stations">stations</span></div>
+          <div class="stat"><b>1</b><span data-i="change1">change</span></div>
+          <div class="stat"><b>15</b><span data-i="egp">EGP</span></div>
+        </div>
+        <div class="status warn">
+          <span class="dot"></span><span data-i="closing">Closing soon · last train 00:00</span>
+        </div>
+
+        <ol class="tl">
+          <li style="--c: var(--l2)">
+            <span class="node"></span>
+            <div>
+              <div class="name">El-Monib</div>
+              <div class="sub">
+                <span class="pill" style="--c: var(--l2)"><span data-i="line">Line</span> 2</span>
+                <span data-i="towards">towards</span> Shubra El-Kheima
+              </div>
+              <details class="ride" style="--c: var(--l2)">
+                <summary>
+                  <span>7 <span data-i="stops">stops</span> · 14 <span data-i="min">min</span></span
+                  ><span>▾</span>
+                </summary>
+                <ul>
+                  <li>Sakiat Mekky</li>
+                  <li>Omm El-Misryeen</li>
+                  <li>Giza</li>
+                  <li>Faisal</li>
+                  <li>Cairo University</li>
+                  <li>Bohooth</li>
+                </ul>
+              </details>
+            </div>
+          </li>
+          <li style="--c: var(--hl)">
+            <span class="node end" style="--c: var(--hl)">⇄</span>
+            <div>
+              <div class="name">Sadat</div>
+              <span class="change"
+                ><span data-i="changeTo">Change to</span>
+                <span class="pill" style="--c: var(--l1)"><span data-i="line">Line</span> 1</span> ·
+                4 <span data-i="min">min</span></span
+              >
+            </div>
+          </li>
+          <li style="--c: var(--l1)">
+            <span class="node" style="--c: var(--l1)"></span>
+            <div>
+              <div class="sub">
+                <span class="pill" style="--c: var(--l1)"><span data-i="line">Line</span> 1</span>
+                <span data-i="towards">towards</span> El-Marg
+              </div>
+              <details class="ride" style="--c: var(--l1)">
+                <summary>
+                  <span>5 <span data-i="stops">stops</span> · 10 <span data-i="min">min</span></span
+                  ><span>▾</span>
+                </summary>
+                <ul>
+                  <li>Nasser</li>
+                  <li>Orabi</li>
+                  <li>Al-Shohadaa</li>
+                  <li>Ghamra</li>
+                </ul>
+              </details>
+            </div>
+          </li>
+          <li style="--c: var(--l1)">
+            <span class="node end" style="--c: var(--l1)"></span>
+            <div>
+              <div class="name">El-Demerdash</div>
+              <div class="sub" data-i="getOff">Get off here</div>
+            </div>
+          </li>
+        </ol>
+
+        <div class="tips">
+          <details>
+            <summary>♀ <span data-i="women">Women-only cars</span></summary>
+            <p data-i="womenText">The 2 middle cars of every train. Men may use them after 9 pm.</p>
+          </details>
+        </div>
+        <div class="actions">
+          <button class="primary" data-i="track">▶ Track my trip</button>
+          <button data-i="share">Share</button>
+          <button data-i="save">☆ Save trip</button>
+        </div>
+        <p class="fine" data-i="estimates">Times are estimates.</p>
+      </section>
+    </div>
+
+    <script>
+      const ar = {
+        fastest: 'الأسرع',
+        min: 'د',
+        arrive: 'الوصول',
+        stations: 'محطات',
+        direct: 'مباشر',
+        transfers0: 'بدون تبديل',
+        egp: 'جنيه',
+        running: 'يعمل · قطار كل دقيقتين تقريباً',
+        closing: 'قارب على الإغلاق · آخر قطار 00:00',
+        walkTo: 'امشِ إلى المنيب',
+        line: 'خط',
+        towards: 'باتجاه',
+        stops: 'محطات',
+        getOff: 'انزل هنا',
+        dest: 'وجهتك',
+        women: 'عربات السيدات',
+        womenText: 'العربتان الوسطيان في كل قطار. يمكن للرجال استخدامهما بعد الساعة 9 مساءً.',
+        track: '▶ تتبع رحلتي',
+        share: 'مشاركة',
+        save: '☆ حفظ الرحلة',
+        estimates: 'الأوقات تقديرية.',
+        change1: 'تبديل',
+        changeTo: 'بدّل إلى',
+      };
+      const setLang = (l) => {
+        document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.querySelectorAll('[data-i]').forEach((e) => {
+          e.dataset.en ??= e.textContent;
+          e.textContent = l === 'ar' ? (ar[e.dataset.i] ?? e.dataset.en) : e.dataset.en;
+        });
+      };
+      let lang = 'en';
+      document.getElementById('dir').onclick = (e) => {
+        lang = lang === 'en' ? 'ar' : 'en';
+        e.target.textContent = lang === 'en' ? 'العربية' : 'English';
+        setLang(lang);
+      };
+      document.getElementById('theme').onclick = (e) => {
+        document.body.classList.toggle('dark');
+        e.target.textContent = document.body.classList.contains('dark') ? 'Light' : 'Dark';
+      };
+      document.querySelectorAll('[data-v]').forEach((b) => {
+        b.onclick = () => {
+          document.querySelectorAll('[data-v]').forEach((x) => x.classList.toggle('on', x === b));
+          document
+            .querySelectorAll('[data-view]')
+            .forEach((s) => (s.hidden = s.dataset.view !== b.dataset.v));
+        };
+      });
+    </script>
+  </body>
+</html>

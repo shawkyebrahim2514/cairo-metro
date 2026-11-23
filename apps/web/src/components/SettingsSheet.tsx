@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useModal } from '../useModal';
 import type { TicketCategory } from '@cairo-metro/core';
 import { canVibrate, fireAlert, type AlertPrefs } from '../alerts';
 import { localDigits, useI18n } from '../i18n';
@@ -22,11 +23,9 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
   const { t, lang } = useI18n();
   const { theme, setTheme, highlight, setHighlight, alerts, setAlerts } = useSettings();
 
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  const timers = useRef<number[]>([]);
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const modal = useModal(onClose);
 
   return (
     <div className="scrim" onClick={onClose}>
@@ -35,12 +34,15 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
         role="dialog"
         aria-modal="true"
         aria-label={t('settings')}
+        ref={modal.ref}
+        onKeyDown={modal.onKeyDown}
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="settings-head">
           <h2>{t('settings')}</h2>
           <button type="button" className="icon" aria-label={t('close')} onClick={onClose}>
-            ✕
+            <span aria-hidden="true">✕</span>
           </button>
         </div>
 
@@ -117,8 +119,11 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
           />{' '}
           {t('alertAwake')}
         </label>
-        <p className="label">{t('alertWarn')}</p>
+        <p className="label" id="warn-label">
+          {t('alertWarn')}
+        </p>
         <select
+          aria-labelledby="warn-label"
           value={alerts.warnStops}
           onChange={(e) =>
             setAlerts({ ...alerts, warnStops: Number(e.target.value) as AlertPrefs['warnStops'] })
@@ -136,7 +141,12 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
           className="pill test"
           onClick={() => {
             for (const [i, kind] of (['station', 'warn', 'change', 'arrive'] as const).entries()) {
-              setTimeout(() => fireAlert(kind, alerts, t('alertTestText'), lang), i * 1500);
+              timers.current.push(
+                window.setTimeout(
+                  () => fireAlert(kind, alerts, t('alertTestText'), lang),
+                  i * 1500,
+                ),
+              );
             }
           }}
         >
@@ -144,8 +154,14 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
         </button>
 
         <h3>{t('tripTitle')}</h3>
-        <p className="label">{t('fareCategory')}</p>
-        <select value={category} onChange={(e) => onCategory(e.target.value as TicketCategory)}>
+        <p className="label" id="fare-label">
+          {t('fareCategory')}
+        </p>
+        <select
+          aria-labelledby="fare-label"
+          value={category}
+          onChange={(e) => onCategory(e.target.value as TicketCategory)}
+        >
           <option value="standard">{t('catStandard')}</option>
           <option value="senior60AndArmyPolice">{t('catSenior')}</option>
           <option value="specialNeedsAndVeterans">{t('catSpecial')}</option>

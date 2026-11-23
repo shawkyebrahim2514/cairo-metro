@@ -45,7 +45,12 @@ export function TrackPanel({
   const here = route.stations[state.index]!;
 
   return (
-    <section className="track" aria-live="polite">
+    <section className="track" aria-label={t('trackTitle')}>
+      <p className="sr-only" role="status">
+        {arrived
+          ? `${t('trackArrived')} ${name(here)}`
+          : `${t('trackNext')}: ${p.nextStationId ? name(p.nextStationId) : ''}`}
+      </p>
       <header>
         <span className="pulse" aria-hidden="true" />
         <strong>{t('trackTitle')}</strong>
@@ -55,13 +60,15 @@ export function TrackPanel({
       </header>
 
       {state.alarm && (
-        <button type="button" className="alarm" onClick={onDismiss}>
-          {t('trackDismiss')}
-        </button>
+        <div role="alert">
+          <button type="button" className="alarm" onClick={onDismiss}>
+            {t('trackDismiss')}
+          </button>
+        </div>
       )}
       {state.denied && <p className="note warn">{t('trackDenied')}</p>}
       {state.offRoute && (
-        <div className="note warn">
+        <div className="note warn" role="alert">
           <p>{t('trackOffRoute')}</p>
           <button type="button" className="pill" onClick={onReplan}>
             {t('trackReplan')}

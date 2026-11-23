@@ -60,6 +60,8 @@ export function PlaceInput({
   const [filter, setFilter] = useState<Filter>('all');
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
+  const inputId = useId();
+  const [active, setActive] = useState(-1);
 
   const typedRef = useRef(false);
   const prevEndpointRef = useRef<Endpoint | null>(null);
@@ -159,6 +161,8 @@ export function PlaceInput({
     .map((group) => ({ group, items: visible.filter((s) => s.group === group) }))
     .filter((g) => g.items.length > 0);
 
+  const flat = groups.flatMap((g) => g.items);
+
   const locate = () => {
     const token = ++gpsToken.current;
     setBusy(true);
@@ -192,16 +196,20 @@ export function PlaceInput({
 
   return (
     <div className="place-input" ref={rootRef}>
-      <label>
-        <span className="label">{label}</span>
+      <label className="label" htmlFor={inputId}>
+        {label}
+      </label>
+      <div>
         <div className="field">
           {tone && <i className={`dot ${tone}`} aria-hidden="true" />}
           <input
+            id={inputId}
             value={text}
             placeholder={t('searchPlaceholder')}
             onChange={(e) => {
               setText(e.target.value);
               setOpen(true);
+              setActive(-1);
               gpsToken.current++;
               setBusy(false);
               if (endpoint) {
@@ -214,9 +222,25 @@ export function PlaceInput({
             enterKeyHint="search"
             role="combobox"
             aria-expanded={open && suggestions.length > 0}
-            aria-controls={listId}
+            aria-controls={open && suggestions.length > 0 ? listId : undefined}
+            aria-activedescendant={
+              active >= 0 && flat[active] ? `${listId}-${flat[active]!.key}` : undefined
+            }
             aria-autocomplete="list"
-            onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') setOpen(false);
+              else if (e.key === 'ArrowDown' && flat.length) {
+                e.preventDefault();
+                setOpen(true);
+                setActive((a) => (a + 1) % flat.length);
+              } else if (e.key === 'ArrowUp' && flat.length) {
+                e.preventDefault();
+                setActive((a) => (a <= 0 ? flat.length - 1 : a - 1));
+              } else if (e.key === 'Enter' && open && flat[active]) {
+                e.preventDefault();
+                choose(flat[active]!);
+              }
+            }}
           />
           {text && (
             <button
@@ -230,7 +254,7 @@ export function PlaceInput({
                 onChange(null);
               }}
             >
-              ×
+              <span aria-hidden="true">×</span>
             </button>
           )}
           {showGps && 'geolocation' in navigator && (
@@ -242,11 +266,14 @@ export function PlaceInput({
               onClick={locate}
               disabled={busy}
             >
-              {busy ? '…' : '◎'}
+              <span aria-hidden="true">{busy ? '…' : '◎'}</span>
             </button>
           )}
         </div>
-      </label>
+      </div>
+      <p className="sr-only" role="status">
+        {open && suggestions.length > 0 ? `${suggestions.length} ${t('resultsCount')}` : ''}
+      </p>
       {error && <p className="note error">{error}</p>}
       {hint && <p className="note">{hint}</p>}
       {open && suggestions.length > 0 && (
@@ -266,16 +293,24 @@ export function PlaceInput({
               </button>
             ))}
           </div>
-          <ul id={listId}>
+          <ul id={listId} role="listbox" aria-label={label}>
             {groups.map(({ group, items }) => (
-              <li key={group} className="group">
+              <li key={group} className="group" role="presentation">
                 {group !== 'other' && (
                   <h4>{t(group === 'stations' ? 'groupStations' : 'groupPlaces')}</h4>
                 )}
-                <ul>
+                <ul role="presentation">
                   {items.map((s) => (
-                    <li key={s.key}>
-                      <button type="button" onClick={() => choose(s)}>
+                    <li key={s.key} role="presentation">
+                      <button
+                        type="button"
+                        role="option"
+                        id={`${listId}-${s.key}`}
+                        aria-selected={flat[active]?.key === s.key}
+                        className={flat[active]?.key === s.key ? 'active' : undefined}
+                        tabIndex={-1}
+                        onClick={() => choose(s)}
+                      >
                         <span className={`ico ${s.group}`} aria-hidden="true">
                           {s.group === 'stations' ? 'M' : s.group === 'places' ? 'P' : '📍'}
                         </span>

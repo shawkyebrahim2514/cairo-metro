@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useModal } from '../useModal';
 import { localDigits, useI18n, type Key } from '../i18n';
 
 const STEPS: { title: Key; body: Key }[] = [
@@ -15,18 +16,21 @@ export function Tour({ onClose }: { onClose: () => void }) {
   const last = step === STEPS.length - 1;
   const s = STEPS[step]!;
 
-  useEffect(() => {
-    nextRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  const modal = useModal(onClose, () => nextRef.current);
 
   return (
     <div className="tour-scrim">
-      <div className="tour" role="dialog" aria-modal="true" aria-labelledby="tour-title">
+      <div
+        className="tour"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="tour-title"
+        ref={modal.ref}
+        onKeyDown={modal.onKeyDown}
+        tabIndex={-1}
+      >
         <h2 id="tour-title">{t(s.title)}</h2>
-        <p>{t(s.body)}</p>
+        <p aria-live="polite">{t(s.body)}</p>
         <div className="tour-nav">
           <button type="button" className="link" onClick={onClose}>
             {t('tourSkip')}

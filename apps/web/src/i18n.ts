@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+﻿import { createContext, useContext } from 'react';
 import type { Station } from '@cairo-metro/core';
 
 export type Lang = 'en' | 'ar';
@@ -92,6 +92,7 @@ const en = {
   svcWait: 'Average wait for a train:',
   filterStations: 'Stations',
   filterPlaces: 'Places',
+  resultsCount: 'results',
   groupStations: 'Metro stations',
   groupPlaces: 'Places',
   nearestPrefix: 'Nearest',
@@ -253,6 +254,7 @@ const ar: Record<Key, string> = {
   svcWait: 'متوسط الانتظار للقطار:',
   filterStations: 'المحطات',
   filterPlaces: 'الأماكن',
+  resultsCount: 'نتيجة',
   groupStations: 'محطات المترو',
   groupPlaces: 'أماكن',
   nearestPrefix: 'الأقرب',

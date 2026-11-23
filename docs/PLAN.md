@@ -137,6 +137,11 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Trip alerts in Settings (vibration, pulse per station, 'n stops before' warning, beep, spoken announcements, keep screen on, test button); different vibration patterns per event.
 - Limits: alerts only while the page is open (no background); background alerts need a Capacitor native wrapper. Works offline as an installed PWA. Not verified on a real phone underground (headless Edge with emulated GPS only).
 
+### Accessibility review fixes (done)
+
+- [x] Code-review and rubber-duck agents on a11y: modal focus trap/restore (useModal), TrackPanel live region reduced to a concise status plus role=alert for alarm/off-route, combobox keyboard (arrows/Enter, listbox/option), route-pick button with aria-pressed, select labels, sheet aria-expanded, 44px touch targets, darker muted text, darker line pills. Deferred: keyboard map station selection, tabs pattern, wake-me anchor/crossed-warning edge case, audio unlock.
+- [x] docs/FEATURES.md (feature guide) and docs/mocks/route-card-v2.html (route card redesign mock, awaiting approval).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.

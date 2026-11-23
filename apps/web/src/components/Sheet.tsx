@@ -27,6 +27,8 @@ export function Sheet({ snap, onSnap, children }: Props) {
         type="button"
         className="sheet-handle"
         aria-label={snap === 'full' ? t('sheetLower') : t('sheetRaise')}
+        aria-expanded={snap !== 'peek'}
+        onPointerCancel={() => (startY.current = null)}
         onPointerDown={(e) => {
           startY.current = e.clientY;
           moved.current = false;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { tripService } from '@cairo-metro/core';
 import { hoursData, lineColour, stationsById } from '../data';
 import { endpointName, type Endpoint } from '../endpoint';
@@ -32,13 +32,23 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
   return (
     <section className={`card route${selected ? ' selected' : ''}`} onClick={onSelect}>
       <header>
-        <strong>{title}</strong>
+        <button
+          type="button"
+          className="route-pick"
+          aria-pressed={selected}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSelect();
+          }}
+        >
+          <strong>{title}</strong>
+        </button>
         <span className="total">{formatMinutes(trip.totalSec, t, lang)}</span>
       </header>
       <p className="meta">
-        {n(route.stops + 1)} {route.stops === 0 ? t('stationCountOne') : t('stationCount')} ·{' '}
+        {n(route.stops + 1)} {route.stops === 0 ? t('stationCountOne') : t('stationCount')} Â·{' '}
         {nt === 0 ? t('direct') : `${n(nt)} ${nt === 1 ? t('transfer') : t('transfers')}`}
-        {route.fare != null && ` · ${n(route.fare)} ${t('fare')}`}
+        {route.fare != null && ` Â· ${n(route.fare)} ${t('fare')}`}
       </p>
       {service.state === 'closed' && <p className="note warn">{t('svcClosed')}</p>}
       {service.state === 'closing-soon' && (
@@ -57,8 +67,8 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
       <ol className="steps">
         {trip.walkIn && (
           <li className="walk">
-            {t('walkToStation')} {name(trip.walkIn.station.id)} ·{' '}
-            {formatDistance(trip.walkIn.walkMeters, t, lang)} ·{' '}
+            {t('walkToStation')} {name(trip.walkIn.station.id)} Â·{' '}
+            {formatDistance(trip.walkIn.walkMeters, t, lang)} Â·{' '}
             {formatMinutes(trip.walkIn.walkSec, t, lang)}
           </li>
         )}
@@ -73,7 +83,7 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
                 {t('line')} {n(leg.line.replace(/\D/g, ''))}
               </span>{' '}
               {t('takeLine')} {name(leg.stations[0]!)} {t('towards')}{' '}
-              {leg.towards.map(name).join(' / ')} · {n(leg.stops)}{' '}
+              {leg.towards.map(name).join(' / ')} Â· {n(leg.stops)}{' '}
               {leg.stops === 1 ? t('stop') : t('stops')}
               <br />
               <small>
@@ -93,8 +103,8 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
         })}
         {trip.walkOut && (
           <li className="walk">
-            {t('walkFromStation')} {name(trip.walkOut.station.id)} ·{' '}
-            {formatDistance(trip.walkOut.walkMeters, t, lang)} ·{' '}
+            {t('walkFromStation')} {name(trip.walkOut.station.id)} Â·{' '}
+            {formatDistance(trip.walkOut.walkMeters, t, lang)} Â·{' '}
             {formatMinutes(trip.walkOut.walkSec, t, lang)}
           </li>
         )}
@@ -106,12 +116,13 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
       <button
         type="button"
         className="link"
+        aria-expanded={expanded}
         onClick={(e) => {
           e.stopPropagation();
           setExpanded((v) => !v);
         }}
       >
-        {t('showStations')} {expanded ? '▲' : '▼'}
+        {t('showStations')} <span aria-hidden="true">{expanded ? 'â–²' : 'â–¼'}</span>
       </button>
     </section>
   );
