@@ -127,6 +127,10 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] GitHub Pages: `.github/workflows/pages.yml` builds `apps/web` and deploys on every push to main. Live at https://shawkyebrahim2514.github.io/cairo-metro/ (relative base path, hash routes, so it works under the sub-path).
 
+### UI v2 (modern look, in design)
+
+- Mock `docs/mocks/ui-v2.html`: bottom sheet over a full-screen map, route timeline, motion, skeletons, SVG icons and line pills, theme switch (light/dark/auto), map with station labels beside each dot and a bold, colour-selectable route highlight (others fade). Awaiting user feedback before implementing; real app also needs a theme switch.
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
