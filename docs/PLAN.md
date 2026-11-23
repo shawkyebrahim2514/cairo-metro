@@ -127,9 +127,9 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] GitHub Pages: `.github/workflows/pages.yml` builds `apps/web` and deploys on every push to main. Live at https://shawkyebrahim2514.github.io/cairo-metro/ (relative base path, hash routes, so it works under the sub-path).
 
-### UI v2 (modern look, in design)
+### UI v2 (partly implemented)
 
-- Mock `docs/mocks/ui-v2.html`: bottom sheet over a full-screen map, route timeline, motion, skeletons, SVG icons and line pills, theme switch (light/dark/auto), map with station labels beside each dot and a bold, colour-selectable route highlight (others fade). Awaiting user feedback before implementing; real app also needs a theme switch.
+- [x] Settings sheet (gear in app bar): theme Light/Dark/Auto, route highlight colour (amber/violet/pink/cyan), ticket type, map tiles; saved in localStorage. [x] Map: station names beside dots by zoom (route stations always), route drawn with glow, white casing, per-line colour and animated dots, other lines fade. Remaining: route timeline card, SVG icons, bottom-sheet layout, skeletons.
 
 ### Future ideas (not scheduled)
 

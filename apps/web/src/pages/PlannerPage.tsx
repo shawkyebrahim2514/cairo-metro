@@ -150,6 +150,7 @@ export function PlannerPage({
       <MetroMap
         markers={markers}
         route={trip?.route.stations}
+        legs={trip?.route.legs}
         tiles={tiles}
         onPick={pick}
         onStation={(s) => pickEndpoint({ kind: 'station', station: s })}

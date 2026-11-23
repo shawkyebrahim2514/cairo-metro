@@ -8,23 +8,28 @@
   --on-accent: #fff;
   --warn: #b45309;
   --chip: #f1f5f9;
-  color-scheme: light dark;
+  --map: #e6edf5;
+  --glass: rgb(255 255 255 / 0.75);
+  --shadow: 0 8px 28px rgb(15 23 42 / 0.16);
+  --hl: #f59e0b;
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0b0f17;
-    --card: #141a26;
-    --text: #e8edf5;
-    --muted: #94a3b8;
-    --border: #243044;
-    --accent: #2dd4bf;
-    --on-accent: #06201c;
-    --warn: #fbbf24;
-    --chip: #1b2434;
-  }
+:root[data-theme='dark'] {
+  --bg: #0b0f17;
+  --card: #141a26;
+  --text: #e8edf5;
+  --muted: #94a3b8;
+  --border: #243044;
+  --accent: #2dd4bf;
+  --on-accent: #06201c;
+  --warn: #fbbf24;
+  --chip: #1b2434;
+  --map: #0f1b2e;
+  --glass: rgb(20 26 38 / 0.72);
+  --shadow: 0 8px 28px rgb(0 0 0 / 0.5);
+  color-scheme: dark;
 }
-
 * {
   box-sizing: border-box;
 }
@@ -694,4 +699,147 @@ footer {
 .map-tools {
   inset-inline-end: auto;
   right: 10px;
+}
+
+/* Settings sheet */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  background: rgb(0 0 0 / 0.55);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fade 0.2s;
+}
+
+.settings {
+  width: 100%;
+  max-width: 720px;
+  background: var(--card);
+  border-radius: 24px 24px 0 0;
+  padding: 16px 16px 24px;
+  box-shadow: 0 -10px 34px rgb(0 0 0 / 0.3);
+  animation: slide-up 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.settings-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-head h2 {
+  margin: 0;
+}
+
+.settings .label {
+  margin: 14px 0 6px;
+}
+
+.settings select {
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+.settings .toggle.row {
+  display: block;
+  margin-top: 14px;
+}
+
+.seg {
+  display: flex;
+  background: var(--chip);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.seg button {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.seg button.on {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.swatches {
+  display: flex;
+  gap: 12px;
+}
+
+.swatches button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--card);
+  outline: 1px solid var(--border);
+}
+
+.swatches button.on {
+  outline: 3px solid var(--text);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+/* Map: theme-aware background, station names beside dots, animated route dots */
+.map,
+.leaflet-container {
+  background: var(--map);
+  font: inherit;
+}
+
+.leaflet-tooltip.st-label {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text);
+  text-shadow:
+    0 0 3px var(--map),
+    0 0 3px var(--map),
+    0 0 3px var(--map);
+}
+
+.leaflet-tooltip.st-label.on-route {
+  font-weight: 800;
+  font-size: 0.74rem;
+}
+
+.leaflet-tooltip.st-label::before {
+  display: none;
+}
+
+.route-flow {
+  animation: flow 1.2s linear infinite;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -12;
+  }
 }

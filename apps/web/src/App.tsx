@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
+import { SettingsSheet } from './components/SettingsSheet';
 import { Tour } from './components/Tour';
 import { NearestPage } from './pages/NearestPage';
 import { PlannerPage } from './pages/PlannerPage';
@@ -9,6 +10,14 @@ import './styles.css';
 import { takeSharedText } from './share';
 import { readPlanHash } from './storage';
 import { reportUrl } from './report';
+import {
+  applyTheme,
+  highlightColour,
+  SettingsContext,
+  type HighlightId,
+  type Settings,
+  type ThemeMode,
+} from './settings';
 
 type Tab = 'nearest' | 'plan';
 
@@ -46,6 +55,13 @@ export function App() {
     localStorage.setItem('toured', '1');
     setTour(false);
   };
+  const [theme, setTheme] = useState<ThemeMode>(() =>
+    stored<ThemeMode>('theme', ['light', 'dark', 'auto'], 'auto'),
+  );
+  const [highlight, setHighlight] = useState<HighlightId>(() =>
+    stored<HighlightId>('highlight', ['amber', 'violet', 'pink', 'cyan'], 'amber'),
+  );
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
   const [resolverFailed, setResolverFailed] = useState(false);
@@ -62,6 +78,28 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem('theme', theme);
+    localStorage.setItem('highlight', highlight);
+    applyTheme(theme, highlight);
+    if (theme !== 'auto') return;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const onChange = () => applyTheme('auto', highlight);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, [theme, highlight]);
+
+  const settings = useMemo<Settings>(
+    () => ({
+      theme,
+      setTheme,
+      highlight,
+      setHighlight,
+      highlightColour: highlightColour(highlight),
+    }),
+    [theme, highlight],
+  );
+
+  useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
     localStorage.setItem('lang', lang);
@@ -75,105 +113,104 @@ export function App() {
 
   return (
     <I18nContext.Provider value={i18n}>
-      <div className="app">
-        <header className="top">
-          <h1>{t('appName')}</h1>
-          <div className="actions">
-            <button
-              type="button"
-              className="pill"
-              aria-label={t('help')}
-              onClick={() => setTour(true)}
-            >
-              ?
-            </button>
-            <button
-              type="button"
-              className="pill"
-              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-            >
-              {t('language')}
-            </button>
-          </div>
-        </header>
+      <SettingsContext.Provider value={settings}>
+        <div className="app">
+          <header className="top">
+            <h1>{t('appName')}</h1>
+            <div className="actions">
+              <button
+                type="button"
+                className="pill"
+                aria-label={t('settings')}
+                onClick={() => setSettingsOpen(true)}
+              >
+                ⚙
+              </button>
+              <button
+                type="button"
+                className="pill"
+                aria-label={t('help')}
+                onClick={() => setTour(true)}
+              >
+                ?
+              </button>
+              <button
+                type="button"
+                className="pill"
+                onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+              >
+                {t('language')}
+              </button>
+            </div>
+          </header>
 
-        <nav className="tabs" role="tablist">
-          {(['nearest', 'plan'] as const).map((id) => (
-            <button
-              key={id}
-              role="tab"
-              aria-selected={tab === id}
-              className={tab === id ? 'active' : ''}
-              onClick={() => {
-                setTab(id);
-                localStorage.setItem('tab', id);
-              }}
-            >
-              <span className="tab-ico" aria-hidden="true">
-                {id === 'nearest' ? '📍' : '🚇'}
-              </span>
-              {id === 'nearest' ? t('tabNearest') : t('tabPlan')}
-            </button>
-          ))}
-        </nav>
+          <nav className="tabs" role="tablist">
+            {(['nearest', 'plan'] as const).map((id) => (
+              <button
+                key={id}
+                role="tab"
+                aria-selected={tab === id}
+                className={tab === id ? 'active' : ''}
+                onClick={() => {
+                  setTab(id);
+                  localStorage.setItem('tab', id);
+                }}
+              >
+                <span className="tab-ico" aria-hidden="true">
+                  {id === 'nearest' ? '📍' : '🚇'}
+                </span>
+                {id === 'nearest' ? t('tabNearest') : t('tabPlan')}
+              </button>
+            ))}
+          </nav>
 
-        {!resolver && (
-          <p className={resolverFailed ? 'note warn' : 'note'}>
-            {t(resolverFailed ? 'placesFailed' : 'loadingPlaces')}
-          </p>
-        )}
-
-        <main>
-          {tab === 'nearest' ? (
-            <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
-          ) : (
-            <PlannerPage resolver={resolver} tiles={tiles} category={category} />
+          {!resolver && (
+            <p className={resolverFailed ? 'note warn' : 'note'}>
+              {t(resolverFailed ? 'placesFailed' : 'loadingPlaces')}
+            </p>
           )}
-        </main>
 
-        {tour && <Tour onClose={closeTour} />}
+          <main>
+            {tab === 'nearest' ? (
+              <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
+            ) : (
+              <PlannerPage resolver={resolver} tiles={tiles} category={category} />
+            )}
+          </main>
 
-        <footer>
-          <label className="toggle">
-            {t('fareCategory')}{' '}
-            <select
-              value={category}
-              onChange={(e) => {
-                const v = e.target.value as TicketCategory;
+          {tour && <Tour onClose={closeTour} />}
+          {settingsOpen && (
+            <SettingsSheet
+              category={category}
+              onCategory={(v) => {
                 setCategory(v);
                 localStorage.setItem('category', v);
               }}
-            >
-              <option value="standard">{t('catStandard')}</option>
-              <option value="senior60AndArmyPolice">{t('catSenior')}</option>
-              <option value="specialNeedsAndVeterans">{t('catSpecial')}</option>
-            </select>
-          </label>
-          <label className="toggle">
-            <input
-              type="checkbox"
-              checked={tiles}
-              onChange={(e) => {
-                setTiles(e.target.checked);
-                localStorage.setItem('tiles', e.target.checked ? '1' : '0');
+              tiles={tiles}
+              onTiles={(v) => {
+                setTiles(v);
+                localStorage.setItem('tiles', v ? '1' : '0');
               }}
-            />{' '}
-            {t('mapTiles')}
-          </label>
-          <a
-            href={reportUrl(lang)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => {
-              // refresh so the link carries the current route
-              e.currentTarget.href = reportUrl(lang);
-            }}
-          >
-            {t('reportProblem')}
-          </a>
-          <small>{t('attribution')}</small>
-        </footer>
-      </div>
+              onClose={() => setSettingsOpen(false)}
+            />
+          )}
+
+          <footer>
+            <a
+              href={reportUrl(lang)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => {
+                // refresh so the link carries the current route
+                e.currentTarget.href = reportUrl(lang);
+              }}
+            >
+              {t('reportProblem')}
+            </a>
+            <small>{t('attribution')}</small>
+          </footer>
+        </div>
+      </SettingsContext.Provider>
     </I18nContext.Provider>
   );
 }

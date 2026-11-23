@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { LatLng, Station } from '@cairo-metro/core';
+import type { LatLng, LineId, Station } from '@cairo-metro/core';
 import { lineColour, metro, stationsById } from '../data';
 import { stationName, useI18n } from '../i18n';
+import { useSettings } from '../settings';
 
 export interface MapMarker {
   point: LatLng;
@@ -17,6 +18,8 @@ interface Props {
   markers?: MapMarker[];
   /** Station ids of the route to highlight, in order. */
   route?: string[];
+  /** The route's legs, so each part is drawn in its line colour. */
+  legs?: { line: LineId; stations: string[] }[];
   tiles: boolean;
   onPick?: (p: LatLng) => void;
   /** Called when a station dot is tapped. */
@@ -25,8 +28,12 @@ interface Props {
 
 const CAIRO: L.LatLngTuple = [30.05, 31.25];
 
-export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Props) {
+export function MetroMap({ markers = [], route, legs, tiles, onPick, onStation }: Props) {
   const { lang, t } = useI18n();
+  const { highlightColour } = useSettings();
+  const baseRef = useRef<L.Polyline[]>([]);
+  const [zoom, setZoom] = useState(11);
+  const routeSet = useMemo(() => new Set(route ?? []), [route]);
   const hostRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const tileRef = useRef<L.TileLayer | null>(null);
@@ -51,14 +58,18 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
           const s = stationsById.get(id)!;
           return [s.lat, s.lng];
         });
-        L.polyline(pts, { color: lineColour.get(line.id), weight: 4, opacity: 0.85 }).addTo(map);
+        baseRef.current.push(
+          L.polyline(pts, { color: lineColour.get(line.id), weight: 5, opacity: 0.85 }).addTo(map),
+        );
       }
     }
+    map.on('zoomend', () => setZoom(map.getZoom()));
     map.on('click', (e: L.LeafletMouseEvent) =>
       pickRef.current?.({ lat: e.latlng.lat, lng: e.latlng.lng }),
     );
     return () => {
       map.remove();
+      baseRef.current = [];
       meRef.current = null;
       mapRef.current = null;
       tileRef.current = null;
@@ -100,19 +111,37 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
     );
   };
 
+  // Dim the plain lines while a route is shown so the route stands out.
+  useEffect(() => {
+    const hasRoute = Boolean(route && route.length > 1);
+    for (const l of baseRef.current) l.setStyle({ opacity: hasRoute ? 0.28 : 0.85 });
+  }, [route]);
+
+  // Station dots and names beside them: names appear by zoom level, route stations always.
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
     const group = L.layerGroup().addTo(map);
+    const hasRoute = routeSet.size > 0;
     for (const s of metro.stations) {
-      L.circleMarker([s.lat, s.lng], {
-        radius: s.interchange ? 6 : 4,
-        color: lineColour.get(s.lines[0]!.line) ?? '#333',
-        weight: 2,
+      const onRoute = routeSet.has(s.id);
+      const dim = hasRoute && !onRoute;
+      const marker = L.circleMarker([s.lat, s.lng], {
+        radius: onRoute ? 6 : s.interchange ? 6 : 4,
+        color: s.interchange ? '#111' : (lineColour.get(s.lines[0]!.line) ?? '#333'),
+        weight: onRoute ? 3 : 2,
         fillColor: '#fff',
-        fillOpacity: 1,
-      })
-        .bindTooltip(stationName(s, lang))
+        fillOpacity: dim ? 0.4 : 1,
+        opacity: dim ? 0.4 : 1,
+      });
+      const showName = onRoute || (!dim && (zoom >= 14 || (s.interchange && zoom >= 11)));
+      marker.bindTooltip(stationName(s, lang), {
+        permanent: showName,
+        direction: lang === 'ar' ? 'left' : 'right',
+        offset: [lang === 'ar' ? -6 : 6, 0],
+        className: `st-label${onRoute ? ' on-route' : ''}`,
+      });
+      marker
         .on('click', (e: L.LeafletMouseEvent) => {
           L.DomEvent.stopPropagation(e);
           stationRef.current?.(s);
@@ -122,7 +151,7 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
     return () => {
       group.remove();
     };
-  }, [lang]);
+  }, [lang, routeSet, zoom]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -147,12 +176,33 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
     const bounds: L.LatLngTuple[] = [];
 
     if (route && route.length > 1) {
-      const pts = route.map((id): L.LatLngTuple => {
-        const s = stationsById.get(id)!;
-        return [s.lat, s.lng];
-      });
-      L.polyline(pts, { color: '#111', weight: 9, opacity: 0.3 }).addTo(group);
-      bounds.push(...pts);
+      const toPts = (ids: string[]) =>
+        ids.map((id): L.LatLngTuple => {
+          const s = stationsById.get(id)!;
+          return [s.lat, s.lng];
+        });
+      const segments = legs?.length
+        ? legs.map((l) => ({ pts: toPts(l.stations), colour: lineColour.get(l.line) ?? '#333' }))
+        : [{ pts: toPts(route), colour: '#333' }];
+      const round = { lineCap: 'round', lineJoin: 'round' } as const;
+      // Glow, white casing, line colour, then moving dots, so the route reads clearly on any theme.
+      for (const seg of segments)
+        L.polyline(seg.pts, { color: highlightColour, weight: 18, opacity: 0.55, ...round }).addTo(
+          group,
+        );
+      for (const seg of segments)
+        L.polyline(seg.pts, { color: '#fff', weight: 11, opacity: 1, ...round }).addTo(group);
+      for (const seg of segments)
+        L.polyline(seg.pts, { color: seg.colour, weight: 6, opacity: 1, ...round }).addTo(group);
+      for (const seg of segments)
+        L.polyline(seg.pts, {
+          color: '#fff',
+          weight: 2,
+          dashArray: '1 11',
+          className: 'route-flow',
+          ...round,
+        }).addTo(group);
+      bounds.push(...toPts(route));
     }
     for (const m of markers) {
       L.circleMarker([m.point.lat, m.point.lng], {
@@ -168,7 +218,7 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
     }
     if (bounds.length > 0)
       map.fitBounds(L.latLngBounds(bounds), { padding: [40, 40], maxZoom: 16 });
-  }, [markers, route]);
+  }, [markers, route, legs, highlightColour]);
 
   return (
     <div className={full ? 'map-wrap full' : 'map-wrap'}>
