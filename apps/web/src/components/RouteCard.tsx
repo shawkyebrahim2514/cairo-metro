@@ -52,6 +52,7 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
           {t('svcWait')} {n(Math.round(firstWait))} {t('min')}
         </p>
       )}
+      <p className="note">{t('womenCars')}</p>
 
       <ol className="steps">
         {trip.walkIn && (

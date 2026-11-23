@@ -83,6 +83,8 @@ const en = {
   reachWithin: 'Within',
   reachNone: 'No stations within this time. Try a longer time.',
   reportProblem: 'Report a problem',
+  womenCars:
+    'Women-only cars: the 2 middle cars of every train. Men may use them after 9 pm (per cairometro.gov.eg).',
   svcClosed: 'The metro is closed now (first trains around 05:15). Times are estimates.',
   svcClosingSoon: 'Last trains are leaving soon, check before you go',
   svcWait: 'Average wait for a train:',
@@ -193,6 +195,8 @@ const ar: Record<Key, string> = {
   reachWithin: 'خلال',
   reachNone: 'لا توجد محطات خلال هذه المدة. جرّب مدة أطول.',
   reportProblem: 'الإبلاغ عن مشكلة',
+  womenCars:
+    'عربات السيدات: العربتان الوسطيان في كل قطار. يمكن للرجال استخدامهما بعد الساعة 9 مساءً.',
   svcClosed: 'المترو مغلق الآن (أول القطارات حوالي 05:15). الأوقات تقديرية.',
   svcClosingSoon: 'آخر القطارات ستغادر قريبًا، تأكد قبل الخروج',
   svcWait: 'متوسط الانتظار للقطار:',
