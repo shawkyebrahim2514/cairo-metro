@@ -137,6 +137,7 @@ Opened with the gear button, grouped as:
 
 - **Appearance**: theme (Light, Dark, Auto), and the route highlight colour (amber, violet, pink, cyan).
 - **Trip alerts**: see above.
+- **Station names on the map**: Always (default, smaller text when zoomed out), When zoomed in, or Hidden. Stations on the planned route always keep their names unless Hidden.
 - **Time format**: 12-hour or 24-hour clock for the arrival time and last-train times.
 - **Trip and map**: ticket type and the map tiles switch.
 

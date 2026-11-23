@@ -18,6 +18,7 @@ import {
   SettingsContext,
   type HighlightId,
   type Settings,
+  type StationLabels,
   type ThemeMode,
 } from './settings';
 
@@ -67,6 +68,9 @@ export function App() {
   const [timeFormat, setTimeFormat] = useState<TimeFormat>(() =>
     stored<TimeFormat>('timeFormat', ['12', '24'], '24'),
   );
+  const [stationLabels, setStationLabels] = useState<StationLabels>(() =>
+    stored<StationLabels>('stationLabels', ['always', 'zoom', 'off'], 'always'),
+  );
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
@@ -96,6 +100,7 @@ export function App() {
 
   useEffect(() => saveAlerts(alerts), [alerts]);
   useEffect(() => localStorage.setItem('timeFormat', timeFormat), [timeFormat]);
+  useEffect(() => localStorage.setItem('stationLabels', stationLabels), [stationLabels]);
 
   const settings = useMemo<Settings>(
     () => ({
@@ -107,9 +112,11 @@ export function App() {
       setHighlight,
       timeFormat,
       setTimeFormat,
+      stationLabels,
+      setStationLabels,
       highlightColour: highlightColour(highlight),
     }),
-    [theme, highlight, alerts, timeFormat],
+    [theme, highlight, alerts, timeFormat, stationLabels],
   );
 
   useEffect(() => {

@@ -1460,3 +1460,12 @@ footer {
     background: transparent;
   }
 }
+
+.leaflet-tooltip.st-label.small {
+  font-size: 0.58rem;
+  font-weight: 500;
+}
+.leaflet-tooltip.st-label.small.on-route {
+  font-size: 0.66rem;
+  font-weight: 800;
+}

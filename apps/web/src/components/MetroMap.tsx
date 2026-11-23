@@ -50,7 +50,7 @@ export function MetroMap({
   const padRef = useRef(bottomPad);
   padRef.current = bottomPad;
   const { lang, t } = useI18n();
-  const { highlightColour } = useSettings();
+  const { highlightColour, stationLabels } = useSettings();
   const baseRef = useRef<L.Polyline[]>([]);
   const [zoom, setZoom] = useState(11);
   const routeSet = useMemo(() => new Set(route ?? []), [route]);
@@ -186,12 +186,16 @@ export function MetroMap({
         fillOpacity: dim ? 0.4 : 1,
         opacity: dim ? 0.4 : 1,
       });
-      const showName = onRoute || (!dim && (zoom >= 14 || (s.interchange && zoom >= 11)));
+      const showName =
+        onRoute ||
+        (!dim &&
+          (stationLabels === 'always' ||
+            (stationLabels === 'zoom' && (zoom >= 14 || (s.interchange && zoom >= 11)))));
       marker.bindTooltip(stationName(s, lang), {
         permanent: showName,
         direction: lang === 'ar' ? 'left' : 'right',
         offset: [lang === 'ar' ? -6 : 6, 0],
-        className: `st-label${onRoute ? ' on-route' : ''}`,
+        className: `st-label${onRoute ? ' on-route' : ''}${zoom < 13 ? ' small' : ''}`,
       });
       marker
         .on('click', (e: L.LeafletMouseEvent) => {
@@ -216,7 +220,7 @@ export function MetroMap({
     return () => {
       group.remove();
     };
-  }, [lang, routeSet, zoom]);
+  }, [lang, routeSet, zoom, stationLabels]);
 
   useEffect(() => {
     const map = mapRef.current;

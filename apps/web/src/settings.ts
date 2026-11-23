@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 import { DEFAULT_ALERTS, type AlertPrefs } from './alerts';
 import type { TimeFormat } from './i18n';
 
+export type StationLabels = 'always' | 'zoom' | 'off';
+
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
 export const HIGHLIGHTS = [
@@ -24,6 +26,8 @@ export interface Settings {
   setAlerts: (a: AlertPrefs) => void;
   timeFormat: TimeFormat;
   setTimeFormat: (f: TimeFormat) => void;
+  stationLabels: StationLabels;
+  setStationLabels: (v: StationLabels) => void;
 }
 
 export const SettingsContext = createContext<Settings>({
@@ -36,6 +40,8 @@ export const SettingsContext = createContext<Settings>({
   setAlerts: () => {},
   timeFormat: '24',
   setTimeFormat: () => {},
+  stationLabels: 'always',
+  setStationLabels: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);
