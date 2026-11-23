@@ -157,6 +157,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - **Idea backlog (awaiting user pick):** trip screenshot/share image (M), QR trip share (S), Home/Work quick-picks + leave-now ETA (S), leave-at/arrive-by (M), trip history (S), station detail sheet (M), map station search + schematic view (M-L), user-reported disruptions (L, needs backend), walking directions (M-L), install prompt + offline badge (S), Capacitor wrapper (L), Monorail/BRT (L).
 
+- [x] 8A feature batch from the backlog: trip image, QR share, Home/Work quick-picks, trip history, station detail sheet with nearby places, install card + offline badge, shared-trip card with Open Graph preview. Skipped: user-reported disruptions. Still backlog: leave-at/arrive-by, map station search + schematic view, walking directions, Capacitor wrapper, Monorail/BRT.
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.

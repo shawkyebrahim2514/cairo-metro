@@ -153,6 +153,13 @@ All choices are saved on the device.
 
 - **Installable PWA** (Add to Home screen). The app shell, data and places index are cached by a small service worker; a new version appears on the second load.
 - **Share target**: once installed on Android, the app appears in the share menu for text or links.
+- **Install card** (touch devices): an Install button when the browser offers it; otherwise iOS "Share, Add to Home Screen" steps, Android menu steps, or an "open in Chrome/Safari" hint inside Facebook, WhatsApp and Instagram browsers. Dismissal is remembered for 14 days.
+- **Offline badge** in the header: "Ready offline" once the service worker has cached the app (from the second visit), "Offline" when the connection drops.
+- **Shared-trip card**: opening a trip link shows a gradient card with the route, time, stations and fare, plus View route, Track my trip and Save buttons. Link previews in WhatsApp/Facebook show a generic app card (static hosting cannot make per-trip previews).
+- **Trip QR code**: a QR of the trip link that another phone can scan (built in, no library).
+- **Trip image**: a shareable PNG with the route diagram, stats and steps (Web Share on phones, download elsewhere).
+- **Home and Work** quick places, and a **trip history** (last 30, with dates, "Show all", "Clear history") next to saved trips.
+- **Station sheet**: tapping a station on the map opens its lines, first and last train, women-only cars note and places within 600 m of walking, with "Start here" and "Go here" buttons.
 - **Hosted on GitHub Pages**, deployed automatically on every push to the main branch.
 
 ## 14. Accessibility
