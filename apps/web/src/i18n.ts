@@ -1,4 +1,4 @@
-﻿import { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import type { Station } from '@cairo-metro/core';
 
 export type Lang = 'en' | 'ar';
@@ -63,17 +63,6 @@ const en = {
   catStandard: 'Standard',
   catSenior: 'Senior 60+ / army / police',
   catSpecial: 'Special needs / veterans',
-  passTitle: 'Monthly pass or tickets?',
-  noPass: 'No monthly pass is listed for this ticket type.',
-  ridesPerMonth: 'Rides per month',
-  singleTickets: 'Single tickets',
-  monthlyPass: 'Monthly pass',
-  quarterlyPass: 'Quarterly pass (3 months)',
-  perMonth: '/month',
-  zonesApprox: 'estimated zones',
-  passCheaper: 'The pass saves you',
-  ticketsCheaper: 'Single tickets are cheaper for this many rides.',
-  breakEven: 'The pass pays off from this many rides per month:',
   linkCopied: 'Link copied',
   saveTrip: 'Save trip',
   saved: 'Saved',
@@ -150,6 +139,9 @@ const en = {
   themeDark: 'Dark',
   themeAuto: 'Auto',
   routeHighlight: 'Route highlight colour',
+  timeFormat: 'Time format',
+  time12: '12-hour',
+  time24: '24-hour',
   hl_amber: 'Amber',
   hl_violet: 'Violet',
   hl_pink: 'Pink',
@@ -232,17 +224,6 @@ const ar: Record<Key, string> = {
   catStandard: 'عادية',
   catSenior: 'فوق 60 سنة / جيش / شرطة',
   catSpecial: 'ذوو الاحتياجات الخاصة / المحاربون القدامى',
-  passTitle: 'اشتراك شهري أم تذاكر؟',
-  noPass: 'لا يوجد اشتراك شهري لهذا النوع من التذاكر.',
-  ridesPerMonth: 'عدد الرحلات في الشهر',
-  singleTickets: 'تذاكر فردية',
-  monthlyPass: 'الاشتراك الشهري',
-  quarterlyPass: 'الاشتراك ربع السنوي (٣ أشهر)',
-  perMonth: '/شهرياً',
-  zonesApprox: 'عدد المناطق التقديري',
-  passCheaper: 'الاشتراك يوفّر لك',
-  ticketsCheaper: 'التذاكر الفردية أرخص لهذا العدد من الرحلات.',
-  breakEven: 'الاشتراك يُجدي من هذا العدد من الرحلات شهرياً:',
   linkCopied: 'تم نسخ الرابط',
   saveTrip: 'حفظ الرحلة',
   saved: 'محفوظة',
@@ -319,6 +300,9 @@ const ar: Record<Key, string> = {
   themeDark: 'داكن',
   themeAuto: 'تلقائي',
   routeHighlight: 'لون تمييز المسار',
+  timeFormat: 'تنسيق الوقت',
+  time12: '١٢ ساعة',
+  time24: '٢٤ ساعة',
   hl_amber: 'عنبري',
   hl_violet: 'بنفسجي',
   hl_pink: 'وردي',
@@ -368,3 +352,13 @@ export function formatDistance(meters: number, t: I18n['t'], lang: Lang): string
 
 export const formatMinutes = (sec: number, t: I18n['t'], lang: Lang) =>
   `${localDigits(Math.max(1, Math.round(sec / 60)), lang)} ${t('min')}`;
+
+export type TimeFormat = '12' | '24';
+
+/** A clock time in the chosen 12 or 24-hour format. */
+export const formatClock = (date: Date, lang: Lang, fmt: TimeFormat) =>
+  date.toLocaleTimeString(lang === 'ar' ? 'ar-EG' : 'en-GB', {
+    hour: fmt === '12' ? 'numeric' : '2-digit',
+    minute: '2-digit',
+    hour12: fmt === '12',
+  });

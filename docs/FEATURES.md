@@ -74,7 +74,6 @@ Plan a metro trip between two points. Each end can be a station, a place, a Maps
   **Fares and passes**
 
 - Fare uses the official ticket tiers (10 EGP up to 9 stations, 12 up to 16, 15 up to 23, 20 up to 39 for the standard ticket). Ticket type can be standard, senior 60+/army/police, or special needs/veterans (set in Settings).
-- **Monthly and quarterly pass calculator**: enter rides per month to see whether a pass or single tickets cost less, with the break-even point.
 
 **Estimates**
 
@@ -138,6 +137,7 @@ Opened with the gear button, grouped as:
 
 - **Appearance**: theme (Light, Dark, Auto), and the route highlight colour (amber, violet, pink, cyan).
 - **Trip alerts**: see above.
+- **Time format**: 12-hour or 24-hour clock for the arrival time and last-train times.
 - **Trip and map**: ticket type and the map tiles switch.
 
 All choices are saved on the device.
@@ -159,6 +159,7 @@ All choices are saved on the device.
 - Search box is a full combobox: arrow keys move through a listbox of results, Enter picks, and the result count is announced.
 - Dialogs (Settings, tour) move focus in, trap Tab, close on Escape and return focus. Tabs are a navigation with the current page marked.
 - Tracking announces only the next station, with alarm and off-route messages as alerts. The wake-me alarm still fires if a station is skipped, and audio is unlocked when you tap Track.
+- Search fields use clean icon buttons (clear, my location with a spinner while locating), and scrollbars are custom-styled thin rounded bars that follow the theme.
 - Map stations can be focused with Tab and chosen with Enter. Buttons are at least 44 px; muted text and line badges meet contrast.
 - Dark mode contrast, reduced-motion support (animations stop), and a meta description.
 - Lighthouse (mobile): performance 0.99, accessibility 1, best practices 1, SEO 1 at the time of the last check.

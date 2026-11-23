@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import { DEFAULT_ALERTS, type AlertPrefs } from './alerts';
+import type { TimeFormat } from './i18n';
 
 export type ThemeMode = 'light' | 'dark' | 'auto';
 
@@ -21,6 +22,8 @@ export interface Settings {
   highlightColour: string;
   alerts: AlertPrefs;
   setAlerts: (a: AlertPrefs) => void;
+  timeFormat: TimeFormat;
+  setTimeFormat: (f: TimeFormat) => void;
 }
 
 export const SettingsContext = createContext<Settings>({
@@ -31,6 +34,8 @@ export const SettingsContext = createContext<Settings>({
   highlightColour: HIGHLIGHTS[0].colour,
   alerts: DEFAULT_ALERTS,
   setAlerts: () => {},
+  timeFormat: '24',
+  setTimeFormat: () => {},
 });
 
 export const useSettings = () => useContext(SettingsContext);

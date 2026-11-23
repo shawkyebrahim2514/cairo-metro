@@ -21,7 +21,8 @@ const THEMES: { id: ThemeMode; key: 'themeLight' | 'themeDark' | 'themeAuto' }[]
 
 export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }: Props) {
   const { t, lang } = useI18n();
-  const { theme, setTheme, highlight, setHighlight, alerts, setAlerts } = useSettings();
+  const { theme, setTheme, highlight, setHighlight, alerts, setAlerts, timeFormat, setTimeFormat } =
+    useSettings();
 
   const timers = useRef<number[]>([]);
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
@@ -74,6 +75,21 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
               aria-label={t(`hl_${h.id}`)}
               onClick={() => setHighlight(h.id)}
             />
+          ))}
+        </div>
+
+        <p className="label">{t('timeFormat')}</p>
+        <div className="seg" role="group" aria-label={t('timeFormat')}>
+          {(['12', '24'] as const).map((f) => (
+            <button
+              key={f}
+              type="button"
+              className={timeFormat === f ? 'on' : ''}
+              aria-pressed={timeFormat === f}
+              onClick={() => setTimeFormat(f)}
+            >
+              {t(f === '12' ? 'time12' : 'time24')}
+            </button>
           ))}
         </div>
 

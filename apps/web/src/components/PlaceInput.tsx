@@ -1,4 +1,5 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { Icon } from './Icon';
 import {
   nearestStations,
   parsePlaceInput,
@@ -254,7 +255,7 @@ export function PlaceInput({
                 onChange(null);
               }}
             >
-              <span aria-hidden="true">×</span>
+              <Icon name="close" size={16} />
             </button>
           )}
           {showGps && 'geolocation' in navigator && (
@@ -266,7 +267,11 @@ export function PlaceInput({
               onClick={locate}
               disabled={busy}
             >
-              <span aria-hidden="true">{busy ? '…' : '◎'}</span>
+              {busy ? (
+                <span className="spin" aria-hidden="true" />
+              ) : (
+                <Icon name="locate" size={18} />
+              )}
             </button>
           )}
         </div>

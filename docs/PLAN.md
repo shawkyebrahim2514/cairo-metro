@@ -147,6 +147,10 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Route card redesigned from docs/mocks/route-card-v2.html (header with arrival time, stat tiles, service strip, timeline with ride boxes and change chips, collapsed women-cars tip, primary Track button).
 - [x] Remaining a11y issues: map stations keyboard-focusable, tabs as nav with aria-current, tracking anchors the time estimate at boarding, crossed warn/change/arrive alerts are not lost on a jump, audio/speech unlocked on Track tap.
 
+### Cleanup round (done)
+
+- [x] Removed the monthly pass vs tickets calculator from the UI (core comparePass/comparePassPlans kept, unused by the app). [x] Settings: 12-hour / 24-hour time format. [x] Custom themed scrollbars. [x] Search field icons redesigned (SVG clear and locate, spinner, even sizing).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.

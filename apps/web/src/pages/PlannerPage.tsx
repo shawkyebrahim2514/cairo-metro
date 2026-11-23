@@ -3,7 +3,6 @@ import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { Footer } from '../components/Footer';
 import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
-import { PassCalculator } from '../components/PassCalculator';
 import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
 import { Reachable } from '../components/Reachable';
@@ -274,7 +273,6 @@ export function PlannerPage({
                 </button>
               </div>
             )}
-            {trip && <PassCalculator stops={trip.route.stops} category={category} />}
             {plan.trips.length > 0 && <p className="note">{t('estimateNote')}</p>}
           </>
         )}

@@ -1,6 +1,14 @@
 import { tripService, type LineId } from '@cairo-metro/core';
 import { hoursData, lineColour, stationsById } from '../data';
-import { formatDistance, formatMinutes, localDigits, stationName, useI18n } from '../i18n';
+import {
+  formatClock,
+  formatDistance,
+  formatMinutes,
+  localDigits,
+  stationName,
+  useI18n,
+} from '../i18n';
+import { useSettings } from '../settings';
 import type { Trip } from '../trip';
 
 interface Props {
@@ -14,6 +22,7 @@ const lineNo = (line: string) => line.replace(/\D/g, '');
 
 export function RouteCard({ trip, title, selected, onSelect }: Props) {
   const { t, lang } = useI18n();
+  const { timeFormat } = useSettings();
   const { route } = trip;
   const n = (v: number | string) => localDigits(v, lang);
   const name = (id: string) => stationName(stationsById.get(id)!, lang);
@@ -27,10 +36,16 @@ export function RouteCard({ trip, title, selected, onSelect }: Props) {
   );
   const firstWait = service.lines[0]?.avgWaitMin;
   const lastTrain = service.lines.find((s) => s.state !== 'open')?.lastTrain;
-  const arrival = new Date(now.getTime() + trip.totalSec * 1000).toLocaleTimeString(
-    lang === 'ar' ? 'ar-EG' : 'en-GB',
-    { hour: '2-digit', minute: '2-digit' },
-  );
+  const arrival = formatClock(new Date(now.getTime() + trip.totalSec * 1000), lang, timeFormat);
+  const [lh, lm] = (lastTrain ?? '').split(':').map(Number);
+  const lastTime =
+    lh === undefined || lm === undefined || Number.isNaN(lh) || Number.isNaN(lm)
+      ? null
+      : formatClock(
+          new Date(now.getFullYear(), now.getMonth(), now.getDate(), lh, lm),
+          lang,
+          timeFormat,
+        );
   const pill = (line: LineId) => (
     <span className="badge line-pill" style={{ background: lineColour.get(line) }}>
       {t('line')} {n(lineNo(line))}
@@ -87,7 +102,7 @@ export function RouteCard({ trip, title, selected, onSelect }: Props) {
         <p className="status warn">
           <i className="dot" aria-hidden="true" />
           {t('svcClosingSoon')}
-          {lastTrain && ` (${n(lastTrain)})`}
+          {lastTime && ` (${lastTime})`}
         </p>
       )}
       {service.state === 'open' && firstWait != null && (
