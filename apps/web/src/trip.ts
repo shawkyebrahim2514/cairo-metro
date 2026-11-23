@@ -2,6 +2,8 @@ import {
   haversineMeters,
   nearestStations,
   planRoutes,
+  reachableStations,
+  type Reachable,
   type NearestStation,
   type Route,
   type TicketCategory,
@@ -76,4 +78,22 @@ export function planTrips(
   const trips =
     fewest.route.transfers.length < fastest.route.transfers.length ? [fastest, fewest] : [fastest];
   return { trips, sameStation: false, closeBy: false };
+}
+
+export interface ReachResult {
+  /** Station the metro part starts from. */
+  originId: string;
+  /** Walk to that station in seconds; 0 when the origin is a station. */
+  walkSec: number;
+  items: Reachable[];
+}
+
+/** Stations reachable within a time budget, counting the walk to the first station. */
+export function reachFrom(from: Endpoint, minutes: number): ReachResult | null {
+  const first = access(from).sort((a, b) => (a.walk?.walkSec ?? 0) - (b.walk?.walkSec ?? 0))[0];
+  if (!first) return null;
+  const walkSec = first.walk?.walkSec ?? 0;
+  const maxSec = minutes * 60 - walkSec;
+  if (maxSec <= 0) return { originId: first.id, walkSec, items: [] };
+  return { originId: first.id, walkSec, items: reachableStations(graph, first.id, { maxSec }) };
 }

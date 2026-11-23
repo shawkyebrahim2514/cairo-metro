@@ -3,10 +3,11 @@ import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { PassCalculator } from '../components/PassCalculator';
 import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
+import { Reachable } from '../components/Reachable';
 import { RouteCard } from '../components/RouteCard';
-import type { PlaceResolver } from '../data';
+import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
-import { useI18n } from '../i18n';
+import { stationName, useI18n } from '../i18n';
 import {
   isStarred,
   loadTrips,
@@ -16,7 +17,7 @@ import {
   recordTrip,
   toggleStar,
 } from '../storage';
-import { planTrips } from '../trip';
+import { planTrips, reachFrom } from '../trip';
 
 export function PlannerPage({
   resolver,
@@ -34,6 +35,13 @@ export function PlannerPage({
   const [selected, setSelected] = useState(0);
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);
+  const [reachMin, setReachMin] = useState(20);
+
+  // Offer the 'where can I get to' view while only the origin is chosen.
+  const reach = useMemo(
+    () => (from && !to ? reachFrom(from, reachMin) : null),
+    [from, to, reachMin],
+  );
 
   const plan = useMemo(
     () => (from && to ? planTrips(from, to, category) : null),
@@ -52,8 +60,16 @@ export function PlannerPage({
         primary: true,
         colour: '#2563eb',
       });
+    for (const r of reach?.items ?? []) {
+      const s = stationsById.get(r.stationId)!;
+      out.push({
+        point: { lat: s.lat, lng: s.lng },
+        label: stationName(s, lang),
+        colour: '#0f766e',
+      });
+    }
     return out;
-  }, [from, to, lang]);
+  }, [from, to, lang, reach]);
 
   // A map tap fills the first empty endpoint, origin first.
   const pickEndpoint = (e: Endpoint) => {
@@ -137,6 +153,8 @@ export function PlannerPage({
         onStation={(s) => pickEndpoint({ kind: 'station', station: s })}
       />
       <p className="note">{t('mapHint')}</p>
+
+      {from && !to && <Reachable minutes={reachMin} onMinutes={setReachMin} result={reach} />}
 
       {plan && from && to && (
         <>

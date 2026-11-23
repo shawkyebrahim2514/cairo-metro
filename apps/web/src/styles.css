@@ -442,3 +442,22 @@ footer {
   display: flex;
   gap: 6px;
 }
+
+.reach-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 240px;
+  overflow: auto;
+}
+
+.reach-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.reach-list small {
+  color: var(--muted);
+}

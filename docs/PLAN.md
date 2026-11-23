@@ -116,7 +116,7 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] 7A UX/UI refactor done: teal theme, search with All/Stations/Places chips and grouped results (places show nearest station + distance), full-screen map with expand and locate-me, skippable 4-step feature tour with a ? button to reopen. Verified in a headless browser at 390 px. Further visual polish can follow user feedback.
 - [x] 7B time features: core `schedule.ts` (`lineService`, `tripService`: open / closing-soon / closed from `hours.json`, average wait from headway) with tests; route cards show the average wait, a closing-soon warning with the last train, or a closed notice (device local time). Next-train times by timetable are not possible (no timetable data).
-- **7C Exploration:** stations reachable within N stops/minutes, last-mile suggestions.
+- [x] 7C exploration (partly): with only a From station chosen, the planner lists stations reachable within 10/20/30/45/60 min (core `reachableStations`, tests, teal map markers). Last-mile suggestions not implemented.
 - **7D Station info:** exits, facilities, women-only cars, accessibility, per-station zones (needs data).
 - **7E More networks:** LRT, Monorail, Lines 4+ as optional layers.
 - **7F Community and data ops:** issue-report flow (prefilled GitHub issue: stations, route, app version), monthly data-refresh GitHub Action, CONTRIBUTING guide, optional resolver worker.
