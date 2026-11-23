@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
 import { NearestPage } from './pages/NearestPage';
@@ -29,6 +30,13 @@ export function App() {
         : stored<Tab>('tab', ['nearest', 'plan'], 'nearest'),
   );
   const [tiles, setTiles] = useState(() => localStorage.getItem('tiles') === '1');
+  const [category, setCategory] = useState<TicketCategory>(() =>
+    stored<TicketCategory>(
+      'category',
+      ['standard', 'senior60AndArmyPolice', 'specialNeedsAndVeterans'],
+      'standard',
+    ),
+  );
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
   const [resolverFailed, setResolverFailed] = useState(false);
@@ -97,11 +105,26 @@ export function App() {
           {tab === 'nearest' ? (
             <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
           ) : (
-            <PlannerPage resolver={resolver} tiles={tiles} />
+            <PlannerPage resolver={resolver} tiles={tiles} category={category} />
           )}
         </main>
 
         <footer>
+          <label className="toggle">
+            {t('fareCategory')}{' '}
+            <select
+              value={category}
+              onChange={(e) => {
+                const v = e.target.value as TicketCategory;
+                setCategory(v);
+                localStorage.setItem('category', v);
+              }}
+            >
+              <option value="standard">{t('catStandard')}</option>
+              <option value="senior60AndArmyPolice">{t('catSenior')}</option>
+              <option value="specialNeedsAndVeterans">{t('catSpecial')}</option>
+            </select>
+          </label>
           <label className="toggle">
             <input
               type="checkbox"

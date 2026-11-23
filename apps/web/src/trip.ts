@@ -4,6 +4,7 @@ import {
   planRoutes,
   type NearestStation,
   type Route,
+  type TicketCategory,
 } from '@cairo-metro/core';
 import { faresData, graph, metro } from './data';
 import { endpointPoint, type Endpoint } from './endpoint';
@@ -34,6 +35,7 @@ function access(e: Endpoint): { id: string; walk: NearestStation | null }[] {
 export function planTrips(
   from: Endpoint,
   to: Endpoint,
+  category: TicketCategory = 'standard',
 ): { trips: Trip[]; sameStation: boolean; closeBy: boolean } {
   if (haversineMeters(endpointPoint(from), endpointPoint(to)) < WALK_INSTEAD_METERS) {
     return { trips: [], sameStation: false, closeBy: true };
@@ -49,7 +51,10 @@ export function planTrips(
         sameStation = true;
         continue;
       }
-      for (const route of planRoutes(graph, a.id, b.id, { fares: faresData })) {
+      for (const route of planRoutes(graph, a.id, b.id, {
+        fares: faresData,
+        fareCategory: category,
+      })) {
         all.push({
           route,
           walkIn: a.walk,

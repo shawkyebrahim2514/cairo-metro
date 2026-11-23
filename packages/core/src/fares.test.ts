@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { tripFare, ticketPrice, type FaresData } from './fares';
+import { comparePass, tripFare, ticketPrice, type FaresData } from './fares';
 
 const fares: FaresData = {
   currency: 'EGP',
@@ -40,5 +40,21 @@ describe('tripFare', () => {
 
   it('has no fare for a zero-stop trip', () => {
     expect(tripFare(fares, 0)).toBeNull();
+  });
+});
+
+describe('comparePass', () => {
+  const withPass: FaresData = { ...fares, subscriptions: { monthly: { people: [390, 440] } } };
+
+  it('finds the break-even and savings against single tickets', () => {
+    const r = comparePass(withPass, 10, 44)!; // 11 stations -> 2nd tier, 12 EGP, zone 2
+    expect(r.zones).toBe(2);
+    expect(r.ticketTotal).toBe(528);
+    expect(r.savings).toBe(88);
+    expect(r.breakEvenRides).toBe(37);
+  });
+
+  it('has no monthly pass for categories without one', () => {
+    expect(comparePass(withPass, 10, 44, 'specialNeedsAndVeterans')).toBeNull();
   });
 });

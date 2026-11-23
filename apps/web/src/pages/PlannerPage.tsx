@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MetroMap, type MapMarker } from '../components/MetroMap';
+import { PassCalculator } from '../components/PassCalculator';
+import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
 import { RouteCard } from '../components/RouteCard';
 import type { PlaceResolver } from '../data';
@@ -19,9 +21,11 @@ import { planTrips } from '../trip';
 export function PlannerPage({
   resolver,
   tiles,
+  category,
 }: {
   resolver: PlaceResolver | null;
   tiles: boolean;
+  category: TicketCategory;
 }) {
   const { t, lang } = useI18n();
   const [linked] = useState(readPlanHash);
@@ -31,7 +35,10 @@ export function PlannerPage({
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);
 
-  const plan = useMemo(() => (from && to ? planTrips(from, to) : null), [from, to]);
+  const plan = useMemo(
+    () => (from && to ? planTrips(from, to, category) : null),
+    [from, to, category],
+  );
   const trip = plan?.trips[Math.min(selected, (plan?.trips.length ?? 1) - 1)];
 
   const markers = useMemo<MapMarker[]>(() => {
@@ -166,6 +173,7 @@ export function PlannerPage({
               </button>
             </div>
           )}
+          {trip && <PassCalculator stops={trip.route.stops} category={category} />}
           {plan.trips.length > 0 && <p className="note">{t('estimateNote')}</p>}
         </>
       )}

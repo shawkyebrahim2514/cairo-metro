@@ -70,7 +70,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 1. [x] PWA manifest + icons + dependency-free service worker (app shell precached, other same-origin GETs stale-while-revalidate, so a new version appears on the second load) + offline data. Verified offline with a headless browser.
 2. [x] Web Share Target (GET, title/text/url; deduplicated, resolved offline via the places index; the query is removed from the URL after reading). Works only once the PWA is installed on Android/Chrome.
 3. [x] Saved trips (star), recents (last 6), shareable route links (`#/plan?from=..&to=..`, Web Share API with clipboard fallback), all in localStorage. Verified in a headless browser.
-4. Fare + subscription calculator.
+4. [x] Ticket-type selector (standard / senior / special needs) feeding fares, plus a monthly-pass vs single-tickets calculator (`comparePass` in core, rides per month, break-even). Zones are estimated from the ticket tier because station-to-zone data is missing (open data gap). Quarterly/annual passes not compared yet.
 5. Door-to-door totals (done in Stage 4).
 6. Accessibility + Lighthouse.
 7. Alternative station names people actually use (e.g. "Tahrir" for Sadat, old names, abbreviations, Arabic colloquial spellings): collect them into `data/curated/curated.json` aliases, and verify in the data viewer. Scheduled, do after the PWA work.
