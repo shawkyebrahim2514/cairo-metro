@@ -1,9 +1,11 @@
 import fares from '../../../data/curated/fares.json';
+import hours from '../../../data/curated/hours.json';
 import metroJson from '../../../data/metro.json';
 import {
   buildGraph,
   createPlaceResolver,
   type FaresData,
+  type HoursData,
   type MetroData,
   type Place,
   type PlacesData,
@@ -12,6 +14,7 @@ import {
 
 export const metro = metroJson as unknown as MetroData;
 export const faresData = fares as unknown as FaresData;
+export const hoursData = hours as unknown as HoursData;
 export const graph = buildGraph(metro);
 export const stationsById = new Map<string, Station>(metro.stations.map((s) => [s.id, s]));
 export const lineColour = new Map(metro.lines.map((l) => [l.id, l.colour]));

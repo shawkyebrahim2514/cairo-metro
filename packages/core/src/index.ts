@@ -4,6 +4,7 @@ export * from './link-parser';
 export * from './nearest';
 export * from './place-resolver';
 export * from './routing';
+export * from './schedule';
 export * from './search';
 export * from './types';
 export * from './validate';

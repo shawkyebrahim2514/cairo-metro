@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { lineColour, stationsById } from '../data';
+import { tripService } from '@cairo-metro/core';
+import { hoursData, lineColour, stationsById } from '../data';
 import { endpointName, type Endpoint } from '../endpoint';
 import { formatDistance, formatMinutes, localDigits, stationName, useI18n } from '../i18n';
 import type { Trip } from '../trip';
@@ -20,6 +21,13 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
   const n = (v: number | string) => localDigits(v, lang);
   const name = (id: string) => stationName(stationsById.get(id)!, lang);
   const nt = route.transfers.length;
+  const service = tripService(
+    hoursData,
+    route.legs.map((l) => l.line),
+    new Date(),
+  );
+  const firstWait = service.lines[0]?.avgWaitMin;
+  const lastTrain = service.lines.find((s) => s.state !== 'open')?.lastTrain;
 
   return (
     <section className={`card route${selected ? ' selected' : ''}`} onClick={onSelect}>
@@ -32,6 +40,18 @@ export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) 
         {nt === 0 ? t('direct') : `${n(nt)} ${nt === 1 ? t('transfer') : t('transfers')}`}
         {route.fare != null && ` · ${n(route.fare)} ${t('fare')}`}
       </p>
+      {service.state === 'closed' && <p className="note warn">{t('svcClosed')}</p>}
+      {service.state === 'closing-soon' && (
+        <p className="note warn">
+          {t('svcClosingSoon')}
+          {lastTrain && ` (${n(lastTrain)})`}
+        </p>
+      )}
+      {service.state === 'open' && firstWait != null && (
+        <p className="note">
+          {t('svcWait')} {n(Math.round(firstWait))} {t('min')}
+        </p>
+      )}
 
       <ol className="steps">
         {trip.walkIn && (
