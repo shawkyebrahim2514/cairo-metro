@@ -34,10 +34,29 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
   const [error, setError] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);
 
+  const typedRef = useRef(false);
+  const prevEndpointRef = useRef<Endpoint | null>(null);
+  const gpsToken = useRef(0);
+
   // Keep the visible text in sync when the endpoint changes from outside (map tap, swap, language).
+  // Clearing caused by the user typing must not wipe what they typed.
   useEffect(() => {
-    setText(endpoint ? endpointName(endpoint, lang) : '');
+    gpsToken.current++;
+    if (typedRef.current) {
+      typedRef.current = false;
+    } else if (endpoint) {
+      setText(endpointName(endpoint, lang));
+    } else if (prevEndpointRef.current) {
+      setText('');
+    }
+    prevEndpointRef.current = endpoint;
   }, [endpoint, lang]);
+
+  useEffect(() => {
+    return () => {
+      gpsToken.current++;
+    };
+  }, []);
 
   useEffect(() => {
     const close = (e: MouseEvent) => {
@@ -91,10 +110,12 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
   }, [text, endpoint, lang, resolver, t]);
 
   const locate = () => {
+    const token = ++gpsToken.current;
     setBusy(true);
     setError('');
     navigator.geolocation.getCurrentPosition(
       (pos) => {
+        if (token !== gpsToken.current) return;
         setBusy(false);
         onChange({
           kind: 'point',
@@ -103,6 +124,7 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
         });
       },
       () => {
+        if (token !== gpsToken.current) return;
         setBusy(false);
         setError(t('locationDenied'));
       },
@@ -111,6 +133,8 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
   };
 
   const choose = (s: Suggestion) => {
+    gpsToken.current++;
+    setBusy(false);
     onChange(s.endpoint);
     setText(endpointName(s.endpoint, lang));
     setOpen(false);
@@ -127,7 +151,12 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
             onChange={(e) => {
               setText(e.target.value);
               setOpen(true);
-              if (endpoint) onChange(null);
+              gpsToken.current++;
+              setBusy(false);
+              if (endpoint) {
+                typedRef.current = true;
+                onChange(null);
+              }
             }}
             onFocus={() => setOpen(true)}
             autoComplete="off"
@@ -139,6 +168,8 @@ export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true
               className="icon"
               aria-label={t('clear')}
               onClick={() => {
+                gpsToken.current++;
+                setBusy(false);
                 setText('');
                 onChange(null);
               }}

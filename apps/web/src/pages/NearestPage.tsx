@@ -48,10 +48,14 @@ export function NearestPage({
         onChange={setPlace}
         resolver={resolver}
       />
-      {!resolver && <p className="note">{t('loadingPlaces')}</p>}
       {!place && <p className="note">{t('nearestHint')}</p>}
       {far && <p className="note warn">{t('farWarning')}</p>}
-      <MetroMap markers={markers} tiles={tiles} onPick={(p) => setPlace(pinned(p, t))} />
+      <MetroMap
+        markers={markers}
+        tiles={tiles}
+        onPick={(p) => setPlace(pinned(p, t))}
+        onStation={(s) => setPlace({ kind: 'station', station: s })}
+      />
       <p className="note">{t('mapHint')}</p>
       {results.length > 0 && (
         <>

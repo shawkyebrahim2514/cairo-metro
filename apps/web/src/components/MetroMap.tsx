@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { LatLng } from '@cairo-metro/core';
+import type { LatLng, Station } from '@cairo-metro/core';
 import { lineColour, metro, stationsById } from '../data';
 import { stationName, useI18n } from '../i18n';
 
@@ -19,11 +19,13 @@ interface Props {
   route?: string[];
   tiles: boolean;
   onPick?: (p: LatLng) => void;
+  /** Called when a station dot is tapped. */
+  onStation?: (s: Station) => void;
 }
 
 const CAIRO: L.LatLngTuple = [30.05, 31.25];
 
-export function MetroMap({ markers = [], route, tiles, onPick }: Props) {
+export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Props) {
   const { lang } = useI18n();
   const hostRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
@@ -31,6 +33,8 @@ export function MetroMap({ markers = [], route, tiles, onPick }: Props) {
   const dynamicRef = useRef<L.LayerGroup | null>(null);
   const pickRef = useRef(onPick);
   pickRef.current = onPick;
+  const stationRef = useRef(onStation);
+  stationRef.current = onStation;
 
   useEffect(() => {
     if (!hostRef.current) return;
@@ -73,6 +77,10 @@ export function MetroMap({ markers = [], route, tiles, onPick }: Props) {
         fillOpacity: 1,
       })
         .bindTooltip(stationName(s, lang))
+        .on('click', (e: L.LeafletMouseEvent) => {
+          L.DomEvent.stopPropagation(e);
+          stationRef.current?.(s);
+        })
         .addTo(group);
     }
     return () => {

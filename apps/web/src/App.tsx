@@ -20,8 +20,17 @@ export function App() {
   const [tiles, setTiles] = useState(() => localStorage.getItem('tiles') === '1');
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
+  const [resolverFailed, setResolverFailed] = useState(false);
+
   useEffect(() => {
-    void loadPlaceResolver().then(setResolver);
+    let live = true;
+    loadPlaceResolver().then(
+      (r) => live && setResolver(r),
+      () => live && setResolverFailed(true),
+    );
+    return () => {
+      live = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -66,6 +75,12 @@ export function App() {
             </button>
           ))}
         </nav>
+
+        {!resolver && (
+          <p className={resolverFailed ? 'note warn' : 'note'}>
+            {t(resolverFailed ? 'placesFailed' : 'loadingPlaces')}
+          </p>
+        )}
 
         <main>
           {tab === 'nearest' ? (

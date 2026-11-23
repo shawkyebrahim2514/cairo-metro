@@ -20,6 +20,13 @@ export type PlaceResolver = ReturnType<typeof createPlaceResolver>;
 
 /** The places index is large, so it is loaded after the first paint. */
 export async function loadPlaceResolver(): Promise<PlaceResolver> {
-  const mod = await import('../../../data/places.json');
-  return createPlaceResolver((mod.default as unknown as PlacesData).places as Place[]);
+  resolverPromise ??= import('../../../data/places.json')
+    .then((mod) => createPlaceResolver((mod.default as unknown as PlacesData).places as Place[]))
+    .catch((err: unknown) => {
+      resolverPromise = null;
+      throw err;
+    });
+  return resolverPromise;
 }
+
+let resolverPromise: Promise<PlaceResolver> | null = null;

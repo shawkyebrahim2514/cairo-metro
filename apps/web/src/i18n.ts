@@ -54,7 +54,9 @@ const en = {
   language: 'العربية',
   clear: 'Clear',
   loadingPlaces: 'Loading places…',
-  mapHint: 'Tip: you can also tap the map to drop a pin.',
+  placesFailed: 'Could not load the places list. Station search still works; reload to retry.',
+  closeBy: 'These two places are close together, so walking is probably faster than the metro.',
+  mapHint: 'Tip: tap the map or a station to set a point (fills From, then To, then replaces To).',
 };
 
 export type Key = keyof typeof en;
@@ -110,7 +112,9 @@ const ar: Record<Key, string> = {
   language: 'English',
   clear: 'مسح',
   loadingPlaces: 'جارٍ تحميل الأماكن…',
-  mapHint: 'نصيحة: يمكنك أيضاً الضغط على الخريطة لتحديد موقع.',
+  placesFailed: 'تعذر تحميل قائمة الأماكن. البحث عن المحطات ما زال يعمل؛ أعد تحميل الصفحة.',
+  closeBy: 'المكانان قريبان من بعضهما، فالمشي غالباً أسرع من المترو.',
+  mapHint: 'نصيحة: اضغط على الخريطة لتحديد موقع (يملأ «من» ثم «إلى» ثم يستبدل «إلى»).',
 };
 
 export const dictionaries: Record<Lang, Record<Key, string>> = { en, ar };

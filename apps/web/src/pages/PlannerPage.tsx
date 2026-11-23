@@ -37,10 +37,12 @@ export function PlannerPage({
   }, [from, to, lang]);
 
   // A map tap fills the first empty endpoint, origin first.
-  const pick = (p: { lat: number; lng: number }) => {
-    if (!from) setFrom(pinned(p, t));
-    else if (!to) setTo(pinned(p, t));
+  const pickEndpoint = (e: Endpoint) => {
+    if (!from) setFrom(e);
+    else setTo(e);
+    setSelected(0);
   };
+  const pick = (p: { lat: number; lng: number }) => pickEndpoint(pinned(p, t));
 
   const swap = () => {
     setFrom(to);
@@ -78,17 +80,22 @@ export function PlannerPage({
         resolver={resolver}
         showGps={false}
       />
-      {!resolver && <p className="note">{t('loadingPlaces')}</p>}
-
-      <MetroMap markers={markers} route={trip?.route.stations} tiles={tiles} onPick={pick} />
+      <MetroMap
+        markers={markers}
+        route={trip?.route.stations}
+        tiles={tiles}
+        onPick={pick}
+        onStation={(s) => pickEndpoint({ kind: 'station', station: s })}
+      />
       <p className="note">{t('mapHint')}</p>
 
       {plan && from && to && (
         <>
+          {plan.closeBy && <p className="note">{t('closeBy')}</p>}
           {plan.sameStation && plan.trips.length === 0 && (
             <p className="note">{t('sameStation')}</p>
           )}
-          {!plan.sameStation && plan.trips.length === 0 && (
+          {!plan.closeBy && !plan.sameStation && plan.trips.length === 0 && (
             <p className="note warn">{t('noRoute')}</p>
           )}
           {plan.trips.map((tr, i) => (

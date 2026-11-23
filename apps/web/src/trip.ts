@@ -1,4 +1,10 @@
-import { nearestStations, planRoutes, type NearestStation, type Route } from '@cairo-metro/core';
+import {
+  haversineMeters,
+  nearestStations,
+  planRoutes,
+  type NearestStation,
+  type Route,
+} from '@cairo-metro/core';
 import { faresData, graph, metro } from './data';
 import { endpointPoint, type Endpoint } from './endpoint';
 
@@ -11,7 +17,10 @@ export interface Trip {
 }
 
 /** How many nearby stations are tried at a place that is not itself a station. */
-const CANDIDATES = 2;
+const CANDIDATES = 3;
+
+/** Two places closer than this are better reached on foot than by metro. */
+const WALK_INSTEAD_METERS = 700;
 
 function access(e: Endpoint): { id: string; walk: NearestStation | null }[] {
   if (e.kind === 'station') return [{ id: e.station.id, walk: null }];
@@ -22,7 +31,13 @@ function access(e: Endpoint): { id: string; walk: NearestStation | null }[] {
 }
 
 /** Door-to-door trips: the best (walk + ride + walk) overall, plus the fewest-transfers alternative. */
-export function planTrips(from: Endpoint, to: Endpoint): { trips: Trip[]; sameStation: boolean } {
+export function planTrips(
+  from: Endpoint,
+  to: Endpoint,
+): { trips: Trip[]; sameStation: boolean; closeBy: boolean } {
+  if (haversineMeters(endpointPoint(from), endpointPoint(to)) < WALK_INSTEAD_METERS) {
+    return { trips: [], sameStation: false, closeBy: true };
+  }
   const starts = access(from);
   const ends = access(to);
   const all: Trip[] = [];
@@ -44,7 +59,7 @@ export function planTrips(from: Endpoint, to: Endpoint): { trips: Trip[]; sameSt
       }
     }
   }
-  if (all.length === 0) return { trips: [], sameStation };
+  if (all.length === 0) return { trips: [], sameStation, closeBy: false };
 
   const fastest = all.reduce((x, y) => (y.totalSec < x.totalSec ? y : x));
   const fewest = all.reduce((x, y) =>
@@ -53,11 +68,7 @@ export function planTrips(from: Endpoint, to: Endpoint): { trips: Trip[]; sameSt
       ? y
       : x,
   );
-  const sameTrip = fewest.route.from === fastest.route.from && fewest.route.to === fastest.route.to;
   const trips =
-    fewest.route.transfers.length < fastest.route.transfers.length &&
-    !(sameTrip && fewest.route.mode === fastest.route.mode)
-      ? [fastest, fewest]
-      : [fastest];
-  return { trips, sameStation: false };
+    fewest.route.transfers.length < fastest.route.transfers.length ? [fastest, fewest] : [fastest];
+  return { trips, sameStation: false, closeBy: false };
 }
