@@ -212,8 +212,9 @@ export function ImageDialog({
       try {
         await navigator.share({ files: [file], title: t('appName') });
         return;
-      } catch {
-        // dismissed or failed: fall back to a download
+      } catch (e) {
+        if ((e as DOMException).name === 'AbortError') return;
+        // share failed: fall back to a download
       }
     }
     const a = document.createElement('a');
@@ -415,7 +416,14 @@ export function ImageDialog({
           type="button"
           className="img-big"
           aria-label={t('close')}
+          autoFocus
           onClick={() => setBig(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              e.stopPropagation();
+              setBig(false);
+            }
+          }}
         >
           <img src={preview} alt={t('imgPreviewAlt')} />
         </button>

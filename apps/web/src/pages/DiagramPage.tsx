@@ -166,6 +166,12 @@ export function DiagramPage({
   const onPointerMove = (e: React.PointerEvent) => {
     const prev = pointers.current.get(e.pointerId);
     if (!prev) return;
+    if (e.pointerType === 'mouse' && e.buttons === 0) {
+      // the button was released outside the svg
+      pointers.current.delete(e.pointerId);
+      pinch.current = 0;
+      return;
+    }
     const cur = { x: e.clientX, y: e.clientY };
     pointers.current.set(e.pointerId, cur);
     const pts = [...pointers.current.values()];
@@ -242,6 +248,7 @@ export function DiagramPage({
         <svg
           role="group"
           aria-label={t('diagramMap')}
+          direction="ltr"
           viewBox={`${vx} ${vy} ${view.w} ${h}`}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
