@@ -78,6 +78,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 ### Stage 6: Quality & benchmark (in progress)
 
 - [x] Benchmark harness: `npm run benchmark` plans 30 trips from `data/benchmark/trips.json` and writes `docs/benchmark.md` with empty App columns. Next: user (or a normal-user walkthrough) fills the app results, then we compare and fix data/weights.
+- [x] Confirmed by the user (rider): fares count the boarding station and an interchange counts once; the 4-minute default transfer time is good. Still to do: compare ride times and stops on sample trips, and the issue-report flow (needs the GitHub repo URL, so after publishing).
 
 1. Compare 20-30 trips vs Egypt Transport app + official map -> docs/benchmark.md.
 2. Fix data/weights.
