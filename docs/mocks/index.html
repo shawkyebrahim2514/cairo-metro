@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cairo Metro: UI/UX mocks (static, not the real app)</title>
+    <style>
+      :root {
+        --bg: #eef1f6;
+        --card: #fff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --accent: #0f766e;
+        --on: #fff;
+        --chip: #f1f5f9;
+        --l1: #1d4ed8;
+        --l2: #dc2626;
+        --l3: #16a34a;
+        --map: #dbeafe;
+        --warn: #b45309;
+      }
+      .dark {
+        --bg: #0b0f17;
+        --card: #141a26;
+        --text: #e8edf5;
+        --muted: #94a3b8;
+        --border: #243044;
+        --accent: #2dd4bf;
+        --on: #06201c;
+        --chip: #1b2434;
+        --map: #10233d;
+        --warn: #fbbf24;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          15px/1.4 system-ui,
+          'Segoe UI',
+          Tahoma,
+          sans-serif;
+      }
+      header.top {
+        padding: 20px 24px 4px;
+      }
+      header.top h1 {
+        margin: 0 0 4px;
+        font-size: 20px;
+      }
+      header.top p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 70ch;
+      }
+      .bar {
+        padding: 12px 24px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      button.tg {
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        border-radius: 999px;
+        padding: 6px 14px;
+        cursor: pointer;
+        font: inherit;
+      }
+      .row {
+        display: flex;
+        gap: 28px;
+        padding: 8px 24px 40px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        margin: 10px 4px 0;
+        max-width: 320px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      figcaption b {
+        color: var(--text);
+      }
+      .phone {
+        width: 320px;
+        height: 640px;
+        border-radius: 30px;
+        border: 8px solid #0f172a;
+        background: var(--bg);
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .appbar {
+        padding: 12px 14px 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+      }
+      .appbar strong {
+        font-size: 16px;
+      }
+      .pill {
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: var(--chip);
+        color: var(--muted);
+      }
+      .body {
+        padding: 12px 14px;
+        overflow: auto;
+        flex: 1;
+      }
+      .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+      }
+      .field .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .field .dot.to {
+        background: var(--l2);
+      }
+      .field span {
+        flex: 1;
+      }
+      .field small {
+        color: var(--muted);
+      }
+      .chips {
+        display: flex;
+        gap: 6px;
+        overflow: auto;
+        padding: 2px 0 10px;
+      }
+      .chip {
+        white-space: nowrap;
+        font-size: 13px;
+        padding: 5px 11px;
+        border-radius: 999px;
+        background: var(--chip);
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+      .chip.on {
+        background: var(--accent);
+        color: var(--on);
+        border-color: var(--accent);
+      }
+      .group h4 {
+        margin: 10px 2px 6px;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 9px 11px;
+        margin-bottom: 6px;
+      }
+      .ico {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 13px;
+        color: #fff;
+        flex: none;
+      }
+      .item .t {
+        flex: 1;
+        min-width: 0;
+      }
+      .item .t b {
+        display: block;
+      }
+      .item .t small {
+        color: var(--muted);
+      }
+      .lines {
+        display: flex;
+        gap: 3px;
+      }
+      .lines i {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        display: block;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+      .card header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .big {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      .meta {
+        color: var(--muted);
+        margin: 2px 0 8px;
+        font-size: 13px;
+      }
+      .step {
+        display: flex;
+        gap: 10px;
+        margin: 6px 0;
+        font-size: 14px;
+      }
+      .rail {
+        width: 6px;
+        border-radius: 3px;
+        flex: none;
+      }
+      .cta {
+        background: var(--accent);
+        color: var(--on);
+        text-align: center;
+        border-radius: 12px;
+        padding: 10px;
+        font-weight: 600;
+        margin-top: 8px;
+      }
+      .tabs {
+        display: flex;
+        background: var(--card);
+        border-top: 1px solid var(--border);
+      }
+      .tabs div {
+        flex: 1;
+        text-align: center;
+        padding: 9px 0 11px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .tabs div.on {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .map {
+        position: absolute;
+        inset: 0;
+        background: var(--map);
+      }
+      .map svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .float {
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 10px 12px;
+        box-shadow: 0 6px 20px #0003;
+      }
+      .fab {
+        position: absolute;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 4px 12px #0003;
+      }
+      .scrim {
+        position: absolute;
+        inset: 0;
+        background: #0009;
+      }
+      .tip {
+        position: absolute;
+        background: var(--card);
+        border-radius: 14px;
+        padding: 12px;
+        left: 16px;
+        right: 16px;
+        box-shadow: 0 8px 30px #0006;
+      }
+      .tip small {
+        color: var(--muted);
+        display: block;
+        margin-top: 4px;
+      }
+      .tip .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .hl {
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 0 3px var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <h1>Cairo Metro: UI/UX mocks (7A)</h1>
+      <p>
+        Static mock screens (no logic) to agree on direction before coding: calmer search, richer
+        map, onboarding, and a refreshed teal theme. Tell me what to keep, drop or change.
+      </p>
+    </header>
+    <div class="bar">
+      <button class="tg" onclick="document.body.classList.toggle('dark')">
+        Toggle dark / light
+      </button>
+      <button
+        class="tg"
+        onclick="
+          document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl'
+        "
+      >
+        Toggle RTL
+      </button>
+    </div>
+
+    <div class="row">
+      <figure>
+        <div class="phone">
+          <div class="appbar">
+            <strong>Trip planner</strong><span class="pill">EN · العربية</span>
+          </div>
+          <div class="body">
+            <div class="field">
+              <i class="dot"></i><span>Cairo University <small>· Giza</small></span>
+            </div>
+            <div class="field hl"><i class="dot to"></i><span>Sad|</span></div>
+            <div class="chips">
+              <span class="chip on">Stations</span><span class="chip">Places</span
+              ><span class="chip">Areas</span><span class="chip">Maps link</span>
+            </div>
+            <div class="group">
+              <h4>Metro stations</h4>
+              <div class="item">
+                <div class="ico" style="background: var(--l1)">M</div>
+                <div class="t"><b>Sadat</b><small>Tahrir Square · interchange</small></div>
+                <div class="lines">
+                  <i style="background: var(--l1)"></i><i style="background: var(--l2)"></i>
+                </div>
+              </div>
+              <div class="item">
+                <div class="ico" style="background: var(--l1)">M</div>
+                <div class="t"><b>Saad Zaghloul</b><small>Line 1</small></div>
+                <div class="lines"><i style="background: var(--l1)"></i></div>
+              </div>
+            </div>
+            <div class="group">
+              <h4>Places near a station</h4>
+              <div class="item">
+                <div class="ico" style="background: #64748b">P</div>
+                <div class="t">
+                  <b>Saad Zaghloul Mausoleum</b><small>Nearest: Saad Zaghloul · 350 m</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabs">
+            <div>Nearest</div>
+            <div class="on">Plan</div>
+            <div>Saved</div>
+            <div>Map</div>
+          </div>
+        </div>
+        <figcaption>
+          <b>1. Search.</b> Stations come first; type chips (Stations / Places / Areas) stop the
+          list from mixing metro, parks and shops. Places always show their nearest station.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone">
+          <div class="appbar">
+            <strong>Trip planner</strong><span class="pill">EN · العربية</span>
+          </div>
+          <div class="body">
+            <div class="field"><i class="dot"></i><span>El-Monib</span><small>⇅</small></div>
+            <div class="field"><i class="dot to"></i><span>El-Sayeda Zeinab</span></div>
+            <div class="card">
+              <header><span class="big">27 min</span><span class="pill">Fastest</span></header>
+              <p class="meta">12 stations · 1 transfer · 10 EGP</p>
+              <div class="step">
+                <i class="rail" style="background: var(--l2)"></i>
+                <div>
+                  <b>Line 2</b> towards Shubra El-Kheima<br /><small style="color: var(--muted)"
+                    >El-Monib → Sadat · 10 stops</small
+                  >
+                </div>
+              </div>
+              <div class="step">
+                <i class="rail" style="background: #94a3b8"></i>
+                <div><b>Change at Sadat</b> · about 4 min</div>
+              </div>
+              <div class="step">
+                <i class="rail" style="background: var(--l1)"></i>
+                <div>
+                  <b>Line 1</b> towards Helwan<br /><small style="color: var(--muted)"
+                    >Sadat → El-Sayeda Zeinab · 2 stops</small
+                  >
+                </div>
+              </div>
+              <div class="cta">Start trip</div>
+            </div>
+            <div class="card">
+              <b>Next trains</b>
+              <p class="meta" style="margin: 4px 0 0">
+                Every ~3 min · last train 23:35 <span style="color: var(--warn)">(7B)</span>
+              </p>
+            </div>
+          </div>
+          <div class="tabs">
+            <div>Nearest</div>
+            <div class="on">Plan</div>
+            <div>Saved</div>
+            <div>Map</div>
+          </div>
+        </div>
+        <figcaption>
+          <b>2. Result.</b> One clear headline (time), compact meta, coloured step rail, next-train
+          info (7B).
+        </figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone">
+          <div class="map">
+            <svg viewBox="0 0 304 624" preserveAspectRatio="none">
+              <polyline
+                points="40,560 80,470 140,380 170,300 190,220 230,120"
+                fill="none"
+                stroke="#1d4ed8"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+              <polyline
+                points="260,540 220,440 170,300 120,200 90,90"
+                fill="none"
+                stroke="#dc2626"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+              <polyline
+                points="40,200 100,260 170,300 250,330"
+                fill="none"
+                stroke="#16a34a"
+                stroke-width="6"
+                stroke-linecap="round"
+              />
+              <circle cx="170" cy="300" r="10" fill="#fff" stroke="#0f172a" stroke-width="3" />
+              <circle cx="60" cy="420" r="9" fill="#0f766e" stroke="#fff" stroke-width="3" />
+            </svg>
+          </div>
+          <div class="float" style="top: 12px">
+            <b>Sadat</b> <small style="color: var(--muted)">· Lines 1 + 2</small>
+          </div>
+          <div class="fab" style="top: 70px">⛶</div>
+          <div class="fab" style="top: 118px">◎</div>
+          <div class="fab" style="top: 166px">≡</div>
+          <div class="float" style="bottom: 12px">
+            <b>You are here</b> <small style="color: var(--muted)">· nearest: Sadat, 420 m</small>
+            <div class="cta" style="margin-top: 8px">Plan trip from here</div>
+          </div>
+        </div>
+        <figcaption>
+          <b>3. Full-screen map.</b> Map fills the screen; floating controls: expand, locate me,
+          layers (lines, places). Tap a station for a bottom sheet; long-press to drop a pin.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <div class="phone">
+          <div class="appbar"><strong>Nearest station</strong><span class="pill">?</span></div>
+          <div class="body">
+            <div class="field hl"><span>Paste a Maps link, a name or use GPS</span></div>
+            <div class="item">
+              <div class="ico" style="background: var(--l1)">M</div>
+              <div class="t"><b>Sadat</b><small>420 m · 6 min walk</small></div>
+            </div>
+          </div>
+          <div class="scrim"></div>
+          <div class="tip" style="top: 130px">
+            <b>Start here</b>
+            <small
+              >Paste a Google Maps link or share a place to the app. We find the closest stations,
+              even offline.</small
+            >
+            <div class="nav">
+              <small>1 of 4</small
+              ><span class="pill" style="background: var(--accent); color: var(--on)">Next</span>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <b>4. Feature discovery.</b> A skippable 4-step tour (search, planner, save trips, map)
+          plus a "?" on each screen that reopens it.
+        </figcaption>
+      </figure>
+    </div>
+  </body>
+</html>

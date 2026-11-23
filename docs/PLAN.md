@@ -112,6 +112,17 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Stage 3 done (core): offline places index (~7.6k places after noise filtering, curated aliases in `data/curated/place-aliases.json`, landmark regression tests; `npm run data:places -- --cached` rebuilds from the cached raw download), `createPlaceResolver`, `parseSharedText`, word-order-tolerant search. UI wiring (Share Target, map pin) comes in Stages 4-5.
 - [x] Stage 4 done: web MVP (i18n en/ar RTL, dark/light theme), own Leaflet map with optional OSM tiles and tappable stations, nearest page, trip planner (door-to-door over the 3 nearest stations per end, fastest + fewest transfers, fare, step list, walk-instead hint under 700 m). Review fixes: input editing, stale GPS, resolver cache/failure message. Verified by scripted browser check at 390 px in EN and AR (no overflow). Follow-ups: station aliases such as Tahrir for Sadat, web lifecycle tests, Stage 6 benchmark vs the Egypt Transport app (black-box).
 
+### Stage 7 breakdown (sections; each is contributor-friendly and independent)
+
+- **7A UX/UI refactor (mocks first: `docs/mocks/index.html`, approve before coding):** theme refresh, search UX (type chips, grouped results, stations first), full-screen map design, feature discovery/onboarding.
+- **7B Time features:** leave-now / last-train warnings from `hours.json`, "next train" estimates by headway.
+- **7C Exploration:** stations reachable within N stops/minutes, last-mile suggestions.
+- **7D Station info:** exits, facilities, women-only cars, accessibility, per-station zones (needs data).
+- **7E More networks:** LRT, Monorail, Lines 4+ as optional layers.
+- **7F Community and data ops:** issue-report flow (prefilled GitHub issue: stations, route, app version), monthly data-refresh GitHub Action, CONTRIBUTING guide, optional resolver worker.
+- **7G Quality:** web lifecycle tests, quarterly/annual pass comparison, more benchmark trips.
+- Published: https://github.com/shawkyebrahim2514/cairo-metro (public, MIT; data ODbL attribution).
+
 ### Future ideas (not scheduled)
 
 - **Feature discovery / onboarding:** a quick, convenient way for anyone to learn what each feature does (short tooltips, first-run tour, "what's this?" hints).
