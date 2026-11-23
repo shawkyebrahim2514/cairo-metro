@@ -1939,3 +1939,63 @@ h2 svg {
   background: var(--card);
   color: var(--text);
 }
+
+.tour.img-dialog {
+  max-width: 560px;
+  width: 100%;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.img-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 8px;
+}
+.img-pane {
+  flex: none;
+}
+.img-opts {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-inline-end: 4px;
+}
+.img-preview img {
+  max-height: 30vh;
+}
+.img-actions {
+  position: static;
+  flex: none;
+  display: flex;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+@media (min-width: 800px) {
+  .tour.img-dialog {
+    max-width: 980px;
+  }
+  .img-body {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .img-pane {
+    flex: 1.1;
+    display: flex;
+    align-items: flex-start;
+  }
+  .img-preview img {
+    max-height: 68vh;
+  }
+  .img-opts {
+    flex: 1;
+  }
+}
+
+.seg button.on {
+  color: var(--accent);
+  background: var(--card);
+}

@@ -243,149 +243,156 @@ export function ImageDialog({
       >
         <h2 id="img-title">{t('imgTitle')}</h2>
 
-        <button
-          type="button"
-          className="img-preview"
-          aria-label={t('imgEnlarge')}
-          onClick={() => preview && setBig(true)}
-        >
-          {preview && <img src={preview} alt={t('imgPreviewAlt')} />}
-          {(busy || !preview) && !failed && <span className="img-busy">{t('imgPreviewing')}</span>}
-          {failed && <span className="img-busy">{t('imgFailed')}</span>}
-        </button>
+        <div className="img-body">
+          <div className="img-pane">
+            <button
+              type="button"
+              className="img-preview"
+              aria-label={t('imgEnlarge')}
+              onClick={() => preview && setBig(true)}
+            >
+              {preview && <img src={preview} alt={t('imgPreviewAlt')} />}
+              {(busy || !preview) && !failed && (
+                <span className="img-busy">{t('imgPreviewing')}</span>
+              )}
+              {failed && <span className="img-busy">{t('imgFailed')}</span>}
+            </button>
+          </div>
+          <div className="img-opts">
+            <h3>{t('imgSectionLook')}</h3>
+            <Seg<ImageStyle>
+              label={t('imgStyle')}
+              hint={t('imgHStyle')}
+              value={ui.style}
+              options={[
+                ['network', t('imgStyleNetwork')],
+                ['route', t('imgStyleRoute')],
+              ]}
+              onChange={(v) => set('style', v)}
+            />
+            <Seg<ImageCrop>
+              label={t('imgCrop')}
+              hint={t('imgHCrop')}
+              value={ui.crop}
+              disabled={route}
+              options={[
+                ['trip', t('imgCropTrip')],
+                ['network', t('imgCropNetwork')],
+              ]}
+              onChange={(v) => set('crop', v)}
+            />
+            <Seg<ImageColour>
+              label={t('imgColour')}
+              hint={t('imgHColour')}
+              value={ui.colour}
+              options={[
+                ['lines', t('imgColourLines')],
+                ['accent', t('imgColourAccent')],
+              ]}
+              onChange={(v) => set('colour', v)}
+            />
+            <Seg<ImageTheme>
+              label={t('theme')}
+              hint={t('imgHTheme')}
+              value={ui.theme}
+              options={themes}
+              onChange={(v) => set('theme', v)}
+            />
+            <Seg<'app' | Lang>
+              label={t('imgLang')}
+              hint={t('imgHLang')}
+              value={ui.lang}
+              options={[
+                ['app', t('imgLangApp')],
+                ['en', 'English'],
+                ['ar', 'العربية'],
+              ]}
+              onChange={(v) => set('lang', v)}
+            />
+            <Seg<ImageFormat>
+              label={t('imgFormat')}
+              hint={t('imgHFormat')}
+              value={ui.format}
+              options={[
+                ['portrait', t('imgFormatPortrait')],
+                ['square', t('imgFormatSquare')],
+                ['story', t('imgFormatStory')],
+              ]}
+              onChange={(v) => set('format', v)}
+            />
 
-        <h3>{t('imgSectionLook')}</h3>
-        <Seg<ImageStyle>
-          label={t('imgStyle')}
-          hint={t('imgHStyle')}
-          value={ui.style}
-          options={[
-            ['network', t('imgStyleNetwork')],
-            ['route', t('imgStyleRoute')],
-          ]}
-          onChange={(v) => set('style', v)}
-        />
-        <Seg<ImageCrop>
-          label={t('imgCrop')}
-          hint={t('imgHCrop')}
-          value={ui.crop}
-          disabled={route}
-          options={[
-            ['trip', t('imgCropTrip')],
-            ['network', t('imgCropNetwork')],
-          ]}
-          onChange={(v) => set('crop', v)}
-        />
-        <Seg<ImageColour>
-          label={t('imgColour')}
-          hint={t('imgHColour')}
-          value={ui.colour}
-          options={[
-            ['lines', t('imgColourLines')],
-            ['accent', t('imgColourAccent')],
-          ]}
-          onChange={(v) => set('colour', v)}
-        />
-        <Seg<ImageTheme>
-          label={t('theme')}
-          hint={t('imgHTheme')}
-          value={ui.theme}
-          options={themes}
-          onChange={(v) => set('theme', v)}
-        />
-        <Seg<'app' | Lang>
-          label={t('imgLang')}
-          hint={t('imgHLang')}
-          value={ui.lang}
-          options={[
-            ['app', t('imgLangApp')],
-            ['en', 'English'],
-            ['ar', 'العربية'],
-          ]}
-          onChange={(v) => set('lang', v)}
-        />
-        <Seg<ImageFormat>
-          label={t('imgFormat')}
-          hint={t('imgHFormat')}
-          value={ui.format}
-          options={[
-            ['portrait', t('imgFormatPortrait')],
-            ['square', t('imgFormatSquare')],
-            ['story', t('imgFormatStory')],
-          ]}
-          onChange={(v) => set('format', v)}
-        />
-
-        <h3>{t('imgSectionInclude')}</h3>
-        <Check
-          label={t('imgRouteNames')}
-          hint={t('imgHRouteNames')}
-          checked={ui.routeNames}
-          onChange={(v) => set('routeNames', v)}
-        />
-        <Check
-          label={t('imgOtherNames')}
-          hint={t('imgHOtherNames')}
-          checked={ui.otherNames}
-          disabled={route}
-          onChange={(v) => set('otherNames', v)}
-        />
-        <Check
-          label={t('imgWalking')}
-          hint={t('imgHWalking')}
-          checked={ui.walking}
-          onChange={(v) => set('walking', v)}
-        />
-        <Check
-          label={t('imgPlaces')}
-          hint={t('imgHPlaces')}
-          checked={ui.places}
-          disabled={nearby.length === 0}
-          onChange={(v) => set('places', v)}
-        />
-        <Check
-          label={t('imgStats')}
-          hint={t('imgHStats')}
-          checked={ui.stats}
-          onChange={(v) => set('stats', v)}
-        />
-        <Check
-          label={t('imgFare')}
-          hint={t('imgHFare')}
-          checked={ui.fare}
-          disabled={!ui.stats}
-          onChange={(v) => set('fare', v)}
-        />
-        <Check
-          label={t('imgEta')}
-          hint={t('imgHEta')}
-          checked={ui.eta}
-          onChange={(v) => set('eta', v)}
-        />
-        <Check
-          label={t('imgSteps')}
-          hint={t('imgHSteps')}
-          checked={ui.steps}
-          onChange={(v) => set('steps', v)}
-        />
-        <Check
-          label={t('imgWomen')}
-          hint={t('imgHWomen')}
-          checked={ui.women}
-          onChange={(v) => set('women', v)}
-        />
-        <Check
-          label={t('imgQr')}
-          hint={t('imgHQr')}
-          checked={ui.qr}
-          onChange={(v) => set('qr', v)}
-        />
-        <Check
-          label={t('imgBranding')}
-          hint={t('imgHBranding')}
-          checked={ui.branding}
-          onChange={(v) => set('branding', v)}
-        />
+            <h3>{t('imgSectionInclude')}</h3>
+            <Check
+              label={t('imgRouteNames')}
+              hint={t('imgHRouteNames')}
+              checked={ui.routeNames}
+              onChange={(v) => set('routeNames', v)}
+            />
+            <Check
+              label={t('imgOtherNames')}
+              hint={t('imgHOtherNames')}
+              checked={ui.otherNames}
+              disabled={route}
+              onChange={(v) => set('otherNames', v)}
+            />
+            <Check
+              label={t('imgWalking')}
+              hint={t('imgHWalking')}
+              checked={ui.walking}
+              onChange={(v) => set('walking', v)}
+            />
+            <Check
+              label={t('imgPlaces')}
+              hint={t('imgHPlaces')}
+              checked={ui.places}
+              disabled={nearby.length === 0}
+              onChange={(v) => set('places', v)}
+            />
+            <Check
+              label={t('imgStats')}
+              hint={t('imgHStats')}
+              checked={ui.stats}
+              onChange={(v) => set('stats', v)}
+            />
+            <Check
+              label={t('imgFare')}
+              hint={t('imgHFare')}
+              checked={ui.fare}
+              disabled={!ui.stats}
+              onChange={(v) => set('fare', v)}
+            />
+            <Check
+              label={t('imgEta')}
+              hint={t('imgHEta')}
+              checked={ui.eta}
+              onChange={(v) => set('eta', v)}
+            />
+            <Check
+              label={t('imgSteps')}
+              hint={t('imgHSteps')}
+              checked={ui.steps}
+              onChange={(v) => set('steps', v)}
+            />
+            <Check
+              label={t('imgWomen')}
+              hint={t('imgHWomen')}
+              checked={ui.women}
+              onChange={(v) => set('women', v)}
+            />
+            <Check
+              label={t('imgQr')}
+              hint={t('imgHQr')}
+              checked={ui.qr}
+              onChange={(v) => set('qr', v)}
+            />
+            <Check
+              label={t('imgBranding')}
+              hint={t('imgHBranding')}
+              checked={ui.branding}
+              onChange={(v) => set('branding', v)}
+            />
+          </div>
+        </div>
 
         <div className="tour-nav img-actions">
           <button
