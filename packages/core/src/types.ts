@@ -62,6 +62,8 @@ export interface Place {
   /** Either name may be empty when OSM has only one language. */
   en: string;
   ar: string;
+  /** Curated extra names (from data/curated/place-aliases.json). */
+  aliases?: string[];
   /** OSM tag value such as 'mall', 'university' or 'suburb'. */
   type: string;
   lat: number;

@@ -31,7 +31,7 @@ npm run build
 ```
 npm run data:fetch      # refresh raw OSM + Wikipedia/Wikidata snapshots (data/raw)
 npm run data:build      # build data/metro.json + data/crosscheck.json (applies curated + verification files)
-npm run data:places     # rebuild the offline places index data/places.json from OSM
+npm run data:places     # rebuild offline places index data/places.json from OSM (add -- --cached to reuse the last download)
 npm run data:validate   # sanity checks (counts, connectivity, names, coordinates)
 npm run data:view       # open the verification workspace at http://127.0.0.1:5174
 ```

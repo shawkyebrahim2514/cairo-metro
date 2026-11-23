@@ -4,3 +4,4 @@ coverage
 package-lock.json
 data/raw
 data/places.json
+data/raw/osm-places.json

@@ -6,3 +6,4 @@ coverage/
 .env.*
 .DS_Store
 .wrangler/
+data/raw/osm-places.json

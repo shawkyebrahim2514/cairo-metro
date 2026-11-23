@@ -129,9 +129,15 @@ export interface Match<T> {
 }
 
 /** Precomputes normalised names once so that searching thousands of items stays fast. */
-export function createSearchIndex<T>(items: T[], namesOf: (item: T) => string[]) {
+export function createSearchIndex<T>(
+  items: T[],
+  namesOf: (item: T) => string[],
+  /** Breaks ties between equally good matches; higher comes first. */
+  weightOf: (item: T) => number = () => 0,
+) {
   const entries = items.map((item) => ({
     item,
+    weight: weightOf(item),
     label: namesOf(item).find(Boolean) ?? '',
     keys: [...new Set(namesOf(item).map(normalizeForSearch).filter(Boolean))],
   }));
@@ -139,17 +145,18 @@ export function createSearchIndex<T>(items: T[], namesOf: (item: T) => string[])
     search(query: string, limit = 8): Match<T>[] {
       const q = normalizeForSearch(query);
       if (!q) return [];
-      const matches: (Match<T> & { label: string })[] = [];
+      const matches: (Match<T> & { label: string; weight: number })[] = [];
       for (const e of entries) {
         let best: number | null = null;
         for (const key of e.keys) {
           const s = scoreKey(q, key);
           if (s !== null && (best === null || s < best)) best = s;
         }
-        if (best !== null) matches.push({ item: e.item, score: best, label: e.label });
+        if (best !== null)
+          matches.push({ item: e.item, score: best, label: e.label, weight: e.weight });
       }
       return matches
-        .sort((a, b) => a.score - b.score || a.label.localeCompare(b.label))
+        .sort((a, b) => a.score - b.score || b.weight - a.weight || a.label.localeCompare(b.label))
         .slice(0, limit)
         .map(({ item, score }) => ({ item, score }));
     },

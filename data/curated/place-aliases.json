@@ -1,0 +1,16 @@
+{
+  "_comment": "Extra names people use for places. Keys are the place's name in data/places.json (English or Arabic); matching ignores case and El/Al. Add entries freely, then run `npm run data:places -- --cached`.",
+  "Salah El Din Citadel": [
+    "Cairo Citadel",
+    "Citadel of Cairo",
+    "Citadel of Saladin",
+    "Saladin Citadel",
+    "قلعة صلاح الدين",
+    "قلعة القاهرة"
+  ],
+  "Cairo International Airport": ["Cairo Airport", "CAI", "مطار القاهرة"],
+  "Khan el-Khalili": ["Khan Khalili", "Khan al Khalili", "خان الخليلي"],
+  "El Tahrir Square": ["Midan Tahrir", "Tahrir", "ميدان التحرير"],
+  "Egyptian Museum": ["Cairo Museum", "Tahrir Museum", "المتحف المصري"],
+  "Cairo Tower": ["برج القاهرة"]
+}

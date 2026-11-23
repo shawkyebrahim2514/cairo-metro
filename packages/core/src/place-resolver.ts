@@ -52,9 +52,35 @@ const toResolved = (p: Place): ResolvedPlace => ({
   placeType: p.type,
 });
 
+/** Landmarks a rider is likely to mean rank above generic shops and clinics when names tie. */
+const TYPE_WEIGHT: Record<string, number> = {
+  university: 5,
+  mall: 5,
+  attraction: 5,
+  museum: 5,
+  castle: 5,
+  fort: 5,
+  monument: 5,
+  airport: 5,
+  train_station: 5,
+  stadium: 4,
+  zoo: 4,
+  theatre: 4,
+  hospital: 4,
+  suburb: 4,
+  square: 4,
+  hotel: 3,
+  park: 3,
+  neighbourhood: 3,
+  college: 3,
+  place_of_worship: 2,
+  marketplace: 2,
+};
+export const placeWeight = (p: Place) => TYPE_WEIGHT[p.type] ?? 1;
+
 /** Resolves pasted/shared input to coordinates using only local data (no network). */
 export function createPlaceResolver(places: Place[]) {
-  const index = createSearchIndex(places, (p) => [p.en, p.ar]);
+  const index = createSearchIndex(places, (p) => [p.en, p.ar, ...(p.aliases ?? [])], placeWeight);
 
   function searchPlaces(query: string, limit = 8): ResolvedPlace[] {
     return index.search(query, limit).map((m) => toResolved(m.item));
