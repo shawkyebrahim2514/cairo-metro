@@ -193,7 +193,11 @@ export function ImageDialog({
           setBlob(b);
           setFailed(false);
         })
-        .catch(() => live && setFailed(true))
+        .catch(() => {
+          if (!live) return;
+          setBlob(null);
+          setFailed(true);
+        })
         .finally(() => live && setBusy(false));
     }, 200);
     return () => {

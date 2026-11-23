@@ -41,7 +41,12 @@ export function NearestPage({
   const markers = useMemo<MapMarker[]>(() => {
     if (!place) return [];
     const out: MapMarker[] = [
-      { point: endpointPoint(place), label: endpointName(place, lang), primary: true },
+      {
+        point: endpointPoint(place),
+        label: endpointName(place, lang),
+        primary: true,
+        onTap: () => setPlace(null),
+      },
     ];
     for (const r of results) {
       out.push({
@@ -75,7 +80,12 @@ export function NearestPage({
       <p className="note">{t('mapHint')}</p>
       {results.length > 0 && (
         <>
-          <h2>{t('nearestTitle')}</h2>
+          <div className="row-between">
+            <h2>{t('nearestTitle')}</h2>
+            <button type="button" className="pill" onClick={() => setPlace(null)}>
+              {t('clearPin')}
+            </button>
+          </div>
           <ul className="cards">
             {results.map((r) => (
               <li key={r.station.id} className="card">

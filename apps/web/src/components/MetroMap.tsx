@@ -12,6 +12,8 @@ export interface MapMarker {
   colour?: string;
   /** Larger marker with a permanent label, for the user's origin/destination. */
   primary?: boolean;
+  /** Called when the marker is tapped (for example to remove a pin). */
+  onTap?: () => void;
 }
 
 interface Props {
@@ -187,7 +189,7 @@ export function MetroMap({
         opacity: dim ? 0.4 : 1,
       });
       const showName =
-        onRoute ||
+        (onRoute && stationLabels !== 'off') ||
         (!dim &&
           (stationLabels === 'always' ||
             (stationLabels === 'zoom' && (zoom >= 14 || (s.interchange && zoom >= 11)))));
@@ -274,7 +276,8 @@ export function MetroMap({
       bounds.push(...toPts(route));
     }
     for (const m of markers) {
-      L.circleMarker([m.point.lat, m.point.lng], {
+      const dot = L.circleMarker([m.point.lat, m.point.lng], {
+        bubblingMouseEvents: !m.onTap,
         radius: m.primary ? 9 : 7,
         color: '#fff',
         weight: 2,
@@ -283,6 +286,7 @@ export function MetroMap({
       })
         .bindTooltip(m.label, { permanent: Boolean(m.primary), direction: 'top' })
         .addTo(group);
+      if (m.onTap) dot.on('click', m.onTap);
       bounds.push([m.point.lat, m.point.lng]);
     }
     if (bounds.length > 0)

@@ -46,8 +46,12 @@ export function PlannerPage({
 }) {
   const { t, lang } = useI18n();
   const [linked] = useState(readPlanHash);
-  const [from, setFrom] = useState<Endpoint | null>(linked?.from ?? preset?.from ?? null);
-  const [to, setTo] = useState<Endpoint | null>(linked?.to ?? preset?.to ?? null);
+  const [from, setFrom] = useState<Endpoint | null>(
+    preset ? (preset.from ?? null) : (linked?.from ?? null),
+  );
+  const [to, setTo] = useState<Endpoint | null>(
+    preset ? (preset.to ?? null) : (linked?.to ?? null),
+  );
   const [selected, setSelected] = useState(0);
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);
@@ -56,7 +60,7 @@ export function PlannerPage({
   const [imageOpen, setImageOpen] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
-  const [showShared, setShowShared] = useState(Boolean(linked));
+  const [showShared, setShowShared] = useState(Boolean(linked) && !preset);
 
   // Offer the 'where can I get to' view while only the origin is chosen.
   const reach = useMemo(
@@ -79,13 +83,19 @@ export function PlannerPage({
   const markers = useMemo<MapMarker[]>(() => {
     const out: MapMarker[] = [];
     if (from)
-      out.push({ point: endpointPoint(from), label: endpointName(from, lang), primary: true });
+      out.push({
+        point: endpointPoint(from),
+        label: endpointName(from, lang),
+        primary: true,
+        onTap: () => setFrom(null),
+      });
     if (to)
       out.push({
         point: endpointPoint(to),
         label: endpointName(to, lang),
         primary: true,
         colour: '#2563eb',
+        onTap: () => setTo(null),
       });
     for (const r of reach?.items ?? []) {
       const s = stationsById.get(r.stationId)!;
