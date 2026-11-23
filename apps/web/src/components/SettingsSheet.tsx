@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useModal } from '../useModal';
 import type { TicketCategory } from '@cairo-metro/core';
-import { canVibrate, fireAlert, type AlertPrefs } from '../alerts';
+import { canVibrate, fireAlert, unlockAudio, type AlertPrefs } from '../alerts';
 import { localDigits, useI18n } from '../i18n';
 import { HIGHLIGHTS, useSettings, type ThemeMode } from '../settings';
 
@@ -140,6 +140,7 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
           type="button"
           className="pill test"
           onClick={() => {
+            unlockAudio();
             for (const [i, kind] of (['station', 'warn', 'change', 'arrive'] as const).entries()) {
               timers.current.push(
                 window.setTimeout(

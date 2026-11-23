@@ -199,6 +199,19 @@ export function MetroMap({
           stationRef.current?.(s);
         })
         .addTo(group);
+      if (stationRef.current) {
+        const el = marker.getElement();
+        el?.setAttribute('tabindex', '0');
+        el?.setAttribute('role', 'button');
+        el?.setAttribute('aria-label', stationName(s, lang));
+        el?.addEventListener('keydown', (e: Event) => {
+          const k = e as KeyboardEvent;
+          if (k.key === 'Enter' || k.key === ' ') {
+            e.preventDefault();
+            stationRef.current?.(s);
+          }
+        });
+      }
     }
     return () => {
       group.remove();

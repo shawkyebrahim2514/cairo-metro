@@ -72,6 +72,17 @@ function beep(kind: AlertKind) {
   }
 }
 
+/** Call from a tap: browsers only allow sound and speech after a user gesture. */
+export function unlockAudio(): void {
+  try {
+    audio ??= new AudioContext();
+    void audio.resume();
+    if ('speechSynthesis' in window) window.speechSynthesis.speak(new SpeechSynthesisUtterance(''));
+  } catch {
+    // audio is optional
+  }
+}
+
 function speak(text: string, lang: string) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();

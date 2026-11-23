@@ -8,6 +8,7 @@ import type { TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
 import { Reachable } from '../components/Reachable';
 import { RouteCard } from '../components/RouteCard';
+import { unlockAudio } from '../alerts';
 import { stationsById, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
 import { stationName, useI18n } from '../i18n';
@@ -240,8 +241,6 @@ export function PlannerPage({
               <RouteCard
                 key={i}
                 trip={tr}
-                from={from}
-                to={to}
                 title={i === 0 ? t('fastest') : t('fewestTransfers')}
                 selected={i === selected}
                 onSelect={() => setSelected(i)}
@@ -251,14 +250,15 @@ export function PlannerPage({
               <div className="actions">
                 <button
                   type="button"
-                  className="pill"
+                  className="pill primary"
                   onClick={() => {
+                    unlockAudio();
                     setTracking(true);
                     setFollow(true);
                     setSnap('half');
                   }}
                 >
-                  {t('trackStart')}
+                  <span aria-hidden="true">▶</span> {t('trackStart')}
                 </button>
                 <button type="button" className="pill" onClick={share}>
                   {copied ? t('linkCopied') : t('share')}
@@ -269,7 +269,8 @@ export function PlannerPage({
                   aria-pressed={starred}
                   onClick={() => setSaved(toggleStar(saved, from, to))}
                 >
-                  {starred ? '★ ' + t('saved') : '☆ ' + t('saveTrip')}
+                  <span aria-hidden="true">{starred ? '★ ' : '☆ '}</span>
+                  {starred ? t('saved') : t('saveTrip')}
                 </button>
               </div>
             )}

@@ -63,13 +63,15 @@ Plan a metro trip between two points. Each end can be a station, a place, a Maps
 **Results** (two cards when they differ)
 
 - **Fastest** route and **Fewest transfers** route.
-- Total time, number of stations (the boarding station counts, an interchange counts once), number of transfers, and the fare in EGP.
+- **Route card**, built in parts:
+  - **Header**: the tag (Fastest or Fewest transfers), a large total time and the arrival clock time if you leave now.
+  - **Three stat tiles**: stations (the boarding station counts, an interchange counts once), changes (or "Direct, no changes") and the fare in EGP.
+  - **Service strip**: green "Running, a train about every N min", or amber "closing soon" with the last train time, or a closed notice. Based on the device clock.
+  - **Vertical timeline**: dotted walk segments with distance and time; a boarding node with a coloured Line pill and "towards" the terminal; a collapsible "N stops, M min" box that lists the stops in between; a highlighted "Change to Line N, 4 min" chip at interchanges; a "Get off here" exit node; and the destination node.
+  - **Women-only cars**: a collapsed tip (the two middle cars of every train; men may use them after 9 pm).
+- **Actions** under the card: a large **Track my trip** button, then Share and Save.
 - **Door to door**: when From or To is a place, the planner tries the three nearest stations at each end and adds the walk to the first station and from the last station. If the walk is shorter than about 700 m it suggests walking instead.
-- **Step timeline**: walk to the station, take Line N towards the terminal station, number of stops, change at an interchange, get off at the exit station, walk to the destination. A _Show stations_ toggle lists every stop on each leg.
-- **Service notes**: average wait for a train (from the line headway), a warning when service is closing soon (with the last train time) and a notice when the metro is closed. Based on the device clock.
-- **Women-only cars**: a note that the two middle cars of every train are for women, and men may use them after 9 pm.
-
-**Fares and passes**
+  **Fares and passes**
 
 - Fare uses the official ticket tiers (10 EGP up to 9 stations, 12 up to 16, 15 up to 23, 20 up to 39 for the standard ticket). Ticket type can be standard, senior 60+/army/police, or special needs/veterans (set in Settings).
 - **Monthly and quarterly pass calculator**: enter rides per month to see whether a pass or single tickets cost less, with the break-even point.
@@ -154,7 +156,10 @@ All choices are saved on the device.
 
 ## 14. Accessibility
 
-- Combobox semantics on the search box, keyboard navigation, visible focus rings, landmarks and labelled buttons.
+- Search box is a full combobox: arrow keys move through a listbox of results, Enter picks, and the result count is announced.
+- Dialogs (Settings, tour) move focus in, trap Tab, close on Escape and return focus. Tabs are a navigation with the current page marked.
+- Tracking announces only the next station, with alarm and off-route messages as alerts. The wake-me alarm still fires if a station is skipped, and audio is unlocked when you tap Track.
+- Map stations can be focused with Tab and chosen with Enter. Buttons are at least 44 px; muted text and line badges meet contrast.
 - Dark mode contrast, reduced-motion support (animations stop), and a meta description.
 - Lighthouse (mobile): performance 0.99, accessibility 1, best practices 1, SEO 1 at the time of the last check.
 - An accessibility review is tracked in `docs/PLAN.md`.

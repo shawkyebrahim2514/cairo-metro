@@ -142,6 +142,11 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] Code-review and rubber-duck agents on a11y: modal focus trap/restore (useModal), TrackPanel live region reduced to a concise status plus role=alert for alarm/off-route, combobox keyboard (arrows/Enter, listbox/option), route-pick button with aria-pressed, select labels, sheet aria-expanded, 44px touch targets, darker muted text, darker line pills. Deferred: keyboard map station selection, tabs pattern, wake-me anchor/crossed-warning edge case, audio unlock.
 - [x] docs/FEATURES.md (feature guide) and docs/mocks/route-card-v2.html (route card redesign mock, awaiting approval).
 
+### Route card v2 and remaining a11y (done)
+
+- [x] Route card redesigned from docs/mocks/route-card-v2.html (header with arrival time, stat tiles, service strip, timeline with ride boxes and change chips, collapsed women-cars tip, primary Track button).
+- [x] Remaining a11y issues: map stations keyboard-focusable, tabs as nav with aria-current, tracking anchors the time estimate at boarding, crossed warn/change/arrive alerts are not lost on a jump, audio/speech unlocked on Track tap.
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.

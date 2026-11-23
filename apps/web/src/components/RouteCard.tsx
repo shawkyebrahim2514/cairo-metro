@@ -1,129 +1,197 @@
-﻿import { useState } from 'react';
-import { tripService } from '@cairo-metro/core';
+import { tripService, type LineId } from '@cairo-metro/core';
 import { hoursData, lineColour, stationsById } from '../data';
-import { endpointName, type Endpoint } from '../endpoint';
 import { formatDistance, formatMinutes, localDigits, stationName, useI18n } from '../i18n';
 import type { Trip } from '../trip';
 
 interface Props {
   trip: Trip;
   title: string;
-  from: Endpoint;
-  to: Endpoint;
   selected: boolean;
   onSelect: () => void;
 }
 
-export function RouteCard({ trip, title, from, to, selected, onSelect }: Props) {
+const lineNo = (line: string) => line.replace(/\D/g, '');
+
+export function RouteCard({ trip, title, selected, onSelect }: Props) {
   const { t, lang } = useI18n();
-  const [expanded, setExpanded] = useState(false);
   const { route } = trip;
   const n = (v: number | string) => localDigits(v, lang);
   const name = (id: string) => stationName(stationsById.get(id)!, lang);
+  const mins = (sec: number) => `${n(Math.max(1, Math.round(sec / 60)))} ${t('min')}`;
   const nt = route.transfers.length;
+  const now = new Date();
   const service = tripService(
     hoursData,
     route.legs.map((l) => l.line),
-    new Date(),
+    now,
   );
   const firstWait = service.lines[0]?.avgWaitMin;
   const lastTrain = service.lines.find((s) => s.state !== 'open')?.lastTrain;
+  const arrival = new Date(now.getTime() + trip.totalSec * 1000).toLocaleTimeString(
+    lang === 'ar' ? 'ar-EG' : 'en-GB',
+    { hour: '2-digit', minute: '2-digit' },
+  );
+  const pill = (line: LineId) => (
+    <span className="badge line-pill" style={{ background: lineColour.get(line) }}>
+      {t('line')} {n(lineNo(line))}
+    </span>
+  );
 
   return (
     <section className={`card route${selected ? ' selected' : ''}`} onClick={onSelect}>
       <header>
-        <button
-          type="button"
-          className="route-pick"
-          aria-pressed={selected}
-          onClick={(e) => {
-            e.stopPropagation();
-            onSelect();
-          }}
-        >
-          <strong>{title}</strong>
-        </button>
-        <span className="total">{formatMinutes(trip.totalSec, t, lang)}</span>
+        <div>
+          <button
+            type="button"
+            className="route-pick"
+            aria-pressed={selected}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect();
+            }}
+          >
+            <span className="tag">{title}</span>
+          </button>
+          <div className="big-time">{formatMinutes(trip.totalSec, t, lang)}</div>
+        </div>
+        <div className="arrive">
+          {t('arriveAt')}
+          <b>{arrival}</b>
+        </div>
       </header>
-      <p className="meta">
-        {n(route.stops + 1)} {route.stops === 0 ? t('stationCountOne') : t('stationCount')} Â·{' '}
-        {nt === 0 ? t('direct') : `${n(nt)} ${nt === 1 ? t('transfer') : t('transfers')}`}
-        {route.fare != null && ` Â· ${n(route.fare)} ${t('fare')}`}
-      </p>
-      {service.state === 'closed' && <p className="note warn">{t('svcClosed')}</p>}
+
+      <div className="stats">
+        <div className="stat">
+          <b>{n(route.stops + 1)}</b>
+          <span>{route.stops === 0 ? t('stationCountOne') : t('stationCount')}</span>
+        </div>
+        <div className="stat">
+          <b>{nt === 0 ? t('direct') : n(nt)}</b>
+          <span>{nt === 0 ? t('noChanges') : nt === 1 ? t('transfer') : t('transfers')}</span>
+        </div>
+        {route.fare != null && (
+          <div className="stat">
+            <b>{n(route.fare)}</b>
+            <span>{t('fare')}</span>
+          </div>
+        )}
+      </div>
+
+      {service.state === 'closed' && (
+        <p className="status warn">
+          <i className="dot" aria-hidden="true" />
+          {t('svcClosed')}
+        </p>
+      )}
       {service.state === 'closing-soon' && (
-        <p className="note warn">
+        <p className="status warn">
+          <i className="dot" aria-hidden="true" />
           {t('svcClosingSoon')}
           {lastTrain && ` (${n(lastTrain)})`}
         </p>
       )}
       {service.state === 'open' && firstWait != null && (
-        <p className="note">
-          {t('svcWait')} {n(Math.round(firstWait))} {t('min')}
+        <p className="status">
+          <i className="dot" aria-hidden="true" />
+          {t('svcRunning')} {n(Math.round(firstWait))} {t('min')}
         </p>
       )}
-      <p className="note">{t('womenCars')}</p>
 
-      <ol className="steps">
+      <ol className="tl">
         {trip.walkIn && (
           <li className="walk">
-            {t('walkToStation')} {name(trip.walkIn.station.id)} Â·{' '}
-            {formatDistance(trip.walkIn.walkMeters, t, lang)} Â·{' '}
-            {formatMinutes(trip.walkIn.walkSec, t, lang)}
+            <span className="node ico" aria-hidden="true">
+              🚶
+            </span>
+            <div>
+              <div className="name">
+                {t('walkToStation')} {name(trip.walkIn.station.id)}
+              </div>
+              <div className="sub">
+                {formatDistance(trip.walkIn.walkMeters, t, lang)} ·{' '}
+                {formatMinutes(trip.walkIn.walkSec, t, lang)}
+              </div>
+            </div>
           </li>
         )}
-        {!trip.walkIn && from.kind === 'station' && (
-          <li className="walk">{endpointName(from, lang)}</li>
-        )}
-        {route.legs.map((leg, i) => {
+        {route.legs.flatMap((leg, i) => {
           const tr = route.transfers[i];
-          return (
-            <li key={i} style={{ borderColor: lineColour.get(leg.line) }}>
-              <span className="badge line-pill" style={{ background: lineColour.get(leg.line) }}>
-                {t('line')} {n(leg.line.replace(/\D/g, ''))}
-              </span>{' '}
-              {t('takeLine')} {name(leg.stations[0]!)} {t('towards')}{' '}
-              {leg.towards.map(name).join(' / ')} Â· {n(leg.stops)}{' '}
-              {leg.stops === 1 ? t('stop') : t('stops')}
-              <br />
-              <small>
-                {tr
-                  ? `${t('changeAt')} ${name(tr.stationId)}`
-                  : `${t('getOff')} ${name(leg.stations.at(-1)!)}`}
-              </small>
-              {expanded && (
-                <ul className="stations">
-                  {leg.stations.map((id) => (
-                    <li key={id}>{name(id)}</li>
-                  ))}
-                </ul>
-              )}
+          const next = route.legs[i + 1];
+          const middle = leg.stations.slice(1, -1);
+          const style = { '--c': lineColour.get(leg.line) } as React.CSSProperties;
+          const ride = (
+            <li key={`leg${i}`} style={style}>
+              <span className="node" aria-hidden="true" />
+              <div>
+                {i === 0 && <div className="name">{name(leg.stations[0]!)}</div>}
+                <div className="sub">
+                  {pill(leg.line)} {t('towards')} {leg.towards.map(name).join(' / ')}
+                </div>
+                <details className="ride">
+                  <summary>
+                    <span>
+                      {n(leg.stops)} {leg.stops === 1 ? t('stop') : t('stops')} ·{' '}
+                      {mins(leg.rideSec)}
+                    </span>
+                    <span aria-hidden="true">▾</span>
+                  </summary>
+                  {middle.length > 0 && (
+                    <ul>
+                      {middle.map((id) => (
+                        <li key={id}>{name(id)}</li>
+                      ))}
+                    </ul>
+                  )}
+                </details>
+              </div>
             </li>
           );
-        })}
-        {trip.walkOut && (
+          const end = tr ? (
+            <li key={`change${i}`} style={{ '--c': 'var(--hl)' } as React.CSSProperties}>
+              <span className="node end" aria-hidden="true">
+                ⇄
+              </span>
+              <div>
+                <div className="name">{name(tr.stationId)}</div>
+                <span className="change">
+                  {t('changeToLine')} {next && pill(next.line)} · {mins(tr.sec)}
+                </span>
+              </div>
+            </li>
+          ) : (
+            <li key={`exit${i}`} style={style}>
+              <span className="node end" aria-hidden="true" />
+              <div>
+                <div className="name">{name(leg.stations.at(-1)!)}</div>
+                <div className="sub">{t('getOffHere')}</div>
+              </div>
+            </li>
+          );
+          return [ride, end];
+        })}{' '}
+        {trip.walkOut ? (
           <li className="walk">
-            {t('walkFromStation')} {name(trip.walkOut.station.id)} Â·{' '}
-            {formatDistance(trip.walkOut.walkMeters, t, lang)} Â·{' '}
-            {formatMinutes(trip.walkOut.walkSec, t, lang)}
+            <span className="node ico" aria-hidden="true">
+              📍
+            </span>
+            <div>
+              <div className="name">{t('destLabel')}</div>
+              <div className="sub">
+                {t('walkFromStation')} {name(trip.walkOut.station.id)} ·{' '}
+                {formatDistance(trip.walkOut.walkMeters, t, lang)} ·{' '}
+                {formatMinutes(trip.walkOut.walkSec, t, lang)}
+              </div>
+            </div>
           </li>
-        )}
-        {!trip.walkOut && to.kind === 'station' && (
-          <li className="walk">{endpointName(to, lang)}</li>
-        )}
+        ) : null}
       </ol>
 
-      <button
-        type="button"
-        className="link"
-        aria-expanded={expanded}
-        onClick={(e) => {
-          e.stopPropagation();
-          setExpanded((v) => !v);
-        }}
-      >
-        {t('showStations')} <span aria-hidden="true">{expanded ? 'â–²' : 'â–¼'}</span>
-      </button>
+      <details className="tips" onClick={(e) => e.stopPropagation()}>
+        <summary>
+          <span aria-hidden="true">♀</span> {t('womenTitle')}
+        </summary>
+        <p>{t('womenCars')}</p>
+      </details>
     </section>
   );
 }

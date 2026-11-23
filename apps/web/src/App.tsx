@@ -151,12 +151,12 @@ export function App() {
             </div>
           </header>
 
-          <nav className="tabs" role="tablist">
+          <nav className="tabs" aria-label={t('appName')}>
             {(['nearest', 'plan'] as const).map((id) => (
               <button
                 key={id}
-                role="tab"
-                aria-selected={tab === id}
+                type="button"
+                aria-current={tab === id ? 'page' : undefined}
                 className={tab === id ? 'active' : ''}
                 onClick={() => {
                   setTab(id);

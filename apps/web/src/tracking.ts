@@ -68,7 +68,8 @@ export function useTracking(
   // A new trip or a restart begins again at the boarding station.
   useEffect(() => {
     indexRef.current = 0;
-    anchor.current = null;
+    // the time estimate starts from boarding, so the warning still fires without a GPS fix
+    anchor.current = active && route ? { index: 0, at: Date.now() } : null;
     lastFixAt.current = 0;
     lastFix.current = null;
     setState({
@@ -156,12 +157,22 @@ export function useTracking(
     }
     const idx = state.index;
     if (idx > prevIndex.current) {
-      const kind = alertAt(route, idx, prefsRef.current.warnStops);
+      // a jump can skip stations: keep the most important alert among those crossed
+      const rank = { station: 0, warn: 1, change: 2, arrive: 3 } as const;
+      let kind: ReturnType<typeof alertAt> = null;
+      let at = idx;
+      for (let i = prevIndex.current + 1; i <= idx; i++) {
+        const k = alertAt(route, i, prefsRef.current.warnStops);
+        if (k && (!kind || rank[k] >= rank[kind])) {
+          kind = k;
+          at = i;
+        }
+      }
       if (kind) {
         const { t: tt, lang: lg } = textRef.current;
         const name = (id: string) => stationName(stationsById.get(id)!, lg);
-        const stationId = route.stations[idx]!;
-        const p = tripProgress(route, idx);
+        const stationId = route.stations[at]!;
+        const p = tripProgress(route, at);
         const text =
           kind === 'arrive'
             ? `${tt('trackArrived')} ${name(stationId)}`
