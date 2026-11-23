@@ -125,6 +125,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 ### Future ideas (not scheduled)
 
+- **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
+
 - **Feature discovery / onboarding:** a quick, convenient way for anyone to learn what each feature does (short tooltips, first-run tour, "what's this?" hints).
 
 - **Monthly data refresh via GitHub Action:** scheduled workflow runs `npm run data:places` (and `data:fetch` + `data:build` + `data:validate`), and opens a PR with the diff for manual review. Never auto-merge; keep `verification.json` untouched. Measured OSM growth of our place categories: ~+3.5% per 6 months (8,672 -> 8,966 -> 9,277 between 2025-11 and 2026-11, net count).
