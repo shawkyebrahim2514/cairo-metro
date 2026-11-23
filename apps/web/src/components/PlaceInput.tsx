@@ -1,14 +1,23 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { parsePlaceInput, searchStations, type ResolvedPlace } from '@cairo-metro/core';
+import {
+  nearestStations,
+  parsePlaceInput,
+  searchStations,
+  type ResolvedPlace,
+} from '@cairo-metro/core';
 import { metro, type PlaceResolver } from '../data';
 import { endpointName, pinned, type Endpoint } from '../endpoint';
-import { stationName, useI18n } from '../i18n';
+import { formatDistance, stationName, useI18n } from '../i18n';
+
+type Group = 'stations' | 'places' | 'other';
+type Filter = 'all' | 'stations' | 'places';
 
 interface Suggestion {
   key: string;
   label: string;
   sub: string;
   endpoint: Endpoint;
+  group: Group;
 }
 
 interface Props {
@@ -21,11 +30,12 @@ interface Props {
   seedText?: string | null;
 }
 
-const fromPlace = (p: ResolvedPlace, sub: string, key: string): Suggestion => ({
+const fromPlace = (p: ResolvedPlace, sub: string, key: string, group: Group): Suggestion => ({
   key,
   label: p.name,
   sub,
   endpoint: { kind: 'point', point: p.point, name: p.name },
+  group,
 });
 
 export function PlaceInput({
@@ -41,6 +51,7 @@ export function PlaceInput({
   const [open, setOpen] = useState(Boolean(seedText));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [filter, setFilter] = useState<Filter>('all');
   const rootRef = useRef<HTMLDivElement>(null);
   const listId = useId();
 
@@ -88,9 +99,16 @@ export function PlaceInput({
     if (parsed?.kind === 'coords' || parsed?.kind === 'short' || /https?:\/\//.test(q)) {
       const r = resolver?.resolve(q);
       if (r?.status === 'resolved') {
-        out.push(fromPlace({ ...r.place, name: r.place.name || t('pinned') }, t('pinned'), 'link'));
+        out.push(
+          fromPlace(
+            { ...r.place, name: r.place.name || t('pinned') },
+            t('pinned'),
+            'link',
+            'other',
+          ),
+        );
       } else if (r?.status === 'ambiguous') {
-        r.candidates.forEach((c, i) => out.push(fromPlace(c, t('placeLabel'), `c${i}`)));
+        r.candidates.forEach((c, i) => out.push(fromPlace(c, t('placeLabel'), `c${i}`, 'other')));
       } else if (r?.status === 'needs-name') {
         hint = t('needsName');
       } else if (parsed?.kind === 'coords') {
@@ -99,25 +117,40 @@ export function PlaceInput({
           label: t('pinned'),
           sub: `${parsed.point.lat.toFixed(5)}, ${parsed.point.lng.toFixed(5)}`,
           endpoint: pinned(parsed.point, t),
+          group: 'other',
         });
       }
       return { suggestions: out, hint };
     }
 
-    for (const m of searchStations(metro.stations, q, 4)) {
+    for (const m of searchStations(metro.stations, q, filter === 'stations' ? 8 : 4)) {
       const lines = [...new Set(m.station.lines.map((l) => l.line))].join(' / ');
       out.push({
         key: `s-${m.station.id}`,
         label: stationName(m.station, lang),
         sub: `${t('stationLabel')} · ${lines}`,
         endpoint: { kind: 'station', station: m.station },
+        group: 'stations',
       });
     }
-    resolver
-      ?.searchPlaces(q, 6)
-      .forEach((p, i) => out.push(fromPlace(p, p.placeType ?? '', `p${i}`)));
+    resolver?.searchPlaces(q, filter === 'places' ? 10 : 6).forEach((p, i) => {
+      const near = nearestStations(metro.stations, p.point, { limit: 1 })[0];
+      const nearText = near
+        ? `${t('nearestPrefix')}: ${stationName(near.station, lang)} · ${formatDistance(near.walkMeters, t, lang)}`
+        : '';
+      out.push(
+        fromPlace(p, [p.placeType, nearText].filter(Boolean).join(' · '), `p${i}`, 'places'),
+      );
+    });
     return { suggestions: out, hint };
-  }, [text, endpoint, lang, resolver, t]);
+  }, [text, endpoint, lang, resolver, t, filter]);
+
+  const visible = suggestions.filter(
+    (s) => s.group === 'other' || filter === 'all' || s.group === filter,
+  );
+  const groups: { group: Group; items: Suggestion[] }[] = (['other', 'stations', 'places'] as const)
+    .map((group) => ({ group, items: visible.filter((s) => s.group === group) }))
+    .filter((g) => g.items.length > 0);
 
   const locate = () => {
     const token = ++gpsToken.current;
@@ -209,16 +242,42 @@ export function PlaceInput({
       {error && <p className="note error">{error}</p>}
       {hint && <p className="note">{hint}</p>}
       {open && suggestions.length > 0 && (
-        <ul className="suggestions" id={listId}>
-          {suggestions.map((s) => (
-            <li key={s.key}>
-              <button type="button" onClick={() => choose(s)}>
-                <span>{s.label}</span>
-                <small>{s.sub}</small>
+        <div className="suggestions">
+          <div className="chips" role="group" aria-label={t('searchPlaceholder')}>
+            {(['all', 'stations', 'places'] as const).map((f) => (
+              <button
+                key={f}
+                type="button"
+                className={filter === f ? 'chip on' : 'chip'}
+                aria-pressed={filter === f}
+                onClick={() => setFilter(f)}
+              >
+                {t(
+                  f === 'all' ? 'filterAll' : f === 'stations' ? 'filterStations' : 'filterPlaces',
+                )}
               </button>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+          <ul id={listId}>
+            {groups.map(({ group, items }) => (
+              <li key={group} className="group">
+                {group !== 'other' && (
+                  <h4>{t(group === 'stations' ? 'groupStations' : 'groupPlaces')}</h4>
+                )}
+                <ul>
+                  {items.map((s) => (
+                    <li key={s.key}>
+                      <button type="button" onClick={() => choose(s)}>
+                        <span>{s.label}</span>
+                        <small>{s.sub}</small>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );

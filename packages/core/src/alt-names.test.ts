@@ -1,10 +1,11 @@
-﻿import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
+import metro from '../../../data/metro.json';
 import { searchStations } from './search';
+import type { Station } from './types';
 
-const data = JSON.parse(readFileSync(new URL('../../../data/metro.json', import.meta.url), 'utf8'));
+const stations = metro.stations as unknown as Station[];
 
-const top = (q: string) => searchStations(data.stations, q)[0]?.station.id;
+const top = (q: string) => searchStations(stations, q)[0]?.station.id;
 
 describe('alternative station names (real data)', () => {
   it.each([

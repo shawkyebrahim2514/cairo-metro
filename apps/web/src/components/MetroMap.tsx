@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LatLng, Station } from '@cairo-metro/core';
@@ -33,6 +33,8 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
   const dynamicRef = useRef<L.LayerGroup | null>(null);
   const pickRef = useRef(onPick);
   pickRef.current = onPick;
+  const [full, setFull] = useState(false);
+  const meRef = useRef<L.CircleMarker | null>(null);
   const stationRef = useRef(onStation);
   stationRef.current = onStation;
 
@@ -57,6 +59,7 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
     );
     return () => {
       map.remove();
+      meRef.current = null;
       mapRef.current = null;
       tileRef.current = null;
       dynamicRef.current = null;
@@ -64,6 +67,39 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
   }, []);
 
   // Station dots are redrawn when the language changes so tooltips use the right name.
+  // The container size changes when the map is expanded or collapsed.
+  useEffect(() => {
+    const id = requestAnimationFrame(() => mapRef.current?.invalidateSize());
+    if (!full) return () => cancelAnimationFrame(id);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setFull(false);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      cancelAnimationFrame(id);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [full]);
+
+  const locate = () => {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const map = mapRef.current;
+        if (!map) return;
+        const ll: L.LatLngTuple = [pos.coords.latitude, pos.coords.longitude];
+        meRef.current?.remove();
+        meRef.current = L.circleMarker(ll, {
+          radius: 8,
+          color: '#fff',
+          weight: 3,
+          fillColor: '#2563eb',
+          fillOpacity: 1,
+        }).addTo(map);
+        map.setView(ll, Math.max(map.getZoom(), 15));
+      },
+      () => undefined,
+      { enableHighAccuracy: true, timeout: 10000 },
+    );
+  };
+
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
@@ -134,5 +170,24 @@ export function MetroMap({ markers = [], route, tiles, onPick, onStation }: Prop
       map.fitBounds(L.latLngBounds(bounds), { padding: [40, 40], maxZoom: 16 });
   }, [markers, route]);
 
-  return <div className="map" ref={hostRef} role="region" aria-label={t('mapLabel')} />;
+  return (
+    <div className={full ? 'map-wrap full' : 'map-wrap'}>
+      <div className="map" ref={hostRef} role="region" aria-label={t('mapLabel')} />
+      <div className="map-tools">
+        <button
+          type="button"
+          aria-label={full ? t('collapseMap') : t('expandMap')}
+          title={full ? t('collapseMap') : t('expandMap')}
+          onClick={() => setFull(!full)}
+        >
+          {full ? '✕' : '⛶'}
+        </button>
+        {'geolocation' in navigator && (
+          <button type="button" aria-label={t('locateMe')} title={t('locateMe')} onClick={locate}>
+            ◎
+          </button>
+        )}
+      </div>
+    </div>
+  );
 }

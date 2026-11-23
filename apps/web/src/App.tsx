@@ -2,6 +2,7 @@
 import type { TicketCategory } from '@cairo-metro/core';
 import { loadPlaceResolver, type PlaceResolver } from './data';
 import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
+import { Tour } from './components/Tour';
 import { NearestPage } from './pages/NearestPage';
 import { PlannerPage } from './pages/PlannerPage';
 import './styles.css';
@@ -37,6 +38,13 @@ export function App() {
       'standard',
     ),
   );
+  const [tour, setTour] = useState(
+    () => !sharedAtLoad && !readPlanHash() && localStorage.getItem('toured') !== '1',
+  );
+  const closeTour = () => {
+    localStorage.setItem('toured', '1');
+    setTour(false);
+  };
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
   const [resolverFailed, setResolverFailed] = useState(false);
@@ -69,13 +77,23 @@ export function App() {
       <div className="app">
         <header className="top">
           <h1>{t('appName')}</h1>
-          <button
-            type="button"
-            className="pill"
-            onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
-          >
-            {t('language')}
-          </button>
+          <div className="actions">
+            <button
+              type="button"
+              className="pill"
+              aria-label={t('help')}
+              onClick={() => setTour(true)}
+            >
+              ?
+            </button>
+            <button
+              type="button"
+              className="pill"
+              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+            >
+              {t('language')}
+            </button>
+          </div>
         </header>
 
         <nav className="tabs" role="tablist">
@@ -108,6 +126,8 @@ export function App() {
             <PlannerPage resolver={resolver} tiles={tiles} category={category} />
           )}
         </main>
+
+        {tour && <Tour onClose={closeTour} />}
 
         <footer>
           <label className="toggle">
