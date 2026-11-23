@@ -1,11 +1,12 @@
 import type { LineId, NearbyPlace, Station } from '@cairo-metro/core';
 import { lineColour, metro, stationsById } from './data';
+import { schematic, schematicPath, type SPt } from './schematic';
 import { endpointName, endpointPoint, type Endpoint } from './endpoint';
 import { formatMinutes, localDigits, stationName, type I18n, type Lang } from './i18n';
 import { qrMatrix, qrPath } from './qr';
 import type { Trip } from './trip';
 
-export type ImageStyle = 'route' | 'network';
+export type ImageStyle = 'route' | 'network' | 'schematic';
 export type ImageCrop = 'trip' | 'network';
 export type ImageTheme = 'app' | 'light' | 'dark';
 export type ImageFormat = 'portrait' | 'square' | 'story';
@@ -284,15 +285,28 @@ export async function renderTripImage(input: Input): Promise<Blob> {
 
   const ids = route.stations;
   const pts = ids.map((id) => stationsById.get(id) as Station);
-  const ends = [endpointPoint(from), endpointPoint(to)];
-  const network = o.style === 'network';
+  const schem = o.style === 'schematic';
+  const ends = schem ? [pts[0]!, pts[pts.length - 1]!] : [endpointPoint(from), endpointPoint(to)];
+  const network = o.style !== 'route';
   const wholeNetwork = network && o.crop === 'network';
-  const focus = [...pts, ...ends];
-  const proj = fitView(
-    wholeNetwork ? [...metro.stations, ...ends] : focus,
-    box,
-    wholeNetwork ? 40 : 90,
-  );
+  // The diagram is mapped onto pseudo coordinates so the same projection serves both styles.
+  const geo = (p: SPt) => ({ lat: -p.y / 10000, lng: p.x / (10000 * COS_CAIRO) });
+  const at = (s: { id: string; lat: number; lng: number }) =>
+    schem ? geo(schematic.positions.get(s.id)!) : s;
+  const focus = [...pts.map(at), ...(schem ? [] : ends)];
+  const everything = [...metro.stations.map(at), ...(schem ? [] : ends)];
+  const proj = fitView(wholeNetwork ? everything : focus, box, wholeNetwork ? 40 : 90);
+  const P = (s: { id: string; lat: number; lng: number }) => {
+    const g = at(s);
+    return proj(g.lat, g.lng);
+  };
+  const pathOf = (ids2: string[]): Pt[] =>
+    schem
+      ? schematicPath(ids2).map((q) => {
+          const g = geo(q);
+          return proj(g.lat, g.lng);
+        })
+      : ids2.map((id) => P(stationsById.get(id)!));
 
   const stroke = (a: Pt[], colour: string, width: number, dash?: number[]) => {
     ctx.beginPath();
@@ -321,16 +335,13 @@ export async function renderTripImage(input: Input): Promise<Blob> {
     ctx.globalAlpha = pal.fade;
     for (const line of metro.lines) {
       for (const branch of line.branches) {
-        const pl = branch.stations.map((id) => {
-          const s = stationsById.get(id)!;
-          return proj(s.lat, s.lng);
-        });
+        const pl = pathOf(branch.stations);
         stroke(pl, lineColour.get(line.id) ?? '#888', small ? 5 : 9);
       }
     }
     ctx.globalAlpha = Math.min(1, pal.fade + 0.3);
     for (const s of metro.stations) {
-      const p = proj(s.lat, s.lng);
+      const p = P(s);
       ctx.beginPath();
       ctx.arc(p.x, p.y, small ? 3.5 : 6, 0, Math.PI * 2);
       ctx.fillStyle = pal.card;
@@ -343,21 +354,18 @@ export async function renderTripImage(input: Input): Promise<Blob> {
   }
 
   // Walking legs and pins.
-  const first = proj(pts[0]!.lat, pts[0]!.lng);
-  const last = proj(pts[pts.length - 1]!.lat, pts[pts.length - 1]!.lng);
-  const fromP = proj(ends[0]!.lat, ends[0]!.lng);
-  const toP = proj(ends[1]!.lat, ends[1]!.lng);
-  if (o.walking) {
+  const first = P(pts[0]!);
+  const last = P(pts[pts.length - 1]!);
+  const fromP = schem ? first : proj(ends[0]!.lat, ends[0]!.lng);
+  const toP = schem ? last : proj(ends[1]!.lat, ends[1]!.lng);
+  if (o.walking && !schem) {
     if (from.kind === 'point') stroke([fromP, first], dark ? '#cbd5e1' : '#64748b', 6, [4, 14]);
     if (to.kind === 'point') stroke([last, toP], dark ? '#cbd5e1' : '#64748b', 6, [4, 14]);
   }
 
   // The route: glow, halo, then the line colour.
   for (const leg of route.legs) {
-    const pl = leg.stations.map((id) => {
-      const s = stationsById.get(id)!;
-      return proj(s.lat, s.lng);
-    });
+    const pl = pathOf(leg.stations);
     const colour = legColour(leg.line);
     if (network) {
       ctx.globalAlpha = 0.28;
@@ -368,7 +376,7 @@ export async function renderTripImage(input: Input): Promise<Blob> {
     stroke(pl, colour, small ? 11 : 13);
   }
   // Dots follow the station spacing so they never merge into a white band over the line.
-  const route2d = pts.map((s) => proj(s.lat, s.lng));
+  const route2d = pts.map((s) => P(s));
   let pathLen = 0;
   for (let i = 1; i < route2d.length; i++) {
     pathLen += Math.hypot(route2d[i]!.x - route2d[i - 1]!.x, route2d[i]!.y - route2d[i - 1]!.y);
@@ -386,7 +394,7 @@ export async function renderTripImage(input: Input): Promise<Blob> {
 
   // Labels avoid the stations and labels already placed.
   const placed: Rect[] = pts.map((q) => {
-    const p = proj(q.lat, q.lng);
+    const p = P(q);
     return { x: p.x - 14, y: p.y - 14, w: 28, h: 28 };
   });
   const label = (
@@ -453,12 +461,12 @@ export async function renderTripImage(input: Input): Promise<Blob> {
   dot(first, legColour(route.legs[0]!.line), small ? 10 : 15, small ? 6 : 8);
   for (const tr of route.transfers) {
     const s = stationsById.get(tr.stationId)!;
-    dot(proj(s.lat, s.lng), '#f59e0b', small ? 9 : 13, small ? 6 : 8);
+    dot(P(s), '#f59e0b', small ? 9 : 13, small ? 6 : 8);
   }
   dot(last, legColour(route.legs[route.legs.length - 1]!.line), small ? 10 : 15, small ? 6 : 8);
 
-  const fromIsPlace = from.kind === 'point';
-  const toIsPlace = to.kind === 'point';
+  const fromIsPlace = from.kind === 'point' && !schem;
+  const toIsPlace = to.kind === 'point' && !schem;
   if (fromIsPlace) pin(fromP, dark ? '#14b8a6' : '#0f766e');
   if (toIsPlace) pin(toP, '#2563eb');
 
@@ -472,17 +480,17 @@ export async function renderTripImage(input: Input): Promise<Blob> {
   label(name(route.to), last, big, 800, pal.text);
   for (const tr of route.transfers) {
     const s = stationsById.get(tr.stationId)!;
-    label(name(tr.stationId), proj(s.lat, s.lng), big - 2, 700, pal.text);
+    label(name(tr.stationId), P(s), big - 2, 700, pal.text);
   }
   if (o.routeNames) {
     for (const s of pts) {
       if (s.id === route.from || s.id === route.to) continue;
       if (route.transfers.some((tr) => tr.stationId === s.id)) continue;
-      label(stationName(s, lang), proj(s.lat, s.lng), small ? 17 : 22, 600, pal.body, 20);
+      label(stationName(s, lang), P(s), small ? 17 : 22, 600, pal.body, 20);
     }
   }
   let credit = false;
-  if (o.places && input.nearby?.length) {
+  if (o.places && !schem && input.nearby?.length) {
     credit = true;
     for (const { place } of input.nearby) {
       const p = proj(place.lat, place.lng);
@@ -504,7 +512,7 @@ export async function renderTripImage(input: Input): Promise<Blob> {
     const onRoute = new Set(ids);
     for (const s of metro.stations) {
       if (onRoute.has(s.id)) continue;
-      label(stationName(s, lang), proj(s.lat, s.lng), small ? 15 : 19, 500, pal.muted, 12);
+      label(stationName(s, lang), P(s), small ? 15 : 19, 500, pal.muted, 12);
     }
   }
   if (credit) {

@@ -339,13 +339,14 @@ export function ImageDialog({
               label={t('imgWalking')}
               hint={t('imgHWalking')}
               checked={ui.walking}
+              disabled={ui.style === 'schematic'}
               onChange={(v) => set('walking', v)}
             />
             <Check
               label={t('imgPlaces')}
               hint={t('imgHPlaces')}
               checked={ui.places}
-              disabled={nearby.length === 0}
+              disabled={nearby.length === 0 || ui.style === 'schematic'}
               onChange={(v) => set('places', v)}
             />
             <Check
