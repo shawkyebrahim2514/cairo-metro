@@ -104,3 +104,17 @@ describe('place resolver (real index)', () => {
     expect(resolver.resolve('qqqzzzxxxwww').status).toBe('not-found');
   });
 });
+
+describe('placesNear', () => {
+  it('lists named places around a station, closest first, without area labels', () => {
+    const metro = metroJson as unknown as MetroData;
+    const sadat = metro.stations.find((s) => s.id === 'sadat')!;
+    const near = resolver.placesNear(sadat, 600, 8);
+    expect(near.length).toBeGreaterThan(0);
+    expect(near.length).toBeLessThanOrEqual(8);
+    const d = near.map((n) => n.walkMeters);
+    expect(d).toEqual([...d].sort((a, b) => a - b));
+    expect(near.every((n) => n.walkMeters <= 600)).toBe(true);
+    expect(near.some((n) => n.place.type === 'neighbourhood')).toBe(false);
+  });
+});

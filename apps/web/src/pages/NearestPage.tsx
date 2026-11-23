@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { nearestStations } from '@cairo-metro/core';
+import { nearestStations, type Station } from '@cairo-metro/core';
 import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { PlaceInput } from '../components/PlaceInput';
+import { StationSheet } from '../components/StationSheet';
 import { lineColour, metro, type PlaceResolver } from '../data';
 import { endpointName, endpointPoint, pinned, type Endpoint } from '../endpoint';
 import { formatDistance, formatMinutes, stationName, useI18n } from '../i18n';
@@ -20,6 +21,7 @@ export function NearestPage({
 }) {
   const { t, lang } = useI18n();
   const [place, setPlace] = useState<Endpoint | null>(null);
+  const [stationInfo, setStationInfo] = useState<Station | null>(null);
 
   useEffect(() => {
     if (!resolver || !shared) return;
@@ -68,7 +70,7 @@ export function NearestPage({
         markers={markers}
         tiles={tiles}
         onPick={(p) => setPlace(pinned(p, t))}
-        onStation={(s) => setPlace({ kind: 'station', station: s })}
+        onStation={setStationInfo}
       />
       <p className="note">{t('mapHint')}</p>
       {results.length > 0 && (
@@ -92,6 +94,21 @@ export function NearestPage({
             ))}
           </ul>
         </>
+      )}
+      {stationInfo && (
+        <StationSheet
+          station={stationInfo}
+          resolver={resolver}
+          onFrom={() => {
+            setPlace({ kind: 'station', station: stationInfo });
+            setStationInfo(null);
+          }}
+          onTo={() => {
+            setPlace({ kind: 'station', station: stationInfo });
+            setStationInfo(null);
+          }}
+          onClose={() => setStationInfo(null)}
+        />
       )}
     </>
   );

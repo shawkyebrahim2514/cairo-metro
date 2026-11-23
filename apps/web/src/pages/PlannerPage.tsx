@@ -3,9 +3,10 @@ import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { Footer } from '../components/Footer';
 import { TrackPanel } from '../components/TrackPanel';
 import { Sheet, type Snap } from '../components/Sheet';
-import type { TicketCategory } from '@cairo-metro/core';
+import type { Station, TicketCategory } from '@cairo-metro/core';
 import { PlaceInput } from '../components/PlaceInput';
 import { QrDialog } from '../components/QrDialog';
+import { StationSheet } from '../components/StationSheet';
 import { QuickPlaces } from '../components/QuickPlaces';
 import { TripList } from '../components/TripList';
 import { Reachable } from '../components/Reachable';
@@ -46,6 +47,7 @@ export function PlannerPage({
   const [saved, setSaved] = useState(loadTrips);
   const [copied, setCopied] = useState(false);
   const [qrOpen, setQrOpen] = useState(false);
+  const [stationInfo, setStationInfo] = useState<Station | null>(null);
   const [imaging, setImaging] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
@@ -211,7 +213,7 @@ export function PlannerPage({
           follow={tracking && follow}
           onDrag={() => setFollow(false)}
           onPick={pick}
-          onStation={(s) => pickEndpoint({ kind: 'station', station: s })}
+          onStation={setStationInfo}
         />
       </div>
       <Sheet snap={snap} onSnap={setSnap}>
@@ -348,6 +350,23 @@ export function PlannerPage({
       </Sheet>
       {qrOpen && from && to && (
         <QrDialog url={planUrl(from, to)} onClose={() => setQrOpen(false)} />
+      )}
+      {stationInfo && (
+        <StationSheet
+          station={stationInfo}
+          resolver={resolver}
+          onFrom={() => {
+            setFrom({ kind: 'station', station: stationInfo });
+            setSelected(0);
+            setStationInfo(null);
+          }}
+          onTo={() => {
+            setTo({ kind: 'station', station: stationInfo });
+            setSelected(0);
+            setStationInfo(null);
+          }}
+          onClose={() => setStationInfo(null)}
+        />
       )}
     </>
   );

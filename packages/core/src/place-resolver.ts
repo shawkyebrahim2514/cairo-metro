@@ -1,5 +1,6 @@
-import type { LatLng } from './geo';
+import { haversineMeters, type LatLng } from './geo';
 import { parsePlaceInput } from './link-parser';
+import { DETOUR_FACTOR } from './nearest';
 import { createSearchIndex } from './search';
 import type { Place } from './types';
 
@@ -76,6 +77,23 @@ const TYPE_WEIGHT: Record<string, number> = {
   place_of_worship: 2,
   marketplace: 2,
 };
+/** Types that describe an area rather than somewhere to go; skipped in 'nearby' lists. */
+const AREA_TYPES = new Set([
+  'suburb',
+  'neighbourhood',
+  'quarter',
+  'locality',
+  'city_block',
+  'apartment',
+  'hotel;apartment',
+]);
+
+export interface NearbyPlace {
+  place: Place;
+  /** Estimated walking distance (straight line x detour factor). */
+  walkMeters: number;
+}
+
 export const placeWeight = (p: Place) => TYPE_WEIGHT[p.type] ?? 1;
 
 /** Resolves pasted/shared input to coordinates using only local data (no network). */
@@ -127,5 +145,22 @@ export function createPlaceResolver(places: Place[]) {
     return fromName(query);
   }
 
-  return { resolve, searchPlaces };
+  /** Named places within walking distance of a point, closest first (one per name). */
+  function placesNear(point: LatLng, maxWalkMeters = 600, limit = 8): NearbyPlace[] {
+    const seen = new Set<string>();
+    return places
+      .filter((p) => (p.en || p.ar) && !AREA_TYPES.has(p.type))
+      .map((place) => ({ place, walkMeters: haversineMeters(point, place) * DETOUR_FACTOR }))
+      .filter((x) => x.walkMeters <= maxWalkMeters)
+      .sort((a, b) => a.walkMeters - b.walkMeters)
+      .filter((x) => {
+        const key = (x.place.en || x.place.ar).toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .slice(0, limit);
+  }
+
+  return { resolve, searchPlaces, placesNear };
 }

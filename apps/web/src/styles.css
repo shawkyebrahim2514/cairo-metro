@@ -1725,3 +1725,40 @@ footer {
 .qr-dialog .tour-nav {
   justify-content: center;
 }
+
+.station-sheet h3 {
+  margin: 14px 0 6px;
+  font-size: 0.95rem;
+}
+.station-sheet .muted {
+  margin: 0;
+  font-size: 0.85rem;
+}
+.station-lines {
+  display: grid;
+  gap: 8px;
+}
+.station-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.station-nearby {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 28vh;
+  overflow-y: auto;
+}
+.station-nearby li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.station-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
