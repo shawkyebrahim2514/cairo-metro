@@ -155,6 +155,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 
 - [x] Settings: station names on the map (Always / When zoomed in / Hidden; default Always, smaller text at low zoom).
 
+- **Idea backlog (awaiting user pick):** trip screenshot/share image (M), QR trip share (S), Home/Work quick-picks + leave-now ETA (S), leave-at/arrive-by (M), trip history (S), station detail sheet (M), map station search + schematic view (M-L), user-reported disruptions (L, needs backend), walking directions (M-L), install prompt + offline badge (S), Capacitor wrapper (L), Monorail/BRT (L).
+
 ### Future ideas (not scheduled)
 
 - **Monorail and BRT layers (7E, deferred by user):** add East Nile Monorail and Ring Road BRT (Phase 1 first, Phase 2 behind per-station open flags) as optional layers. First get coordinates from OSM or an official map and resolve the open questions in `docs/transit-research.md`.
