@@ -4,8 +4,12 @@ import { dictionaries, I18nContext, type I18n, type Lang } from './i18n';
 import { NearestPage } from './pages/NearestPage';
 import { PlannerPage } from './pages/PlannerPage';
 import './styles.css';
+import { takeSharedText } from './share';
 
 type Tab = 'nearest' | 'plan';
+
+// Read once at load: the share target query is removed from the URL right away.
+const sharedAtLoad = takeSharedText();
 
 const stored = <T extends string>(key: string, allowed: T[], fallback: T): T => {
   const v = localStorage.getItem(key) as T | null;
@@ -16,7 +20,9 @@ export function App() {
   const [lang, setLang] = useState<Lang>(() =>
     stored<Lang>('lang', ['en', 'ar'], navigator.language.startsWith('ar') ? 'ar' : 'en'),
   );
-  const [tab, setTab] = useState<Tab>(() => stored<Tab>('tab', ['nearest', 'plan'], 'nearest'));
+  const [tab, setTab] = useState<Tab>(() =>
+    sharedAtLoad ? 'nearest' : stored<Tab>('tab', ['nearest', 'plan'], 'nearest'),
+  );
   const [tiles, setTiles] = useState(() => localStorage.getItem('tiles') === '1');
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
 
@@ -84,7 +90,7 @@ export function App() {
 
         <main>
           {tab === 'nearest' ? (
-            <NearestPage resolver={resolver} tiles={tiles} />
+            <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
           ) : (
             <PlannerPage resolver={resolver} tiles={tiles} />
           )}

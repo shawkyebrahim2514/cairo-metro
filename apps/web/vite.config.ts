@@ -2,5 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  // Relative asset paths let the app be hosted under any sub-path (e.g. GitHub Pages).
+  base: './',
   plugins: [react()],
 });

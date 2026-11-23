@@ -17,6 +17,8 @@ interface Props {
   onChange: (e: Endpoint | null) => void;
   resolver: PlaceResolver | null;
   showGps?: boolean;
+  /** Text to prefill on mount (e.g. a shared link), shown with suggestions. */
+  seedText?: string | null;
 }
 
 const fromPlace = (p: ResolvedPlace, sub: string, key: string): Suggestion => ({
@@ -26,10 +28,17 @@ const fromPlace = (p: ResolvedPlace, sub: string, key: string): Suggestion => ({
   endpoint: { kind: 'point', point: p.point, name: p.name },
 });
 
-export function PlaceInput({ label, endpoint, onChange, resolver, showGps = true }: Props) {
+export function PlaceInput({
+  label,
+  endpoint,
+  onChange,
+  resolver,
+  showGps = true,
+  seedText,
+}: Props) {
   const { t, lang } = useI18n();
-  const [text, setText] = useState('');
-  const [open, setOpen] = useState(false);
+  const [text, setText] = useState(seedText ?? '');
+  const [open, setOpen] = useState(Boolean(seedText));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const rootRef = useRef<HTMLDivElement>(null);

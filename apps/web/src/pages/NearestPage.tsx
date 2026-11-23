@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { nearestStations } from '@cairo-metro/core';
 import { MetroMap, type MapMarker } from '../components/MetroMap';
 import { PlaceInput } from '../components/PlaceInput';
@@ -11,12 +11,25 @@ const FAR_METERS = 3000;
 export function NearestPage({
   resolver,
   tiles,
+  shared,
 }: {
   resolver: PlaceResolver | null;
   tiles: boolean;
+  /** Text received from the share target; resolved once the places index is ready. */
+  shared?: string | null;
 }) {
   const { t, lang } = useI18n();
   const [place, setPlace] = useState<Endpoint | null>(null);
+
+  useEffect(() => {
+    if (!resolver || !shared) return;
+    const r = resolver.resolve(shared);
+    if (r.status === 'resolved') {
+      setPlace(
+        (cur) => cur ?? { kind: 'point', point: r.place.point, name: r.place.name || t('pinned') },
+      );
+    }
+  }, [resolver, shared]);
 
   const results = useMemo(
     () => (place ? nearestStations(metro.stations, endpointPoint(place), { limit: 3 }) : []),
@@ -43,6 +56,7 @@ export function NearestPage({
   return (
     <>
       <PlaceInput
+        seedText={shared}
         label={t('tabNearest')}
         endpoint={place}
         onChange={setPlace}

@@ -65,14 +65,15 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 5. Station detail sheet.
    Done when: both user stories work end to end on mobile.
 
-### Stage 5: Product polish
+### Stage 5: Product polish (in progress)
 
-1. PWA manifest + service worker + offline data.
-2. Web Share Target (Maps/WhatsApp).
+1. [x] PWA manifest + icons + dependency-free service worker (app shell precached, other same-origin GETs stale-while-revalidate, so a new version appears on the second load) + offline data. Verified offline with a headless browser.
+2. [x] Web Share Target (GET, title/text/url; deduplicated, resolved offline via the places index; the query is removed from the URL after reading). Works only once the PWA is installed on Android/Chrome.
 3. Saved trips, recents, shareable route URLs.
 4. Fare + subscription calculator.
-5. Door-to-door totals.
+5. Door-to-door totals (done in Stage 4).
 6. Accessibility + Lighthouse.
+7. Alternative station names people actually use (e.g. "Tahrir" for Sadat, old names, abbreviations, Arabic colloquial spellings): collect them into `data/curated/curated.json` aliases, and verify in the data viewer. Scheduled, do after the PWA work.
 
 ### Stage 6: Quality & benchmark
 
