@@ -1,4 +1,4 @@
-# Cairo Metro: feature guide
+﻿# Cairo Metro: feature guide
 
 A detailed description of everything the app does today. Each feature lists what the user sees, how it behaves, and the rules behind it, so it can be used as a script for demos, videos or documentation.
 
@@ -157,7 +157,7 @@ All choices are saved on the device.
 - **Offline badge** in the header: "Ready offline" once the service worker has cached the app (from the second visit), "Offline" when the connection drops.
 - **Shared-trip card**: opening a trip link shows a gradient card with the route, time, stations and fare, plus View route, Track my trip and Save buttons. Link previews in WhatsApp/Facebook show a generic app card (static hosting cannot make per-trip previews).
 - **Trip QR code**: a QR of the trip link that another phone can scan (built in, no library).
-- **Trip image**: a shareable PNG with the route diagram, stats and steps (Web Share on phones, download elsewhere).
+- **Trip image**: tap **Image** to open an options dialog with a live preview (choices are remembered). Each option has an (i) hint. Options: map style (network map with all lines faded behind the highlighted trip, or route only); zoom (crop to the trip or whole network); other station names; include ETA, fare, women-cars note, steps, stats, branding and a QR corner; walking legs drawn dashed with start/end pins; nearby places at the destination (adds the OpenStreetMap credit automatically); image theme (match app, light, dark); image language (match app, English, Arabic); format (portrait, square, story 9:16). Shared with Web Share on phones, downloaded elsewhere. No map tiles are used. A schematic style is planned.
 - **Home and Work** quick places, and a **trip history** (last 30, with dates, "Show all", "Clear history") next to saved trips.
 - **Station sheet**: tapping a station on the map opens its lines, first and last train, women-only cars note and places within 600 m of walking, with "Start here" and "Go here" buttons.
 - **Hosted on GitHub Pages**, deployed automatically on every push to the main branch.
