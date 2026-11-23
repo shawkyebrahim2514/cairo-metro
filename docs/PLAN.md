@@ -73,7 +73,7 @@ data/ (raw, curated) | scripts/ (build-data, validate-data) | packages/core | ap
 4. [x] Ticket-type selector (standard / senior / special needs) feeding fares, plus a monthly-pass vs single-tickets calculator (`comparePass` in core, rides per month, break-even). Zones are estimated from the ticket tier because station-to-zone data is missing (open data gap). Quarterly/annual passes not compared yet.
 5. Door-to-door totals (done in Stage 4).
 6. [x] Accessibility pass (combobox semantics, Escape closes suggestions, focus rings, reduced motion, landmarks, dark-mode contrast, meta description, robots.txt). Lighthouse (mobile, run with npx, not a dependency): performance 0.99, accessibility 1, best practices 1, SEO 1.
-7. [x] Alternative station names (Tahrir=Sadat, area names, spelling variants, Arabic) in `data/curated/alt-names.json`, merged by build-data; review list in `docs/alt-names-review.md`. PROPOSED, awaiting user verification; also check suspicious old aliases (Maspero "Gamal AbdAlNasser", Opera "Gezira").
+7. [x] Alternative station names (Tahrir=Sadat, area names, spelling variants, Arabic) in `data/curated/alt-names.json`, merged by build-data; review list in `docs/alt-names-review.md`. APPROVED by the user.
 
 ### Stage 6: Quality & benchmark (in progress)
 
@@ -181,6 +181,8 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
       eached in snapToRoute) and a jump over the warning still rings the wake alarm; fewest-transfers now minimises transfers first; two chosen stations under 700 m still plan a metro trip; first visit precaches JS/CSS/places chunks; enlarged image preview is inside the dialog focus trap (rest inert, focus restored); pins removable by tap or a Remove pin button. Left by design: the time-based estimate before boarding (it only runs when GPS is stale; each GPS fix re-anchors it).
 
 - [x] Long-trip images: taller map in portrait, Turn map to fit (rotation with north arrow), every-station list; split-into-panels idea was mocked and rejected by the user (not built).
+
+- [x] Final cleanup: alternative names approved (alt-names.json supports a `remove` list; wrong Maspero alias removed), unused pass-comparison code deleted from core (comparePass, comparePassPlans), README refreshed. Station zones stay a known data gap; benchmark trips and real-device checks postponed by the user; unbuilt ideas dropped from scope.
 
 ### Future ideas (not scheduled)
 

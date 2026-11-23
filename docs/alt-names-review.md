@@ -1,6 +1,6 @@
-﻿# Alternative station names: review list
+# Alternative station names: review list
 
-Source: data/curated/alt-names.json (proposed, unverified). Edit that file, run npm run data:build. Existing suspicious aliases to check: Maspero 'Gamal AbdAlNasser' (belongs to Nasser), Opera 'Gezira'.
+Source: data/curated/alt-names.json. APPROVED by the project owner. Edit that file, run npm run data:build. The wrong Maspero alias 'Gamal AbdAlNasser' (it belongs to Nasser) is removed through the file's `remove` list; Opera 'Gezira' is kept (the station is on Gezira island).
 
 | Station                                | Added names                                                                                               |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------- |

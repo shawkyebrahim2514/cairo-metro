@@ -14,16 +14,9 @@ export interface FareCounting {
 export interface FaresData {
   currency: string;
   ticket: { counting?: FareCounting; tiers: TicketTier[] };
-  subscriptions?: { monthly?: Record<string, number[]>; quarterly?: Record<string, number[]> };
 }
 
 export type TicketCategory = 'standard' | 'senior60AndArmyPolice' | 'specialNeedsAndVeterans';
-
-/** Which monthly-pass price list applies to a ticket category (none for special needs/veterans). */
-const MONTHLY_PASS_KEY: Partial<Record<TicketCategory, string>> = {
-  standard: 'people',
-  senior60AndArmyPolice: 'senior60',
-};
 
 export const DEFAULT_FARE_COUNTING: FareCounting = { includesOrigin: true };
 
@@ -51,87 +44,4 @@ export function tripFare(
   category: TicketCategory = 'standard',
 ): number | null {
   return stops > 0 ? ticketPrice(fares, billableStations(fares, stops), category) : null;
-}
-
-export interface PassComparison {
-  /** Estimated zones (1-4). Station-to-zone data is not available, so this follows the ticket tier. */
-  zones: number;
-  ticketTotal: number;
-  monthlyPass: number;
-  /** Positive when the pass is cheaper than single tickets for this many rides. */
-  savings: number;
-  /** Rides per month from which the pass is cheaper. */
-  breakEvenRides: number;
-}
-
-/** Compares paying per ride with a monthly pass for a trip repeated `ridesPerMonth` times. */
-export function comparePass(
-  fares: FaresData,
-  stops: number,
-  ridesPerMonth: number,
-  category: TicketCategory = 'standard',
-): PassComparison | null {
-  const key = MONTHLY_PASS_KEY[category];
-  const prices = key ? fares.subscriptions?.monthly?.[key] : undefined;
-  const fare = tripFare(fares, stops, category);
-  if (!prices || fare == null || fare <= 0) return null;
-  const tiers = [...fares.ticket.tiers].sort((a, b) => a.maxStations - b.maxStations);
-  const tierIndex = tiers.findIndex((t) => billableStations(fares, stops) <= t.maxStations);
-  const zones = Math.min(Math.max(tierIndex + 1, 1), prices.length);
-  const monthlyPass = prices[zones - 1]!;
-  const ticketTotal = fare * ridesPerMonth;
-  return {
-    zones,
-    ticketTotal,
-    monthlyPass,
-    savings: ticketTotal - monthlyPass,
-    breakEvenRides: Math.ceil(monthlyPass / fare),
-  };
-}
-
-export interface PassPlan {
-  period: 'monthly' | 'quarterly';
-  months: number;
-  price: number;
-  /** What single tickets would cost over the same period. */
-  ticketTotal: number;
-  /** Positive when the pass is cheaper than single tickets. */
-  savings: number;
-  /** Pass price spread over its months. */
-  perMonth: number;
-}
-
-const PERIODS = [
-  { period: 'monthly', months: 1 },
-  { period: 'quarterly', months: 3 },
-] as const;
-
-/** Compares single tickets with the monthly and quarterly passes (annual passes are priced per lines, not zones). */
-export function comparePassPlans(
-  fares: FaresData,
-  stops: number,
-  ridesPerMonth: number,
-  category: TicketCategory = 'standard',
-): PassPlan[] {
-  const key = MONTHLY_PASS_KEY[category];
-  const fare = tripFare(fares, stops, category);
-  if (!key || fare == null || fare <= 0) return [];
-  const tiers = [...fares.ticket.tiers].sort((a, b) => a.maxStations - b.maxStations);
-  const tierIndex = tiers.findIndex((t) => billableStations(fares, stops) <= t.maxStations);
-  const plans: PassPlan[] = [];
-  for (const { period, months } of PERIODS) {
-    const prices = fares.subscriptions?.[period]?.[key];
-    if (!prices?.length) continue;
-    const price = prices[Math.min(Math.max(tierIndex + 1, 1), prices.length) - 1]!;
-    const ticketTotal = fare * ridesPerMonth * months;
-    plans.push({
-      period,
-      months,
-      price,
-      ticketTotal,
-      savings: ticketTotal - price,
-      perMonth: Math.round(price / months),
-    });
-  }
-  return plans;
 }

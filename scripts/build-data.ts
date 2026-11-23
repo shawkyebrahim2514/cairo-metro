@@ -59,7 +59,7 @@ interface VerificationFile {
   stations: Record<string, { verified?: boolean; name?: Partial<LocalizedName> }>;
 }
 interface AltNamesFile {
-  stations: Record<string, { names: string[] }>;
+  stations: Record<string, { names?: string[]; remove?: string[] }>;
 }
 const altNamesPath = 'data/curated/alt-names.json';
 const altNames: AltNamesFile = existsSync(altNamesPath)
@@ -296,6 +296,7 @@ for (const [qid, group] of byQid) {
   usedIds.add(id);
 
   // Alternative names people really use (curated separately so they can be reviewed in one place).
+  const removed = new Set((altNames.stations[id]?.remove ?? []).map(norm));
   for (const a of altNames.stations[id]?.names ?? []) {
     const clean = hasArabic(a) ? cleanAr(a) : cleanEn(a);
     if (clean && !seen.has(norm(clean))) {
@@ -303,6 +304,9 @@ for (const [qid, group] of byQid) {
       aliases.push(clean);
     }
   }
+
+  for (let i = aliases.length - 1; i >= 0; i--)
+    if (removed.has(norm(aliases[i]!))) aliases.splice(i, 1);
 
   const linesEntries: StationLineEntry[] = group.flatMap((g) =>
     g.memberships.map((m) => ({ line: g.line, branch: m.branch, order: m.order })),

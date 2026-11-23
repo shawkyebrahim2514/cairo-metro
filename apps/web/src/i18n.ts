@@ -274,8 +274,7 @@ const en = {
   tour2Title: 'Plan a trip',
   tour2Body: 'Pick a start and a destination to see stations, transfers, time and fare.',
   tour3Title: 'Save your trips',
-  tour3Body:
-    'Star trips you repeat, share them as a link, and compare a monthly pass with single tickets.',
+  tour3Body: 'Star trips you repeat, and share them as a link.',
   tour4Title: 'The map',
   tour4Body: 'Tap a station or the map to set a point, and expand the map to see a place clearly.',
 };
@@ -549,7 +548,7 @@ const ar: Record<Key, string> = {
   tour2Title: 'خطط رحلتك',
   tour2Body: 'اختر نقطة البداية والوصول لترى عدد المحطات وأماكن التبديل والوقت والأجرة.',
   tour3Title: 'احفظ رحلاتك',
-  tour3Body: 'احفظ الرحلات المتكررة بالنجمة وشاركها كرابط، وقارن بين الاشتراك الشهري والتذاكر.',
+  tour3Body: 'احفظ الرحلات المتكررة بالنجمة وشاركها كرابط.',
   tour4Title: 'الخريطة',
   tour4Body: 'اضغط على محطة أو على الخريطة لتحديد نقطة، وكبّر الخريطة لرؤية المكان بوضوح.',
 };

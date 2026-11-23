@@ -1,5 +1,5 @@
 {
-  "_comment": "Alternative names, old names, area names and common spellings riders use. Merged into station aliases by scripts/build-data.ts (run `npm run data:build`). PROPOSED from general knowledge and common transliterations: review each entry (delete wrong ones, add missing ones) before release. Keyed by station id.",
+  "_comment": "Alternative names, old names, area names and common spellings riders use, merged into station aliases by scripts/build-data.ts (run npm run data:build). Approved by the project owner. 'remove' drops a wrong alias that came from OSM. Keyed by station id.",
   "stations": {
     "sadat": {
       "names": [
@@ -34,10 +34,15 @@
         "عبد الناصر"
       ]
     },
-    "attaba": { "names": ["Ataba Square", "Attaba Square", "ميدان العتبة"] },
-    "opera": { "names": ["Cairo Opera House", "Opera House", "Gezira", "دار الأوبرا", "الجزيرة"] },
+    "attaba": {
+      "names": ["Ataba Square", "Attaba Square", "ميدان العتبة"]
+    },
+    "opera": {
+      "names": ["Cairo Opera House", "Opera House", "Gezira", "دار الأوبرا", "الجزيرة"]
+    },
     "maspero": {
-      "names": ["Maspero Television Building", "Radio and Television Building", "مبنى التليفزيون"]
+      "names": ["Maspero Television Building", "Radio and Television Building", "مبنى التليفزيون"],
+      "remove": ["Gamal AbdAlNasser"]
     },
     "mohamed-naguib": {
       "names": [
@@ -79,14 +84,30 @@
         "المهندسين"
       ]
     },
-    "wadi-el-nile": { "names": ["Nile Valley", "Wadi El Nil", "Wadi Elnile"] },
-    "sudan": { "names": ["Sudan Street", "شارع السودان"] },
-    "safaa-hegazy": { "names": ["Safa Hegazy", "Safaa Higazy", "Safaa Hijazi", "صفا حجازي"] },
-    "kit-kat": { "names": ["Kitkat", "Kit Kat Square", "كيت كات"] },
-    "imbaba": { "names": ["Embaba", "Embabah", "امبابة"] },
-    "cairo-university": { "names": ["Cairo Univ", "Cairo Uni", "Giza University Square"] },
-    "faisal": { "names": ["Faysal", "Feisal", "شارع فيصل"] },
-    "giza": { "names": ["Gizah", "Giza Square", "ميدان الجيزة"] },
+    "wadi-el-nile": {
+      "names": ["Nile Valley", "Wadi El Nil", "Wadi Elnile"]
+    },
+    "sudan": {
+      "names": ["Sudan Street", "شارع السودان"]
+    },
+    "safaa-hegazy": {
+      "names": ["Safa Hegazy", "Safaa Higazy", "Safaa Hijazi", "صفا حجازي"]
+    },
+    "kit-kat": {
+      "names": ["Kitkat", "Kit Kat Square", "كيت كات"]
+    },
+    "imbaba": {
+      "names": ["Embaba", "Embabah", "امبابة"]
+    },
+    "cairo-university": {
+      "names": ["Cairo Univ", "Cairo Uni", "Giza University Square"]
+    },
+    "faisal": {
+      "names": ["Faysal", "Feisal", "شارع فيصل"]
+    },
+    "giza": {
+      "names": ["Gizah", "Giza Square", "ميدان الجيزة"]
+    },
     "omm-el-misryeen": {
       "names": [
         "Om El Masryeen",
@@ -96,38 +117,84 @@
         "أم المصريين"
       ]
     },
-    "bolaq-el-dakrour": { "names": ["Bulaq", "Dakrour", "Boulaq El Dakrour", "بولاق", "الدكرور"] },
-    "el-monib": { "names": ["Mounib", "El Moneeb", "Moneib", "Elmonib"] },
-    "el-maasara": { "names": ["Maasara", "Maassara", "El Maasara Station"] },
-    "el-tawfikia": { "names": ["Tawfiqiya", "Tawfiqia", "El Tawfiqiyya", "Tawfikeya"] },
-    "el-khalafawy": { "names": ["Khalafawi", "El Khalafawi", "Al Khalafawi", "Khalafawy Station"] },
+    "bolaq-el-dakrour": {
+      "names": ["Bulaq", "Dakrour", "Boulaq El Dakrour", "بولاق", "الدكرور"]
+    },
+    "el-monib": {
+      "names": ["Mounib", "El Moneeb", "Moneib", "Elmonib"]
+    },
+    "el-maasara": {
+      "names": ["Maasara", "Maassara", "El Maasara Station"]
+    },
+    "el-tawfikia": {
+      "names": ["Tawfiqiya", "Tawfiqia", "El Tawfiqiyya", "Tawfikeya"]
+    },
+    "el-khalafawy": {
+      "names": ["Khalafawi", "El Khalafawi", "Al Khalafawi", "Khalafawy Station"]
+    },
     "shubra-el-kheima": {
       "names": ["Shobra", "Shubra", "Shubra Kheima", "Shobra El Kheima", "شبرا"]
     },
-    "rod-el-farag": { "names": ["Rod El-Farag Station", "Rod Al Farag", "Roud El Farag"] },
-    "ghamra": { "names": ["Ghamrah", "Ghamra Station"] },
-    "abdo-pasha": { "names": ["Abdu Basha", "Abdou Basha", "Abdo Basha"] },
-    "abbassia": { "names": ["Abbasiya", "Abbasia", "Abbassiyya"] },
+    "rod-el-farag": {
+      "names": ["Rod El-Farag Station", "Rod Al Farag", "Roud El Farag"]
+    },
+    "ghamra": {
+      "names": ["Ghamrah", "Ghamra Station"]
+    },
+    "abdo-pasha": {
+      "names": ["Abdu Basha", "Abdou Basha", "Abdo Basha"]
+    },
+    "abbassia": {
+      "names": ["Abbasiya", "Abbasia", "Abbassiyya"]
+    },
     "bab-el-sharia": {
       "names": ["Bab El Shariya", "Bab Sharia", "Bab El Shaaria", "Bab Al Shaaria"]
     },
-    "mezallat": { "names": ["Mazallat", "Mizallat", "Mezalat", "Mezzalat"] },
-    "hadayek-el-zaitoun": { "names": ["Zaitoun Gardens", "Zeitoun Gardens", "Zeitoun", "Zaytoun"] },
+    "mezallat": {
+      "names": ["Mazallat", "Mizallat", "Mezalat", "Mezzalat"]
+    },
+    "hadayek-el-zaitoun": {
+      "names": ["Zaitoun Gardens", "Zeitoun Gardens", "Zeitoun", "Zaytoun"]
+    },
     "helmeyet-el-zaitoun": {
       "names": ["Helmeya", "Helmiyet Zeitoun", "Helmeyet Zeitoun", "Zeitoun", "حلمية"]
     },
-    "el-matareyya": { "names": ["Matareya", "Mataria", "El Mataria", "Matariya", "Matareyya"] },
-    "el-marg": { "names": ["Marg", "Marj", "El Marj", "المرج القديمة"] },
-    "new-el-marg": { "names": ["New Marg", "New Marj", "Marg El Gedida", "المرج الجديد"] },
-    "ezbet-el-nakhl": { "names": ["Ezbet Nakhl", "Izbat El Nakhl", "Ezbet El Nakheel"] },
-    "manshiet-el-sadr": { "names": ["Manshiet Sadr", "Mansheyet El Sadr", "Manshiyat El Sadr"] },
-    "kobri-el-qobba": { "names": ["Kobry El Kobba", "Kobri El Kobba", "Koubri El Qubba"] },
-    "hammamat-el-qobba": { "names": ["Hammamat El Kobba", "Hamamat El Qobba", "Hamamat El Kobba"] },
-    "saray-el-qobba": { "names": ["Saray El Kobba", "Sarai El Qobba", "Saray Elkobba"] },
-    "hesham-barakat": { "names": ["Hisham Barakat", "Hesham Barakat Station"] },
-    "el-qawmia": { "names": ["Qawmeya", "El Kawmeya", "Al Qawmiyya", "Qawmiyya"] },
-    "el-bohy": { "names": ["Bohy", "Al Buhi", "El Bouhy", "Elbohy"] },
-    "qobaa": { "names": ["Koba", "Kobaa", "Quba", "Qoba"] },
+    "el-matareyya": {
+      "names": ["Matareya", "Mataria", "El Mataria", "Matariya", "Matareyya"]
+    },
+    "el-marg": {
+      "names": ["Marg", "Marj", "El Marj", "المرج القديمة"]
+    },
+    "new-el-marg": {
+      "names": ["New Marg", "New Marj", "Marg El Gedida", "المرج الجديد"]
+    },
+    "ezbet-el-nakhl": {
+      "names": ["Ezbet Nakhl", "Izbat El Nakhl", "Ezbet El Nakheel"]
+    },
+    "manshiet-el-sadr": {
+      "names": ["Manshiet Sadr", "Mansheyet El Sadr", "Manshiyat El Sadr"]
+    },
+    "kobri-el-qobba": {
+      "names": ["Kobry El Kobba", "Kobri El Kobba", "Koubri El Qubba"]
+    },
+    "hammamat-el-qobba": {
+      "names": ["Hammamat El Kobba", "Hamamat El Qobba", "Hamamat El Kobba"]
+    },
+    "saray-el-qobba": {
+      "names": ["Saray El Kobba", "Sarai El Qobba", "Saray Elkobba"]
+    },
+    "hesham-barakat": {
+      "names": ["Hisham Barakat", "Hesham Barakat Station"]
+    },
+    "el-qawmia": {
+      "names": ["Qawmeya", "El Kawmeya", "Al Qawmiyya", "Qawmiyya"]
+    },
+    "el-bohy": {
+      "names": ["Bohy", "Al Buhi", "El Bouhy", "Elbohy"]
+    },
+    "qobaa": {
+      "names": ["Koba", "Kobaa", "Quba", "Qoba"]
+    },
     "omar-ibn-el-khattab": {
       "names": [
         "Omar Ibn Khattab",
@@ -136,12 +203,24 @@
         "Omar Ibn El Khatab"
       ]
     },
-    "el-shams-club": { "names": ["Shams Club", "El Shams Club Station", "Shams Sporting Club"] },
-    "el-nozha": { "names": ["Nozha", "Al Nozha", "El Nouzha", "Nouzha"] },
-    "heliopolis": { "names": ["Heliopolis Station", "Misr El Gedida", "مصر الجديدة"] },
-    "el-haykestep": { "names": ["Haikestep", "Hikestep", "Haykestep", "Heikestep", "Haykestab"] },
-    "el-gish": { "names": ["Gesh", "El Geish Street", "Geish"] },
-    "el-bohoth": { "names": ["Bohouth", "Research", "Al Buhuth", "Al Bohoth", "Bohooth Station"] },
+    "el-shams-club": {
+      "names": ["Shams Club", "El Shams Club Station", "Shams Sporting Club"]
+    },
+    "el-nozha": {
+      "names": ["Nozha", "Al Nozha", "El Nouzha", "Nouzha"]
+    },
+    "heliopolis": {
+      "names": ["Heliopolis Station", "Misr El Gedida", "مصر الجديدة"]
+    },
+    "el-haykestep": {
+      "names": ["Haikestep", "Hikestep", "Haykestep", "Heikestep", "Haykestab"]
+    },
+    "el-gish": {
+      "names": ["Gesh", "El Geish Street", "Geish"]
+    },
+    "el-bohoth": {
+      "names": ["Bohouth", "Research", "Al Buhuth", "Al Bohoth", "Bohooth Station"]
+    },
     "stadium": {
       "names": ["Cairo Stadium", "Cairo International Stadium", "Nasr City Stadium", "ستاد القاهرة"]
     },
@@ -155,10 +234,18 @@
         "المعارض"
       ]
     },
-    "alf-maskan": { "names": ["Alf Maskn", "1000 Houses", "Thousand Houses", "Thousand Housing"] },
-    "adly-mansour": { "names": ["Adli Mansour", "Adly Mansur", "Adli Mansur", "محطة عدلي منصور"] },
-    "ain-shams": { "names": ["Ain Shams Station", "Ayn Shams"] },
-    "el-demerdash": { "names": ["Demerdash", "Al Demerdash", "Demirdash"] },
+    "alf-maskan": {
+      "names": ["Alf Maskn", "1000 Houses", "Thousand Houses", "Thousand Housing"]
+    },
+    "adly-mansour": {
+      "names": ["Adli Mansour", "Adly Mansur", "Adli Mansur", "محطة عدلي منصور"]
+    },
+    "ain-shams": {
+      "names": ["Ain Shams Station", "Ayn Shams"]
+    },
+    "el-demerdash": {
+      "names": ["Demerdash", "Al Demerdash", "Demirdash"]
+    },
     "koleyet-el-banat": {
       "names": ["Girls College", "Koliet El Banat", "Kolyet El Banat", "Kulliyat al-Banat"]
     },
@@ -170,32 +257,68 @@
         "Agriculture College"
       ]
     },
-    "el-zahraa": { "names": ["Zahraa", "Zahraa El Maadi", "Zahraa Maadi"] },
-    "dar-el-salam": { "names": ["Dar Al Salam", "Dar El Salaam", "Dar Elsalam"] },
-    "maadi": { "names": ["Maadi Station", "Maadi Square", "Al Maadi"] },
-    "hadayek-el-maadi": { "names": ["Maadi Gardens", "Hadayek Maadi", "Hadayeq Maadi"] },
-    "sakanat-el-maadi": { "names": ["Maadi Barracks", "Sakanat Maadi", "Thakanat Maadi"] },
+    "el-zahraa": {
+      "names": ["Zahraa", "Zahraa El Maadi", "Zahraa Maadi"]
+    },
+    "dar-el-salam": {
+      "names": ["Dar Al Salam", "Dar El Salaam", "Dar Elsalam"]
+    },
+    "maadi": {
+      "names": ["Maadi Station", "Maadi Square", "Al Maadi"]
+    },
+    "hadayek-el-maadi": {
+      "names": ["Maadi Gardens", "Hadayek Maadi", "Hadayeq Maadi"]
+    },
+    "sakanat-el-maadi": {
+      "names": ["Maadi Barracks", "Sakanat Maadi", "Thakanat Maadi"]
+    },
     "tora-el-asmant": {
       "names": ["Tora Cement", "Tura El Asmant", "Tora Asmant", "Tora Elasmant"]
     },
-    "tora-el-balad": { "names": ["Tora Balad", "Tura El Balad", "Tora Elbalad"] },
-    "kozzika": { "names": ["Kozika", "Kozzica", "Kotsika", "Kutsika"] },
-    "sakiat-mekky": { "names": ["Sakiat Makki", "Sakiet Mekky", "Sakyet Mekki"] },
-    "hadayek-helwan": { "names": ["Helwan Gardens", "Hadayek Helwan Station"] },
-    "wadi-hof": { "names": ["Wadi Hoff", "Wadi Hof Station"] },
-    "ain-helwan": { "names": ["Ayn Helwan", "Ain Helwan Station"] },
-    "helwan": { "names": ["Hilwan", "Helwan Station", "Helwan Square"] },
+    "tora-el-balad": {
+      "names": ["Tora Balad", "Tura El Balad", "Tora Elbalad"]
+    },
+    "kozzika": {
+      "names": ["Kozika", "Kozzica", "Kotsika", "Kutsika"]
+    },
+    "sakiat-mekky": {
+      "names": ["Sakiat Makki", "Sakiet Mekky", "Sakyet Mekki"]
+    },
+    "hadayek-helwan": {
+      "names": ["Helwan Gardens", "Hadayek Helwan Station"]
+    },
+    "wadi-hof": {
+      "names": ["Wadi Hoff", "Wadi Hof Station"]
+    },
+    "ain-helwan": {
+      "names": ["Ayn Helwan", "Ain Helwan Station"]
+    },
+    "helwan": {
+      "names": ["Hilwan", "Helwan Station", "Helwan Square"]
+    },
     "capital-university-helwan-university": {
       "names": ["Helwan Univ", "Capital Univ", "Hilwan University"]
     },
-    "ring-road": { "names": ["Ring", "El Dayery", "Autostrad", "الدائري"] },
-    "orabi": { "names": ["Urabi", "Arabi", "Orabi Station", "Ahmed Orabi"] },
-    "sainte-teresa": { "names": ["Saint Teresa", "Santa Teresa", "St Teresa"] },
-    "masarra": { "names": ["Massarah", "Masara", "Masarra Station"] },
-    "el-ahram": { "names": ["Ahram", "Al Ahram Street", "El Ahram Station"] },
+    "ring-road": {
+      "names": ["Ring", "El Dayery", "Autostrad", "الدائري"]
+    },
+    "orabi": {
+      "names": ["Urabi", "Arabi", "Orabi Station", "Ahmed Orabi"]
+    },
+    "sainte-teresa": {
+      "names": ["Saint Teresa", "Santa Teresa", "St Teresa"]
+    },
+    "masarra": {
+      "names": ["Massarah", "Masara", "Masarra Station"]
+    },
+    "el-ahram": {
+      "names": ["Ahram", "Al Ahram Street", "El Ahram Station"]
+    },
     "rod-el-farag-axis": {
       "names": ["Rod El Farag Corridor", "Dabaa Axis", "Rod El Farag Axis Station"]
     },
-    "dokki": { "names": ["Dokki Station", "Doqqi", "Dukki", "Al Dokki"] }
+    "dokki": {
+      "names": ["Dokki Station", "Doqqi", "Dukki", "Al Dokki"]
+    }
   }
 }
