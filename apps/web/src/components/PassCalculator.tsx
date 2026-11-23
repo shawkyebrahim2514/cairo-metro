@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { comparePass, type TicketCategory } from '@cairo-metro/core';
+import { comparePass, comparePassPlans, type TicketCategory } from '@cairo-metro/core';
 import { faresData } from '../data';
 import { localDigits, useI18n } from '../i18n';
 
@@ -10,6 +10,9 @@ export function PassCalculator({ stops, category }: { stops: number; category: T
   const [rides, setRides] = useState(DEFAULT_RIDES);
   const n = (v: number) => localDigits(v, lang);
   const result = comparePass(faresData, stops, rides, category);
+  const quarterly = comparePassPlans(faresData, stops, rides, category).find(
+    (p) => p.period === 'quarterly',
+  );
 
   return (
     <details className="card">
@@ -35,6 +38,15 @@ export function PassCalculator({ stops, category }: { stops: number; category: T
             {t('monthlyPass')} ({t('zonesApprox')} {n(result.zones)}): {n(result.monthlyPass)}{' '}
             {t('fare')}
           </p>
+          {quarterly && (
+            <p className="meta">
+              {t('quarterlyPass')}: {n(quarterly.price)} {t('fare')} ({n(quarterly.perMonth)}{' '}
+              {t('perMonth')}) ·{' '}
+              {quarterly.savings > 0
+                ? `${t('passCheaper')} ${n(quarterly.savings)} ${t('fare')}`
+                : t('ticketsCheaper')}
+            </p>
+          )}
           <p>
             <strong>
               {result.savings > 0

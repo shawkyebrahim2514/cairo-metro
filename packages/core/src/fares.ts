@@ -14,7 +14,7 @@ export interface FareCounting {
 export interface FaresData {
   currency: string;
   ticket: { counting?: FareCounting; tiers: TicketTier[] };
-  subscriptions?: { monthly?: Record<string, number[]> };
+  subscriptions?: { monthly?: Record<string, number[]>; quarterly?: Record<string, number[]> };
 }
 
 export type TicketCategory = 'standard' | 'senior60AndArmyPolice' | 'specialNeedsAndVeterans';
@@ -87,4 +87,51 @@ export function comparePass(
     savings: ticketTotal - monthlyPass,
     breakEvenRides: Math.ceil(monthlyPass / fare),
   };
+}
+
+export interface PassPlan {
+  period: 'monthly' | 'quarterly';
+  months: number;
+  price: number;
+  /** What single tickets would cost over the same period. */
+  ticketTotal: number;
+  /** Positive when the pass is cheaper than single tickets. */
+  savings: number;
+  /** Pass price spread over its months. */
+  perMonth: number;
+}
+
+const PERIODS = [
+  { period: 'monthly', months: 1 },
+  { period: 'quarterly', months: 3 },
+] as const;
+
+/** Compares single tickets with the monthly and quarterly passes (annual passes are priced per lines, not zones). */
+export function comparePassPlans(
+  fares: FaresData,
+  stops: number,
+  ridesPerMonth: number,
+  category: TicketCategory = 'standard',
+): PassPlan[] {
+  const key = MONTHLY_PASS_KEY[category];
+  const fare = tripFare(fares, stops, category);
+  if (!key || fare == null || fare <= 0) return [];
+  const tiers = [...fares.ticket.tiers].sort((a, b) => a.maxStations - b.maxStations);
+  const tierIndex = tiers.findIndex((t) => billableStations(fares, stops) <= t.maxStations);
+  const plans: PassPlan[] = [];
+  for (const { period, months } of PERIODS) {
+    const prices = fares.subscriptions?.[period]?.[key];
+    if (!prices?.length) continue;
+    const price = prices[Math.min(Math.max(tierIndex + 1, 1), prices.length) - 1]!;
+    const ticketTotal = fare * ridesPerMonth * months;
+    plans.push({
+      period,
+      months,
+      price,
+      ticketTotal,
+      savings: ticketTotal - price,
+      perMonth: Math.round(price / months),
+    });
+  }
+  return plans;
 }

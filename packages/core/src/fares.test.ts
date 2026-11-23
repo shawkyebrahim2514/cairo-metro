@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { comparePass, tripFare, ticketPrice, type FaresData } from './fares';
+import { comparePass, comparePassPlans, tripFare, ticketPrice, type FaresData } from './fares';
 
 const fares: FaresData = {
   currency: 'EGP',
@@ -56,5 +56,28 @@ describe('comparePass', () => {
 
   it('has no monthly pass for categories without one', () => {
     expect(comparePass(withPass, 10, 44, 'specialNeedsAndVeterans')).toBeNull();
+  });
+});
+
+describe('comparePassPlans', () => {
+  const withPasses: FaresData = {
+    ...fares,
+    subscriptions: { monthly: { people: [390, 440] }, quarterly: { people: [1045, 1190] } },
+  };
+
+  it('compares monthly and quarterly passes over their own periods', () => {
+    const [m, q] = comparePassPlans(withPasses, 10, 44);
+    expect(m).toMatchObject({ period: 'monthly', price: 440, ticketTotal: 528, savings: 88 });
+    expect(q).toMatchObject({
+      period: 'quarterly',
+      price: 1190,
+      ticketTotal: 1584,
+      savings: 394,
+      perMonth: 397,
+    });
+  });
+
+  it('returns nothing for categories without passes', () => {
+    expect(comparePassPlans(withPasses, 10, 44, 'specialNeedsAndVeterans')).toEqual([]);
   });
 });

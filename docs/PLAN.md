@@ -120,7 +120,7 @@ Verification: a dev-only data visualizer (apps/web /admin/data or standalone pag
 - [x] 7D station info (scoped): women-only cars note (2 middle cars, open to men after 9 pm) shown on each route card. Exits, facilities, accessibility and zones deferred (no clean data source).
 - **7E More networks:** BRT (Ring Road, "اتوبيس ترددي"; phase 2 opened Sep 2026, interchanges with L1 El-Zahraa/El-Marg and L3 Adly Mansour/Imbaba), East Nile Monorail (meets BRT at El-Mosheer Tantawy), LRT (Adly Mansour), Lines 4+. Research saved in `docs/transit-research.md` (stations, fares, hours; coordinates and several facts still unverified; West Nile Monorail not ready). Each as an optional layer; needs station lists, fares, and times from official sources first (not yet collected).
 - [x] 7F community and data ops: footer "Report a problem" opens a prefilled GitHub issue (page URL carries the route, language, device); monthly `data-refresh.yml` Action opens a PR (never auto-merges, verification.json untouched; untested until first run); `CONTRIBUTING.md`. Optional resolver worker stays a future idea.
-- **7G Quality:** web lifecycle tests, quarterly/annual pass comparison, more benchmark trips.
+- 7G quality (partly): [x] quarterly pass comparison (`comparePassPlans`, shown in the pass calculator; annual passes are priced per lines, not zones, so not compared). Remaining: web lifecycle tests (StrictMode map mount, GPS races), more benchmark trips (need app results from the user).
 - Published: https://github.com/shawkyebrahim2514/cairo-metro (public, MIT; data ODbL attribution).
 
 ### Future ideas (not scheduled)
