@@ -5,6 +5,8 @@ import { dictionaries, I18nContext, type I18n, type Lang, type TimeFormat } from
 import { loadAlerts, saveAlerts, type AlertPrefs } from './alerts';
 import { Footer } from './components/Footer';
 import { Icon } from './components/Icon';
+import { InstallCard } from './components/InstallCard';
+import { servedFromCache, useOnline } from './pwa';
 import { SettingsSheet } from './components/SettingsSheet';
 import { Tour } from './components/Tour';
 import { NearestPage } from './pages/NearestPage';
@@ -73,6 +75,7 @@ export function App() {
   );
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
+  const online = useOnline();
 
   const [resolverFailed, setResolverFailed] = useState(false);
 
@@ -136,7 +139,15 @@ export function App() {
       <SettingsContext.Provider value={settings}>
         <div className={tab === 'plan' ? 'app plan' : 'app'}>
           <header className="top">
-            <h1>{t('appName')}</h1>
+            <div className="brand">
+              <h1>{t('appName')}</h1>
+              {!online ? (
+                <span className="net-badge off">{t('offline')}</span>
+              ) : (
+                resolver &&
+                servedFromCache() && <span className="net-badge">{t('offlineReady')}</span>
+              )}
+            </div>
             <div className="actions">
               <button
                 type="button"
@@ -215,6 +226,7 @@ export function App() {
             />
           )}
 
+          <InstallCard />
           {tab === 'nearest' && <Footer />}
         </div>
       </SettingsContext.Provider>

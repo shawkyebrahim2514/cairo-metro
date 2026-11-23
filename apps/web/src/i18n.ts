@@ -119,7 +119,8 @@ const en = {
   installButton: 'Install',
   installIos: 'On iPhone: tap Share, then Add to Home Screen.',
   installAndroid: 'Or open the browser menu and choose Install app / Add to Home screen.',
-  installLater: 'Not now',
+  installInApp:
+    'This in-app browser cannot install apps. Open the page in Chrome or Safari (menu, Open in browser).',
   offlineReady: 'Ready offline',
   offline: 'Offline',
   filterStations: 'Stations',
@@ -320,7 +321,8 @@ const ar: Record<Key, string> = {
   installButton: 'تثبيت',
   installIos: 'على الآيفون: اضغط مشاركة ثم «إضافة إلى الشاشة الرئيسية».',
   installAndroid: 'أو افتح قائمة المتصفح واختر «تثبيت التطبيق» / «إضافة إلى الشاشة الرئيسية».',
-  installLater: 'لاحقًا',
+  installInApp:
+    'هذا المتصفح الداخلي لا يدعم التثبيت. افتح الصفحة في Chrome أو Safari (من القائمة: فتح في المتصفح).',
   offlineReady: 'جاهز بدون إنترنت',
   offline: 'بدون إنترنت',
   filterStations: 'المحطات',

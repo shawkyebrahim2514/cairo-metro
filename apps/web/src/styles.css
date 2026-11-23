@@ -1541,3 +1541,83 @@ footer {
   color: #fff;
   cursor: pointer;
 }
+
+/* Install card and offline badge */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+.net-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #166534;
+  line-height: 1;
+}
+.net-badge::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.net-badge.off {
+  color: #b45309;
+}
+.net-badge.off::before {
+  background: #f59e0b;
+}
+:root[data-theme='dark'] .net-badge {
+  color: #86efac;
+}
+:root[data-theme='dark'] .net-badge.off {
+  color: #fcd34d;
+}
+.install-card {
+  position: fixed;
+  inset-inline: 12px;
+  inset-block-end: 84px;
+  z-index: 1700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 40px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
+}
+[dir='rtl'] .install-card {
+  padding: 12px 12px 12px 40px;
+}
+.install-card img {
+  border-radius: 10px;
+  flex: none;
+}
+.install-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 0.82rem;
+}
+.install-hint {
+  color: var(--muted);
+}
+.install-card .shared-x {
+  background: var(--chip);
+  color: var(--text);
+}
+.install-card .pill.primary {
+  flex: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 0;
+  font-weight: 700;
+}
