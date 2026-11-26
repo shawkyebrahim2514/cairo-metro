@@ -2140,3 +2140,23 @@ h2 svg {
   justify-content: space-between;
   gap: 8px;
 }
+
+.map-error {
+  position: absolute;
+  inset-inline: 12px;
+  top: 10px;
+  z-index: 600;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--warn);
+  font-size: 0.82rem;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+}
+
+.map-bg .map-error {
+  top: 66px;
+  inset-inline-end: 60px;
+}

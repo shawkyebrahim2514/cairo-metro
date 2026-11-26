@@ -78,6 +78,7 @@ export function DiagramPage({
 }) {
   const { t, lang } = useI18n();
   const box = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const [size, setSize] = useState({ w: 360, h: 520 });
   const [view, setView] = useState<View>({ cx: 460, cy: 680, w: 440 });
   const [selected, setSelected] = useState<Station | null>(null);
@@ -92,9 +93,14 @@ export function DiagramPage({
   useEffect(() => {
     const el = box.current;
     if (!el) return;
-    const ro = new ResizeObserver(() => setSize({ w: el.clientWidth, h: el.clientHeight }));
+    const update = () => {
+      if (el.clientWidth > 0 && el.clientHeight > 0) {
+        setSize({ w: el.clientWidth, h: el.clientHeight });
+      }
+    };
+    const ro = new ResizeObserver(update);
     ro.observe(el);
-    setSize({ w: el.clientWidth, h: el.clientHeight });
+    update();
     return () => ro.disconnect();
   }, []);
 
@@ -131,14 +137,18 @@ export function DiagramPage({
     [query],
   );
 
-  const h = view.w * (size.h / size.w);
+  const safeW = Math.max(1, size.w);
+  const safeH = Math.max(1, size.h);
+  const h = view.w * (safeH / safeW);
   const vx = view.cx - view.w / 2;
   const vy = view.cy - h / 2;
   const toWorld = (clientX: number, clientY: number) => {
     const r = box.current!.getBoundingClientRect();
+    const rw = Math.max(1, r.width);
+    const rh = Math.max(1, r.height);
     return {
-      x: vx + ((clientX - r.left) / r.width) * view.w,
-      y: vy + ((clientY - r.top) / r.height) * h,
+      x: vx + ((clientX - r.left) / rw) * view.w,
+      y: vy + ((clientY - r.top) / rh) * h,
     };
   };
   const zoomAt = (factor: number, at?: SPt) =>
@@ -149,8 +159,8 @@ export function DiagramPage({
       return { w, cx: p.x + (v.cx - p.x) * k, cy: p.y + (v.cy - p.y) * k };
     });
   const fit = () => {
-    const scale = Math.min(size.w / BOUNDS.w, size.h / BOUNDS.h);
-    setView({ cx: BOUNDS.x + BOUNDS.w / 2, cy: BOUNDS.y + BOUNDS.h / 2, w: size.w / scale });
+    const scale = Math.min(safeW / BOUNDS.w, safeH / BOUNDS.h);
+    setView({ cx: BOUNDS.x + BOUNDS.w / 2, cy: BOUNDS.y + BOUNDS.h / 2, w: safeW / scale });
   };
   const focusOn = (s: Station) => {
     const p = schematic.positions.get(s.id);
@@ -192,15 +202,29 @@ export function DiagramPage({
     if (!moved.current && Math.hypot(cur.x - downAt.current.x, cur.y - downAt.current.y) < 4)
       return;
     moved.current = true;
-    const k = view.w / size.w;
+    const k = view.w / safeW;
     setView((v) => ({ ...v, cx: v.cx - dx * k, cy: v.cy - dy * k }));
   };
   const onPointerUp = (e: React.PointerEvent) => {
     pointers.current.delete(e.pointerId);
     pinch.current = 0;
   };
-  const onWheel = (e: React.WheelEvent) =>
+
+  const wheelRef = useRef((e: WheelEvent) => {
+    e.preventDefault();
     zoomAt(e.deltaY > 0 ? 1.15 : 1 / 1.15, toWorld(e.clientX, e.clientY));
+  });
+  wheelRef.current = (e: WheelEvent) => {
+    e.preventDefault();
+    zoomAt(e.deltaY > 0 ? 1.15 : 1 / 1.15, toWorld(e.clientX, e.clientY));
+  };
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const handler = (e: WheelEvent) => wheelRef.current(e);
+    svg.addEventListener('wheel', handler, { passive: false });
+    return () => svg.removeEventListener('wheel', handler);
+  }, []);
 
   const tap = (s: Station) => {
     if (moved.current) return;
@@ -249,6 +273,7 @@ export function DiagramPage({
 
       <div className="diagram-box" ref={box}>
         <svg
+          ref={svgRef}
           role="group"
           aria-label={t('diagramMap')}
           direction="ltr"
@@ -257,7 +282,6 @@ export function DiagramPage({
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerUp}
-          onWheel={onWheel}
         >
           {paths.map((p) => (
             <polyline

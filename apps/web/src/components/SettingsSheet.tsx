@@ -35,6 +35,8 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
   } = useSettings();
 
   const timers = useRef<number[]>([]);
+  const alertsRef = useRef(alerts);
+  alertsRef.current = alerts;
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
   const modal = useModal(onClose);
 
@@ -182,10 +184,12 @@ export function SettingsSheet({ category, onCategory, tiles, onTiles, onClose }:
           className="pill test"
           onClick={() => {
             unlockAudio();
+            timers.current.forEach(clearTimeout);
+            timers.current = [];
             for (const [i, kind] of (['station', 'warn', 'change', 'arrive'] as const).entries()) {
               timers.current.push(
                 window.setTimeout(
-                  () => fireAlert(kind, alerts, t('alertTestText'), lang),
+                  () => fireAlert(kind, alertsRef.current, t('alertTestText'), lang),
                   i * 1500,
                 ),
               );

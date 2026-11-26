@@ -9,7 +9,7 @@ import {
 } from '@cairo-metro/core';
 import { lineColour, metro, type PlaceResolver } from '../data';
 import { endpointName, pinned, type Endpoint } from '../endpoint';
-import { formatDistance, stationName, useI18n } from '../i18n';
+import { formatDistance, localDigits, stationName, useI18n } from '../i18n';
 
 type Group = 'stations' | 'places' | 'other';
 type Filter = 'all' | 'stations' | 'places';
@@ -135,10 +135,13 @@ export function PlaceInput({
 
     for (const m of searchStations(metro.stations, q, filter === 'stations' ? 8 : 4)) {
       const lines = [...new Set(m.station.lines.map((l) => l.line))];
+      const lineLabels = lines
+        .map((l) => `${t('line')} ${localDigits(l.replace(/\D/g, ''), lang)}`)
+        .join(' · ');
       out.push({
         key: `s-${m.station.id}`,
         label: stationName(m.station, lang),
-        sub: `${t('stationLabel')} · ${lines}`,
+        sub: `${t('stationLabel')} · ${lineLabels}`,
         endpoint: { kind: 'station', station: m.station },
         group: 'stations',
         lines,
@@ -169,23 +172,32 @@ export function PlaceInput({
     const token = ++gpsToken.current;
     setBusy(true);
     setError('');
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        if (token !== gpsToken.current) return;
-        setBusy(false);
-        onChange({
-          kind: 'point',
-          point: { lat: pos.coords.latitude, lng: pos.coords.longitude },
-          name: t('useMyLocation'),
-        });
-      },
-      () => {
-        if (token !== gpsToken.current) return;
-        setBusy(false);
-        setError(t('locationDenied'));
-      },
-      { enableHighAccuracy: true, timeout: 10000 },
-    );
+    const request = (highAccuracy: boolean) => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          if (token !== gpsToken.current) return;
+          setBusy(false);
+          onChange({
+            kind: 'point',
+            point: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+            name: t('useMyLocation'),
+          });
+        },
+        (err) => {
+          if (token !== gpsToken.current) return;
+          if (highAccuracy && err.code !== 1) {
+            request(false);
+            return;
+          }
+          setBusy(false);
+          setError(err.code === 1 ? t('locationDenied') : t('locationUnavailable'));
+        },
+        highAccuracy
+          ? { enableHighAccuracy: true, timeout: 10000, maximumAge: 10000 }
+          : { enableHighAccuracy: false, timeout: 15000, maximumAge: 30000 },
+      );
+    };
+    request(true);
   };
 
   const choose = (s: Suggestion) => {

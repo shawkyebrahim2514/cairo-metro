@@ -66,6 +66,8 @@ export function MetroMap({
   const pickRef = useRef(onPick);
   pickRef.current = onPick;
   const [full, setFull] = useState(false);
+  const [locating, setLocating] = useState(false);
+  const [locError, setLocError] = useState('');
   const meRef = useRef<L.CircleMarker | null>(null);
   const dragRef = useRef(onDrag);
   dragRef.current = onDrag;
@@ -154,24 +156,39 @@ export function MetroMap({
   }, [track, follow]);
 
   const locate = () => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const map = mapRef.current;
-        if (!map) return;
-        const ll: L.LatLngTuple = [pos.coords.latitude, pos.coords.longitude];
-        meRef.current?.remove();
-        meRef.current = L.circleMarker(ll, {
-          radius: 8,
-          color: '#fff',
-          weight: 3,
-          fillColor: '#2563eb',
-          fillOpacity: 1,
-        }).addTo(map);
-        map.setView(ll, Math.max(map.getZoom(), 15));
-      },
-      () => undefined,
-      { enableHighAccuracy: true, timeout: 10000 },
-    );
+    setLocating(true);
+    setLocError('');
+    const request = (highAccuracy: boolean) => {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setLocating(false);
+          const map = mapRef.current;
+          if (!map) return;
+          const ll: L.LatLngTuple = [pos.coords.latitude, pos.coords.longitude];
+          meRef.current?.remove();
+          meRef.current = L.circleMarker(ll, {
+            radius: 8,
+            color: '#fff',
+            weight: 3,
+            fillColor: '#2563eb',
+            fillOpacity: 1,
+          }).addTo(map);
+          map.setView(ll, Math.max(map.getZoom(), 15));
+        },
+        (err) => {
+          if (highAccuracy && err.code !== 1) {
+            request(false);
+            return;
+          }
+          setLocating(false);
+          setLocError(err.code === 1 ? t('locationDenied') : t('locationUnavailable'));
+        },
+        highAccuracy
+          ? { enableHighAccuracy: true, timeout: 10000, maximumAge: 10000 }
+          : { enableHighAccuracy: false, timeout: 15000, maximumAge: 30000 },
+      );
+    };
+    request(true);
   };
 
   // Dim the plain lines while a route is shown so the route stands out.
@@ -319,11 +336,22 @@ export function MetroMap({
           {full ? '✕' : '⛶'}
         </button>
         {'geolocation' in navigator && (
-          <button type="button" aria-label={t('locateMe')} title={t('locateMe')} onClick={locate}>
-            ◎
+          <button
+            type="button"
+            aria-label={locating ? t('locating') : t('locateMe')}
+            title={locating ? t('locating') : t('locateMe')}
+            disabled={locating}
+            onClick={locate}
+          >
+            {locating ? '…' : '◎'}
           </button>
         )}
       </div>
+      {locError && (
+        <p className="map-error" role="alert">
+          {locError}
+        </p>
+      )}
     </div>
   );
 }

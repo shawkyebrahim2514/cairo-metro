@@ -56,6 +56,7 @@ function beep(kind: AlertKind) {
   try {
     audio ??= new AudioContext();
     const ctx = audio;
+    if (ctx.state === 'suspended') void ctx.resume();
     const times = kind === 'station' ? 1 : kind === 'change' ? 2 : kind === 'warn' ? 3 : 1;
     for (let i = 0; i < times; i++) {
       const osc = ctx.createOscillator();

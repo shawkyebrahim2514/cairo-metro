@@ -63,7 +63,14 @@ export function PlannerPage({
   const [imageOpen, setImageOpen] = useState(false);
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
+  const [viewportH, setViewportH] = useState(() => window.innerHeight);
   const [showShared, setShowShared] = useState(Boolean(linked) && !preset);
+
+  useEffect(() => {
+    const onResize = () => setViewportH(window.innerHeight);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
   // Apply presets sent from other tabs while keeping PlannerPage mounted across tab switches.
   useEffect(() => {
@@ -198,9 +205,14 @@ export function PlannerPage({
         // dismissed or unsupported: fall back to the clipboard
       }
     }
-    await navigator.clipboard?.writeText(url);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    if (!navigator.clipboard?.writeText) return;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard denied or unavailable in non-secure context
+    }
   };
 
   return (
@@ -211,7 +223,7 @@ export function PlannerPage({
           route={trip?.route.stations}
           legs={trip?.route.legs}
           tiles={tiles}
-          bottomPad={Math.round(window.innerHeight * 0.45)}
+          bottomPad={snap === 'peek' ? 236 : Math.round(viewportH * 0.52)}
           track={trackPoint}
           follow={tracking && follow}
           onDrag={() => setFollow(false)}
