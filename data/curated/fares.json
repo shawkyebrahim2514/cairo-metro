@@ -31,7 +31,7 @@
         "specialNeedsAndVeterans": 5
       },
       {
-        "maxStations": 39,
+        "maxStations": null,
         "standard": 20,
         "senior60AndArmyPolice": 10,
         "specialNeedsAndVeterans": 5

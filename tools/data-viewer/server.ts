@@ -1,7 +1,7 @@
 // Local-only data verification tool. Usage: npm run data:view  -> http://127.0.0.1:5174
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { extname, join, normalize, resolve } from 'node:path';
+import { extname, join, normalize, resolve, sep } from 'node:path';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 const PUBLIC_DIR = join(import.meta.dirname, 'public');
@@ -23,7 +23,7 @@ const readJson = (file: string, fallback: unknown) =>
 
 function serveFile(base: string, rel: string, res: import('node:http').ServerResponse) {
   const file = normalize(join(base, rel));
-  if (!file.startsWith(base) || !existsSync(file)) {
+  if ((file !== base && !file.startsWith(base + sep)) || !existsSync(file)) {
     res.writeHead(404).end('Not found');
     return;
   }
@@ -34,14 +34,23 @@ function serveFile(base: string, rel: string, res: import('node:http').ServerRes
 function readBody(req: import('node:http').IncomingMessage): Promise<string> {
   return new Promise((resolveBody, reject) => {
     let size = 0;
+    let failed = false;
     const chunks: Buffer[] = [];
     req.on('data', (c: Buffer) => {
+      if (failed) return;
       size += c.length;
-      if (size > 1_000_000) reject(new Error('Body too large'));
+      if (size > 1_000_000) {
+        failed = true;
+        req.destroy();
+        reject(new Error('Body too large'));
+        return;
+      }
       chunks.push(c);
     });
-    req.on('end', () => resolveBody(Buffer.concat(chunks).toString('utf8')));
-    req.on('error', reject);
+    req.on('end', () => !failed && resolveBody(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', (err) => {
+      if (!failed) reject(err);
+    });
   });
 }
 

@@ -2,18 +2,24 @@ import type { Station } from './types';
 
 const ARTICLES = new Set(['el', 'al', 'il', 'ell', 'ul']);
 
-/** Strip the Arabic definite article, diacritics and letter variants. */
-function normalizeArabic(text: string): string {
-  return text
+/** Strip the Arabic definite article, diacritics and letter variants (while folding any Latin tokens too). */
+function normalizeArabicToken(t: string): string {
+  const clean = t
     .replace(/[\u064B-\u065F\u0670\u0640\u200E\u200F]/g, '')
     .replace(/[أإآٱ]/g, 'ا')
     .replace(/ى/g, 'ي')
     .replace(/ة/g, 'ه')
     .replace(/ک/g, 'ك')
-    .replace(/ی/g, 'ي')
+    .replace(/ی/g, 'ي');
+  return clean.startsWith('ال') && clean.length > 4 ? clean.slice(2) : clean;
+}
+
+function normalizeMixed(text: string): string {
+  return text
     .split(/[\s\-_.'’]+/)
     .filter(Boolean)
-    .map((t) => (t.startsWith('ال') && t.length > 4 ? t.slice(2) : t))
+    .map((t) => (/[\u0600-\u06FF]/.test(t) ? normalizeArabicToken(t) : normalizeLatin(t)))
+    .filter(Boolean)
     .join(' ');
 }
 
@@ -42,10 +48,7 @@ function foldLatinToken(token: string): string {
   );
 }
 
-/** Canonical search key: tokens joined by a single space. Works for Latin and Arabic input. */
-export function normalizeForSearch(text: string): string {
-  if (/[\u0600-\u06FF]/.test(text)) return normalizeArabic(text);
-
+function normalizeLatin(text: string): string {
   const tokens = text
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -64,6 +67,12 @@ export function normalizeForSearch(text: string): string {
     .filter(Boolean);
   const kept = stripped.length > 0 ? stripped : tokens;
   return kept.map(foldLatinToken).join(' ');
+}
+
+/** Canonical search key: tokens joined by a single space. Works for Latin, Arabic, and mixed input. */
+export function normalizeForSearch(text: string): string {
+  if (/[\u0600-\u06FF]/.test(text)) return normalizeMixed(text);
+  return normalizeLatin(text);
 }
 
 function editDistance(a: string, b: string, max: number): number {
@@ -163,9 +172,14 @@ export function createSearchIndex<T>(
   };
 }
 
+const stationIndexCache = new WeakMap<Station[], ReturnType<typeof createSearchIndex<Station>>>();
+
 /** Search stations by English/Arabic name and aliases, tolerant to transliteration variants. */
 export function searchStations(stations: Station[], query: string, limit = 8): StationMatch[] {
-  return createSearchIndex(stations, (s) => [s.name.en, s.name.ar, ...s.aliases])
-    .search(query, limit)
-    .map((m) => ({ station: m.item, score: m.score }));
+  let idx = stationIndexCache.get(stations);
+  if (!idx) {
+    idx = createSearchIndex(stations, (s) => [s.name.en, s.name.ar, ...s.aliases]);
+    stationIndexCache.set(stations, idx);
+  }
+  return idx.search(query, limit).map((m) => ({ station: m.item, score: m.score }));
 }

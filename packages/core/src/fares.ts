@@ -1,5 +1,6 @@
 export interface TicketTier {
-  maxStations: number;
+  /** Inclusive upper bound on stations, or null for an open-ended top tier. */
+  maxStations: number | null;
   standard: number;
   senior60AndArmyPolice: number;
   specialNeedsAndVeterans: number;
@@ -32,8 +33,9 @@ export function ticketPrice(
   stations: number,
   category: TicketCategory = 'standard',
 ): number | null {
-  const tiers = [...fares.ticket.tiers].sort((a, b) => a.maxStations - b.maxStations);
-  const tier = tiers.find((t) => stations <= t.maxStations);
+  const limit = (t: TicketTier) => t.maxStations ?? Infinity;
+  const tiers = [...fares.ticket.tiers].sort((a, b) => limit(a) - limit(b));
+  const tier = tiers.find((t) => stations <= limit(t));
   return tier ? tier[category] : null;
 }
 

@@ -241,7 +241,7 @@ export function ImageDialog({
   ];
 
   return (
-    <div className="tour-scrim">
+    <div className="tour-scrim" onClick={() => !big && onClose()}>
       <div
         className="tour img-dialog"
         role="dialog"
@@ -249,6 +249,7 @@ export function ImageDialog({
         aria-labelledby="img-title"
         ref={modal.ref}
         onKeyDown={modal.onKeyDown}
+        onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >
         <h2 id="img-title">{t('imgTitle')}</h2>

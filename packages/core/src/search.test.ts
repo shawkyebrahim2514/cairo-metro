@@ -51,6 +51,7 @@ describe('normalizeForSearch', () => {
   it('normalises Arabic letter variants and the definite article', () => {
     expect(normalizeForSearch('الشهداء')).toBe(normalizeForSearch('شهداء'));
     expect(normalizeForSearch('أحمد')).toBe(normalizeForSearch('احمد'));
+    expect(normalizeForSearch('Line 1 المعادي')).toBe(normalizeForSearch('line 1 معادي'));
   });
 });
 

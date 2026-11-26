@@ -14,7 +14,7 @@ export function QrDialog({ url, onClose }: { url: string; onClose: () => void })
   }, [url]);
 
   return (
-    <div className="tour-scrim">
+    <div className="tour-scrim" onClick={onClose}>
       <div
         className="tour qr-dialog"
         role="dialog"
@@ -22,6 +22,7 @@ export function QrDialog({ url, onClose }: { url: string; onClose: () => void })
         aria-labelledby="qr-title"
         ref={modal.ref}
         onKeyDown={modal.onKeyDown}
+        onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >
         <h2 id="qr-title">{t('qrTitle')}</h2>

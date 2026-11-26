@@ -19,7 +19,7 @@ export function Tour({ onClose }: { onClose: () => void }) {
   const modal = useModal(onClose, () => nextRef.current);
 
   return (
-    <div className="tour-scrim">
+    <div className="tour-scrim" onClick={onClose}>
       <div
         className="tour"
         role="dialog"
@@ -27,6 +27,7 @@ export function Tour({ onClose }: { onClose: () => void }) {
         aria-labelledby="tour-title"
         ref={modal.ref}
         onKeyDown={modal.onKeyDown}
+        onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >
         <h2 id="tour-title">{t(s.title)}</h2>

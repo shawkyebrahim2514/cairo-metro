@@ -21,6 +21,25 @@ describe('ticketPrice', () => {
   it('returns null beyond the largest tier', () => {
     expect(ticketPrice(fares, 17)).toBeNull();
   });
+
+  it('supports an open-ended top tier when maxStations is null', () => {
+    const openTop: FaresData = {
+      ...fares,
+      ticket: {
+        tiers: [
+          ...fares.ticket.tiers,
+          {
+            maxStations: null,
+            standard: 20,
+            senior60AndArmyPolice: 10,
+            specialNeedsAndVeterans: 5,
+          },
+        ],
+      },
+    };
+    expect(ticketPrice(openTop, 40)).toBe(20);
+    expect(ticketPrice(openTop, 100, 'senior60AndArmyPolice')).toBe(10);
+  });
 });
 
 describe('tripFare', () => {
