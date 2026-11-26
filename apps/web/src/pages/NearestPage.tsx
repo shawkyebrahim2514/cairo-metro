@@ -13,11 +13,13 @@ export function NearestPage({
   resolver,
   tiles,
   shared,
+  onPlan,
 }: {
   resolver: PlaceResolver | null;
   tiles: boolean;
   /** Text received from the share target; resolved once the places index is ready. */
   shared?: string | null;
+  onPlan?: (preset: { from?: Endpoint; to?: Endpoint }) => void;
 }) {
   const { t, lang } = useI18n();
   const [place, setPlace] = useState<Endpoint | null>(null);
@@ -110,12 +112,16 @@ export function NearestPage({
           station={stationInfo}
           resolver={resolver}
           onFrom={() => {
-            setPlace({ kind: 'station', station: stationInfo });
+            const ep: Endpoint = { kind: 'station', station: stationInfo };
             setStationInfo(null);
+            if (onPlan) onPlan({ from: ep });
+            else setPlace(ep);
           }}
           onTo={() => {
-            setPlace({ kind: 'station', station: stationInfo });
+            const ep: Endpoint = { kind: 'station', station: stationInfo };
             setStationInfo(null);
+            if (onPlan) onPlan({ to: ep });
+            else setPlace(ep);
           }}
           onClose={() => setStationInfo(null)}
         />

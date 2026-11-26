@@ -33,6 +33,8 @@ interface Props {
   onPick?: (p: LatLng) => void;
   /** Called when a station dot is tapped. */
   onStation?: (s: Station) => void;
+  /** False when the map is hidden behind another tab; triggers invalidateSize on re-show. */
+  visible?: boolean;
 }
 
 const CAIRO: L.LatLngTuple = [30.05, 31.25];
@@ -48,6 +50,7 @@ export function MetroMap({
   onDrag,
   onPick,
   onStation,
+  visible = true,
 }: Props) {
   const padRef = useRef(bottomPad);
   padRef.current = bottomPad;
@@ -116,6 +119,12 @@ export function MetroMap({
       document.removeEventListener('keydown', onKey);
     };
   }, [full]);
+
+  useEffect(() => {
+    if (!visible) return;
+    const id = requestAnimationFrame(() => mapRef.current?.invalidateSize());
+    return () => cancelAnimationFrame(id);
+  }, [visible]);
 
   // Live tracking: a pulsing dot that the map follows while following is on.
   useEffect(() => {

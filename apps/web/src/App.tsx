@@ -77,8 +77,16 @@ export function App() {
   );
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [preset, setPreset] = useState<{ from?: Endpoint; to?: Endpoint } | null>(null);
+  const [planMounted, setPlanMounted] = useState(() => tab === 'plan');
   const [resolver, setResolver] = useState<PlaceResolver | null>(null);
   const online = useOnline();
+
+  const openPlan = (p: { from?: Endpoint; to?: Endpoint }) => {
+    setPreset({ ...p });
+    setPlanMounted(true);
+    setTab('plan');
+    localStorage.setItem('tab', 'plan');
+  };
 
   const [resolverFailed, setResolverFailed] = useState(false);
 
@@ -187,6 +195,7 @@ export function App() {
                 className={tab === id ? 'active' : ''}
                 onClick={() => {
                   setPreset(null);
+                  if (id === 'plan') setPlanMounted(true);
                   setTab(id);
                   localStorage.setItem('tab', id);
                 }}
@@ -213,20 +222,26 @@ export function App() {
           )}
 
           <main>
-            {tab === 'nearest' ? (
-              <NearestPage resolver={resolver} tiles={tiles} shared={sharedAtLoad} />
-            ) : tab === 'plan' ? (
-              <PlannerPage resolver={resolver} tiles={tiles} category={category} preset={preset} />
-            ) : (
-              <DiagramPage
+            {tab === 'nearest' && (
+              <NearestPage
                 resolver={resolver}
-                onPlan={(p) => {
-                  setPreset(p);
-                  setTab('plan');
-                  localStorage.setItem('tab', 'plan');
-                }}
+                tiles={tiles}
+                shared={sharedAtLoad}
+                onPlan={openPlan}
               />
             )}
+            {planMounted && (
+              <div style={tab === 'plan' ? undefined : { display: 'none' }}>
+                <PlannerPage
+                  resolver={resolver}
+                  tiles={tiles}
+                  category={category}
+                  preset={preset}
+                  visible={tab === 'plan'}
+                />
+              </div>
+            )}
+            {tab === 'diagram' && <DiagramPage resolver={resolver} onPlan={openPlan} />}
           </main>
 
           {tour && <Tour onClose={closeTour} />}

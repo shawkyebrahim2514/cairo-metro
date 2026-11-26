@@ -37,12 +37,15 @@ export function PlannerPage({
   tiles,
   category,
   preset,
+  visible = true,
 }: {
   resolver: PlaceResolver | null;
   tiles: boolean;
   category: TicketCategory;
   /** Endpoints chosen elsewhere (for example on the metro map). */
   preset?: { from?: Endpoint; to?: Endpoint } | null;
+  /** False when PlannerPage stays mounted in the background while another tab is open. */
+  visible?: boolean;
 }) {
   const { t, lang } = useI18n();
   const [linked] = useState(readPlanHash);
@@ -61,6 +64,15 @@ export function PlannerPage({
   const [reachMin, setReachMin] = useState(20);
   const [snap, setSnap] = useState<Snap>(linked ? 'half' : 'peek');
   const [showShared, setShowShared] = useState(Boolean(linked) && !preset);
+
+  // Apply presets sent from other tabs while keeping PlannerPage mounted across tab switches.
+  useEffect(() => {
+    if (!preset) return;
+    if (preset.from !== undefined) setFrom(preset.from);
+    if (preset.to !== undefined) setTo(preset.to);
+    setSelected(0);
+    setShowShared(false);
+  }, [preset]);
 
   // Offer the 'where can I get to' view while only the origin is chosen.
   const reach = useMemo(
@@ -205,6 +217,7 @@ export function PlannerPage({
           onDrag={() => setFollow(false)}
           onPick={pick}
           onStation={setStationInfo}
+          visible={visible}
         />
       </div>
       <Sheet snap={snap} onSnap={setSnap}>
