@@ -37,6 +37,7 @@ export function RouteCard({ trip, from, to, title, selected, onSelect }: Props) 
     hoursData,
     route.legs.map((l) => l.line),
     now,
+    { timeZone: 'Africa/Cairo' },
   );
   const firstWait = service.lines[0]?.avgWaitMin;
   const lastTrain = service.lines.find((s) => s.state !== 'open')?.lastTrain;

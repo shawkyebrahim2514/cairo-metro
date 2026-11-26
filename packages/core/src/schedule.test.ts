@@ -14,7 +14,10 @@ const hours: HoursData = {
     },
     L3: {
       firstTrain: '05:15',
-      lastTrains: [{ from: 'Adly Mansour', to: 'Cairo University', time: '23:33' }],
+      lastTrains: [
+        { from: 'Adly Mansour', to: 'Rod El-Farag Axis', time: '23:29' },
+        { from: 'Rod El-Farag Axis', to: 'Adly Mansour', time: '23:55' },
+      ],
       serviceEnds: null,
       headwayMinutes: { min: 4, max: 8 },
     },
@@ -34,9 +37,27 @@ describe('lineService', () => {
   it('warns shortly before the last train and closes after service ends', () => {
     expect(lineService(hours, 'L1', at(23, 10))!.state).toBe('closing-soon');
     expect(lineService(hours, 'L1', at(0, 30))!.state).toBe('closing-soon');
+    expect(lineService(hours, 'L1', at(0, 30))!.lastTrain).toBeNull();
     expect(lineService(hours, 'L1', at(1, 30))!.state).toBe('closed');
     expect(lineService(hours, 'L1', at(4, 0))!.state).toBe('closed');
     expect(lineService(hours, 'L1', at(5, 20))!.state).toBe('open');
+  });
+
+  it('warns before the earliest L3 last train and keeps L3 running past midnight', () => {
+    const early = lineService(hours, 'L3', at(23, 0))!;
+    expect(early.state).toBe('closing-soon');
+    expect(early.lastTrain).toBe('23:29');
+    expect(lineService(hours, 'L3', at(0, 15))!.state).toBe('closing-soon');
+    expect(lineService(hours, 'L3', at(1, 0))!.state).toBe('closed');
+  });
+
+  it('evaluates service in the requested IANA time zone', () => {
+    // 2026-01-15T01:00:00Z is 03:00 in Africa/Cairo (UTC+2) -> closed.
+    const nightUtc = new Date('2026-01-15T01:00:00Z');
+    expect(lineService(hours, 'L1', nightUtc, { timeZone: 'Africa/Cairo' })!.state).toBe('closed');
+    // 2026-01-15T10:00:00Z is 12:00 in Africa/Cairo -> open.
+    const noonUtc = new Date('2026-01-15T10:00:00Z');
+    expect(lineService(hours, 'L1', noonUtc, { timeZone: 'Africa/Cairo' })!.state).toBe('open');
   });
 
   it('returns null for unknown lines', () => {
