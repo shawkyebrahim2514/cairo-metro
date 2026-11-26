@@ -174,7 +174,8 @@ export function RouteCard({ trip, from, to, title, selected, onSelect }: Props) 
               <div>
                 <div className="name">{name(tr.stationId)}</div>
                 <span className="change">
-                  {t('changeToLine')} {next && pill(next.line)} · {mins(tr.sec)}
+                  {tr.fromLine === tr.toLine ? t('changeBranch') : t('changeToLine')}{' '}
+                  {next && pill(next.line)} · {mins(tr.sec)}
                 </span>
               </div>
             </li>

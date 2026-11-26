@@ -120,6 +120,11 @@ describe('planRoute', () => {
     expect(r.legs[0]!.towards.sort()).toEqual(['cairo-university', 'rod-el-farag-axis']);
   });
 
+  it('names the trunk terminal when heading eastbound from a branch to the junction', () => {
+    const r = planRoute(graph, 'imbaba', 'kit-kat')!;
+    expect(r.legs[0]!.towards).toEqual(['adly-mansour']);
+  });
+
   it('is symmetric in total time', () => {
     for (const [a, b] of [
       ['helwan', 'rod-el-farag-axis'],

@@ -205,6 +205,10 @@ function terminalsToward(graph: MetroGraph, branchId: string, dir: 1 | -1): stri
     const onward = line.branches.slice(1).filter((b) => b.stations[0] === end);
     if (onward.length > 0) return onward.map((b) => b.stations[b.stations.length - 1]!);
   }
+  if (branchId !== trunk.id && dir === -1 && trunk.stations[trunk.stations.length - 1] === end) {
+    // Trains heading back from a branch onto the trunk continue to the trunk's start terminal.
+    return [trunk.stations[0]!];
+  }
   return [end];
 }
 
