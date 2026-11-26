@@ -136,16 +136,16 @@ export function PlannerPage({
   useEffect(() => {
     setTracking(false);
     setWakeMe(false);
-  }, [from, to, selected, category]);
+  }, [from, to, selected]);
 
   const stationAt = trip ? stationsById.get(trip.route.stations[ts.index]!) : undefined;
-  const fixLat = ts.fixFresh ? ts.fix?.lat : undefined;
-  const fixLng = ts.fixFresh ? ts.fix?.lng : undefined;
+  const ptLat = ts.point?.lat;
+  const ptLng = ts.point?.lng;
   const trackPoint = useMemo(() => {
     if (!tracking) return null;
-    if (fixLat != null && fixLng != null) return { lat: fixLat, lng: fixLng };
+    if (ptLat != null && ptLng != null) return { lat: ptLat, lng: ptLng };
     return stationAt ? { lat: stationAt.lat, lng: stationAt.lng } : null;
-  }, [tracking, fixLat, fixLng, stationAt]);
+  }, [tracking, ptLat, ptLng, stationAt]);
 
   const startTracking = () => {
     unlockAudio();

@@ -44,6 +44,8 @@ export interface RouteLeg {
   /** Number of stations travelled to (excludes the boarding station). */
   stops: number;
   rideSec: number;
+  /** Ride time in seconds for each consecutive hop in `stations`. */
+  hopSec?: number[];
   /** Terminal station id(s) the train is heading to. */
   towards: string[];
 }
@@ -235,6 +237,7 @@ function toRoute(
           stations: [prevNode.stationId],
           stops: 0,
           rideSec: 0,
+          hopSec: [],
           towards: [],
         };
         legs.push(leg);
@@ -242,6 +245,7 @@ function toRoute(
       leg.stations.push(node.stationId);
       leg.stops++;
       leg.rideSec += edge.sec;
+      leg.hopSec!.push(edge.sec);
       lastRide = { branchId: node.branchId, dir: edge.dir! };
       stations.push(node.stationId);
     } else if (edge.kind === 'through') {

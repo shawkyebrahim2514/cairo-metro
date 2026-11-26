@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   alertAt,
+  interpolateRoute,
+  routeHopSecs,
   snapToRoute,
   trackSteps,
   tripProgress,
@@ -12,25 +14,49 @@ import { stationsById } from './data';
 import { stationName, useI18n } from './i18n';
 
 export type TrackSource = 'start' | 'gps' | 'manual' | 'time';
+export type GpsErrorKind = 'denied' | 'unavailable' | 'timeout' | null;
 
 export interface TrackState {
   index: number;
   source: TrackSource;
-  /** Latest GPS fix, and whether it is recent (GPS usually drops in tunnels). */
+  /** Latest fresh GPS fix, or null when estimating by time / manually set. */
   fix: LatLng | null;
+  /** Point to show on the map (GPS fix, snapped route point, or interpolated time position). */
+  point: LatLng | null;
+  /** Reported accuracy of the latest accepted GPS fix, in metres. */
+  accuracy: number | null;
   fixFresh?: boolean;
   offRoute: boolean;
   denied: boolean;
+  gpsError: GpsErrorKind;
   /** The wake-me alarm is ringing. */
   alarm: boolean;
 }
 
-const STALE_MS = 60_000;
-const BOARD_DELAY_SEC = 180;
+const STALE_MS = 30_000;
+const HIGH_ACC_M = 250;
+const MAX_ACC_M = 1500;
+const HIGH_ACC_HOLD_MS = 20_000;
+const BASE_OFF_ROUTE_M = 600;
+const BOARD_DELAY_SEC = 30;
+const TICK_MS = 3_000;
+
+const initialState = (startPoint: LatLng | null): TrackState => ({
+  index: 0,
+  source: 'start',
+  fix: null,
+  point: startPoint,
+  accuracy: null,
+  offRoute: false,
+  denied: false,
+  gpsError: null,
+  alarm: false,
+});
 
 /**
- * Follows a trip: GPS snapped to the route, a manual "I am at" correction, and a
- * time-based estimate when GPS is lost underground. Raises the alerts chosen in the settings.
+ * Follows a trip: GPS snapped to the route (falling back to network/coarse fixes indoors),
+ * a manual "I am at" correction, and a smooth time-based estimate when GPS drops underground.
+ * Raises the alerts chosen in the settings.
  */
 export function useTracking(
   route: Route | null,
@@ -39,19 +65,14 @@ export function useTracking(
   wakeMe: boolean,
 ) {
   const { t, lang } = useI18n();
-  const [state, setState] = useState<TrackState>({
-    index: 0,
-    source: 'start',
-    fix: null,
-    offRoute: false,
-    denied: false,
-    alarm: false,
-  });
-  const [, setTick] = useState(0);
-  const anchor = useRef<{ index: number; at: number } | null>(null);
+  const [state, setState] = useState<TrackState>(() => initialState(null));
+  const [highAccuracy, setHighAccuracy] = useState(true);
+  const anchor = useRef<{ index: number; at: number; boardDelay: boolean } | null>(null);
   const lastFixAt = useRef(0);
-  const lastFix = useRef<LatLng | null>(null);
+  const lastHighAccAt = useRef(0);
+  const lastPosTs = useRef(0);
   const indexRef = useRef(0);
+  const sourceRef = useRef<TrackSource>('start');
   const prefsRef = useRef(prefs);
   prefsRef.current = prefs;
   const wakeRef = useRef(wakeMe);
@@ -59,30 +80,47 @@ export function useTracking(
   const textRef = useRef({ t, lang });
   textRef.current = { t, lang };
 
-  const setIndex = useCallback((index: number, source: TrackSource) => {
-    indexRef.current = index;
-    if (source !== 'time') anchor.current = { index, at: Date.now() };
-    setState((s) => ({ ...s, index, source }));
-  }, []);
+  const setIndex = useCallback(
+    (index: number, source: TrackSource) => {
+      indexRef.current = index;
+      sourceRef.current = source;
+      if (source !== 'time') {
+        anchor.current = { index, at: Date.now(), boardDelay: false };
+      }
+      if (source === 'manual') {
+        lastFixAt.current = 0;
+        lastHighAccAt.current = 0;
+      }
+      const st = route ? stationsById.get(route.stations[index]!) : undefined;
+      const point = st ? { lat: st.lat, lng: st.lng } : null;
+      setState((s) => ({
+        ...s,
+        index,
+        source,
+        fix: source === 'manual' ? null : s.fix,
+        point: point ?? s.point,
+        offRoute: source === 'manual' ? false : s.offRoute,
+      }));
+    },
+    [route],
+  );
 
   // A new trip or a restart begins again at the boarding station.
   useEffect(() => {
+    const startSt = route ? stationsById.get(route.stations[0]!) : undefined;
+    const startPoint = startSt ? { lat: startSt.lat, lng: startSt.lng } : null;
     indexRef.current = 0;
-    // the time estimate starts from boarding, so the warning still fires without a GPS fix
-    anchor.current = active && route ? { index: 0, at: Date.now() } : null;
+    sourceRef.current = 'start';
+    // Start the time anchor at boarding so underground/offline riders still get live progress.
+    anchor.current = active && route ? { index: 0, at: Date.now(), boardDelay: true } : null;
     lastFixAt.current = 0;
-    lastFix.current = null;
-    setState({
-      index: 0,
-      source: 'start',
-      fix: null,
-      offRoute: false,
-      denied: false,
-      alarm: false,
-    });
+    lastHighAccAt.current = 0;
+    lastPosTs.current = 0;
+    setHighAccuracy(true);
+    setState(initialState(active ? startPoint : null));
   }, [route, active]);
 
-  // GPS
+  // GPS watcher with adaptive accuracy and fallback to network positioning indoors/underground.
   useEffect(() => {
     if (!active || !route || !('geolocation' in navigator)) return;
     const coords = route.stations.map((id) => {
@@ -91,60 +129,128 @@ export function useTracking(
     });
     const id = navigator.geolocation.watchPosition(
       (pos) => {
-        if (pos.coords.accuracy > 250) return;
-        const fix = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        lastFixAt.current = Date.now();
-        lastFix.current = fix;
-        const snap = snapToRoute(coords, fix);
-        setState((s) => ({ ...s, fix, offRoute: snap.offRoute, denied: false }));
-        if (!snap.offRoute) {
-          setState((s) => {
-            if (snap.reached >= s.index || s.source === 'time') {
-              indexRef.current = snap.reached;
-              anchor.current = { index: snap.reached, at: Date.now() };
-              return { ...s, index: snap.reached, source: 'gps' };
-            }
-            return s;
-          });
+        const now = Date.now();
+        const rawTs = typeof pos.timestamp === 'number' && pos.timestamp > 0 ? pos.timestamp : now;
+        const fixTs = Math.min(rawTs, now);
+        // Ignore duplicate OS-cached deliveries and fixes already older than STALE_MS.
+        if (pos.timestamp > 0 && pos.timestamp === lastPosTs.current) return;
+        if (now - fixTs > STALE_MS) return;
+
+        const acc = Number.isFinite(pos.coords.accuracy) ? pos.coords.accuracy : 0;
+        if (acc > MAX_ACC_M) {
+          setState((s) => ({ ...s, accuracy: Math.round(acc), gpsError: 'unavailable' }));
+          return;
         }
+        // Keep a recent high-accuracy GNSS lock from being overridden by a noisy cell fix.
+        if (acc > HIGH_ACC_M && now - lastHighAccAt.current < HIGH_ACC_HOLD_MS) return;
+
+        lastPosTs.current = pos.timestamp || now;
+        lastFixAt.current = fixTs;
+        if (acc <= HIGH_ACC_M) lastHighAccAt.current = fixTs;
+
+        const fix: LatLng = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        // Widen off-route tolerance when accuracy is coarse (e.g. cell/Wi-Fi indoors).
+        const maxOffRouteM = BASE_OFF_ROUTE_M + (acc > HIGH_ACC_M ? Math.min(acc, 800) : 0);
+        const snap = snapToRoute(coords, fix, maxOffRouteM);
+        const displayPoint = !snap.offRoute && acc > HIGH_ACC_M ? snap.projected : fix;
+
+        let nextIndex = indexRef.current;
+        let nextSource = sourceRef.current;
+        if (!snap.offRoute) {
+          const canCorrectTimeBackwards =
+            sourceRef.current === 'time' && acc <= HIGH_ACC_M && now - fixTs < 15_000;
+          if (snap.reached >= indexRef.current || canCorrectTimeBackwards) {
+            nextIndex = snap.reached;
+            nextSource = 'gps';
+            indexRef.current = nextIndex;
+            sourceRef.current = nextSource;
+            anchor.current = {
+              index: nextIndex,
+              at: fixTs,
+              boardDelay: nextIndex === 0 && anchor.current?.boardDelay === true,
+            };
+          }
+        }
+
+        setState((s) => ({
+          ...s,
+          index: nextIndex,
+          source: nextSource,
+          fix,
+          point: displayPoint,
+          accuracy: Math.round(acc),
+          offRoute: snap.offRoute,
+          denied: false,
+          gpsError: null,
+        }));
       },
       (err) => {
-        if (err.code === 1) setState((s) => ({ ...s, denied: true }));
+        if (err.code === 1) {
+          setState((s) => ({ ...s, denied: true, gpsError: 'denied' }));
+        } else {
+          const kind: GpsErrorKind = err.code === 3 ? 'timeout' : 'unavailable';
+          setState((s) => ({ ...s, gpsError: kind }));
+          // Inside stations/trains, high-accuracy GNSS often times out; fall back to network location.
+          if (highAccuracy && lastFixAt.current === 0) {
+            setHighAccuracy(false);
+          }
+        }
       },
-      { enableHighAccuracy: true, maximumAge: 5000, timeout: 20000 },
+      highAccuracy
+        ? { enableHighAccuracy: true, maximumAge: 10_000, timeout: 15_000 }
+        : { enableHighAccuracy: false, maximumAge: 15_000, timeout: 20_000 },
     );
     return () => navigator.geolocation.clearWatch(id);
-  }, [active, route]);
+  }, [active, route, highAccuracy]);
 
-  // Time-based estimate while GPS is missing, from the last confirmed station.
+  // Smooth time-based estimate while GPS is missing, from the last confirmed station.
   useEffect(() => {
     if (!active || !route) return;
     const steps = trackSteps(route);
-    const hops: number[] = [];
-    for (const leg of route.legs) {
-      const per = leg.stops > 0 ? leg.rideSec / leg.stops : 0;
-      for (let j = 1; j < leg.stations.length; j++) hops.push(per);
-    }
+    const hops = routeHopSecs(route);
+    const coords = route.stations.map((id) => {
+      const s = stationsById.get(id)!;
+      return { lat: s.lat, lng: s.lng };
+    });
     const transfer = new Map(route.transfers.map((x) => [x.stationId, x.sec]));
+
     const timer = setInterval(() => {
-      setTick((n) => n + 1);
+      const now = Date.now();
       const a = anchor.current;
       if (!a) return;
-      const gpsFresh = Date.now() - lastFixAt.current < STALE_MS;
+      const gpsFresh = lastFixAt.current > 0 && now - lastFixAt.current < STALE_MS;
       if (gpsFresh) return;
-      let rem = (Date.now() - a.at) / 1000 - (a.index === 0 ? BOARD_DELAY_SEC : 0);
+
+      let rem = (now - a.at) / 1000 - (a.index === 0 && a.boardDelay ? BOARD_DELAY_SEC : 0);
+      if (rem < 0) return;
+
       let i = a.index;
-      // never estimate the arrival itself: the exit needs a GPS fix or a tap
+      // Never auto-declare arrival without GPS or tap, but still interpolate along the last hop.
       while (i < steps.length - 2 && rem >= (hops[i] ?? Infinity)) {
         rem -= hops[i]!;
         i++;
         if (steps[i]!.kind === 'change') rem -= transfer.get(steps[i]!.stationId) ?? 0;
       }
-      if (i > indexRef.current) {
-        indexRef.current = i;
-        setState((s) => ({ ...s, index: i, source: 'time', fix: null }));
+
+      const hop = hops[i] ?? 0;
+      const maxFrac = i >= steps.length - 2 ? 0.92 : 0.98;
+      const frac = hop > 0 && rem > 0 ? Math.min(maxFrac, rem / hop) : 0;
+      const nextIdx = Math.max(indexRef.current, i);
+      const point = interpolateRoute(coords, nextIdx, nextIdx === i ? frac : 0);
+
+      if (nextIdx > indexRef.current || frac > 0) {
+        indexRef.current = nextIdx;
+        sourceRef.current = 'time';
+        setState((s) => ({
+          ...s,
+          index: nextIdx,
+          source: 'time',
+          fix: null,
+          point,
+          offRoute: false,
+        }));
       }
-    }, 10_000);
+    }, TICK_MS);
     return () => clearInterval(timer);
   }, [active, route]);
 
@@ -164,7 +270,7 @@ export function useTracking(
       let wake = false;
       for (let i = prevIndex.current + 1; i <= idx; i++) {
         const k = alertAt(route, i, prefsRef.current.warnStops);
-        if (k === 'warn' || k === 'arrive') wake = true;
+        if (k === 'warn' || k === 'change' || k === 'arrive') wake = true;
         if (k && (!kind || rank[k] >= rank[kind])) {
           kind = k;
           at = i;
@@ -234,9 +340,10 @@ export function useTracking(
   }, [active, prefs.keepAwake]);
 
   const dismissAlarm = useCallback(() => setState((s) => ({ ...s, alarm: false })), []);
-  const fixFresh = Date.now() - lastFixAt.current < STALE_MS;
+  const fixFresh =
+    state.fix !== null && lastFixAt.current > 0 && Date.now() - lastFixAt.current < STALE_MS;
   return {
-    state: { ...state, fix: lastFix.current, fixFresh },
+    state: { ...state, fixFresh },
     setIndex,
     dismissAlarm,
   };

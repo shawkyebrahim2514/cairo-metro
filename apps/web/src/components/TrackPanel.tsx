@@ -72,6 +72,9 @@ export function TrackPanel({
         </div>
       )}
       {state.denied && <p className="note warn">{t('trackDenied')}</p>}
+      {!state.denied && (state.gpsError === 'timeout' || state.gpsError === 'unavailable') && (
+        <p className="note">{t('trackWeakGps')}</p>
+      )}
       {state.offRoute && (
         <div className="note warn" role="alert">
           <p>{t('trackOffRoute')}</p>
@@ -116,6 +119,9 @@ export function TrackPanel({
       )}
       <p className="track-src">
         {t('trackNow')}: {name(here)} · {t(SOURCE_KEY[state.source])}
+        {state.source === 'gps' &&
+          state.accuracy != null &&
+          ` (±${formatDistance(state.accuracy, t, lang)})`}
       </p>
 
       <div className="track-actions">

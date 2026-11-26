@@ -2,7 +2,14 @@ import { describe, expect, it } from 'vitest';
 import metroJson from '../../../data/metro.json';
 import { haversineMeters } from './geo';
 import { buildGraph, planRoute } from './routing';
-import { alertAt, snapToRoute, trackSteps, tripProgress } from './tracking';
+import {
+  alertAt,
+  interpolateRoute,
+  routeHopSecs,
+  snapToRoute,
+  trackSteps,
+  tripProgress,
+} from './tracking';
 import type { MetroData } from './types';
 
 const data = metroJson as unknown as MetroData;
@@ -67,5 +74,27 @@ describe('trip tracking', () => {
     expect(alertAt(route, last - 2, 2)).toBe('warn');
     expect(alertAt(route, last - 2, 0)).toBe('station');
     expect(alertAt(route, 1, 2)).toBe('station');
+  });
+
+  it('uses per-segment hop durations rather than a flat average', () => {
+    const l1 = planRoute(graph, 'helwan', 'new-el-marg')!;
+    const hops = routeHopSecs(l1);
+    expect(hops).toHaveLength(l1.stops);
+    expect(Math.min(...hops)).toBeLessThan(Math.max(...hops));
+    expect(hops.reduce((a, b) => a + b, 0)).toBe(l1.rideSec);
+  });
+
+  it('projects fixes onto the route and interpolates smoothly along segments', () => {
+    const [a, b] = [coords[0]!, coords[1]!];
+    const mid = interpolateRoute(coords, 0, 0.5);
+    expect(mid.lat).toBeCloseTo((a.lat + b.lat) / 2, 6);
+    expect(mid.lng).toBeCloseTo((a.lng + b.lng) / 2, 6);
+    const offset = { lat: mid.lat + 0.001, lng: mid.lng };
+    const snap = snapToRoute(coords, offset);
+    expect(snap.offRoute).toBe(false);
+    expect(snap.segment).toBe(0);
+    expect(snap.t).toBeGreaterThan(0);
+    expect(snap.t).toBeLessThan(1);
+    expect(haversineMeters(snap.projected, mid)).toBeLessThan(200);
   });
 });
